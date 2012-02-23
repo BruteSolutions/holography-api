@@ -32,27 +32,43 @@ int main() {
 */
 
 /**
- * short description.
- * @param
- * @return
+ * Shader constructor.
+ * @param vsPath path to the vertex shader file.
+ * @param fsPath path to the fragment shader file.
  */
 Shader::Shader(std::string vsPath, std::string fsPath)
 {
 
 }
 
+/**
+ * Sets the current vertex shader to use.
+ * @param openglRef ID of the shader.
+ */
 void Shader::setVertexShader(GLuint openglRef)
 {
 }
 
+/**
+ * Sets the current fragment shader to use.
+ * @param openglRef ID of the shader.
+ */
 void Shader::setFragmentShader(GLuint openglRef)
 {
 }
 
+/**
+ * Get the current vertex shader.
+ * @return openglRef ID of the shader.
+ */
 GLuint Shader::getVertexShader()
 {
 }
 
+/**
+ * Get the current fragment shader.
+ * @return openglRef ID of the shader.
+ */
 GLuint Shader::getFragmentShader()
 {
 }
