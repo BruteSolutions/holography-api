@@ -2,27 +2,40 @@
  * Shader.h
  *
  *  Created on: Feb 23, 2012
- *      Author: fericss
+ *  Author: David och Fredric E.
  */
 
 #ifndef SHADER_H_
 #define SHADER_H_
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <glload/gl_3_2_comp.h>
+#include <GL/freeglut.h>
 
-typedef struct {
-	String param;
+
+
+typedef struct Uniforms_struct{
+	std::string param;
 	GLuint id;
+	Uniforms_struct(std::string a, GLuint b){
+		param = a;
+		id = b;
+	}
+
 } uniform_t;
 
 class Shader {
 public:
-	Shader(String vsPath, String fsPath);
+	Shader(std::string vsPath, std::string  fsPath);
 	void setVertexShader(GLuint openglRef);
 	void setFragmentShader(GLuint openglRef);
 	GLuint getVertexShader();
-	Gluint getFragmentShader();
-	String getParameters();
-	void removeParameter(String name);
-	void addParameter(String name, GLuint p);
+	GLuint getFragmentShader();
+	std::vector<uniform_t> getParameters();
+	void removeParameter(std::string name);
+	void addParameter(std::string name, GLuint p);
 private:
 	GLuint id;
 	std::vector<uniform_t> uniforms;
