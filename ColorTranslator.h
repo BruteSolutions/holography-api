@@ -12,6 +12,6 @@ public:
 	ColorTranslator(ColorVec3 &factor);
 	void setConversionFactor(ColorVec3 &factor);
 	ColorVec3 &getConversationFactor(); 
-	void apply(ColorVec4 *color[]);
+	void apply(ColorVec4 color);
 };
 #endif

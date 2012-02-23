@@ -10,7 +10,7 @@ void ColorTranslator::setConversionFactor(ColorVec3 &factor){
 ColorVec3 &ColorTranslator::getConversationFactor(){
 	return factor;
 }
-void ColorTranslator::apply(ColorVec4 *color[]){
+void ColorTranslator::apply(ColorVec4 color){
 	
 }
 
