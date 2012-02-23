@@ -22,9 +22,9 @@ public:
 	} 
 	void apply(float * colors, int size){ //Get whole color buffer for colors, apply factor
 		for(int i = 0; i < size; i=i+4){
-				colors[i]=colors[i]+factor.r;		//r
-				colors[i+1]=colors[i+1]+factor.g;	//g
-				colors[i+2]=colors[i+2]+factor.b;	//b
+				colors[i]=colors[i]*factor.r;		//r
+				colors[i+1]=colors[i+1]*factor.g;	//g
+				colors[i+2]=colors[i+2]*factor.b;	//b
 													//w
 		}		
 	}
