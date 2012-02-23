@@ -9,7 +9,7 @@ struct ColorVec4{
 	float r;
 	float g;
 	float b;
-	float w;
+	float a;
 };
 #endif //__structs_h
 
