@@ -4,33 +4,34 @@ GraphicalObject::GraphicalObject()
 {
 }
 
-GraphicalObject::GraphicalObject(float triangle[], int _trianglesSize)
-{
-	*triangles = triangle;
-	trianglesSize = _trianglesSize;
-}
+//GraphicalObject::GraphicalObject(float triangle[], int _trianglesSize)
+//{
+//	*triangles = triangle;
+//	trianglesSize = _trianglesSize;
+//}
 
 GraphicalObject::GraphicalObject(float _triangles[], int _trianglesSize, float _colors[], int _colorsSize)
-{
-	*triangles = _triangles;
-	*colors = _colors;
+{	
+	triangles = _triangles;
+	colors = _colors;	
+	
 	trianglesSize = _trianglesSize;
 	colorsSize = _colorsSize;
 }
 
 float GraphicalObject::getFirstTri()
 {
-	return *triangles[0];
+	return triangles[0];
 }
 
 float* GraphicalObject::getTriangles()
 {	
-	return *triangles;
+	return triangles;
 }
 
 float* GraphicalObject::getColors()
 {	
-	return *colors;
+	return colors;
 }
 
 int GraphicalObject::getTrianglesSize()
