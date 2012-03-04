@@ -1,6 +1,13 @@
 #include "Projector.h"
 
 
+/* *Shader*() - Does not compute.
+ * Shall I make a call to the shader class
+ * or something?
+ * The ADD Document does nothing for me here.
+ */
+
+
 //TODO:dummy
 Projector::Projector()
 {
@@ -57,5 +64,26 @@ void Projector::highlight()
  * @return
  */
 void Projector::unHighlight()
+{
+}
+
+/*
+ * Gets a pointer to the memory location of the buffer used by this certain projector.
+ * @param
+ * @return
+ */
+int* Projector::getBuffer()
+{
+	return &buffer;
+}
+
+/*
+ * Displays the view through the projector associated with this instance.
+ * Prior to that it will also possibly have applied color settings and
+ * definitely applied keystone correction on the view.
+ * @param
+ * @return
+ */
+void display (Scene scn)
 {
 }

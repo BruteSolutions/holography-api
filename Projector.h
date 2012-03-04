@@ -11,6 +11,8 @@ public:
     Configuration getConfiguration();
     void highlight();
     void unHighlight();
+	int* getBuffer();
+	void display(Scene scn);
 };
 
 #endif
