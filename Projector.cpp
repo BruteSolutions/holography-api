@@ -86,4 +86,9 @@ int* Projector::getBuffer()
  */
 void display (Scene scn)
 {
+// Do color settings
+
+// Do Keystone Correction
+
+// Get View for this projector.
 }
