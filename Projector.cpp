@@ -1,3 +1,4 @@
+#include <list>
 #include "Projector.h"
 
 /*
@@ -54,39 +55,39 @@ Vec3 Projector::getDirection(){
 }
 
 /*
- * bla
- * @param
- * @return
+ * Returns the size of the buffer.
+ * @return Size of the buffer.
  */
 unsigned int Projector::getBufferSize()
 {
+  return(bufferSize);
 }
 
 /*
- * bla
- * @param
- * @return
+ * Returns the associated colortranslator object.
+ * @return Colortranslator object.
  */
 ColorTranslator Projector::getColorTranslator()
 {
+  return(colorTranslator);
 }
 
 /*
- * bla
- * @param
- * @return
+ * Set the current configuration.
+ * @param c Configuration to be used.
  */
 void Projector::setConfiguration(Configuration c)
 {
+  configuration = c;
 }
 
 /*
- * bla
- * @param
- * @return
+ * Returns the current configuration.
+ * @return Current configuration.
  */
 Configuration Projector::getConfiguration()
 {
+  return(configuration);
 }
 
 /*

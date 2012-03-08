@@ -1,6 +1,5 @@
 #ifndef PROJECTOR_H_
 #define PROJECTOR_H_
-// #include "ColorTranslator.h" Is this needed? And should it be done any specific way?
 
 class Projector
 {
@@ -24,7 +23,8 @@ private:
   std::list<Shader> shaders;
   int * pnt;
 	unsigned int bufferSize;
-	//ColorTranslator colorTranslator;
+	ColorTranslator colorTranslator;
+  Configuration configuration;
   
 };
 
