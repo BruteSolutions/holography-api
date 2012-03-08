@@ -1,13 +1,6 @@
 #include "Projector.h"
 
 
-/* *Shader*() - Does not compute.
- * Shall I make a call to the shader class
- * or something?
- * The ADD Document does nothing for me here.
- */
-
-
 //TODO:dummy
 Projector::Projector()
 {
@@ -88,7 +81,46 @@ void display (Scene scn)
 {
 // Do color settings
 
-// Do Keystone Correction
+/*
+
+apply correct shader(s) with data of scn as input
+
+3DSpace tds = scn.get3DSpace();
+apply correct shader(s) with data of tds as input
+
+for each(GraphicalObject g in tds):
+if(!map.containsKey(g.id)) associate it with a (possibly new) shader-object
+{
+apply correct shader(s) with data of g as input
+apply ColorTranslator’s shader with data of g as input
+}
+call OpenGL-function to swap buffer;
+  
+Do Keystone Correction
+*/
 
 // Get View for this projector.
+}
+
+/*
+ * Gets the list of in use shaders.
+ * @param void;
+ * @return std::list<Shader>
+ */
+
+std::list<Shader> getShaders()
+{
+  return shaders;
+}
+
+/*
+ * Adds a shader "s" to the list of shaders.
+ // * This might endlessly grow, to later crash the program?
+ // * Due to the fact that there is no way to effectivly remove shaders.
+ * @param Shader s, the Shader you want to add to the list.
+ * @return void
+ */
+void addShader(Shader s)
+{
+  shaders.add(s);  
 }
