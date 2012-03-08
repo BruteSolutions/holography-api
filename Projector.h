@@ -25,6 +25,7 @@ private:
 	unsigned int bufferSize;
 	ColorTranslator colorTranslator;
   Configuration configuration;
+  bool highlighted;
   
 };
 

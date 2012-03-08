@@ -5,7 +5,7 @@
  * Creates a new projector with buffer of size len at the place pointer with position pos
  * and direction dir;
  */
-Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir){
+Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) {
 //	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
 	pnt = pointer;
 	bufferSize = len;
@@ -64,7 +64,7 @@ unsigned int Projector::getBufferSize()
 }
 
 /*
- * Returns the associated colortranslator object.
+  Returns the associated colortranslator object.
  * @return Colortranslator object.
  */
 ColorTranslator Projector::getColorTranslator()
@@ -91,21 +91,25 @@ Configuration Projector::getConfiguration()
 }
 
 /*
- * bla
- * @param
- * @return
+ * Highlights the background.
  */
 void Projector::highlight()
 {
+  if(!highlight) {
+    highlight = true;
+    //TODO: Add
+  }
 }
 
 /*
- * bla
- * @param
- * @return
+ * Disables highlighting of background.
  */
 void Projector::unHighlight()
 {
+  if(highlight) {
+    highlight = false;
+    //TODO: Remove
+  }
 }
 
 /*
