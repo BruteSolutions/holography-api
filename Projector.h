@@ -4,7 +4,8 @@
 class Projector
 {
 public:
-  Projector(); //TODO: dummy
+  Projector(int * pointer, unsigned int len);
+  Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir);
   unsigned int getBufferSize();
   ColorTranslator getColorTranslator();
   void setConfiguration(Configuration c);
@@ -14,8 +15,18 @@ public:
   int* getBuffer();
   void display(Scene scn);
   void addShader(Shader s);
+  Vec3 getPosition(); // Does it neeed anything special to use the OpenGl vec3? Seems to work anyway.
+	Vec3 getDirection();
+  void setPosition(Vec3 pos);
+  void setDirection(Vec3 pos);
 private:
-  std::list<Shader> shaders; 
+  std::list<Shader> shaders;
+  int * pnt;
+	unsigned int bufferSize;
+	ColorTranslator colorTranslator;
+  Configuration configuration;
+  bool highlighted;
+  
 };
 
 #endif

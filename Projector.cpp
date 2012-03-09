@@ -1,63 +1,115 @@
+#include <list>
 #include "Projector.h"
 
-
-//TODO:dummy
-Projector::Projector()
-{
+/*
+ * Creates a new projector with buffer of size len at the place pointer with position pos
+ * and direction dir;
+ */
+Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) {
+//	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
+	pnt = pointer;
+	bufferSize = len;
+	setPosition(pos);
+	setDirection(dir);
+	//create necessary Shader objects What is necessary?
 }
 
 /*
- * bla
- * @param
- * @return
+ * Creates a new projector with buffer of size len at the place pointer with position (0,0,0)
+ * and direction (0,0,0);
+ */
+Projector::Projector(int * pointer, unsigned int len){
+	Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
+
+}
+/*
+ * Sets the position of the projector to the value of the parametre.
+ * @param The new position of the projector.
+ */
+void Projector::setPosition(Vec3 pos){
+	this.pos = pos;
+}
+
+/*
+ * Returns the position of the projector as a Vec3 object.
+ * @return the position of the projector
+ */
+Vec3 Projector::getPosition(){
+	return pos;
+}
+
+/*
+ * Sets the direction of the projectior to the parametre.
+ * @param The new direction of the projector
+ */
+void Projector::setDirection(Vec3 dir){
+	this.dir = dir;
+}
+
+/*
+ * Returns the direction of the projector as a Vec3 object.
+ * @return the direction of the projector
+ */
+Vec3 Projector::getDirection(){
+	return dir;
+}
+
+/*
+ * Returns the size of the buffer.
+ * @return Size of the buffer.
  */
 unsigned int Projector::getBufferSize()
 {
+  return(bufferSize);
 }
 
 /*
- * bla
- * @param
- * @return
+  Returns the associated colortranslator object.
+ * @return Colortranslator object.
  */
 ColorTranslator Projector::getColorTranslator()
 {
+  return(colorTranslator);
 }
 
 /*
- * bla
- * @param
- * @return
+ * Set the current configuration.
+ * @param c Configuration to be used.
  */
 void Projector::setConfiguration(Configuration c)
 {
+  configuration = c;
 }
 
 /*
- * bla
- * @param
- * @return
+ * Returns the current configuration.
+ * @return Current configuration.
  */
 Configuration Projector::getConfiguration()
 {
+  return(configuration);
 }
 
 /*
- * bla
- * @param
- * @return
+ * Highlights the background.
  */
 void Projector::highlight()
 {
+  if(!highlight) {
+    highlight = true;
+    //TODO: Add
+  }
 }
 
 /*
- * bla
- * @param
- * @return
+ * Disables highlighting of background.
  */
 void Projector::unHighlight()
 {
+  if(highlight) {
+    highlight = false;
+    //TODO: Remove
+  }
 }
 
 /*
