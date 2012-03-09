@@ -129,10 +129,25 @@ int* Projector::getBuffer()
  * @param
  * @return
  */
-void display (Scene scn)
+void Projector::display (Scene scn)
 {
 // Do color settings
 
+  3Dspace space = scn.get3DSpace();
+
+  std::list<GraphicalObject> goList = space.getObejects(); // I need a list to do for each.
+
+  for (std::list<GraphicalObject>::iterator it = goList.begin(); goList != fifth.end(); goList++))
+{
+  if() // Something I dont understand.
+    {
+      // Do something with shader from *it (the Gragfical Object).   
+    }
+}
+
+// there is no such function or description of this.
+doMagicKeystoneCorrection();  
+  
 /*
 
 apply correct shader(s) with data of scn as input
@@ -160,7 +175,7 @@ Do Keystone Correction
  * @return std::list<Shader>
  */
 
-std::list<Shader> getShaders()
+std::list<Shader> Projector::getShaders()
 {
   return shaders;
 }
@@ -172,7 +187,7 @@ std::list<Shader> getShaders()
  * @param Shader s, the Shader you want to add to the list.
  * @return void
  */
-void addShader(Shader s)
+void Projector::addShader(Shader s)
 {
   shaders.add(s);  
 }
