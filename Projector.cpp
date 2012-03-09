@@ -139,9 +139,9 @@ void Projector::display (Scene scn)
 
   for (std::list<GraphicalObject>::iterator it = goList.begin(); goList != fifth.end(); goList++))
 {
-  if() // Something I dont understand.
+  if(map.containsKey(*it.id)) // Something I dont understand.
     {
-      // Do something with shader from *it (the Gragfical Object).   
+      // Do something with shader from *it (the Grafical Object).   
     }
 }
 
