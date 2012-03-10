@@ -1,15 +1,14 @@
 #include <iostream>
-#include "structs.h"
 #include "ColorTranslator.h"
-#include "vec3.h"
-
+#include "Shader.h"
 using namespace std;
 
 int main ( ){
 
-	ColorVec3 factor = {1.0f,1.0f,1.0f};
+	float factor[3] = {1.0f,0.5f,1.0f};
 	ColorTranslator ct = ColorTranslator(factor);
-	ColorVec3 x = ct.getConversionFactor();
-	cout << x.r << x.g << x.b << endl;
+	float* x= ct.getConversionFactor();
+	cout << x[0] << x[1] << x[2] << endl;
+	Shader *s = ct.getShader();
 	return 0;
 }
