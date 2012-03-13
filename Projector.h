@@ -1,6 +1,8 @@
 #ifndef PROJECTOR_H_
 #define PROJECTOR_H_
 
+#include "ColorTranslator.h"
+
 class Projector
 {
 public:
@@ -22,8 +24,8 @@ public:
 private:
   std::list<Shader> shaders;
   int * pnt;
-	unsigned int bufferSize;
-	ColorTranslator colorTranslator;
+  unsigned int bufferSize;
+  ColorTranslator colorTranslator;
   Configuration configuration;
   bool highlighted;
   
