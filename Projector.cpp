@@ -5,20 +5,22 @@
  * Creates a new projector with buffer of size len at the place pointer with position pos
  * and direction dir;
  */
-Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) {
-//	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
+Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) 
+{
+	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
 	pnt = pointer;
 	bufferSize = len;
 	setPosition(pos);
 	setDirection(dir);
-	//create necessary Shader objects What is necessary?
+	//create necessary Shader objects => hardcode a picture for the buffer. How do I do that?
 }
 
 /*
  * Creates a new projector with buffer of size len at the place pointer with position (0,0,0)
  * and direction (0,0,0);
  */
-Projector::Projector(int * pointer, unsigned int len){
+Projector::Projector(int * pointer, unsigned int len)
+{
 	Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
 
 }
@@ -26,7 +28,8 @@ Projector::Projector(int * pointer, unsigned int len){
  * Sets the position of the projector to the value of the parametre.
  * @param The new position of the projector.
  */
-void Projector::setPosition(Vec3 pos){
+void Projector::setPosition(Vec3 pos)
+{
 	this.pos = pos;
 }
 
@@ -34,7 +37,8 @@ void Projector::setPosition(Vec3 pos){
  * Returns the position of the projector as a Vec3 object.
  * @return the position of the projector
  */
-Vec3 Projector::getPosition(){
+Vec3 Projector::getPosition()
+{
 	return pos;
 }
 
@@ -42,7 +46,8 @@ Vec3 Projector::getPosition(){
  * Sets the direction of the projectior to the parametre.
  * @param The new direction of the projector
  */
-void Projector::setDirection(Vec3 dir){
+void Projector::setDirection(Vec3 dir)
+{
 	this.dir = dir;
 }
 
@@ -50,7 +55,8 @@ void Projector::setDirection(Vec3 dir){
  * Returns the direction of the projector as a Vec3 object.
  * @return the direction of the projector
  */
-Vec3 Projector::getDirection(){
+Vec3 Projector::getDirection()
+{
 	return dir;
 }
 
