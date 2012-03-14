@@ -1,4 +1,4 @@
-/============================================================================
+//============================================================================
 // Name        : Shader.cpp
 // Author      : David och Fredric E.
 // Description : Shader class implementation.
@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include <stdio.h>
-#include <glload/gl_3_2_comp.h>
+#include "glload/include/glload/gl_3_3.h"
 #include <GL/freeglut.h>
 
 #include "Shader.h"
@@ -62,7 +62,7 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
 GLuint Shader::compileShader(std::string path, GLenum type)
 {
     GLuint shader = glCreateShader(type);
-    const char * filePointer = strShaderFile.c_str();
+    const char * filePointer = path.c_str();
     glShaderSource(shader, 1, &filePointer, NULL);
 
     glCompileShader(shader);
@@ -184,4 +184,3 @@ void Shader::removeParameter(std::string name){
 void Shader::addParameter(std::string name, GLuint p){
     uniforms.push_back(Uniforms_struct(name, p));
 }
-
