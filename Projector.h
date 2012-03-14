@@ -17,7 +17,7 @@ public:
   int* getBuffer();
   void display(Scene scn);
   void addShader(Shader s);
-  Vec3 getPosition(); // Does it neeed anything special to use the OpenGl vec3? Seems to work anyway.
+  Vec3 getPosition();
 	Vec3 getDirection();
   void setPosition(Vec3 pos);
   void setDirection(Vec3 pos);

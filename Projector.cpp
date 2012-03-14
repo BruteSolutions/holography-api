@@ -137,42 +137,23 @@ int* Projector::getBuffer()
  */
 void Projector::display (Scene scn)
 {
-// Do color settings
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  //TODO: Do color settings
 
   3Dspace space = scn.get3DSpace();
+  std::list<GraphicalObject> goList = space.getObjects(); // I need a list to do for each.
 
-  std::list<GraphicalObject> goList = space.getObejects(); // I need a list to do for each.
-
-  for (std::list<GraphicalObject>::iterator it = goList.begin(); goList != fifth.end(); goList++))
-{
-  if(map.containsKey(*it.id)) // Something I dont understand.
-    {
-      // Do something with shader from *it (the Grafical Object).   
+  for (std::list<GraphicalObject>::iterator it = goList.begin(); goList != fifth.end(); goList++) {
+    if(map.containsKey(*it.id)) {
+      //TODO: Apply associated shaders
     }
-}
+  }
 
-// there is no such function or description of this.
-doMagicKeystoneCorrection();  
+  //TODO: Perform keystone correction
   
-/*
-
-apply correct shader(s) with data of scn as input
-
-3DSpace tds = scn.get3DSpace();
-apply correct shader(s) with data of tds as input
-
-for each(GraphicalObject g in tds):
-if(!map.containsKey(g.id)) associate it with a (possibly new) shader-object
-{
-apply correct shader(s) with data of g as input
-apply ColorTranslator’s shader with data of g as input
-}
-call OpenGL-function to swap buffer;
-  
-Do Keystone Correction
-*/
-
-// Get View for this projector.
+  glutSwapBuffers();
 }
 
 /*
