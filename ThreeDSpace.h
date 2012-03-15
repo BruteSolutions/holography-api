@@ -6,7 +6,7 @@ class ThreeDSpace
 	public:
 		ThreeDSpace();
 		std::vector<GraphicalObject> getObjects();
-		void addObject(GraphicalObject obj);
+		void addObject(GraphicalObject * obj);
 		void setOrigin(Vec3 org);
 
 		std::vector<GraphicalObject> objects;

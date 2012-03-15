@@ -15,9 +15,9 @@ std::vector<GraphicalObject> ThreeDSpace::getObjects()
   return objects;
 }
 
-void ThreeDSpace::addObject(GraphicalObject obj)
+void ThreeDSpace::addObject(GraphicalObject * obj)
 {
-  objects.push_back(obj);
+  objects.push_back(*obj);
 }
 
 void ThreeDSpace::setOrigin(Vec3 org)

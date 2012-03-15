@@ -1,0 +1,18 @@
+#include "Scene.h"
+
+Scene::Scene()
+{
+	cPos = {-1-1,1};
+	cDir = {1,1,-1};
+	threeDSpace = new ThreeDSpace();
+}
+
+ThreeDSpace* Scene::get3DSpace()
+{
+	return threeDSpace;
+}
+
+Vec3 Scene::getCameraPosition()
+{
+	return cPos;
+}
