@@ -1,6 +1,8 @@
-#include <list>
+#include <vector>
+#include "Shared.h"
+#include "GraphicalObject.h"
+#include "ThreeDSpace.h"
 #include "Projector.h"
-#include "Vec3.cpp"
 
 /*
  * Creates a new projector with buffer of size len at the place pointer with position pos
@@ -31,9 +33,9 @@ Projector::Projector(int * pointer, unsigned int len)
  * Sets the position of the projector to the value of the parametre.
  * @param The new position of the projector.
  */
-void Projector::setPosition(Vec3 pos)
+void Projector::setPosition(Vec3 newPos)
 {
-	this.pos = pos;
+	newPos = pos;
 }
 
 /*
@@ -49,9 +51,9 @@ Vec3 Projector::getPosition()
  * Sets the direction of the projectior to the parametre.
  * @param The new direction of the projector
  */
-void Projector::setDirection(Vec3 dir)
+void Projector::setDirection(Vec3 newDir)
 {
-	this.dir = dir;
+	this.dir = newDir;
 }
 
 /*
@@ -78,7 +80,7 @@ unsigned int Projector::getBufferSize()
  */
 ColorTranslator Projector::getColorTranslator()
 {
-  return(colorTranslator);
+  return(*colorTranslator);
 }
 
 /*
@@ -104,8 +106,8 @@ Configuration Projector::getConfiguration()
  */
 void Projector::highlight()
 {
-  if(!highlight) {
-    highlight = true;
+  if(!highlighted) {
+    highlighted = true;
     //TODO: Add
   }
 }
@@ -115,8 +117,8 @@ void Projector::highlight()
  */
 void Projector::unHighlight()
 {
-  if(highlight) {
-    highlight = false;
+  if(highlighted) {
+    highlighted = false;
     //TODO: Remove
   }
 }
@@ -128,7 +130,7 @@ void Projector::unHighlight()
  */
 int* Projector::getBuffer()
 {
-	return &buffer;
+	return pnt;
 }
 
 /*

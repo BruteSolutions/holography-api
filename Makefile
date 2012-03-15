@@ -64,7 +64,7 @@ ifeq ($(config),release)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o \
+	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o\
 
 RESOURCES := \
 
@@ -126,6 +126,10 @@ $(GCH): $(PCH)
 endif
 
 $(OBJDIR)/test-economy.o: test-economy.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Projector.o: Projector.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

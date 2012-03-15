@@ -1,8 +1,6 @@
 #ifndef PROJECTOR_H_
 #define PROJECTOR_H_
 
-#include "ColorTranslator.h"
-
 class Projector
 {
 public:
@@ -21,15 +19,16 @@ public:
 	Vec3 getDirection();
   void setPosition(Vec3 pos);
   void setDirection(Vec3 pos);
+
 private:
   std::list<Shader> shaders;
   int * pnt;
   unsigned int bufferSize;
-  ColorTranslator colorTranslator;
+  ColorTranslator * colorTranslator;
   Configuration configuration;
   bool highlighted;
-  Vec3 pos, dir;
-  
+  Vec3 pos;
+  Vec3 dir;
 };
 
 #endif

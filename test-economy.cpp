@@ -5,7 +5,10 @@
 #include "glload/include/glload/gl_3_3.h"
 #include <GL/freeglut.h>
 
+#include "Shader.h"
+#include "ColorTranslator.h"
 #include "Shared.h"
+#include "GraphicalObject.h"
 #include "Projector.h"
 //#include "Scene.h"
 
