@@ -1,3 +1,11 @@
+#include <vector>
+
+#include "glload/include/glload/gl_3_3.h"
+#include <GL/freeglut.h>
+
+#include "Shared.h"
+#include "GraphicalObject.h"
+#include "ThreeDSpace.h"
 #include "Scene.h"
 
 Scene::Scene()

@@ -1,3 +1,5 @@
+#include "glload/include/glload/gl_3_3.h"
+#include <GL/freeglut.h>
 
 #include "GraphicalObject.h"
 

@@ -6,7 +6,7 @@
 ColorTranslator::ColorTranslator(){
 	float factor[3] = {0.217f, 0.715f, 0.017f};
 	setConversionFactor(factor);
-	shader = Shader("","redmonochrome.frag");
+	shader = new Shader("","redmonochrome.frag");
 }
 /* 
  * Constructor
@@ -14,13 +14,14 @@ ColorTranslator::ColorTranslator(){
  */
 ColorTranslator::ColorTranslator(float *factor){
 	setConversionFactor(factor);
-    shader = Shader("","redmonochrome.frag");
+    shader = new Shader("","redmonochrome.frag");
 }
 /*
  * Destroy constructor
  */
 ColorTranslator::~ColorTranslator(){
     //delete factor;
+    delete shader;
 }
 /*
  * Sets the factor of this class to the one sent in.
@@ -39,7 +40,7 @@ float* ColorTranslator::getConversionFactor() const {
  * Returns the pointer to the shader object specified (in case apply method isn't the right approach)
  */
 Shader* ColorTranslator::getShader() {
-	return &shader; 
+	return shader; 
 }
 /*
  * Set the uniform "factor" so that the shader can access the factor.

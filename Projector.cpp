@@ -1,4 +1,3 @@
-#include <list>
 #include <vector>
 
 #include "glload/include/glload/gl_3_3.h"
@@ -7,9 +6,9 @@
 #include "Shared.h"
 #include "Shader.h"
 #include "GraphicalObject.h"
+#include "ThreeDSpace.h"
 #include "Scene.h"
 #include "ColorTranslator.h"
-#include "ThreeDSpace.h"
 #include "Projector.h"
 
 /*
@@ -61,7 +60,7 @@ Vec3 Projector::getPosition()
  */
 void Projector::setDirection(Vec3 newDir)
 {
-	this.direction = newDir;
+	direction = newDir;
 }
 
 /*
@@ -86,9 +85,9 @@ unsigned int Projector::getBufferSize()
   Returns the associated colortranslator object.
  * @return Colortranslator object.
  */
-ColorTranslator Projector::getColorTranslator()
+ColorTranslator * Projector::getColorTranslator()
 {
-  return(*colorTranslator);
+  return(colorTranslator);
 }
 
 /*
@@ -155,10 +154,10 @@ void Projector::display (Scene scn)
 
   //TODO: Do color settings
 
-  ThreeDSpace space = scn.get3DSpace();
-  std::vector<GraphicalObject> goList = space.getObjects(); // I need a list to do for each.
+  ThreeDSpace * space = scn.get3DSpace();
+  std::vector<GraphicalObject> goList = space->getObjects(); // I need a list to do for each.
 
-  for (std::vector<GraphicalObject>::iterator it = goList.begin(); goList != goList.end(); goList++) {
+  for (std::vector<GraphicalObject>::iterator it = goList.begin(); it != goList.end(); it++) {
    // if(map.containsKey(*it.id)) {
       //TODO: Apply associated shaders
    // }
@@ -175,7 +174,7 @@ void Projector::display (Scene scn)
  * @return std::list<Shader>
  */
 
-std::list<Shader> Projector::getShaders()
+std::vector<Shader> Projector::getShaders()
 {
   return shaders;
 }
@@ -189,5 +188,5 @@ std::list<Shader> Projector::getShaders()
  */
 void Projector::addShader(Shader s)
 {
-  shaders.add(s);  
+  shaders.push_back(s);  
 }

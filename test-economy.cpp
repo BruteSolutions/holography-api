@@ -2,6 +2,7 @@
 #include <list>
 #include <string>
 #include <vector>
+
 #include "glload/include/glload/gl_3_3.h"
 #include <GL/freeglut.h>
 
@@ -12,8 +13,6 @@
 #include "Scene.h"
 #include "ColorTranslator.h"
 #include "Projector.h"
-#include "GraphicalObject.h"
-//#include "Scene.h"
 
 Projector * p1, * p2;
 Scene * defaultScene;

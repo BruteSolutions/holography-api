@@ -8,7 +8,7 @@
 class ColorTranslator{
 private: 
     float *factor;
-    Shader shader;
+    Shader * shader;
 public:
 	ColorTranslator();
 	ColorTranslator(const ColorTranslator& copy);
