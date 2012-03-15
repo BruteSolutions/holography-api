@@ -2,7 +2,6 @@
 #define SHARED_H_
 
 struct Configuration {};
-struct Scene {};
 
 struct Vec3
 {

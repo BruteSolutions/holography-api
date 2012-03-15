@@ -1,6 +1,8 @@
 #ifndef __SCENE_H
 #define __SCENE_H
 
+#include "ThreeDSpace.h"
+
 class Scene
 {
 	public:
@@ -8,18 +10,18 @@ class Scene
 		{
 			cPos = {-1-1,1};
 			cDir = {1,1,-1};
-			threeDeeSpace = new ThreeDeeSpace();
+			threeDSpace = new ThreeDSpace();
 		}
-		ThreeDeeSpace * get3DSpace()
+		ThreeDSpace * get3DSpace()
 		{	
-			return threeDeeSpace;
+			return threeDSpace;
 		}
 		
 		Vec3 getCameraPosition()
 		{
 			return cPos;
 		}	
-		ThreeDeeSpace * threeDeeSpace;
+		ThreeDSpace * threeDSpace;
 		Vec3 cPos, cDir;
 	private:
 		

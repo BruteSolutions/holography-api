@@ -28,7 +28,7 @@ private:
   Configuration configuration;
   bool highlighted;
   Vec3 pos;
-  Vec3 dir;
+  Vec3 direction;
 };
 
 #endif

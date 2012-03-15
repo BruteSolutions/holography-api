@@ -1,6 +1,14 @@
+#include <list>
 #include <vector>
+
+#include "glload/include/glload/gl_3_3.h"
+#include <GL/freeglut.h>
+
 #include "Shared.h"
+#include "Shader.h"
 #include "GraphicalObject.h"
+#include "Scene.h"
+#include "ColorTranslator.h"
 #include "ThreeDSpace.h"
 #include "Projector.h"
 
@@ -53,7 +61,7 @@ Vec3 Projector::getPosition()
  */
 void Projector::setDirection(Vec3 newDir)
 {
-	this.dir = newDir;
+	this.direction = newDir;
 }
 
 /*
@@ -62,7 +70,7 @@ void Projector::setDirection(Vec3 newDir)
  */
 Vec3 Projector::getDirection()
 {
-	return dir;
+	return direction;
 }
 
 /*
@@ -147,7 +155,7 @@ void Projector::display (Scene scn)
 
   //TODO: Do color settings
 
-  ThreeDeeSpace space = scn.get3DSpace();
+  ThreeDSpace space = scn.get3DSpace();
   std::vector<GraphicalObject> goList = space.getObjects(); // I need a list to do for each.
 
   for (std::vector<GraphicalObject>::iterator it = goList.begin(); goList != goList.end(); goList++) {
