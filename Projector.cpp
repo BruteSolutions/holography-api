@@ -146,12 +146,12 @@ void Projector::display (Scene scn)
   //TODO: Do color settings
 
   ThreeDeeSpace space = scn.get3DSpace();
-  std::list<GraphicalObject> goList = space.getObjects(); // I need a list to do for each.
+  std::vector<GraphicalObject> goList = space.getObjects(); // I need a list to do for each.
 
-  for (std::list<GraphicalObject>::iterator it = goList.begin(); goList != fifth.end(); goList++) {
-    if(map.containsKey(*it.id)) {
+  for (std::vector<GraphicalObject>::iterator it = goList.begin(); goList != goList.end(); goList++) {
+   // if(map.containsKey(*it.id)) {
       //TODO: Apply associated shaders
-    }
+   // }
   }
 
   //TODO: Perform keystone correction
