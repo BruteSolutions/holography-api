@@ -24,3 +24,8 @@ void ThreeDSpace::setOrigin(Vec3 org)
 {
   origin=org;
 }
+
+std::vector<GraphicalObject> ThreeDSpace::getObjects()
+{
+	return objects;
+}
