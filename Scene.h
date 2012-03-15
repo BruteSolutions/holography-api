@@ -6,13 +6,21 @@ class Scene
 	public:
 		Scene()
 		{
-		
+			cPos = {-1-1,1};
+			cDir = {1,1,-1};
+			threeDeeSpace = new ThreeDeeSpace();
 		}
-		ThreeDeeSpace get3DSpace()
+		ThreeDeeSpace * get3DSpace()
 		{	
 			return threeDeeSpace;
 		}
-		ThreeDeeSpace threeDeeSpace;
+		
+		Vec3 getCameraPosition()
+		{
+			return cPos;
+		}	
+		ThreeDeeSpace * threeDeeSpace;
+		Vec3 cPos, cDir;
 	private:
 		
 		

@@ -10,10 +10,24 @@
 #include "Shared.h"
 #include "GraphicalObject.h"
 #include "Projector.h"
+#include "GraphicalObject.h"
 //#include "Scene.h"
 
 Projector * p1, * p2;
 Scene * defaultScene;
+GraphicalObject * grObj1;
+
+float vertexData1[] = {
+	 0.0f,    0.5f, 0.0f, 1.0f,
+	 0.5f, -0.366f, 0.0f, 1.0f,
+	-0.5f, -0.366f, 0.0f, 1.0f,	 
+};
+
+float colorData1[] = {
+   	 1.0f,    0.0f, 0.0f, 1.0f,
+	 0.0f,    1.0f, 0.0f, 1.0f,
+	 0.0f,    0.0f, 1.0f, 1.0f,
+};
 
 void init()
 {
@@ -23,6 +37,8 @@ void init()
   p1 = new Projector(NULL, 0, pos, dir);
   p2 = new Projector(NULL, 0, pos, dir);
   defaultScene = NULL;
+  grObj1 = new GraphicalObject(vertexData1, sizeof(vertexData1), colorData1, sizeof(colorData1));
+  //defaultScene->get3DSpace()->addObject(grObj1);
 }
 
 void display() {}

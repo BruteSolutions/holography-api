@@ -1,3 +1,4 @@
+
 #include "GraphicalObject.h"
 
 GraphicalObject::GraphicalObject()
