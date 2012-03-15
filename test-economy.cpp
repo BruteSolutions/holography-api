@@ -18,16 +18,49 @@ Projector * p1, * p2;
 Scene * defaultScene;
 GraphicalObject * grObj1;
 
+#define LEFT -0.5f, -0.5f, 0.0f,   1.0f
+#define RIGHT 0.5f, -0.5f, 0.0f,   1.0f
+#define TOP   0.0f,  0.5f, 0.0f,   1.0f
+#define REAR  0.0f,  0.0f, -0.05f, 1.0f
 float vertexData1[] = {
-	 0.0f,    0.5f, 0.0f, 1.0f,
-	 0.5f, -0.366f, 0.0f, 1.0f,
-	-0.5f, -0.366f, 0.0f, 1.0f,	 
+	LEFT,	RIGHT,	TOP,
+	
+	TOP,	LEFT,	REAR,
+	
+	TOP,	RIGHT,	REAR,
+	
+	RIGHT,	LEFT,	REAR,
+	
+/*	 0.0f,    0.5f,  0.0f, 1.0f,
+	 0.5f, -0.366f,  0.0f, 1.0f,
+	-0.5f, -0.366f,  0.0f, 1.0f,
+	
+	 0.0f,    0.5f,  0.0f, 1.0f,
+	 0.5f, -0.366f,  0.0f, 1.0f,
+	 0.0f,    0.2f, -0.4f, 1.0f,	 
+	 
+	 0.5f, -0.366f,  0.0f, 1.0f,
+	-0.5f, -0.366f,  0.0f, 1.0f,
+	 0.0f,    0.2f, -0.4f, 1.0f,
+	 
+	 0.0f,    0.5f,  0.0f, 1.0f,
+	 -0.5f, -0.366f,  0.0f, 1.0f,
+	 0.0f,    0.2f, -0.4f, 1.0f,*/
 };
 
+#define GREEN_COLOR 0.75f, 0.75f, 1.0f, 1.0f
+#define BLUE_COLOR 	0.0f, 0.5f, 0.0f, 1.0f
+#define RED_COLOR 1.0f, 0.0f, 0.0f, 1.0f
+#define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
+#define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
 float colorData1[] = {
-   	 1.0f,    0.0f, 0.0f, 1.0f,
-	 0.0f,    1.0f, 0.0f, 1.0f,
-	 0.0f,    0.0f, 1.0f, 1.0f,
+   	GREEN_COLOR,	GREEN_COLOR,	GREEN_COLOR,
+	 
+	BLUE_COLOR,		BLUE_COLOR,		BLUE_COLOR,
+	 
+	RED_COLOR,		RED_COLOR,		RED_COLOR,
+	 
+	BROWN_COLOR,	BROWN_COLOR,	BROWN_COLOR,
 };
 
 void init()
