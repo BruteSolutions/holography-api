@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include <stdio.h>
-#include "glload/include/glload/gl_3_3.h"
+#include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 
 #include "Shader.h"
@@ -51,6 +51,7 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
     if(vertexId && fragId) {
         progId = compileProgram();
     }
+    std::cout << "End of Shader-constructor \n";
 }
 
 /**
@@ -61,17 +62,30 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
  */
 GLuint Shader::compileShader(std::string path, GLenum type)
 {
+    std::cout << "Compiling shader at location " << path << " of type " << type << std::endl;
     GLuint shader = glCreateShader(type);
+	std::cout << "Return value from createShader: " << shader << std::endl;
     const char * filePointer = path.c_str();
-    glShaderSource(shader, 1, &filePointer, NULL);
+
+	//TODO: Cleanup
+	char sourceBuf[4096];
+	const char * bufferp = sourceBuf;
+	fread(sourceBuf, 4096, 1, fopen(filePointer, "r"));
+  glShaderSource(shader, 1, &bufferp, NULL);
+
+	/*char buf[4096];
+	int outsize;
+	glGetShaderSource(shader, 1024, &outsize, buf);
+	std::cout << buf << std::endl;*/
 
     glCompileShader(shader);
 
     GLint status;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-    if (status == GL_FALSE)
+    if(status == GL_FALSE)
     {
-        throw "Error in shader compilation";
+	std::cout << "Error in shader compilation\n";
+        throw 3;
     }
 
     return shader;
@@ -83,6 +97,7 @@ GLuint Shader::compileShader(std::string path, GLenum type)
  */
 GLuint Shader::compileProgram()
 {
+    std::cout << "Compiling program\n";
     GLuint program = glCreateProgram();
 
     glAttachShader(program, fragId);

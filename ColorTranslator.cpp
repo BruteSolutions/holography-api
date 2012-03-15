@@ -1,39 +1,44 @@
 //#include <iostream>
+#include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
+#include <iostream>
 #include "Shader.h"
 #include "ColorTranslator.h"
+#include "Shared.h"
+
 
 ColorTranslator::ColorTranslator(){
-	float factor[3] = {0.217f, 0.715f, 0.017f};
+	//Vec3 factor = {0.217f, 0.715f, 0.017f};
+	Vec3 factor = {1.0f, 1.0f, 1.0f};
 	setConversionFactor(factor);
-	shader = new Shader("","redmonochrome.frag");
+	shader = new Shader("FragPosition.vert","redmonochrome.frag");
 }
 /* 
  * Constructor
  * @factor is an array of 3 floats. 
  */
-ColorTranslator::ColorTranslator(float *factor){
+ColorTranslator::ColorTranslator(Vec3 factor){
 	setConversionFactor(factor);
-    shader = new Shader("","redmonochrome.frag");
+    shader = new Shader("FragPosition.vert","redmonochrome.frag");
 }
 /*
  * Destroy constructor
  */
 ColorTranslator::~ColorTranslator(){
-    //delete factor;
     delete shader;
 }
 /*
  * Sets the factor of this class to the one sent in.
  * @factor is an array of 3 floats.
  */
-void ColorTranslator::setConversionFactor(float *factor){
+void ColorTranslator::setConversionFactor(Vec3 factor){
     this->factor = factor;
+
 }
 /*
  * Returns a pointer to the factor of this class
  */
-float* ColorTranslator::getConversionFactor() const {
+Vec3 ColorTranslator::getConversionFactor() const {
     return factor;
 }
 /*
@@ -45,9 +50,8 @@ Shader* ColorTranslator::getShader() {
 /*
  * Set the uniform "factor" so that the shader can access the factor.
  */
-void apply( GLuint program ){
-    //GLuint factorLocation = glGetUniformLocation(program, "factor");
-    //glUseProgram(program); //I dont know what this does
-    //glUniform3f(factorLocation,factor[0],factor[1],factor[2]);
-    //glUseProgram(0); //I don't know what this does
+void ColorTranslator::apply()
+{
+    GLuint factorLocation = glGetUniformLocation(shader->getShaderProgram(), "factor");
+    glUniform3f(factorLocation,factor.x, factor.y, factor.z);
 }

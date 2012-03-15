@@ -1,22 +1,23 @@
 #ifndef __ColorTranslator_H
 #define __ColorTranslator_H
 #include <GL/freeglut.h>
+#include "Shared.h"
 #include "Shader.h"
 
 //Class might be redundant as everything can be done with a shader
 
 class ColorTranslator{
 private: 
-    float *factor;
+    Vec3 factor;
     Shader * shader;
 public:
 	ColorTranslator();
 	ColorTranslator(const ColorTranslator& copy);
-	ColorTranslator(float *factor);
+	ColorTranslator(Vec3 factor);
     ~ColorTranslator();
-	void setConversionFactor(float *factor);
-	float* getConversionFactor() const;
+	void setConversionFactor(Vec3 factor);
+	Vec3 getConversionFactor() const;
 	Shader* getShader() ;
-    void apply( GLuint program );
+    void apply( /*GLuint program*/ );
 };
 #endif

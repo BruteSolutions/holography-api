@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "glload/include/glload/gl_3_3.h"
+#include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 
 #include "Shared.h"
@@ -22,7 +22,6 @@ Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : high
 	bufferSize = len;
 	setPosition(pos);
 	setDirection(dir);
-	//create necessary Shader objects => hardcode a picture for the buffer. How do I do that?
 }
 
 /*
@@ -147,26 +146,32 @@ int* Projector::getBuffer()
  * @param
  * @return
  */
-void Projector::display (Scene scn)
+void Projector::display(Scene scn)
 {
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-  glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 
-  //TODO: Do color settings
+	GLuint pid = colorTranslator->getShader()->getShaderProgram();
+  	glUseProgram(pid);
+	colorTranslator->apply();
+	ThreeDSpace * space = scn.get3DSpace();
 
-  ThreeDSpace * space = scn.get3DSpace();
-  std::vector<GraphicalObject> goList = space->getObjects(); // I need a list to do for each.
-
-  for (std::vector<GraphicalObject>::iterator it = goList.begin(); it != goList.end(); it++) {
-   // if(map.containsKey(*it.id)) {
+  std::vector<GraphicalObject*> goList = space->getObjects();
+  for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
+    (*it)->draw();
+    /*if(map.containsKey(*it.id)) {
       //TODO: Apply associated shaders
-   // }
+    }*/
   }
 
-  //TODO: Perform keystone correction
-  
-  glutSwapBuffers();
+  /* std::cout << goList.size() << std::endl;
+	//goList[0]->draw();*/
+
+	glUseProgram(0);
+
+	glutSwapBuffers();
 }
+
 
 /*
  * Gets the list of in use shaders.
@@ -181,8 +186,8 @@ std::vector<Shader> Projector::getShaders()
 
 /*
  * Adds a shader "s" to the list of shaders.
- // * This might endlessly grow, to later crash the program?
- // * Due to the fact that there is no way to effectivly remove shaders.
+ * This might endlessly grow, to later crash the program?
+ * Due to the fact that there is no way to effectivly remove shaders.
  * @param Shader s, the Shader you want to add to the list.
  * @return void
  */

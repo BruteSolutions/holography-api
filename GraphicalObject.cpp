@@ -1,4 +1,4 @@
-#include "glload/include/glload/gl_3_3.h"
+#include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 
 #include "GraphicalObject.h"
@@ -6,12 +6,6 @@
 GraphicalObject::GraphicalObject()
 {
 }
-
-//GraphicalObject::GraphicalObject(float triangle[], int _trianglesSize)
-//{
-//	*triangles = triangle;
-//	trianglesSize = _trianglesSize;
-//}
 
 GraphicalObject::GraphicalObject(float _triangles[], int _trianglesSize, float _colors[], int _colorsSize)
 {	
@@ -47,26 +41,35 @@ int GraphicalObject::getColorsSize()
 	return colorsSize;
 }
 
-void GraphicalObject::bindBufferData()
-{
-	glGenBuffers(1, &positionBufferObject);
-
-	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
-	glBufferData(GL_ARRAY_BUFFER, getTrianglesSize(), getTriangles(), GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-
 void GraphicalObject::draw()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
+  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, sizeof(float), GL_FLOAT, GL_FALSE, 0, 0);
+  glEnableVertexAttribArray(0);			
+  glEnableVertexAttribArray(1);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);	
+  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
+  glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-	glDisableVertexAttribArray(0);
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+
+  glDisableVertexAttribArray(0);
+  glDisableVertexAttribArray(1);
 }
 
+void GraphicalObject::bindBufferData()
+{
+
+  glGenBuffers(1, &positionBufferObject);
+  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
+  glBufferData(GL_ARRAY_BUFFER, getTrianglesSize(), getTriangles(), GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);	
+
+  glGenBuffers(1, &positionBufferObject2);
+  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
+  glBufferData(GL_ARRAY_BUFFER, getColorsSize(), getColors(), GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  
+}
 

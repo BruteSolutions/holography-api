@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "glload/include/glload/gl_3_3.h"
+#include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 
 #include "Shared.h"
@@ -18,49 +18,16 @@ Projector * p1, * p2;
 Scene * defaultScene;
 GraphicalObject * grObj1;
 
-#define LEFT -0.5f, -0.5f, 0.0f,   1.0f
-#define RIGHT 0.5f, -0.5f, 0.0f,   1.0f
-#define TOP   0.0f,  0.5f, 0.0f,   1.0f
-#define REAR  0.0f,  0.0f, -0.05f, 1.0f
-float vertexData1[] = {
-	LEFT,	RIGHT,	TOP,
-	
-	TOP,	LEFT,	REAR,
-	
-	TOP,	RIGHT,	REAR,
-	
-	RIGHT,	LEFT,	REAR,
-	
-/*	 0.0f,    0.5f,  0.0f, 1.0f,
-	 0.5f, -0.366f,  0.0f, 1.0f,
-	-0.5f, -0.366f,  0.0f, 1.0f,
-	
-	 0.0f,    0.5f,  0.0f, 1.0f,
-	 0.5f, -0.366f,  0.0f, 1.0f,
-	 0.0f,    0.2f, -0.4f, 1.0f,	 
-	 
-	 0.5f, -0.366f,  0.0f, 1.0f,
-	-0.5f, -0.366f,  0.0f, 1.0f,
-	 0.0f,    0.2f, -0.4f, 1.0f,
-	 
-	 0.0f,    0.5f,  0.0f, 1.0f,
-	 -0.5f, -0.366f,  0.0f, 1.0f,
-	 0.0f,    0.2f, -0.4f, 1.0f,*/
+float vertexData[] = {
+	0.75f, 0.75f, 0.0f, 1.0f,
+	0.75f, -0.75f, 0.0f, 1.0f,
+	-0.75f, -0.75f, 0.0f, 1.0f,	 
 };
 
-#define GREEN_COLOR 0.75f, 0.75f, 1.0f, 1.0f
-#define BLUE_COLOR 	0.0f, 0.5f, 0.0f, 1.0f
-#define RED_COLOR 1.0f, 0.0f, 0.0f, 1.0f
-#define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
-#define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
-float colorData1[] = {
-   	GREEN_COLOR,	GREEN_COLOR,	GREEN_COLOR,
-	 
-	BLUE_COLOR,		BLUE_COLOR,		BLUE_COLOR,
-	 
-	RED_COLOR,		RED_COLOR,		RED_COLOR,
-	 
-	BROWN_COLOR,	BROWN_COLOR,	BROWN_COLOR,
+float colorData[] = {
+   1.0f, 0.0f, 0.0f, 1.0f,
+	 0.0f, 1.0f, 0.0f, 1.0f,
+	 0.0f, 0.0f, 1.0f, 1.0f,
 };
 
 void init()
@@ -68,22 +35,30 @@ void init()
   std::cout << "Initializing" << std::endl;
 
   Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
+
   p1 = new Projector(NULL, 0, pos, dir);
   p2 = new Projector(NULL, 0, pos, dir);
-  defaultScene = NULL;
-  grObj1 = new GraphicalObject(vertexData1, sizeof(vertexData1), colorData1, sizeof(colorData1));
-  //defaultScene->get3DSpace()->addObject(grObj1);
+
+  defaultScene = new Scene();
+  grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
+  defaultScene->get3DSpace()->addObject(grObj1);
+
+  std::cout << "init done\n";
+
+  grObj1->bindBufferData();
 }
 
 void display() {}
 
 void display1()
 {
+  std::cout << "display1()\n";
   p1->display(*defaultScene);
 }
 
 void display2()
 {
+  std::cout << "display2()\n";
   p2->display(*defaultScene);
 }
 
