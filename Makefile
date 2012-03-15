@@ -41,28 +41,6 @@ ifeq ($(config),debug)
   endef
 endif
 
-ifeq ($(config),release)
-  OBJDIR     = obj/Release
-  TARGETDIR  = .
-  TARGET     = $(TARGETDIR)/test-economy
-  DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DRELEASE -DNDEBUG
-  INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -O3 -fomit-frame-pointer -Wall
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
-  LIBS      += -lframework -lglload -lglimg -lglutil -lglmesh -lfreeglut -lGL -lGLU
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += ../framework/lib/libframework.a
-  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
 OBJECTS := \
 	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Shader.o\
 
