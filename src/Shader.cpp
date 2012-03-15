@@ -41,11 +41,11 @@ return 0;
 Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0), progId(0)
 {
     if(vsPath != "") {
-        vertexId = compileShader(vsPath, GL_VERTEX_SHADER);
+        vertexId = compileShader("shader/" + vsPath, GL_VERTEX_SHADER);
     }
 
     if(fsPath != "") {
-        fragId = compileShader(fsPath, GL_FRAGMENT_SHADER);
+        fragId = compileShader("shader/" + fsPath, GL_FRAGMENT_SHADER);
     }
 
     if(vertexId && fragId) {

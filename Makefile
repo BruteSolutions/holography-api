@@ -24,7 +24,7 @@ ifeq ($(config),debug)
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/test-economy
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DDEBUG -D_DEBUG
-  INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include
+  INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include -Iinclude
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES) -std=c++0x
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g
   CXXFLAGS  += $(CFLAGS) 
@@ -33,6 +33,7 @@ ifeq ($(config),debug)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += ../framework/lib/libframeworkD.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
+  SRCPATH		 = src
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -103,31 +104,31 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/test-economy.o: test-economy.cpp
+$(OBJDIR)/test-economy.o: $(SRCPATH)/test-economy.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/Projector.o: Projector.cpp
+$(OBJDIR)/Projector.o: $(SRCPATH)/Projector.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/GraphicalObject.o: GraphicalObject.cpp
+$(OBJDIR)/GraphicalObject.o: $(SRCPATH)/GraphicalObject.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ColorTranslator.o: ColorTranslator.cpp
+$(OBJDIR)/ColorTranslator.o: $(SRCPATH)/ColorTranslator.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/Scene.o: Scene.cpp
+$(OBJDIR)/Scene.o: $(SRCPATH)/Scene.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ThreeDSpace.o: ThreeDSpace.cpp
+$(OBJDIR)/ThreeDSpace.o: $(SRCPATH)/ThreeDSpace.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/Shader.o: Shader.cpp
+$(OBJDIR)/Shader.o: $(SRCPATH)/Shader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 -include $(OBJECTS:%.o=%.d)
