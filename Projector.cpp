@@ -145,7 +145,7 @@ void Projector::display (Scene scn)
 
   //TODO: Do color settings
 
-  3Dspace space = scn.get3DSpace();
+  ThreeDeeSpace space = scn.get3DSpace();
   std::list<GraphicalObject> goList = space.getObjects(); // I need a list to do for each.
 
   for (std::list<GraphicalObject>::iterator it = goList.begin(); goList != fifth.end(); goList++) {
