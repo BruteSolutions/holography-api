@@ -28,6 +28,7 @@ private:
   ColorTranslator colorTranslator;
   Configuration configuration;
   bool highlighted;
+  Vec3 pos, dir;
   
 };
 

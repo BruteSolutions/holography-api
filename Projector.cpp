@@ -1,5 +1,6 @@
 #include <list>
 #include "Projector.h"
+#include "Vec3.cpp"
 
 /*
  * Creates a new projector with buffer of size len at the place pointer with position pos
@@ -20,8 +21,10 @@ Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : high
  * and direction (0,0,0);
  */
 Projector::Projector(int * pointer, unsigned int len)
-{
-	Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
+{	
+	//Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
+	Vec3 pos = {0,0,0}, dir = {0,0,0};
+	Projector(pointer, len, pos, dir);
 
 }
 /*
