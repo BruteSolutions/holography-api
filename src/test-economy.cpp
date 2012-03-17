@@ -32,33 +32,32 @@ float colorData[] = {
 
 void init()
 {
-  std::cout << "Initializing" << std::endl;
-
-  Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
-
-  p1 = new Projector(NULL, 0, pos, dir);
-  p2 = new Projector(NULL, 0, pos, dir);
-
   defaultScene = new Scene();
   grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
   defaultScene->get3DSpace()->addObject(grObj1);
-
-  std::cout << "init done\n";
-
-  grObj1->bindBufferData();
 }
 
-//void display() {}
-
-void display()
+void init1()
 {
-  std::cout << "display1()\n";
+  Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
+  p1 = new Projector(NULL, 0, pos, dir);
+  defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();
+}
+
+void init2()
+{
+  Vec3 pos = {2, 0, 0}, dir = {0, 0, 0};
+  p2 = new Projector(NULL, 0, pos, dir);
+  defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();
+}
+
+void display1()
+{
   p1->display(*defaultScene);
 }
 
 void display2()
 {
-  std::cout << "display2()\n";
   p2->display(*defaultScene);
 }
 
