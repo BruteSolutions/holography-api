@@ -48,9 +48,9 @@ void init()
   grObj1->bindBufferData();
 }
 
-void display() {}
+//void display() {}
 
-void display1()
+void display()
 {
   std::cout << "display1()\n";
   p1->display(*defaultScene);
