@@ -8,10 +8,9 @@
 
 
 ColorTranslator::ColorTranslator(){
-	//Vec3 factor = {0.217f, 0.715f, 0.017f};
-	Vec3 factor = {1.0f, 1.0f, 1.0f};
+	Vec3 factor = {0.217f, 0.715f, 0.017f};
 	setConversionFactor(factor);
-	shader = new Shader("FragPosition.vert","redmonochrome.frag");
+	shader = new Shader("IdVertex.vert","redmonochrome.frag");
 }
 /* 
  * Constructor
@@ -19,7 +18,7 @@ ColorTranslator::ColorTranslator(){
  */
 ColorTranslator::ColorTranslator(Vec3 factor){
 	setConversionFactor(factor);
-    shader = new Shader("FragPosition.vert","redmonochrome.frag");
+    shader = new Shader("IdVertex.vert","redmonochrome.frag");
 }
 /*
  * Destroy constructor
