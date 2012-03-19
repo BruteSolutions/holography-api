@@ -4,5 +4,6 @@ public:
 	static Scene loadFile(std::string Path);
 
 private:
-	static bool theRightFileType(std::string Path);
+	static int theRightFileType(std::string Path);
+        static int determineNumberFromFiletype(std::string Path);
 }
