@@ -48,7 +48,7 @@ theRightFileType(string path)
 
 determineNumberFromFiletype(string filetype)
 {
-  if(filetype.compare(".X3D") || filetype.compare(".x3d"))
+  if((filetype.compare(".X3D") == 0) || (filetype.compare(".x3d") == 0))
     return 1;
   else
     return -1;
