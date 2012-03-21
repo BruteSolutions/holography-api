@@ -35,6 +35,7 @@ void init()
   defaultScene = new Scene();
   grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
   defaultScene->get3DSpace()->addObject(grObj1);
+
 }
 
 void init1()
@@ -42,6 +43,8 @@ void init1()
   Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
   p1 = new Projector(NULL, 0, pos, dir);
   defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();
+  //Create shader and push to one of the projectors
+  p1->addShader(Shader("AdjustPosition.vert", "IdFragment.frag"));
 }
 
 void init2()
@@ -58,6 +61,7 @@ void display1()
 
 void display2()
 {
+  //TODO: Remove
   p2->display(*defaultScene);
 }
 
