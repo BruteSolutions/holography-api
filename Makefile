@@ -43,7 +43,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Shader.o\
+	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
 
 RESOURCES := \
 
@@ -129,6 +129,10 @@ $(OBJDIR)/ThreeDSpace.o: $(SRCPATH)/ThreeDSpace.cpp
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Shader.o: $(SRCPATH)/Shader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Monitor.o: $(SRCPATH)/Monitor.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 -include $(OBJECTS:%.o=%.d)
