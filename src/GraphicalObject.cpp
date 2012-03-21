@@ -73,3 +73,8 @@ void GraphicalObject::bindBufferData()
   
 }
 
+void GraphicalObject::translate(Vec3 trans)
+{
+	//TODO
+}
+

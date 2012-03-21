@@ -14,13 +14,16 @@ class GraphicalObject
 		float getFirstTri();
 		void bindBufferData();
 		void draw();
+		
+		void translate(Vec3 trans);
 
 	private:
 		GLuint positionBufferObject;
 		GLuint positionBufferObject2;
+		GLuint positionBufferObject3;
 		int trianglesSize, colorsSize;
 		float *triangles, *colors;
-		float *offset;
-		
+		//4*4 Matrix
+		float *transMatrix;
 		
 };
