@@ -17,11 +17,11 @@
  */
 Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) 
 {
-	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
-	pnt = pointer;
-	bufferSize = len;
-	setPosition(pos);
-	setDirection(dir);
+  colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
+  pnt = pointer;
+  bufferSize = len;
+  setPosition(pos);
+  setDirection(dir);
 }
 
 /*
@@ -29,10 +29,10 @@ Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : high
  * and direction (0,0,0);
  */
 Projector::Projector(int * pointer, unsigned int len)
-{	
-	//Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
-	Vec3 pos = {0,0,0}, dir = {0,0,0};
-	Projector(pointer, len, pos, dir);
+{ 
+  //Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
+  Vec3 pos = {0,0,0}, dir = {0,0,0};
+  Projector(pointer, len, pos, dir);
 
 }
 /*
@@ -41,7 +41,7 @@ Projector::Projector(int * pointer, unsigned int len)
  */
 void Projector::setPosition(Vec3 newPos)
 {
-	newPos = pos;
+  newPos = pos;
 }
 
 /*
@@ -50,7 +50,7 @@ void Projector::setPosition(Vec3 newPos)
  */
 Vec3 Projector::getPosition()
 {
-	return pos;
+  return pos;
 }
 
 /*
@@ -59,7 +59,7 @@ Vec3 Projector::getPosition()
  */
 void Projector::setDirection(Vec3 newDir)
 {
-	direction = newDir;
+  direction = newDir;
 }
 
 /*
@@ -68,7 +68,7 @@ void Projector::setDirection(Vec3 newDir)
  */
 Vec3 Projector::getDirection()
 {
-	return direction;
+  return direction;
 }
 
 /*
@@ -136,7 +136,7 @@ void Projector::unHighlight()
  */
 int* Projector::getBuffer()
 {
-	return pnt;
+  return pnt;
 }
 
 /*
@@ -148,13 +148,21 @@ int* Projector::getBuffer()
  */
 void Projector::display(Scene scn)
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+  glClear(GL_COLOR_BUFFER_BIT);
 
-	GLuint pid = colorTranslator->getShader()->getShaderProgram();
-  	glUseProgram(pid);
-	colorTranslator->apply();
-	ThreeDSpace * space = scn.get3DSpace();
+  GLuint pid;
+  if(shaders.size()) {
+    pid = shaders[0].getShaderProgram();
+  }
+  else {
+    pid = colorTranslator->getShader()->getShaderProgram();
+  }
+  glUseProgram(pid);
+  colorTranslator->apply();
+  ThreeDSpace * space = scn.get3DSpace();
+
+  //TODO: Use glGenFramebuffer, glBindFrameBuffer (and glFrameBufferRenderbuffer?)
 
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
@@ -165,11 +173,11 @@ void Projector::display(Scene scn)
   }
 
   /* std::cout << goList.size() << std::endl;
-	//goList[0]->draw();*/
+  //goList[0]->draw();*/
 
-	glUseProgram(0);
+  glUseProgram(0);
 
-	glutSwapBuffers();
+  glutSwapBuffers();
 }
 
 
@@ -186,8 +194,6 @@ std::vector<Shader> Projector::getShaders()
 
 /*
  * Adds a shader "s" to the list of shaders.
- * This might endlessly grow, to later crash the program?
- * Due to the fact that there is no way to effectivly remove shaders.
  * @param Shader s, the Shader you want to add to the list.
  * @return void
  */
