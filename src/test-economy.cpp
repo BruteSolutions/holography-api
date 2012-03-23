@@ -34,7 +34,7 @@ float colorData[] = {
 #define RIGHT 0.5f, -0.5f, 0.0f, 1.0f
 #define TOP 0.0f, 0.5f, 0.0f, 1.0f
 #define REAR 0.0f, 0.0f, -0.05f, 1.0f
-float vertexData1[] = {
+float vertexData[] = {
 LEFT, RIGHT, TOP,
 
 TOP, LEFT, REAR,
@@ -62,7 +62,7 @@ RIGHT, LEFT, REAR,
 #define RED_COLOR 1.0f, 0.0f, 0.0f, 1.0f
 #define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
 #define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
-float colorData1[] = {
+float colorData[] = {
     GREEN_COLOR, GREEN_COLOR, GREEN_COLOR,
 
 	BLUE_COLOR, BLUE_COLOR, BLUE_COLOR,

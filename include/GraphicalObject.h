@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include "Shared.h"
 
 class GraphicalObject
 {
