@@ -11,13 +11,13 @@ loadFile(string path)
 	{
         case -1: // Faild filetype.
           puts("Not a valid file type");
-          throw 666;
+          throw 255;
         case 1: // Filetype X3D
           // Call the X3D fileloader and return its result.
           return X3DLoader.loadFile(path);
         default: // should not be reachable, method call died.
           puts("Method to determine filetype crashed.");
-          throw 667;
+          throw 254;
         }
 }
 
@@ -48,7 +48,7 @@ theRightFileType(string path)
 
 determineNumberFromFiletype(string filetype)
 {
-  if((filetype.compare(".X3D") == 0) || (filetype.compare(".x3d") == 0))
+  if(filetype.compare(".X3D") || filetype.compare(".x3d"))
     return 1;
   else
     return -1;
