@@ -1,6 +1,8 @@
 #ifndef PROJECTOR_H_
 #define PROJECTOR_H_
 
+#include "ColorTranslator.h"
+
 class Projector
 {
 public:

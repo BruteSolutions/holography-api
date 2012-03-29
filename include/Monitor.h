@@ -2,20 +2,22 @@
 #define MONITOR_H_
 
 
+/**
+ * Monitor class.
+ */
 class Monitor
 {
   public:
-    Monitor(int * pointer, unsigned int len);
+    Monitor();
+    ~Monitor();
     void display(Scene scn);
     void addShader(Shader s);
     std::vector<Shader> getShaders();
-    int * getBuffer();
-    int getBufferSize();
 
   private:
     unsigned int bufferSize;
     std::vector<Shader> shaders;
-    std::map<unsigned int, GLuint> objectMap;
+    Projector * proj;
 };
 
 #endif

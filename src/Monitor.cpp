@@ -1,4 +1,3 @@
-#include <map>
 #include <vector>
 
 #include <glload/gl_3_3.h>
@@ -9,29 +8,50 @@
 #include "ThreeDSpace.h"
 #include "Shader.h"
 #include "Scene.h"
+#include "Projector.h"
 #include "Monitor.h"
 
-Monitor::Monitor(int * pointer, unsigned int len)
+
+/**
+ * Monitor constructor.
+ */
+Monitor::Monitor()
 {
+  proj = new Projector(NULL, 0);
 }
 
+/**
+ * Monitor destructor.
+ */
+Monitor::~Monitor()
+{
+  delete proj;
+}
+
+/**
+ * Displays a scene.
+ * @param scn Scene to display.
+ */
 void Monitor::display(Scene scn)
 {
+  proj->display(scn);
 }
 
+/**
+ * Adds a shader to rendering.
+ * @param s Shader to add.
+ */
 void Monitor::addShader(Shader s)
 {
+  shaders.push_back(s);
+  proj->addShader(s);
 }
 
+/**
+ * Returns a list of shaders.
+ * @return All associated shaders.
+ */
 std::vector<Shader> Monitor::getShaders()
 {
+  return(shaders);
 }
-
-int * Monitor::getBuffer()
-{
-}
-
-int Monitor::getBufferSize()
-{
-}
-
