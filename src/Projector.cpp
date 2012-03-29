@@ -158,6 +158,7 @@ void Projector::display(Scene scn)
   }
   glUseProgram(pid);
   colorTranslator->apply();
+  scn.apply(pid);
   ThreeDSpace * space = scn.get3DSpace();
 
   std::vector<GraphicalObject*> goList = space->getObjects();

@@ -13,4 +13,9 @@ struct Vec4
 	float x,y,z,w;
 };
 
+struct Mat4
+{
+	float m[16];
+};
+
 #endif
