@@ -15,25 +15,9 @@
 #include <string>
 #include <fstream>
 
-
 #include "Shader.h"
 
 using namespace std;
-
-/*
-   int main() {
-// Endast för test
-//todo Tas bos när vi har testat klart
-Shader *bla = new Shader("what","eek");
-(*bla).addParameter("harr", 2);
-
-cout << bla->getParameters()[0].param;
-(*bla).addParameter("yarr", 3);
-(*bla).removeParameter("harr");
-cout << bla->getParameters()[0].param;
-return 0;
-}
- */
 
 /**
  * Shader constructor.
