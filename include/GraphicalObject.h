@@ -26,5 +26,5 @@ class GraphicalObject
 		GLuint positionBufferObject3;
 		int trianglesSize, colorsSize;
 		float *triangles, *colors;
-    Vec3 pos;
+    	Vec3 pos;
 };

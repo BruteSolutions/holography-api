@@ -76,7 +76,8 @@ void GraphicalObject::bindBufferData()
 
 void GraphicalObject::translate(Vec3 trans)
 {
-  pos = trans;
+  Vec3 newPos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
+  pos = newPos;
 }
 
 void GraphicalObject::applyTransformation(GLuint shader)
