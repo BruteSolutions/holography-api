@@ -12,6 +12,8 @@
 #include <vector>
 #include <stdio.h>
 #include <GL/freeglut.h>
+#include <string>
+#include <fstream>
 
 typedef struct Uniforms_struct{
   std::string param;
@@ -33,6 +35,9 @@ class Shader {
     std::vector<uniform_t> getParameters();
     void removeParameter(std::string name);
     void addParameter(std::string name, GLuint p);
+	std::string loadFileToString(std::string path);
+	GLuint glcppShaderSource(std::string const &shader_string, GLenum type);
+	
   private:
     GLuint compileShader(std::string path, GLenum type);
     GLuint compileProgram();
