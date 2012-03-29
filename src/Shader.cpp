@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
+#include <string>
+#include <fstream>
+
 
 #include "Shader.h"
 
@@ -60,9 +63,9 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
  * @param type Type of shader.
  * @return Shader ID.
  */
-GLuint Shader::compileShader(std::string path, GLenum type)
+std::string Shader::loadFileToString(std::string path)
 {
-    std::cout << "Compiling shader at location " << path << " of type " << type << std::endl;
+   /* std::cout << "Compiling shader at location " << path << " of type " << type << std::endl;
     GLuint shader = glCreateShader(type);
 	std::cout << "Return value from createShader: " << shader << std::endl;
     const char * filePointer = path.c_str();
@@ -76,7 +79,7 @@ GLuint Shader::compileShader(std::string path, GLenum type)
 	/*char buf[4096];
 	int outsize;
 	glGetShaderSource(shader, 1024, &outsize, buf);
-	std::cout << buf << std::endl;*/
+	std::cout << buf << std::endl;
 
     glCompileShader(shader);
 
@@ -87,10 +90,39 @@ GLuint Shader::compileShader(std::string path, GLenum type)
 	std::cout << "Error in shader compilation\n";
         throw 3;
     }
+	
+    return shader;*/
 
-    return shader;
+	std::ifstream ifile(path);
+    std::string filetext;
+	
+ 	while( ifile.good() ) {
+        std::string line;
+        std::getline(ifile, line);
+        filetext.append(line + "\n");
+    }
+
+	return filetext;
+
 }
 
+GLuint Shader::glcppShaderSource(std::string const &shader_string, GLenum type)
+{
+	GLuint shader = glCreateShader(type);
+    GLchar const *shader_source = shader_string.c_str();
+    GLint const shader_length = shader_string.size();
+
+    glShaderSource(shader, 1, &shader_source, &shader_length);
+	glCompileShader(shader);
+	return shader;
+
+}
+
+GLuint Shader::compileShader(std::string path, GLenum type)
+{
+	GLuint shader=glcppShaderSource(loadFileToString(path), type);
+	return shader;
+}
 /**
  * Compile shaders into a program.
  * @return Program ID.
