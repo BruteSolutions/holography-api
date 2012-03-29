@@ -76,6 +76,8 @@ void init()
 {
   defaultScene = new Scene();
   grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
+  Vec3 pos = {0.5f, 0.0, 0.0};
+  grObj1->translate(pos);
   defaultScene->get3DSpace()->addObject(grObj1);
 
 }
@@ -91,9 +93,9 @@ void init1()
 
 void init2()
 {
-  /*Vec3 pos = {2, 0, 0}, dir = {0, 0, 0};
+  Vec3 pos = {2, 0, 0}, dir = {0, 0, 0};
   p2 = new Projector(NULL, 0, pos, dir);
-  defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();*/
+  defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();
 }
 
 void display1()
@@ -103,8 +105,7 @@ void display1()
 
 void display2()
 {
-  //TODO: Remove
-  //p2->display(*defaultScene);
+  p2->display(*defaultScene);
 }
 
 void reshape (int w, int h)
@@ -119,6 +120,13 @@ void keyboard(unsigned char key, int x, int y)
 	  case 27:
 		  glutLeaveMainLoop();
 		  return;
+    default:
+      //TODO
+      Vec3 pos = {-0.5, 0.0, 0.0};
+      grObj1->translate(pos);
+      std::cout << "--------------------------- TRIGGERING REDRAW -------------------- !11!!\n";
+      glutPostRedisplay();
+      break;
 	}
 }
 

@@ -76,6 +76,12 @@ void GraphicalObject::bindBufferData()
 
 void GraphicalObject::translate(Vec3 trans)
 {
-	//TODO
+  pos = trans;
+}
+
+void GraphicalObject::applyTransformation(GLuint shader)
+{
+    GLuint posLoc = glGetUniformLocation(shader, "objectPos");
+    glUniform3f(posLoc, pos.x, pos.y, pos.z);
 }
 

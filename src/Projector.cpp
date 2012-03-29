@@ -167,7 +167,7 @@ void Projector::display(Scene scn)
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
     //TODO: change position uniform
-    //it->applyTransform();
+    (*it)->applyTransformation(pid);
     (*it)->draw();
   }
 
