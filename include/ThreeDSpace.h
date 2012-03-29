@@ -8,6 +8,7 @@ class ThreeDSpace
 		std::vector<GraphicalObject*> getObjects();
 		void addObject(GraphicalObject * obj);
 		void setOrigin(Vec3 org);
+		void bindBuffers();
 		
 		std::vector<GraphicalObject*> objects;
 		Vec3 origin;

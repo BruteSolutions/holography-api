@@ -27,3 +27,12 @@ void ThreeDSpace::setOrigin(Vec3 org)
 {
   origin=org;
 }
+
+void ThreeDSpace::bindBuffers(){
+
+  for (std::vector<GraphicalObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
+    (*it)->bindBufferData();
+  }
+}
+
+

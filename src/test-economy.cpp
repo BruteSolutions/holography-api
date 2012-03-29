@@ -16,19 +16,19 @@
 
 Projector * p1, * p2;
 Scene * defaultScene;
-GraphicalObject * grObj1;
-/* OLD OBJECT
-float vertexData[] = {
+GraphicalObject * grObj1, * grObj2;
+
+float vertexData2[] = {
 	0.75f, 0.75f, 0.0f, 1.0f,
 	0.75f, -0.75f, 0.0f, 1.0f,
 	-0.75f, -0.75f, 0.0f, 1.0f,	 
 };
 
-float colorData[] = {
+float colorData2[] = {
    1.0f, 0.0f, 0.0f, 1.0f,
 	 0.0f, 1.0f, 0.0f, 1.0f,
 	 0.0f, 0.0f, 1.0f, 1.0f,
-};*/
+};
 
 #define LEFT -0.5f, -0.5f, 0.0f, 1.0f
 #define RIGHT 0.5f, -0.5f, 0.0f, 1.0f
@@ -42,19 +42,6 @@ TOP, LEFT, REAR,
 TOP, RIGHT, REAR,
 
 RIGHT, LEFT, REAR,
-
-/* 0.0f, 0.5f, 0.0f, 1.0f,
-0.5f, -0.366f, 0.0f, 1.0f,
--0.5f, -0.366f, 0.0f, 1.0f,
-0.0f, 0.5f, 0.0f, 1.0f,
-0.5f, -0.366f, 0.0f, 1.0f,
-0.0f, 0.2f, -0.4f, 1.0f,
-0.5f, -0.366f, 0.0f, 1.0f,
--0.5f, -0.366f, 0.0f, 1.0f,
-0.0f, 0.2f, -0.4f, 1.0f,
-0.0f, 0.5f, 0.0f, 1.0f,
--0.5f, -0.366f, 0.0f, 1.0f,
-0.0f, 0.2f, -0.4f, 1.0f,*/
 };
 
 #define GREEN_COLOR 0.75f, 0.75f, 1.0f, 1.0f
@@ -76,9 +63,10 @@ void init()
 {
   defaultScene = new Scene();
   grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
-  Vec3 pos = {0.5f, 0.0, 0.0};
-  grObj1->translate(pos);
+  grObj2 = new GraphicalObject(vertexData2, sizeof(vertexData2), colorData2, sizeof(colorData2));
+
   defaultScene->get3DSpace()->addObject(grObj1);
+  defaultScene->get3DSpace()->addObject(grObj2);
 
 }
 
@@ -86,7 +74,7 @@ void init1()
 {
   Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
   p1 = new Projector(NULL, 0, pos, dir);
-  defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();
+  defaultScene->get3DSpace()->bindBuffers();
   //Create shader and push to one of the projectors
   //p1->addShader(Shader("AdjustPosition.vert", "IdFragment.frag"));
 }
@@ -95,7 +83,7 @@ void init2()
 {
   Vec3 pos = {2, 0, 0}, dir = {0, 0, 0};
   p2 = new Projector(NULL, 0, pos, dir);
-  defaultScene->get3DSpace()->getObjects()[0]->bindBufferData();
+  defaultScene->get3DSpace()->bindBuffers();
 }
 
 void display1()
@@ -115,18 +103,49 @@ void reshape (int w, int h)
 
 void keyboard(unsigned char key, int x, int y)
 {
+	Vec3 pos;
 	switch (key)
 	{
 	  case 27:
 		  glutLeaveMainLoop();
 		  return;
-    default:
-      //TODO
-      Vec3 pos = {-0.5, 0.0, 0.0};
-      grObj1->translate(pos);
-      std::cout << "--------------------------- TRIGGERING REDRAW -------------------- !11!!\n";
-      glutPostRedisplay();
-      break;
+	  case 'a':
+std::cout << "--------------------------- PRESSED A -------------------- !11!!\n";
+		  pos = {-0.05f, 0.0f, 0.0f};
+		  grObj2->translate(pos);
+     	  glutPostRedisplay();
+		  return;
+      case 'd':
+std::cout << "--------------------------- PRESSED D -------------------- !11!!\n";
+		  pos = {0.05f, 0.0f, 0.0f};
+		  grObj2->translate(pos);
+		  glutPostRedisplay();
+		  return;
+      case 'w':
+std::cout << "--------------------------- PRESSED W -------------------- !11!!\n";
+		  pos = {0.0f, 0.05f, 0.0f};
+		  grObj2->translate(pos);
+		  glutPostRedisplay();
+		  return;
+      case 's':
+std::cout << "--------------------------- PRESSED S -------------------- !11!!\n";
+		  pos = {0.0f, -0.05f, 0.0f};
+		  grObj2->translate(pos);
+		  glutPostRedisplay();
+		  return;
+      case 'z':
+std::cout << "--------------------------- PRESSED Z -------------------- !11!!\n";
+		  pos = {0.0f, 0.0f, 0.05f};
+		  grObj1->translate(pos);
+		  glutPostRedisplay();
+		  return;
+      case 'x':
+std::cout << "--------------------------- PRESSED X -------------------- !11!!\n";
+		  pos = {0.0f, 0.0f, -0.05f};
+		  grObj1->translate(pos);
+		  glutPostRedisplay();
+		  return;
+ 
 	}
 }
 
