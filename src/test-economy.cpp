@@ -16,7 +16,10 @@
 
 Projector * p1, * p2;
 Scene * defaultScene;
+int highlightState = 0;
+
 GraphicalObject * grObj1, * grObj2;
+
 
 float vertexData2[] = {
 	0.75f, 0.75f, 0.0f, 1.0f,
@@ -76,7 +79,6 @@ void init1()
   p1 = new Projector(NULL, 0, pos, dir);
   defaultScene->get3DSpace()->bindBuffers();
   //Create shader and push to one of the projectors
-  //p1->addShader(Shader("AdjustPosition.vert", "IdFragment.frag"));
 }
 
 void init2()
@@ -143,9 +145,19 @@ std::cout << "--------------------------- PRESSED Z -------------------- !11!!\n
 std::cout << "--------------------------- PRESSED X -------------------- !11!!\n";
 		  pos = {0.0f, 0.0f, -0.05f};
 		  grObj1->translate(pos);
+
+      highlightState = highlightState ? 0 : 1;
+      if(highlightState) {
+        p1->highlight();
+        p2->highlight();
+      }
+      else {
+        p1->unHighlight();
+        p2->unHighlight();
+      }
+
 		  glutPostRedisplay();
 		  return;
- 
 	}
 }
 

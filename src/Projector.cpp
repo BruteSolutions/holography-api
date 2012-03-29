@@ -114,7 +114,6 @@ void Projector::highlight()
 {
   if(!highlighted) {
     highlighted = true;
-    //TODO: Add
   }
 }
 
@@ -125,7 +124,6 @@ void Projector::unHighlight()
 {
   if(highlighted) {
     highlighted = false;
-    //TODO: Remove
   }
 }
 
@@ -162,20 +160,19 @@ void Projector::display(Scene scn)
   colorTranslator->apply();
   ThreeDSpace * space = scn.get3DSpace();
 
-  //TODO: Set highlight and colortranslator factor in shader
-
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
-    //TODO: change position uniform
     (*it)->applyTransformation(pid);
+
+    //Apply highlight setting
+    float val = highlighted ? 1.0f : 0.0f;
+    GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
+    glUniform1f(loc, val);
+
     (*it)->draw();
   }
 
-  /* std::cout << goList.size() << std::endl;
-  //goList[0]->draw();*/
-
   glUseProgram(0);
-
   glutSwapBuffers();
 }
 
