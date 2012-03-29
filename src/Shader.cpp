@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cstring>
 #include <string>
 #include <vector>
 #include <stdio.h>
@@ -43,18 +44,18 @@ return 0;
  */
 Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0), progId(0)
 {
-    if(vsPath != "") {
-        vertexId = compileShader("shader/" + vsPath, GL_VERTEX_SHADER);
-    }
+  if(vsPath != "") {
+    vertexId = compileShader("shader/" + vsPath, GL_VERTEX_SHADER);
+  }
 
-    if(fsPath != "") {
-        fragId = compileShader("shader/" + fsPath, GL_FRAGMENT_SHADER);
-    }
+  if(fsPath != "") {
+    fragId = compileShader("shader/" + fsPath, GL_FRAGMENT_SHADER);
+  }
 
-    if(vertexId && fragId) {
-        progId = compileProgram();
-    }
-    std::cout << "End of Shader-constructor \n";
+  if(vertexId && fragId) {
+    progId = compileProgram();
+  }
+  std::cout << "End of Shader-constructor \n";
 }
 
 /**
@@ -65,34 +66,6 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
  */
 std::string Shader::loadFileToString(std::string path)
 {
-   /* std::cout << "Compiling shader at location " << path << " of type " << type << std::endl;
-    GLuint shader = glCreateShader(type);
-	std::cout << "Return value from createShader: " << shader << std::endl;
-    const char * filePointer = path.c_str();
-
-	//TODO: Cleanup
-	char sourceBuf[4096];
-	const char * bufferp = sourceBuf;
-	fread(sourceBuf, 4096, 1, fopen(filePointer, "r"));
-  glShaderSource(shader, 1, &bufferp, NULL);
-
-	/*char buf[4096];
-	int outsize;
-	glGetShaderSource(shader, 1024, &outsize, buf);
-	std::cout << buf << std::endl;
-
-    glCompileShader(shader);
-
-    GLint status;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-    if(status == GL_FALSE)
-    {
-	std::cout << "Error in shader compilation\n";
-        throw 3;
-    }
-	
-    return shader;*/
-
 	std::ifstream ifile(path);
     std::string filetext;
 	
@@ -100,10 +73,8 @@ std::string Shader::loadFileToString(std::string path)
         std::string line;
         std::getline(ifile, line);
         filetext.append(line + "\n");
-    }
-
+  }
 	return filetext;
-
 }
 
 GLuint Shader::glcppShaderSource(std::string const &shader_string, GLenum type)
@@ -129,22 +100,22 @@ GLuint Shader::compileShader(std::string path, GLenum type)
  */
 GLuint Shader::compileProgram()
 {
-    std::cout << "Compiling program\n";
-    GLuint program = glCreateProgram();
+  std::cout << "Compiling program\n";
+  GLuint program = glCreateProgram();
 
-    glAttachShader(program, fragId);
-    glAttachShader(program, vertexId);
+  glAttachShader(program, fragId);
+  glAttachShader(program, vertexId);
 
-    glLinkProgram(program);
+  glLinkProgram(program);
 
-    GLint status;
-    glGetProgramiv(program, GL_LINK_STATUS, &status);
-    if (status == GL_FALSE)
-    {
-        throw "Error in program compilation";
-    }
+  GLint status;
+  glGetProgramiv(program, GL_LINK_STATUS, &status);
+  if (status == GL_FALSE)
+  {
+    throw "Error in program compilation";
+  }
 
-    return program;
+  return program;
 }
 
 /**
@@ -153,11 +124,11 @@ GLuint Shader::compileProgram()
  */
 void Shader::setVertexShader(GLuint openglRef)
 {
-    vertexId = openglRef;
-    if(vertexId && fragId) {
-        //TODO: delete program and recompile
-        progId = compileProgram();
-    }
+  vertexId = openglRef;
+  if(vertexId && fragId) {
+    //TODO: delete program and recompile
+    progId = compileProgram();
+  }
 }
 
 /**
@@ -166,11 +137,11 @@ void Shader::setVertexShader(GLuint openglRef)
  */
 void Shader::setFragmentShader(GLuint openglRef)
 {
-    fragId = openglRef;
-    if(vertexId && fragId) {
-        //TODO: delete program and recompile
-        progId = compileProgram();
-    }
+  fragId = openglRef;
+  if(vertexId && fragId) {
+    //TODO: delete program and recompile
+    progId = compileProgram();
+  }
 }
 
 /**
@@ -179,7 +150,7 @@ void Shader::setFragmentShader(GLuint openglRef)
  */
 GLuint Shader::getVertexShader()
 {
-    return(vertexId);
+  return(vertexId);
 }
 
 /**
@@ -188,7 +159,7 @@ GLuint Shader::getVertexShader()
  */
 GLuint Shader::getFragmentShader()
 {
-    return(fragId);
+  return(fragId);
 }
 
 /**
@@ -197,7 +168,7 @@ GLuint Shader::getFragmentShader()
  */
 GLuint Shader::getShaderProgram()
 {
-    return(progId);
+  return(progId);
 }
 
 /**
@@ -205,7 +176,7 @@ GLuint Shader::getShaderProgram()
  * @return A vector with all variables
  */
 std::vector<uniform_t> Shader::getParameters(){
-    return uniforms;
+  return uniforms;
 }
 
 /**
@@ -215,11 +186,11 @@ std::vector<uniform_t> Shader::getParameters(){
  */
 
 void Shader::removeParameter(std::string name){
-    for(unsigned int i = 0; i<uniforms.size();i++){
-        if(name.compare(uniforms[i].param)==0){
-            uniforms.erase(uniforms.begin()+i);
-        }
+  for(unsigned int i = 0; i<uniforms.size();i++){
+    if(name.compare(uniforms[i].param)==0){
+      uniforms.erase(uniforms.begin()+i);
     }
+  }
 }
 
 /**
@@ -229,5 +200,5 @@ void Shader::removeParameter(std::string name){
  * @param p GLuint p is a OpenGL reference pointing to a variable with name name.
  */
 void Shader::addParameter(std::string name, GLuint p){
-    uniforms.push_back(Uniforms_struct(name, p));
+  uniforms.push_back(Uniforms_struct(name, p));
 }

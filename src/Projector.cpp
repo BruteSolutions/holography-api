@@ -162,14 +162,13 @@ void Projector::display(Scene scn)
   colorTranslator->apply();
   ThreeDSpace * space = scn.get3DSpace();
 
-  //TODO: Use glGenFramebuffer, glBindFrameBuffer (and glFrameBufferRenderbuffer?)
+  //TODO: Set highlight and colortranslator factor in shader
 
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
+    //TODO: change position uniform
+    //it->applyTransform();
     (*it)->draw();
-    /*if(map.containsKey(*it.id)) {
-      //TODO: Apply associated shaders
-    }*/
   }
 
   /* std::cout << goList.size() << std::endl;
