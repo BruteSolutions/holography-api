@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include "Shared.h"
+#include "Shader.h"
 
 class GraphicalObject
 {
@@ -15,6 +16,7 @@ class GraphicalObject
 		float getFirstTri();
 		void bindBufferData();
 		void draw();
+    void applyTransformation(GLuint shader);
 		
 		void translate(Vec3 trans);
 
@@ -24,7 +26,5 @@ class GraphicalObject
 		GLuint positionBufferObject3;
 		int trianglesSize, colorsSize;
 		float *triangles, *colors;
-		//4*4 Matrix
-		float *transMatrix;
-		
+    Vec3 pos;
 };
