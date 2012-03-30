@@ -18,9 +18,9 @@ Projector * p1, * p2;
 Scene * defaultScene;
 int highlightState = 0;
 
-GraphicalObject * grObj1, * grObj2;
+GraphicalObject * grObj1, * grObj2, grObj3;
 
-
+/*
 float vertexData2[] = {
 	0.75f, 0.75f, 0.0f, 1.0f,
 	0.75f, -0.75f, 0.0f, 1.0f,
@@ -31,12 +31,23 @@ float colorData2[] = {
    1.0f, 0.0f, 0.0f, 1.0f,
 	 0.0f, 1.0f, 0.0f, 1.0f,
 	 0.0f, 0.0f, 1.0f, 1.0f,
-};
+};*/
+
+#define FLB -0.5f, -0.5f, 0.5f, 1.0f 
+#define FRB 0.5f, -0.5f, 0.5f, 1.0f
+#define FLT -0.5f, 0.5f, 0.5f, 1.0f
+#define FRT 0.5f, 0.5f, 0.5f, 1.0f
+
+#define BLB -0.5f, -0.5f, -0.5f, 1.0f 
+#define BRB 0.5f, -0.5f, -0.5f, 1.0f
+#define BLT -0.5f, 0.5f, -0.5f, 1.0f
+#define BRT 0.5f, 0.5f, -0.5f, 1.0f
+
 
 #define LEFT -0.5f, -0.5f, 0.0f, 1.0f
 #define RIGHT 0.5f, -0.5f, 0.0f, 1.0f
 #define TOP 0.0f, 0.5f, 0.0f, 1.0f
-#define REAR 0.0f, 0.0f, -0.05f, 1.0f
+#define REAR 0.0f, 0.0f, -1.0f, 1.0f
 float vertexData[] = {
 LEFT, RIGHT, TOP,
 
@@ -64,12 +75,25 @@ float colorData[] = {
 
 void init()
 {
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CW);
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
+	glDepthFunc(GL_LEQUAL);
+	glDepthRange(0.0f, 1.0f);
+
+
   defaultScene = new Scene();
   grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
-  grObj2 = new GraphicalObject(vertexData2, sizeof(vertexData2), colorData2, sizeof(colorData2));
+	//initial zoom out
+	Vec3 pos = {0.0f, 0.0f, -0.6f};
+		  grObj1->translate(pos);
+ // grObj2 = new GraphicalObject(vertexData2, sizeof(vertexData2), colorData2, sizeof(colorData2));
 
   defaultScene->get3DSpace()->addObject(grObj1);
-  defaultScene->get3DSpace()->addObject(grObj2);
+  //defaultScene->get3DSpace()->addObject(grObj2);
 
 }
 
@@ -114,25 +138,25 @@ void keyboard(unsigned char key, int x, int y)
 	  case 'a':
 std::cout << "--------------------------- PRESSED A -------------------- !11!!\n";
 		  pos = {-0.05f, 0.0f, 0.0f};
-		  grObj2->translate(pos);
+		  grObj1->translate(pos);
      	  glutPostRedisplay();
 		  return;
       case 'd':
 std::cout << "--------------------------- PRESSED D -------------------- !11!!\n";
 		  pos = {0.05f, 0.0f, 0.0f};
-		  grObj2->translate(pos);
+		  grObj1->translate(pos);
 		  glutPostRedisplay();
 		  return;
       case 'w':
 std::cout << "--------------------------- PRESSED W -------------------- !11!!\n";
 		  pos = {0.0f, 0.05f, 0.0f};
-		  grObj2->translate(pos);
+		  grObj1->translate(pos);
 		  glutPostRedisplay();
 		  return;
       case 's':
 std::cout << "--------------------------- PRESSED S -------------------- !11!!\n";
 		  pos = {0.0f, -0.05f, 0.0f};
-		  grObj2->translate(pos);
+		  grObj1->translate(pos);
 		  glutPostRedisplay();
 		  return;
       case 'z':
@@ -145,19 +169,27 @@ std::cout << "--------------------------- PRESSED Z -------------------- !11!!\n
 std::cout << "--------------------------- PRESSED X -------------------- !11!!\n";
 		  pos = {0.0f, 0.0f, -0.05f};
 		  grObj1->translate(pos);
-
-      highlightState = highlightState ? 0 : 1;
-      if(highlightState) {
-        p1->highlight();
-        p2->highlight();
-      }
-      else {
-        p1->unHighlight();
-        p2->unHighlight();
-      }
-
 		  glutPostRedisplay();
 		  return;
+
+	  case 'j':
+std::cout << "--------------------------- PRESSED J -------------------- !11!!\n";
+		return;
+      case 'c':
+std::cout << "--------------------------- PRESSED C -------------------- !11!!\n";
+
+		  highlightState = highlightState ? 0 : 1;
+		  if(highlightState) {
+		    p1->highlight();
+		    p2->highlight();
+		  }
+		  else {
+		    p1->unHighlight();
+		    p2->unHighlight();
+		  }
+
+			  glutPostRedisplay();
+			  return;
 	}
 }
 

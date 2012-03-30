@@ -14,8 +14,10 @@ class Scene
 		
 		ThreeDSpace * threeDSpace;
 		Vec3 cPos, cDir;
-		Mat4 worldPos;
-		void apply(GLuint shader);
+		Mat4 worldPos, worldRotX, worldRotY, worldRotZ;
+		void applyPos(GLuint shader);
+		float fFrustumScale ; float fzNear; float fzFar;
+		void applyRot(GLuint shader);
 	private:		
 };
 

@@ -148,6 +148,11 @@ void Projector::display(Scene scn)
 {
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClear(GL_COLOR_BUFFER_BIT);
+	
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearDepth(1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   GLuint pid;
   if(shaders.size()) {
@@ -158,7 +163,8 @@ void Projector::display(Scene scn)
   }
   glUseProgram(pid);
   colorTranslator->apply();
-  scn.apply(pid);
+  scn.applyRot(pid);
+  scn.applyPos(pid);
   ThreeDSpace * space = scn.get3DSpace();
 
   std::vector<GraphicalObject*> goList = space->getObjects();
