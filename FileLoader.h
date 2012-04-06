@@ -1,3 +1,5 @@
+#include <string>
+#include "Scene.h"
 class FileLoader
 {
 public:

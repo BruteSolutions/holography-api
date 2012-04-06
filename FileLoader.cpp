@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include "FileLoader.h"
+#include "Scene.h"
 
 /**
  * Loads a file, and from which creates a Scene object.
  * 
  **/ 
-loadFile(string path)
+Scene FileLoader::loadFile(string path)
 {
 	switch(theRightFileType(path))
 	{
@@ -21,7 +23,7 @@ loadFile(string path)
         }
 }
 
-theRightFileType(string path)
+int FileLoader::theRightFileType(string path)
 {
   char dot = '.';
   int i = 0;
@@ -46,7 +48,7 @@ theRightFileType(string path)
   return determineNumberFromFiletype(output);
 }
 
-determineNumberFromFiletype(string filetype)
+int FileLoader::determineNumberFromFiletype(string filetype)
 {
   if(filetype.compare(".X3D") || filetype.compare(".x3d"))
     return 1;
