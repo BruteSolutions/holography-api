@@ -1,7 +1,7 @@
 #include <vector>
 #include "X3DLoader"
 #include "Scene.h"
-
+#include "Shared.h"
 void X3DLoader::copyPoints( const char * attrib, std::vector<Vec4> *points){
 	char *pch = 0;
 	bool firstRun = true;

@@ -2,6 +2,7 @@
 #include <vector>
 #include "FileLoader.h"
 #include "Scene.h"
+#include "Shared.h"
 struct Vec3Int
 {
 	int x,y,z;
