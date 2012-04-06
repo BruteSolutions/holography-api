@@ -7,5 +7,5 @@ public:
 
 private:
 	static int theRightFileType(std::string Path);
-        static int determineNumberFromFiletype(std::string Path);
+  static int determineNumberFromFiletype(std::string Path);
 }

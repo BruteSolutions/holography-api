@@ -1,3 +1,5 @@
+#include <libxml++/libxml++.h>
+#include <libxml++/parsers/textreader.h>
 #include <vector>
 #include "X3DLoader"
 #include "Scene.h"
@@ -98,7 +100,7 @@ Scene X3DLoader::loadFile(std::string path)
 								 	 reader.move_to_first_attribute();
         					do{
 					          if(strcmp(reader.get_name().c_str(), "point") == 0){
-					          	copyFloats(reader.get_value().c_str(), &points);
+					          	copyPoints(reader.get_value().c_str(), &points);
         						}
         					}while(reader.move_to_next_attribute());
         				coordIndexOffset = points.size(); //the next time a shape is loaded it will add faces at the end
