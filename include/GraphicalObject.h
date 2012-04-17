@@ -1,3 +1,5 @@
+#ifndef __GRAPHICALOBJECT_H
+#define __GRAPHICALOBJECT_H
 #include <vector>
 #include <iostream>
 #include "Shared.h"
@@ -7,24 +9,30 @@ class GraphicalObject
 {
 	public:
 		GraphicalObject();
-		GraphicalObject(float triangle[], int size);
-		GraphicalObject(float triangle[], int trianglesSize, float color[], int colorsSize);
-		float* getTriangles();
-		float* getColors();
-		int getTrianglesSize();
-		int getColorsSize();
+		GraphicalObject(float vertexData[], int size);
+		GraphicalObject(float vertexData[], int vertexDatasSize, float colorData[], int ColorDataSize);
+		float* getVertexData();
+		float* getColorData();
+		int getVertexDataSize();
+		int getColorDataSize();
 		float getFirstTri();
 		void bindBufferData();
 		void draw();
+		void rotate();
     void applyTransformation(GLuint shader);
-		
+	void applyRotation(GLuint shader);
+//	void rotate(Vec3 trans);
+		float scale;
 		void translate(Vec3 trans);
-
+		float angleX, angleY, angleZ;
 	private:
 		GLuint positionBufferObject;
 		GLuint positionBufferObject2;
 		GLuint positionBufferObject3;
-		int trianglesSize, colorsSize;
-		float *triangles, *colors;
+		int vertexDataSize, colorDataSize;
+		float *vertexData, *colorData;
     	Vec3 pos;
+		Mat4 objectRotX,objectRotY,objectRotZ;
+
 };
+#endif

@@ -11,6 +11,7 @@ ThreeDSpace::ThreeDSpace() {
   objects.reserve(10);
   Vec3 origin = {0,0,0};
   setOrigin(origin);
+  selected  = std::vector<GraphicalObject*>();
 }
 
 std::vector<GraphicalObject*> ThreeDSpace::getObjects()
@@ -26,6 +27,14 @@ void ThreeDSpace::addObject(GraphicalObject * obj)
 void ThreeDSpace::setOrigin(Vec3 org)
 {
   origin=org;
+}
+void ThreeDSpace::selectNext(){
+	selected.clear();
+	selected.push_back(objects.at(current));
+	current++;
+	if(current >= objects.size()){
+		current = 0;
+	}
 }
 
 void ThreeDSpace::bindBuffers(){

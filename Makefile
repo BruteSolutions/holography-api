@@ -18,6 +18,12 @@ endif
 ifndef AR
   AR = ar
 endif
+ifndef LIBXMLCFLAGS
+ LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
+endif
+ifndef LIBXMLLIBS
+ LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
+endif
 
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
@@ -26,10 +32,10 @@ ifeq ($(config),debug)
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DDEBUG -D_DEBUG
   INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include -Iinclude
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES) -std=c++0x
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g
+  CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) -g
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
-  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGL -lGLU
+  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGL -lGLU $(LIBXMLLIBS)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += ../framework/lib/libframeworkD.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -43,7 +49,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
+	$(OBJDIR)/test-economy.o $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
 
 RESOURCES := \
 
@@ -122,7 +128,7 @@ $(OBJDIR)/ColorTranslator.o: $(SRCPATH)/ColorTranslator.cpp
 
 $(OBJDIR)/Scene.o: $(SRCPATH)/Scene.cpp
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+	$(SILENT) $(CXX) $(CXXFLAGS) $ -o "$@" -c "$<"
 
 $(OBJDIR)/ThreeDSpace.o: $(SRCPATH)/ThreeDSpace.cpp
 	@echo $(notdir $<)
@@ -132,7 +138,26 @@ $(OBJDIR)/Shader.o: $(SRCPATH)/Shader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/mytextreader.o: $(SRCPATH)/mytextreader.h
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) $(LIBXMLPP) -o "$@" -c "$<"
+
 $(OBJDIR)/Monitor.o: $(SRCPATH)/Monitor.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Display.o: $(SRCPATH)/Display.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+	 
+
+$(OBJDIR)/X3DLoader.o: $(SRCPATH)/X3DLoader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS)-o "$@" -c "$<"
+
+$(OBJDIR)/FileLoader.o: $(SRCPATH)/FileLoader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 -include $(OBJECTS:%.o=%.d)
+

@@ -147,12 +147,8 @@ int* Projector::getBuffer()
 void Projector::display(Scene scn)
 {
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-  glClear(GL_COLOR_BUFFER_BIT);
-	
-
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClearDepth(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glClearDepth(1.0f);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   GLuint pid;
   if(shaders.size()) {
@@ -163,6 +159,7 @@ void Projector::display(Scene scn)
   }
   glUseProgram(pid);
   colorTranslator->apply();
+  scn.setRotation();
   scn.applyRot(pid);
   scn.applyPos(pid);
   ThreeDSpace * space = scn.get3DSpace();
@@ -170,13 +167,15 @@ void Projector::display(Scene scn)
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
     (*it)->applyTransformation(pid);
-
+	(*it)->rotate();
+	(*it)->applyRotation(pid);
     //Apply highlight setting
     float val = highlighted ? 1.0f : 0.0f;
     GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
     glUniform1f(loc, val);
 
     (*it)->draw();
+	std::cout<<"running"<<std::endl;
   }
 
   glUseProgram(0);

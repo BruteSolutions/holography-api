@@ -4,29 +4,37 @@
  *  Created on: Feb 22, 2012
  *      Author: fericss
  */
+#include <glload/gl_3_3.h>
+#include <GL/freeglut.h>
+#include <vector>
+#include "ColorTranslator.h"
+#include "Scene.h"
+#include "Monitor.h"
+#include "Projector.h"
 
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 class Display
 {
 	public:
-		void Display();
+		Display();
 		void display(Scene scn);
-		int getProjectors();
-		Monitor getMonitor();
-		ColorTranslator getColorTranslator();
+		std::vector<Projector>* getProjectors();
+		Monitor* getMonitor();
+		ColorTranslator* getColorTranslator();
+		void addProjector(Projector p);
 		double getBoundingCube();
 		void highlight();
 		void unHighlight();
-		void setConfigurations(UniversalConfiguration uc);
-		UniversalConfiguration getConfigurations();
+		//void setConfigurations(UniversalConfiguration uc);
+		//UniversalConfiguration getConfigurations();
 	private:
-		Monitor myMonitor;
-		Projector projectorList;
-		ColorTranslator myColorTrans;
+		Monitor *myMonitor;
+		std::vector<Projector> *projectorList;
+		ColorTranslator *myColorTrans;
 		int numProjectors;
 		//final int WIDTH:
 		//final int HEIGHT:
 
-}
+};
 #endif /* DISPLAY_H_ */

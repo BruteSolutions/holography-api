@@ -13,13 +13,14 @@
 #include "Scene.h"
 #include "ColorTranslator.h"
 #include "Projector.h"
+#include "FileLoader.h"
 
 Projector * p1, * p2;
 Scene * defaultScene;
 int highlightState = 0;
 
-GraphicalObject * grObj1, * grObj2, grObj3;
-
+GraphicalObject * grObj1, *pGO, * grObj2, grObj3;
+std::vector<GraphicalObject*> selGOs;
 /*
 float vertexData2[] = {
 	0.75f, 0.75f, 0.0f, 1.0f,
@@ -75,26 +76,41 @@ float colorData[] = {
 
 void init()
 {
+  glFlush();
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CW);
 
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LEQUAL);
+	glEnable(GL_DEPTH_CLAMP);
 	glDepthRange(0.0f, 1.0f);
 
-
-  defaultScene = new Scene();
-  grObj1 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
+  defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+//defaultScene = new Scene();
+ // grObj2 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
 	//initial zoom out
-	Vec3 pos = {0.0f, 0.0f, -0.6f};
-		  grObj1->translate(pos);
- // grObj2 = new GraphicalObject(vertexData2, sizeof(vertexData2), colorData2, sizeof(colorData2));
+	grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
+	
+//	Vec3 pos = {0.0f, 0.0f, -3.6f};
+//		  grObj1->translate(pos);
+  grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
+std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
+ // defaultScene->get3DSpace()->addObject(grObj1);
+  defaultScene->get3DSpace()->addObject(grObj2);
+  
+		defaultScene->selectNext();
+		
+		pGO = defaultScene->getSelected().at(0);
 
-  defaultScene->get3DSpace()->addObject(grObj1);
-  //defaultScene->get3DSpace()->addObject(grObj2);
-
+	//Flytta bak objekten lite;
+	Vec3 zoom = {-5,0,-15};
+	grObj1->translate(zoom);
+	zoom = {0,0,-2};
+	grObj2->translate(zoom);
 }
 
 void init1()
@@ -102,16 +118,21 @@ void init1()
   Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
   p1 = new Projector(NULL, 0, pos, dir);
   defaultScene->get3DSpace()->bindBuffers();
-  //Create shader and push to one of the projectors
+  //Create shader and push to one of the projectors	
 }
 
 void init2()
 {
-  Vec3 pos = {2, 0, 0}, dir = {0, 0, 0};
+  Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
   p2 = new Projector(NULL, 0, pos, dir);
   defaultScene->get3DSpace()->bindBuffers();
 }
 
+void display()
+{
+ p1->display(*defaultScene);
+ p2->display(*defaultScene);
+}
 void display1()
 {
   p1->display(*defaultScene);
@@ -127,6 +148,7 @@ void reshape (int w, int h)
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 }
 
+bool worldCtrl = false;
 void keyboard(unsigned char key, int x, int y)
 {
 	Vec3 pos;
@@ -135,46 +157,160 @@ void keyboard(unsigned char key, int x, int y)
 	  case 27:
 		  glutLeaveMainLoop();
 		  return;
+	  case 'v':
+std::cout << "--------------------------- PRESSED V -------------------- !11!!\n";
+std::cout << "--------------------------- TOGGLE CTRL -------------------- !11!!\n";
+		worldCtrl = !worldCtrl;
+		if(worldCtrl){
+std::cout << "--------------------------- Controlling world -------------------- !11!!\n";
+		}
+		else{
+std::cout << "--------------------------- Controlling Obj -------------------- !11!!\n";
+		}
+		return;
 	  case 'a':
 std::cout << "--------------------------- PRESSED A -------------------- !11!!\n";
-		  pos = {-0.05f, 0.0f, 0.0f};
-		  grObj1->translate(pos);
-     	  glutPostRedisplay();
+				
+		if(!worldCtrl){
+		  pos = {-0.05f, 0.0f, 0.0f};		  
+		  pGO->translate(pos);
+     	}
+		else{
+		  pos = {0.05f, 0.0f, 0.0f};
+		  defaultScene->translateCam(pos);
+		}
+			glutPostRedisplay();
 		  return;
       case 'd':
 std::cout << "--------------------------- PRESSED D -------------------- !11!!\n";
+		if(!worldCtrl){
 		  pos = {0.05f, 0.0f, 0.0f};
-		  grObj1->translate(pos);
+		  pGO->translate(pos);
+		}
+		else{
+		  pos = {-0.05f, 0.0f, 0.0f};
+		  defaultScene->translateCam(pos);
+		}
 		  glutPostRedisplay();
 		  return;
       case 'w':
 std::cout << "--------------------------- PRESSED W -------------------- !11!!\n";
+		if(!worldCtrl){
 		  pos = {0.0f, 0.05f, 0.0f};
-		  grObj1->translate(pos);
+		  pGO->translate(pos);
+		}
+		else{
+			pos = {0.0f, 0.0f, 0.05f};
+		    defaultScene->translateCam(pos);
+		}
 		  glutPostRedisplay();
 		  return;
       case 's':
 std::cout << "--------------------------- PRESSED S -------------------- !11!!\n";
+		if(!worldCtrl){
 		  pos = {0.0f, -0.05f, 0.0f};
-		  grObj1->translate(pos);
+		  pGO->translate(pos);
+		}
+		else {
+			pos = {0.0f, 0.0f, -0.05f};
+		    defaultScene->translateCam(pos);
+		}
 		  glutPostRedisplay();
 		  return;
       case 'z':
 std::cout << "--------------------------- PRESSED Z -------------------- !11!!\n";
 		  pos = {0.0f, 0.0f, 0.05f};
-		  grObj1->translate(pos);
+		  pGO->translate(pos);
 		  glutPostRedisplay();
 		  return;
       case 'x':
 std::cout << "--------------------------- PRESSED X -------------------- !11!!\n";
 		  pos = {0.0f, 0.0f, -0.05f};
-		  grObj1->translate(pos);
+		  pGO->translate(pos);
 		  glutPostRedisplay();
 		  return;
+	  case 'y':
+std::cout << "--------------------------- PRESSED Y -------------------- !11!!\n";
+		defaultScene->angleX -= 0.1f;
+		  glutPostRedisplay();
 
+		return;
+	  case 'u':
+std::cout << "--------------------------- PRESSED U -------------------- !11!!\n";
+		defaultScene->angleX += 0.1f;
+		  glutPostRedisplay();
+		return;
+
+	  case 'h':
+std::cout << "--------------------------- PRESSED H -------------------- !11!!\n";
+		defaultScene->angleY -= 0.1f;
+		  glutPostRedisplay();
+
+		return;
 	  case 'j':
 std::cout << "--------------------------- PRESSED J -------------------- !11!!\n";
+		defaultScene->angleY += 0.1f;
+		  glutPostRedisplay();
 		return;
+	  case 'n':
+std::cout << "--------------------------- PRESSED N -------------------- !11!!\n";
+		defaultScene->angleZ -= 0.1f;
+		  glutPostRedisplay();
+
+		return;
+	  case 'm':
+std::cout << "--------------------------- PRESSED M -------------------- !11!!\n";
+		defaultScene->angleZ += 0.1f;
+		  glutPostRedisplay();
+		return;
+	  case '7':
+std::cout << "--------------------------- PRESSED 7 -------------------- !11!!\n";
+		pGO->angleX -= 0.1f;
+		  glutPostRedisplay();
+
+		return;
+	  case '8':
+std::cout << "--------------------------- PRESSED 8 -------------------- !11!!\n";
+		pGO->angleX += 0.1f;
+		  glutPostRedisplay();
+		return;
+
+	  case '4':
+std::cout << "--------------------------- PRESSED 4 -------------------- !11!!\n";
+		pGO->angleY -= 0.1f;
+		  glutPostRedisplay();
+
+		return;
+	  case '5':
+std::cout << "--------------------------- PRESSED 5 -------------------- !11!!\n";
+		pGO->angleY += 0.1f;
+		  glutPostRedisplay();
+		return;
+	  case '1':
+std::cout << "--------------------------- PRESSED 1 -------------------- !11!!\n";
+		pGO->angleZ -= 0.1f;
+		  glutPostRedisplay();
+
+		return;
+	  case '2':
+std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n";
+		pGO->angleZ += 0.1f;
+		  glutPostRedisplay();
+		return;
+	  case 'p':
+		defaultScene->selectNext();
+		selGOs = defaultScene->getSelected();
+		pGO = selGOs.at(0);
+		return;
+	case '-':
+		pGO->scale-=0.05f;
+		 glutPostRedisplay();
+			  return;
+
+	case '+':
+		pGO->scale+=0.05f;
+ glutPostRedisplay();
+			  return;
       case 'c':
 std::cout << "--------------------------- PRESSED C -------------------- !11!!\n";
 

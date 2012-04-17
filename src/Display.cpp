@@ -7,76 +7,73 @@
 //============================================================================
 
 #include <iostream>
-
-using namespace std;
+#include <vector>
+#include <glload/gl_3_3.h>
+#include <GL/freeglut.h>
+#include "Display.h"
+#include "Scene.h"
+#include "Monitor.h"
+#include "Projector.h"
 
 
 
 
 //todo
 
-class Display
-{
-	void Display::Display(){
-		*myMonitor = new Monitor();
+Display::Display(){
+	myMonitor = new Monitor();
 
-
-		// in i config fil och hämta antal projektorer
-		//TODO
-		numProjectors = 4; // Temp
-		*projectorList = new projectorList[10];
-		for(int i = 0; i<numProjectors; i++){
-			//TODO buffer of size len at memory (inte 50)
-			projectorList[i] = new Projector(&projectorList[i], 50);
-		}
-		*myColorTrans = new ColorTranslator();
-
-	}
-
-	void Display::display(Scene scn){
-		myColorTrans.apply();
-		//todo göra klart
-	}
-
-	int Display::getProjectors(){
-		return &projectorList;
-	}
-
-	Monitor Display::getMonitor(){
-		return myMonitor;
-	}
-	ColorTranslator getColorTranslator(){
-		return myColorTrans;
-	}
-	double Display::getBoundingCube(){
-		//todo
-	}
-	void Display::highlight(){
-		//todo
-		//	for each(Projector p in projector):
-		//	       p.highlight();
-		for(int i = 0; i<numProjectors;i++){
-			projectorList[i].highlight();
-		}
-	}
-	void Display::unHighlight(){
-		//todo
-		for(int i = 0; i<numProjectors;i++){
-			projectorList[i].unhighlight();
-		}
-	}
-	void Display::setConfigurations(UniversalConfiguration uc){
-		//todo
-
-	}
-	UniversalConfiguration Display::getConfigurations(){
-		//todo
-	}
-
-
-	int main() {
-		cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-		return 0;
-	}
-
+	// in i config fil och hämta antal projektorer
+	//TODO
+//	numProjectors = 4; // Temp
+//	projectorList = new std::vector<Projector>();
+//	for(int i = 0; i<numProjectors; i++){
+		//TODO buffer of size len at memory (inte 50)
+//		projectorList->push_back(Projector(NULL, 0));
+//	}
+	myColorTrans = new ColorTranslator();
 }
+void Display::display(Scene scn){
+//	myColorTrans->apply();
+for(int i = 0; i<numProjectors; i++){
+ (projectorList->at(i)).display(scn);
+}
+myMonitor->display(scn);
+	//todo göra klart
+}
+std::vector<Projector>* Display::getProjectors(){
+	return projectorList;
+}
+void Display::addProjector(Projector p){
+	projectorList->push_back(p);
+}
+Monitor* Display::getMonitor(){
+	return myMonitor;
+}
+ColorTranslator* Display::getColorTranslator(){
+	return myColorTrans;
+}
+double Display::getBoundingCube(){
+	//todo
+}
+void Display::highlight(){
+	//todo
+	//	for each(Projector p in projector):
+	//	       p.highlight();
+	for(int i = 0; i<numProjectors;i++){
+		(projectorList->at(i)).highlight();
+	}
+}
+void Display::unHighlight(){
+	//todo
+	for(int i = 0; i<numProjectors;i++){
+		(projectorList->at(i)).unHighlight();
+	}
+}
+//void Display::setConfigurations(UniversalConfiguration uc){
+		//todo
+//}
+//UniversalConfiguration Display::getConfigurations(){
+	//todo
+//}
+
