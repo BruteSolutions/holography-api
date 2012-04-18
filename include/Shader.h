@@ -37,7 +37,7 @@ class Shader {
     void addParameter(std::string name, GLuint p);
 	std::string loadFileToString(std::string path);
 	GLuint glcppShaderSource(std::string const &shader_string, GLenum type);
-	
+
   private:
     GLuint compileShader(std::string path, GLenum type);
     GLuint compileProgram();

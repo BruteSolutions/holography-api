@@ -13,6 +13,7 @@ class Monitor
     void display(Scene scn);
     void addShader(Shader s);
     std::vector<Shader> getShaders();
+	Projector * getProjector();
 
   private:
     unsigned int bufferSize;

@@ -28,7 +28,7 @@ class Scene
 		void applyRot(GLuint shader);
 		void setRotation();
 		float angleX, angleY,angleZ;
-		
+			void merge(Scene * s);
 	private:		
 		Vec4* matMult(Vec3 vec3);
 };

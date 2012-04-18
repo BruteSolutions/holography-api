@@ -33,7 +33,7 @@ Projector::Projector(int * pointer, unsigned int len)
   //Projector(pointer, len, new Vec3(0, 0, 0), new Vec3 (0, 0, 0));
   Vec3 pos = {0,0,0}, dir = {0,0,0};
   Projector(pointer, len, pos, dir);
-
+//DID NOT WORK, CAUSED SEGMENTATION FAULT
 }
 /*
  * Sets the position of the projector to the value of the parametre.
@@ -41,7 +41,7 @@ Projector::Projector(int * pointer, unsigned int len)
  */
 void Projector::setPosition(Vec3 newPos)
 {
-  newPos = pos;
+  pos = newPos;
 }
 
 /*
@@ -122,6 +122,7 @@ void Projector::highlight()
  */
 void Projector::unHighlight()
 {
+
   if(highlighted) {
     highlighted = false;
   }
@@ -147,16 +148,20 @@ int* Projector::getBuffer()
 void Projector::display(Scene scn)
 {
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-  glClearDepth(1.0f);
+  glClearDepth(5.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   GLuint pid;
+
+//necessary??
   if(shaders.size()) {
     pid = shaders[0].getShaderProgram();
   }
-  else {
+  else{
+
     pid = colorTranslator->getShader()->getShaderProgram();
   }
+
   glUseProgram(pid);
   colorTranslator->apply();
   scn.setRotation();
@@ -171,11 +176,11 @@ void Projector::display(Scene scn)
 	(*it)->applyRotation(pid);
     //Apply highlight setting
     float val = highlighted ? 1.0f : 0.0f;
+	std::cout << val << std::endl;
     GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
     glUniform1f(loc, val);
 
     (*it)->draw();
-	std::cout<<"running"<<std::endl;
   }
 
   glUseProgram(0);

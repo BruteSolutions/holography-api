@@ -22,16 +22,16 @@ class Display
 		std::vector<Projector>* getProjectors();
 		Monitor* getMonitor();
 		ColorTranslator* getColorTranslator();
-		void addProjector(Projector p);
+		void addProjector(Projector *p);
 		double getBoundingCube();
 		void highlight();
 		void unHighlight();
 		//void setConfigurations(UniversalConfiguration uc);
 		//UniversalConfiguration getConfigurations();
 	private:
-		Monitor *myMonitor;
+		Monitor *monitor;
 		std::vector<Projector> *projectorList;
-		ColorTranslator *myColorTrans;
+		ColorTranslator *colorTranslator;
 		int numProjectors;
 		//final int WIDTH:
 		//final int HEIGHT:

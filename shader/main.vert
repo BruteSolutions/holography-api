@@ -18,8 +18,18 @@ smooth out vec4 color;
 
 void main()
 {
-
 	color = theColor;
-	vec4 position2 = objectRotX*objectRotY*objectRotZ*vec4(position.x*scale,(position.y-5)*scale,position.z*scale,position.w);
-	gl_Position =vec4(0,5,0,0)+worldPos*(worldRotY*worldRotZ*worldRotX*vec4(position2.x + objectPos.x+camPos.x, position2.y + objectPos.y+camPos.y, position2.z + objectPos.z+camPos.z, position.w));
+	//rotate object around its origin
+	vec4 origin = vec4(0,5,0,0);
+	position = objectRotX * objectRotY * objectRotZ * (position - origin);
+	//scale object relative to origin
+	position = scale*position;
+	
+	//move object camera might be removed (the camera should be fixed)
+	position.x = position.x+objectPos.x+camPos.x;
+	position.y = position.y+objectPos.y+camPos.y;
+	position.z = position.z+objectPos.z+camPos.z;
+
+	//rotate the world and and apply the frustum matrix (worldpos) add the origin
+	gl_Position = origin + worldPos * worldRotX * worldRotY * worldRotZ * position;
 }

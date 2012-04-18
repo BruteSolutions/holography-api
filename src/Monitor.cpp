@@ -17,7 +17,8 @@
  */
 Monitor::Monitor()
 {
-  proj = new Projector(NULL, 0);
+  Vec3 pos = {0,0,0}, dir = {0,0,0};
+  proj = new Projector(NULL, 0, pos, dir);
 }
 
 /**
@@ -27,7 +28,9 @@ Monitor::~Monitor()
 {
   delete proj;
 }
-
+Projector* Monitor::getProjector(){
+	return proj;
+}
 /**
  * Displays a scene.
  * @param scn Scene to display.

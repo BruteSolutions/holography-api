@@ -78,6 +78,13 @@ std::vector<GraphicalObject*> Scene::getSelected(){
 GraphicalObject * Scene::getNextSelected(){;}
 void Scene::deselectAll(){;}
 
+void Scene::merge(Scene *s){
+	std::vector<GraphicalObject*> newObjects = s->get3DSpace()->getObjects();
+	for(std::vector<GraphicalObject*>::iterator it = newObjects.begin(); it != newObjects.end(); it++){
+		threeDSpace->addObject(*it);
+	}
+}
+
 void Scene::applyPos(GLuint shader)
 {
 	GLuint posLoc = glGetUniformLocation(shader, "worldPos");

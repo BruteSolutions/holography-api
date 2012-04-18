@@ -14,12 +14,14 @@
 #include "ColorTranslator.h"
 #include "Projector.h"
 #include "FileLoader.h"
+#include "Display.h"
 
 Projector * p1, * p2;
+Display* displayHandeler;
 Scene * defaultScene;
 int highlightState = 0;
 
-GraphicalObject * grObj1, *pGO, * grObj2, grObj3;
+GraphicalObject * grObj1, *pGO, * grObj2, *grObj3;
 std::vector<GraphicalObject*> selGOs;
 /*
 float vertexData2[] = {
@@ -73,12 +75,10 @@ float colorData[] = {
 
 	BROWN_COLOR, BROWN_COLOR, BROWN_COLOR,
 };
-
-void init()
-{
-  glFlush();
+int numwindows = 0;
+void graphicSettings(){
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	glCullFace(GL_FRONT);
 	glFrontFace(GL_CW);
 
 	glEnable(GL_DEPTH_TEST);
@@ -87,65 +87,71 @@ void init()
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_DEPTH_CLAMP);
 	glDepthRange(0.0f, 1.0f);
+}
+void bindBuffer(){
+	defaultScene->get3DSpace()->bindBuffers();
+}
+void init()
+{ // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
+  //if an object is added in a later stage, everywindow has to rebind their buffer
+ 
+	defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	defaultScene->get3DSpace()->addObject(grObj2);
 
-  defaultScene = FileLoader::loadFile("CadTeapot.x3d");
-//defaultScene = new Scene();
- // grObj2 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
-	//initial zoom out
+	defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
+	graphicSettings();
+
+	displayHandeler = new Display(); //add a monitor in here
+
+	bindBuffer(); //bind buffer to monitor window
+
 	grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
-	
-//	Vec3 pos = {0.0f, 0.0f, -3.6f};
-//		  grObj1->translate(pos);
-  grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
-std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
- // defaultScene->get3DSpace()->addObject(grObj1);
-  defaultScene->get3DSpace()->addObject(grObj2);
-  
-		defaultScene->selectNext();
+	grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
+	std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
+	std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
+
+	defaultScene->selectNext();
+
 		
-		pGO = defaultScene->getSelected().at(0);
+	pGO = defaultScene->getSelected().at(0);
+	
+	//initial zoom out
 
 	//Flytta bak objekten lite;
 	Vec3 zoom = {-5,0,-15};
 	grObj1->translate(zoom);
+	grObj3->translate(zoom);
 	zoom = {0,0,-2};
 	grObj2->translate(zoom);
+
+	numwindows++;
 }
 
-void init1()
-{
-  Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
-  p1 = new Projector(NULL, 0, pos, dir);
-  defaultScene->get3DSpace()->bindBuffers();
-  //Create shader and push to one of the projectors	
+void addProjector(){
+	if(defaultScene == NULL){
+		std::cout << "ERROR SCENE NOT INITIALIZED";
+		exit(1);
+	}
+	graphicSettings();
+	Vec3 pos = {(float) (numwindows*2), 0, 0}, dir = {0, 0, 0};
+	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
+	bindBuffer();
+	numwindows++;
 }
 
-void init2()
-{
-  Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
-  p2 = new Projector(NULL, 0, pos, dir);
-  defaultScene->get3DSpace()->bindBuffers();
-}
 
 void display()
 {
- p1->display(*defaultScene);
- p2->display(*defaultScene);
-}
-void display1()
-{
-  p1->display(*defaultScene);
+	if(displayHandeler == NULL) fprintf(stderr,"display not initialized\n");
+	displayHandeler->display(*defaultScene);
 }
 
-void display2()
-{
-  p2->display(*defaultScene);
-}
 
 void reshape (int w, int h)
 {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+//do something here to fix shaders
 }
 
 bool worldCtrl = false;
@@ -179,6 +185,7 @@ std::cout << "--------------------------- PRESSED A -------------------- !11!!\n
 		  pos = {0.05f, 0.0f, 0.0f};
 		  defaultScene->translateCam(pos);
 		}
+	fprintf(stderr,"redisplay\n");
 			glutPostRedisplay();
 		  return;
       case 'd':
@@ -311,21 +318,19 @@ std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n
 		pGO->scale+=0.05f;
  glutPostRedisplay();
 			  return;
-      case 'c':
+      case 'c': //highlights all objects
 std::cout << "--------------------------- PRESSED C -------------------- !11!!\n";
 
 		  highlightState = highlightState ? 0 : 1;
 		  if(highlightState) {
-		    p1->highlight();
-		    p2->highlight();
+			displayHandeler->highlight();
 		  }
 		  else {
-		    p1->unHighlight();
-		    p2->unHighlight();
+		    displayHandeler->unHighlight();
 		  }
 
-			  glutPostRedisplay();
-			  return;
+		  glutPostRedisplay();
+		  return;
 	}
 }
 

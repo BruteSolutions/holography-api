@@ -20,7 +20,7 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	memset(&objectRotY.m, 0, sizeof(objectRotY.m));
 	memset(&objectRotZ.m, 0, sizeof(objectRotZ.m));
 	objectRotX.m[0]=1;
-	objectRotX.m[5]=-1;
+	objectRotX.m[5]=1;
 	objectRotX.m[10]=1;
 	objectRotX.m[15]=1;	
 

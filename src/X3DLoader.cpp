@@ -127,9 +127,20 @@ Scene* X3DLoader::loadFile(std::string path)
     int size = faces.size()*12; //every face consists of 3 nodes with 4 flouts
     vertexData = new float[size];
     colorData = new float[size];
-    for(int i = 0; i < size; i++){
-    	colorData[i] = 0.90+i*0.001;
-		if(i%4 == 3) colorData[i] = 1.0;
+	int x = 0, y=0;
+    for(int i = 0; i < size; i+=4){
+		colorData[i] = 0.0; colorData[i+1] = 0.0; colorData[i+2] = 0.0; colorData[i+3] = 1.0;
+		colorData[i+y] = 1.0;
+		x++;
+		if(x==3){ 
+			x=0; y++; 
+			if(y == 4){ 
+				y=0; 
+			}
+		}
+		if(y == 0) std::cout << "RED\n";
+		if(y == 1) std::cout << "GREEN\n";
+		if(y == 2) std::cout << "BLUE\n";
     }
     for(int f = 0, i = 0, j = 4, k = 8; f < faces.size(); f++, i+=12, j+=12, k+=12){
     	Vec3Int face = faces.at(f);
@@ -147,11 +158,13 @@ Scene* X3DLoader::loadFile(std::string path)
     	vertexData[k+3] = points.at( face.z ).w;
     }
 		
-    for(int i = 0; i < 1032; i+=4){
+  /*  for(int i = 0; i < 1032; i+=4){
     	printf("%f %f %f %f \n", vertexData[i], vertexData[i+1], vertexData[i+2], vertexData[i+3]);
     }
     printf("%d \n", size);
-    scene->get3DSpace()->addObject(new GraphicalObject(vertexData, size, colorData, size));
+
+*/ 
+   scene->get3DSpace()->addObject(new GraphicalObject(vertexData, size, colorData, size));
     
     return scene;
   }

@@ -21,53 +21,60 @@
 //todo
 
 Display::Display(){
-	myMonitor = new Monitor();
+	monitor = new Monitor();
+	projectorList = new std::vector<Projector>();
 
-	// in i config fil och hämta antal projektorer
-	//TODO
-//	numProjectors = 4; // Temp
-//	projectorList = new std::vector<Projector>();
-//	for(int i = 0; i<numProjectors; i++){
-		//TODO buffer of size len at memory (inte 50)
-//		projectorList->push_back(Projector(NULL, 0));
-//	}
-	myColorTrans = new ColorTranslator();
+//COLORTRANSLATOR??
+	colorTranslator = new ColorTranslator();
 }
 void Display::display(Scene scn){
-//	myColorTrans->apply();
-for(int i = 0; i<numProjectors; i++){
- (projectorList->at(i)).display(scn);
-}
-myMonitor->display(scn);
-	//todo göra klart
+	//save the current window
+	int currentWindow = glutGetWindow();
+
+	//draw monitor
+	glutSetWindow(1); //monitor
+	monitor->display(scn);
+
+	//draw projectors
+	int windowBuffer = 2;
+	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++)
+	{
+	 glutSetWindow(windowBuffer);
+	 (*it).display(scn);
+	 windowBuffer++;
+	}
+	glutSetWindow(currentWindow);
+	//change back to the current window
 }
 std::vector<Projector>* Display::getProjectors(){
 	return projectorList;
 }
-void Display::addProjector(Projector p){
-	projectorList->push_back(p);
+void Display::addProjector(Projector *p){
+	if(p != NULL){
+		projectorList->push_back(*p);
+	}
 }
 Monitor* Display::getMonitor(){
-	return myMonitor;
+	return monitor;
 }
 ColorTranslator* Display::getColorTranslator(){
-	return myColorTrans;
+	return colorTranslator;
 }
 double Display::getBoundingCube(){
 	//todo
 }
 void Display::highlight(){
-	//todo
-	//	for each(Projector p in projector):
-	//	       p.highlight();
-	for(int i = 0; i<numProjectors;i++){
-		(projectorList->at(i)).highlight();
+	monitor->getProjector()->highlight();
+	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++)
+	{
+	 (*it).highlight();
 	}
 }
 void Display::unHighlight(){
-	//todo
-	for(int i = 0; i<numProjectors;i++){
-		(projectorList->at(i)).unHighlight();
+	monitor->getProjector()->unHighlight();
+	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++)
+	{
+	 (*it).unHighlight();
 	}
 }
 //void Display::setConfigurations(UniversalConfiguration uc){
