@@ -1,6 +1,6 @@
 #include <string>
 #include "FileLoader.h"
-#include "X3DLoader.h"
+//#include "X3DLoader.h"
 #include "Scene.h" 
 
 /**
@@ -14,9 +14,9 @@ Scene* FileLoader::loadFile(std::string path)
         case -1: // Faild filetype.
           puts("Not a valid file type");
           throw 255;
-        case 1: // Filetype X3D
+     //   case 1: // Filetype X3D
           // Call the X3D fileloader and return its result.
-          return X3DLoader::loadFile(path);
+       //   return X3DLoader::loadFile(path);
         default: // should not be reachable, method call died.
           puts("Method to determine filetype crashed.");
           throw 254;

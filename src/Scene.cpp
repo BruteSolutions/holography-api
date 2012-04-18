@@ -8,6 +8,8 @@
 #include "ThreeDSpace.h"
 #include "Scene.h"
 #include <cstring>
+#include <stdio.h>
+#include <math.h>
 
 Scene::Scene()
 {
@@ -28,7 +30,7 @@ Scene::Scene()
 */
 
 	worldRotX.m[0]=1;
-	worldRotX.m[5]=-1;
+	worldRotX.m[5]=1;
 	worldRotX.m[10]=1;
 	worldRotX.m[15]=1;	
 
@@ -131,8 +133,25 @@ void Scene::translateCam(Vec3 trans)
 
 Vec4* Scene::matMult(Vec3 trans)
 {
+setRotation();
+std::cout << "BEGIN MATMULT :" <<trans.x <<" " <<trans.y<< " " << trans.z<<"\n";
 	Vec4 pos = {trans.x, trans.y,trans.z, 1};
 	Vec4* res=new Vec4();
+std::cout <<"ANGLES "<< angleX <<" " <<angleY << " " << angleZ <<"\n";
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 4; j++){
+			std::cout << worldRotX.m[i*4+j]<<" ";
+}		std::cout <<"\n";}
+std::cout <<"\n";
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 4; j++){
+			std::cout << worldRotY.m[i*4+j]<<" ";
+}		std::cout <<"\n";}
+std::cout <<"\n";
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 4; j++){
+			std::cout << worldRotZ.m[i*4+j]<<" ";
+}		std::cout <<"\n";}
 
 	for(int i = 0; i < 4; i++){
 		float posCord;
@@ -149,6 +168,33 @@ Vec4* Scene::matMult(Vec3 trans)
 			if(j==3)
 			posCord=pos.w;
 			r+=worldRotX.m[i*4+j]*posCord;
+		}
+		if(i==0)
+			res->x=r;
+		if(i==1)
+			res->y=r;
+		if(i==2)
+			res->z=r;
+		if(i==3)
+			res->w=r;
+		
+	}
+
+	for(int i = 0; i < 4; i++){
+		float posCord;
+
+		
+		float r=0;
+		for(int j = 0; j < 4; j++){
+			if(j==0)
+				posCord=res->x;
+			if(j==1)
+				posCord=res->y;
+			if(j==2)
+				posCord=res->z;
+			if(j==3)
+			posCord=res->w;
+			r+=worldRotZ.m[i*4+j]*posCord;
 		}
 		if(i==0)
 			res->x=r;

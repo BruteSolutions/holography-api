@@ -3,6 +3,8 @@
 #include <cstring>
 #include "Shared.h"
 #include "GraphicalObject.h"
+#include <stdio.h>
+#include <math.h>
 
 GraphicalObject::GraphicalObject()
 {
@@ -129,6 +131,11 @@ for(int i = 0; i < 16; i++){
 //skapa en metod som sätter alla uniforms istället
 	GLuint scaleLoc = glGetUniformLocation(shader, "scale");
 	glUniform1f(scaleLoc, scale);
+
+	GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
+	glUniform3f(originLoc, origin.x,origin.y,origin.z);
+
+
 	//std::cout << "\n\n"<<scale<<"\n\n";
 	GLuint posLocX = glGetUniformLocation(shader, "objectRotX");
     glUniformMatrix4fv(posLocX , 1, GL_FALSE, objectRotX.m);
@@ -150,5 +157,10 @@ void GraphicalObject::applyTransformation(GLuint shader)
 {
     GLuint posLoc = glGetUniformLocation(shader, "objectPos");
     glUniform3f(posLoc, pos.x, pos.y, pos.z);
+}
+
+void GraphicalObject::setOrigin(Vec3 ori)
+{
+	origin = ori;
 }
 

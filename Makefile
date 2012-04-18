@@ -18,12 +18,7 @@ endif
 ifndef AR
   AR = ar
 endif
-ifndef LIBXMLCFLAGS
- LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
-endif
-ifndef LIBXMLLIBS
- LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
-endif
+
 
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
@@ -49,7 +44,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
+	$(OBJDIR)/test-economy.o $(OBJDIR)/FileLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
 
 RESOURCES := \
 

@@ -19,7 +19,7 @@ Projector * p1, * p2;
 Scene * defaultScene;
 int highlightState = 0;
 
-GraphicalObject * grObj1, *pGO, * grObj2, grObj3;
+GraphicalObject * grObj1, *pGO, * grObj2, *grObj3;
 std::vector<GraphicalObject*> selGOs;
 /*
 float vertexData2[] = {
@@ -88,29 +88,39 @@ void init()
 	glEnable(GL_DEPTH_CLAMP);
 	glDepthRange(0.0f, 1.0f);
 
-  defaultScene = FileLoader::loadFile("CadTeapot.x3d");
-//defaultScene = new Scene();
+  //defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+    defaultScene = new Scene();
  // grObj2 = new GraphicalObject(vertexData, sizeof(vertexData), colorData, sizeof(colorData));
 	//initial zoom out
-	grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
+//	grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
 	
 //	Vec3 pos = {0.0f, 0.0f, -3.6f};
 //		  grObj1->translate(pos);
   grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
-std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
+  grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+  grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
+//std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
  // defaultScene->get3DSpace()->addObject(grObj1);
-  defaultScene->get3DSpace()->addObject(grObj2);
   
+defaultScene->get3DSpace()->addObject(grObj3);
+  defaultScene->get3DSpace()->addObject(grObj1);
+defaultScene->get3DSpace()->addObject(grObj2);
+  
+
 		defaultScene->selectNext();
 		
 		pGO = defaultScene->getSelected().at(0);
 
 	//Flytta bak objekten lite;
 	Vec3 zoom = {-5,0,-15};
-	grObj1->translate(zoom);
+	//grObj1->translate(zoom);
 	zoom = {0,0,-2};
 	grObj2->translate(zoom);
+	zoom = {0.5,0.5,-2};
+	grObj1->translate(zoom);
+	zoom = {-0.5,-0.5,-1};
+    grObj3->translate(zoom);
 }
 
 void init1()
@@ -303,11 +313,13 @@ std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n
 		pGO = selGOs.at(0);
 		return;
 	case '-':
+std::cout << "--------------------------- PRESSED - -------------------- !11!!\n";
 		pGO->scale-=0.05f;
 		 glutPostRedisplay();
 			  return;
 
 	case '+':
+std::cout << "--------------------------- PRESSED + -------------------- !11!!\n";
 		pGO->scale+=0.05f;
  glutPostRedisplay();
 			  return;
