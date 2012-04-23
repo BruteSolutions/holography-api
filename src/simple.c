@@ -3,8 +3,6 @@
 gint state = 0;
 char buf[5];
 
-/* State switching methods should have a cool name describing
-which state one enters */
 void increase(GtkWidget *widget, gpointer label)
 {
   state = 13;
