@@ -138,6 +138,9 @@ for(int i = 0; i < 16; i++){
 
 	GLuint posLocZ = glGetUniformLocation(shader, "objectRotZ");
     glUniformMatrix4fv(posLocZ , 1, GL_FALSE, objectRotZ.m);
+
+    GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
+    glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
 
 void GraphicalObject::translate(Vec3 trans)
@@ -152,3 +155,7 @@ void GraphicalObject::applyTransformation(GLuint shader)
     glUniform3f(posLoc, pos.x, pos.y, pos.z);
 }
 
+void GraphicalObject::setOrigin(Vec3 ori)
+{
+        origin = ori;
+}

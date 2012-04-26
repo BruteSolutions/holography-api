@@ -77,7 +77,7 @@ float colorData[] = {
 };
 int numwindows = 0;
 void graphicSettings(){
-	glEnable(GL_CULL_FACE);
+        /*glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 	glFrontFace(GL_CW);
 
@@ -86,7 +86,11 @@ void graphicSettings(){
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_DEPTH_CLAMP);
-	glDepthRange(0.0f, 1.0f);
+        glDepthRange(0.0f, 1.0f);*/
+
+    glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LEQUAL);
+   glDepthRange(0,1);
 }
 void bindBuffer(){
 	defaultScene->get3DSpace()->bindBuffers();

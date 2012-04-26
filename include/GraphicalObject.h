@@ -18,13 +18,16 @@ class GraphicalObject
 		float getFirstTri();
 		void bindBufferData();
 		void draw();
-		void rotate();
+	
+		void setOrigin(Vec3 ori);	void rotate();
     void applyTransformation(GLuint shader);
 	void applyRotation(GLuint shader);
 //	void rotate(Vec3 trans);
 		float scale;
 		void translate(Vec3 trans);
-		float angleX, angleY, angleZ;
+		Vec3 origin; 
+
+	float angleX, angleY, angleZ;
 	private:
 		GLuint positionBufferObject;
 		GLuint positionBufferObject2;

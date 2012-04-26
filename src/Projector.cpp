@@ -147,9 +147,14 @@ int* Projector::getBuffer()
  */
 void Projector::display(Scene scn)
 {
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-  glClearDepth(5.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glClearColor(0,0,0,0);
+  glClear(GL_DEPTH_BUFFER_BIT);
+
+
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LEQUAL);
+  glDepthRange(0,1);
 
   GLuint pid;
 
