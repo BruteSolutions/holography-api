@@ -111,16 +111,7 @@ float vertexData2[] =
 };
 void init()
 {
-  glFlush();
-  glEnable(GL_CULL_FACE);
-    
-    glFrontFace(GL_CCW);
 
-//    glCullFace(GL_BACK);
-  glEnable(GL_DEPTH_TEST);
-  glDepthMask(GL_FALSE);
-glDepthFunc(GL_LEQUAL);
-glDepthRange(0,1);
 
 
   //defaultScene = FileLoader::loadFile("CadTeapot.x3d");
