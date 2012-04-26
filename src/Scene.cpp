@@ -15,7 +15,8 @@ Scene::Scene()
 {
 	cPos = {0,0,0};
 	cDir = {1,1,-1};
-	 fFrustumScale = 1.0f ;  fzNear = 0.0f;  fzFar = 3.0f;
+	 fFrustumScale = 1.0f ;  fzNear = 1.0f;  fzFar = 10.0f;
+//	gluPerspective(60,10,fzNear,fzFar);
 	memset(&worldPos.m, 0, sizeof(worldPos.m));
 	memset(&worldRotX.m, 0, sizeof(worldRotX.m));
 	memset(&worldRotY.m, 0, sizeof(worldRotY.m));
@@ -118,7 +119,7 @@ void Scene::setRotation(){
 	worldRotZ.m[4] = sin(angleZ);
 	worldRotZ.m[5] = cos(angleZ); 
 }
-
+//
 void Scene::translateCam(Vec3 trans)
 {
   //TODO : make trans depend on the direction the camera is facing

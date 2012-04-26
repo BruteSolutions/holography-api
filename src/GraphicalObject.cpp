@@ -68,6 +68,11 @@ int GraphicalObject::getColorDataSize()
 
 void GraphicalObject::draw()
 {
+
+
+
+
+
   glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
 
   glEnableVertexAttribArray(0);			
@@ -77,7 +82,7 @@ void GraphicalObject::draw()
   glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
   glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-  glDrawArrays(GL_TRIANGLES, 0, vertexDataSize/4);
+  glDrawArrays(GL_TRIANGLES, 0, getVertexDataSize()/4);
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);

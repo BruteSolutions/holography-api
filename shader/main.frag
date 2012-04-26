@@ -20,4 +20,6 @@ void main()
 
 	outputColor.xyz = processed;
   outputColor.w = color.w;
+	//FOR schoool funtime
+	outputColor=color;
 }

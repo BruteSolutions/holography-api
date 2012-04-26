@@ -146,9 +146,16 @@ int* Projector::getBuffer()
  */
 void Projector::display(Scene scn)
 {
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-  glClearDepth(1.0f);
+ 
+
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+glClearColor(0,0,0,0);
+glClear(GL_DEPTH_BUFFER_BIT);
+
+
+  glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LEQUAL);
+glDepthRange(0,1);
 
   GLuint pid;
   if(shaders.size()) {
@@ -166,6 +173,10 @@ void Projector::display(Scene scn)
 
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
+
+
+  
+  
     (*it)->applyTransformation(pid);
 	(*it)->rotate();
 	(*it)->applyRotation(pid);
@@ -175,8 +186,8 @@ void Projector::display(Scene scn)
     glUniform1f(loc, val);
 
     (*it)->draw();
-	std::cout<<"running"<<std::endl;
   }
+
 
   glUseProgram(0);
   glutSwapBuffers();

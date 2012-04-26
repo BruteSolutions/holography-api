@@ -19,7 +19,7 @@ Projector * p1, * p2;
 Scene * defaultScene;
 int highlightState = 0;
 
-GraphicalObject * grObj1, *pGO, * grObj2, *grObj3;
+GraphicalObject * grObj1, *pGO, * grObj2, *grObj3,*grObj4;
 std::vector<GraphicalObject*> selGOs;
 /*
 float vertexData2[] = {
@@ -50,13 +50,17 @@ float colorData2[] = {
 #define TOP 0.0f, 0.5f, 0.0f, 1.0f
 #define REAR 0.0f, 0.0f, -1.0f, 1.0f
 float vertexData[] = {
-LEFT, RIGHT, TOP,
-
 TOP, LEFT, REAR,
-
+RIGHT, LEFT, REAR,
 TOP, RIGHT, REAR,
 
-RIGHT, LEFT, REAR,
+LEFT, RIGHT, TOP,
+
+
+
+
+
+
 };
 
 #define GREEN_COLOR 0.75f, 0.75f, 1.0f, 1.0f
@@ -74,19 +78,50 @@ float colorData[] = {
 	BROWN_COLOR, BROWN_COLOR, BROWN_COLOR,
 };
 
+
+
+#define GREEN2_COLOR 0.0f, 1.0f, 0.0f, 1.0f
+#define BLUE2_COLOR 	0.0f, 0.0f, 1.0f, 1.0f
+#define RED2_COLOR 1.0f, 0.0f, 0.0f, 1.0f
+#define GREY2_COLOR 0.8f, 0.8f, 0.8f, 1.0f
+#define BROWN2_COLOR 0.5f, 0.5f, 0.0f, 1.0f
+float colorData2[] = {
+	GREEN2_COLOR,
+	BLUE2_COLOR,
+	RED2_COLOR,
+	BROWN2_COLOR,
+
+	GREEN2_COLOR,
+	BLUE2_COLOR,
+	RED2_COLOR,
+	BROWN2_COLOR,
+};
+float vertexData2[] =
+{
+	+1.0f, +1.0f, +1.0f,1.0f,
+	-1.0f, -1.0f, +1.0f,1.0f,
+	-1.0f, +1.0f, -1.0f,1.0f,
+	+1.0f, -1.0f, -1.0f,1.0f,
+
+	-1.0f, -1.0f, -1.0f,1.0f,
+	+1.0f, +1.0f, -1.0f,1.0f,
+	+1.0f, -1.0f, +1.0f,1.0f,
+	-1.0f, +1.0f, +1.0f,1.0f,
+
+};
 void init()
 {
   glFlush();
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CW);
+  glEnable(GL_CULL_FACE);
+    
+    glFrontFace(GL_CCW);
 
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-	glDepthMask(GL_TRUE);
-	glDepthFunc(GL_LEQUAL);
-	glEnable(GL_DEPTH_CLAMP);
-	glDepthRange(0.0f, 1.0f);
+//    glCullFace(GL_BACK);
+  glEnable(GL_DEPTH_TEST);
+  glDepthMask(GL_FALSE);
+glDepthFunc(GL_LEQUAL);
+glDepthRange(0,1);
+
 
   //defaultScene = FileLoader::loadFile("CadTeapot.x3d");
     defaultScene = new Scene();
@@ -99,28 +134,31 @@ void init()
   grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
   grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
   grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+  grObj4 = new GraphicalObject(vertexData2, sizeof(vertexData2)/4, colorData2, sizeof(colorData2)/4);
 //std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
 //std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
  // defaultScene->get3DSpace()->addObject(grObj1);
   
-defaultScene->get3DSpace()->addObject(grObj3);
+
   defaultScene->get3DSpace()->addObject(grObj1);
-defaultScene->get3DSpace()->addObject(grObj2);
-  
+//defaultScene->get3DSpace()->addObject(grObj2);
+//  defaultScene->get3DSpace()->addObject(grObj3);
+defaultScene->get3DSpace()->addObject(grObj4);
 
 		defaultScene->selectNext();
-		
+		defaultScene->selectNext();
+
 		pGO = defaultScene->getSelected().at(0);
 
 	//Flytta bak objekten lite;
-	Vec3 zoom = {-5,0,-15};
-	//grObj1->translate(zoom);
-	zoom = {0,0,-2};
-	grObj2->translate(zoom);
-	zoom = {0.5,0.5,-2};
+	Vec3 zoom = {0,0,-2};
 	grObj1->translate(zoom);
-	zoom = {-0.5,-0.5,-1};
+	zoom = {0,-0.7f,-2};
+	grObj2->translate(zoom);
+	zoom = {-0.5,-0.5,-2};
     grObj3->translate(zoom);
+	zoom = {0,0,-2.5f};
+    grObj4->translate(zoom);
 }
 
 void init1()
@@ -129,6 +167,14 @@ void init1()
   p1 = new Projector(NULL, 0, pos, dir);
   defaultScene->get3DSpace()->bindBuffers();
   //Create shader and push to one of the projectors	
+/*   glEnable(GL_DEPTH_TEST);
+  glDepthMask(GL_TRUE);
+glDepthFunc(GL_ALWAYS);
+glDepthRange(0,1);*/
+
+  glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LEQUAL);
+glDepthRange(0,1);
 }
 
 void init2()
@@ -136,6 +182,9 @@ void init2()
   Vec3 pos = {0, 0, 0}, dir = {0, 0, 0};
   p2 = new Projector(NULL, 0, pos, dir);
   defaultScene->get3DSpace()->bindBuffers();
+  glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_LEQUAL);
+glDepthRange(0,1);
 }
 
 void display()
