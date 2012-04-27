@@ -13,7 +13,7 @@
 #include "Scene.h"
 #include "ColorTranslator.h"
 #include "Projector.h"
-#include "FileLoader.h"
+//#include "FileLoader.h"
 #include "Display.h"
 
 Projector * p1, * p2;
@@ -99,11 +99,11 @@ void init()
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
  
-	defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
 	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	defaultScene->get3DSpace()->addObject(grObj2);
 
-	defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
+	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
 	graphicSettings();
 
 	displayHandeler = new Display(); //add a monitor in here
@@ -111,7 +111,7 @@ void init()
 	bindBuffer(); //bind buffer to monitor window
 
 	grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
-	grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
+	//grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
 	std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
 	std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
 

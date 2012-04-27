@@ -1,6 +1,8 @@
 #include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 #include <cstring>
+#include <stdio.h>
+#include <math.h>
 #include "Shared.h"
 #include "GraphicalObject.h"
 
