@@ -101,7 +101,7 @@ void bindBuffer(){
 void init()
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
- 	graphicSettings();
+
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
 	grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
@@ -117,7 +117,7 @@ void init()
 	displayHandeler = new Display(); //add a monitor in here
 
 	bindBuffer(); //bind buffer to monitor window
-
+ 	graphicSettings();
 	//grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
 	//grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
 	//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
@@ -146,10 +146,11 @@ void addProjector(){
 		std::cout << "ERROR SCENE NOT INITIALIZED";
 		exit(1);
 	}
-	graphicSettings();
+
 	Vec3 pos = {(float) (numwindows*2), 0, 0}, dir = {0, 0, 0};
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
 	bindBuffer();
+	graphicSettings();
 	numwindows++;
 }
 
