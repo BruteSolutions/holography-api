@@ -88,25 +88,22 @@ float colorData[] = {
 float colorData2[] = {
 	GREEN2_COLOR,
 	BLUE2_COLOR,
-	RED2_COLOR,
-	BROWN2_COLOR,
+	RED2_COLOR,	
 
+	BROWN2_COLOR,
 	GREEN2_COLOR,
 	BLUE2_COLOR,
-	RED2_COLOR,
-	BROWN2_COLOR,
 };
 float vertexData2[] =
 {
 	+1.0f, +1.0f, +1.0f,1.0f,
 	-1.0f, -1.0f, +1.0f,1.0f,
 	-1.0f, +1.0f, -1.0f,1.0f,
-	+1.0f, -1.0f, -1.0f,1.0f,
 
+	+1.0f, -1.0f, -1.0f,1.0f,
 	-1.0f, -1.0f, -1.0f,1.0f,
 	+1.0f, +1.0f, -1.0f,1.0f,
-	+1.0f, -1.0f, +1.0f,1.0f,
-	-1.0f, +1.0f, +1.0f,1.0f,
+
 
 };
 void init()
@@ -317,6 +314,7 @@ std::cout << "--------------------------- PRESSED M -------------------- !11!!\n
 std::cout << "--------------------------- PRESSED 7 -------------------- !11!!\n";
 		pGO->angleX -= 0.1f;
 		  glutPostRedisplay();
+
 
 		return;
 	  case '8':
