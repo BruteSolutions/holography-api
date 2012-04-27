@@ -79,17 +79,17 @@ float colorData[] = {
 };
 int numwindows = 0;
 void graphicSettings(){
-        /*glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
-	glFrontFace(GL_CW);
+    //    glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
+	//glFrontFace(GL_CW);
 
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
+//	glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LEQUAL);
 
-	glDepthMask(GL_TRUE);
-	glDepthFunc(GL_LEQUAL);
-	glEnable(GL_DEPTH_CLAMP);
-        glDepthRange(0.0f, 1.0f);*/
+	//glDepthMask(GL_TRUE);
+	//glDepthFunc(GL_LEQUAL);
+	//glEnable(GL_DEPTH_CLAMP);
+        //glDepthRange(0.0f, 1.0f);
 
     glEnable(GL_DEPTH_TEST);
    glDepthFunc(GL_LEQUAL);
@@ -116,7 +116,7 @@ void init()
 
 	displayHandeler = new Display(); //add a monitor in here
 
-	bindBuffer(); //bind buffer to monitor window
+	//bindBuffer(); //bind buffer to monitor window
  	graphicSettings();
 	//grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
 	//grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
@@ -149,6 +149,7 @@ void addProjector(){
 
 	Vec3 pos = {(float) (numwindows*2), 0, 0}, dir = {0, 0, 0};
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
+
 	bindBuffer();
 	graphicSettings();
 	numwindows++;
@@ -157,8 +158,9 @@ void addProjector(){
 
 void display()
 {
+	displayHandeler->getMonitor()->display(*defaultScene);
 	if(displayHandeler == NULL) fprintf(stderr,"display not initialized\n");
-	displayHandeler->display(*defaultScene);
+//	displayHandeler->display(*defaultScene);
 }
 
 
