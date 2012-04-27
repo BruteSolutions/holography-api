@@ -37,12 +37,12 @@ void Display::display(Scene scn){
 
 	//draw projectors
 	int windowBuffer = 2;
-/*	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++)
+	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++)
 	{
 	 glutSetWindow(windowBuffer);
 	 (*it).display(scn);
 	 windowBuffer++;
-	}*/
+	}
 	glutSetWindow(currentWindow);
 	//change back to the current window
 }

@@ -116,8 +116,8 @@ void init()
 
 	displayHandeler = new Display(); //add a monitor in here
 
-	//bindBuffer(); //bind buffer to monitor window
- 	graphicSettings();
+	bindBuffer(); //bind buffer to monitor window
+ 	//graphicSettings();
 	//grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
 	//grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
 	//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
@@ -151,16 +151,16 @@ void addProjector(){
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
 
 	bindBuffer();
-	graphicSettings();
+	//graphicSettings();
 	numwindows++;
 }
 
 
 void display()
 {
-	displayHandeler->getMonitor()->display(*defaultScene);
+//	displayHandeler->getMonitor()->display(*defaultScene);
 	if(displayHandeler == NULL) fprintf(stderr,"display not initialized\n");
-//	displayHandeler->display(*defaultScene);
+	displayHandeler->display(*defaultScene);
 }
 
 
