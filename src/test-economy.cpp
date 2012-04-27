@@ -101,7 +101,8 @@ void init()
  
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
 	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	defaultScene->get3DSpace()->addObject(grObj2);
+	defaultScene = new Scene();
+	//defaultScene->get3DSpace()->addObject(grObj2);
 
 	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
 	graphicSettings();
@@ -110,12 +111,12 @@ void init()
 
 	bindBuffer(); //bind buffer to monitor window
 
-	grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
+	//grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
 	//grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
-	std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
-	std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
+	//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
+	//std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
 
-	defaultScene->selectNext();
+	//defaultScene->selectNext();
 
 		
 	pGO = defaultScene->getSelected().at(0);
@@ -124,10 +125,10 @@ void init()
 
 	//Flytta bak objekten lite;
 	Vec3 zoom = {-5,0,-15};
-	grObj1->translate(zoom);
-	grObj3->translate(zoom);
-	zoom = {0,0,-2};
-	grObj2->translate(zoom);
+	//grObj1->translate(zoom);
+	//grObj3->translate(zoom);
+	//zoom = {0,0,-2};
+	//grObj2->translate(zoom);
 
 	numwindows++;
 }

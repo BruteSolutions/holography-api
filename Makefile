@@ -25,7 +25,7 @@ endif
 # LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
 #endif
 # put in CFLAGS $(LIBXMLCFLAGS) 
-# put in LIBS $(LIBXMLLIBS)
+# put in LIBS $(LIBXMLLIBS) -lGL 
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
   TARGETDIR  = .
@@ -36,7 +36,7 @@ ifeq ($(config),debug)
   CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) -g
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
-  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGL -lGLU $(LIBXMLLIBS)
+  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGLU $(LIBXMLLIBS)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += ../framework/lib/libframeworkD.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
