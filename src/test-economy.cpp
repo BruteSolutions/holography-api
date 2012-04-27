@@ -26,11 +26,13 @@ std::vector<GraphicalObject*> selGOs;
 /*
 float vertexData2[] = {
 	0.75f, 0.75f, 0.0f, 1.0f,
+
 	0.75f, -0.75f, 0.0f, 1.0f,
 	-0.75f, -0.75f, 0.0f, 1.0f,	 
 };
 
 float colorData2[] = {
+
    1.0f, 0.0f, 0.0f, 1.0f,
 	 0.0f, 1.0f, 0.0f, 1.0f,
 	 0.0f, 0.0f, 1.0f, 1.0f,
@@ -83,6 +85,7 @@ void graphicSettings(){
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_DEPTH_CLAMP);
@@ -98,14 +101,18 @@ void bindBuffer(){
 void init()
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
- 
+ 	graphicSettings();
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+	grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	defaultScene = new Scene();
-	//defaultScene->get3DSpace()->addObject(grObj2);
+	defaultScene->get3DSpace()->addObject(grObj1);
+	defaultScene->get3DSpace()->addObject(grObj2);
+	defaultScene->get3DSpace()->addObject(grObj3);
 
 	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
-	graphicSettings();
+	
 
 	displayHandeler = new Display(); //add a monitor in here
 
@@ -116,19 +123,20 @@ void init()
 	//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
 	//std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
 
-	//defaultScene->selectNext();
+	defaultScene->selectNext();
 
-		
+
 	pGO = defaultScene->getSelected().at(0);
-	
+
 	//initial zoom out
 
 	//Flytta bak objekten lite;
-	Vec3 zoom = {-5,0,-15};
-	//grObj1->translate(zoom);
-	//grObj3->translate(zoom);
-	//zoom = {0,0,-2};
-	//grObj2->translate(zoom);
+	Vec3 zoom = {1,0,-3};
+	grObj1->translate(zoom);
+	zoom = {-1,0,-3};
+	grObj3->translate(zoom);
+	zoom = {0,0,-2};
+	grObj2->translate(zoom);
 
 	numwindows++;
 }

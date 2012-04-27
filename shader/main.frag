@@ -20,4 +20,5 @@ void main()
 
 	outputColor.xyz = processed;
   outputColor.w = color.w;
+outputColor = color;
 }
