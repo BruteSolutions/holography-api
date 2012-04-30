@@ -14,7 +14,7 @@ Scene::Scene()
 {
 	cPos = {0,0,0};
 	cDir = {1,1,-1};
-	 fFrustumScale = 1.0f ;  fzNear = 0.0f;  fzFar = 3.0f;
+	 fFrustumScale = 1.0f ;  fzNear = 1.0f;  fzFar = 10.0f;
 	memset(&worldPos.m, 0, sizeof(worldPos.m));
 	memset(&worldRotX.m, 0, sizeof(worldRotX.m));
 	memset(&worldRotY.m, 0, sizeof(worldRotY.m));
