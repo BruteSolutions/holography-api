@@ -167,12 +167,24 @@ glDepthRange(0,1);
     pid = colorTranslator->getShader()->getShaderProgram();
   }
 
+
   glUseProgram(pid);
   colorTranslator->apply();
+
+  //Apply camera translation based on projector position
+  Vec3 adjustment3D = pos;
+  scn.translateCam(adjustment3D);
+
   scn.setRotation();
   scn.applyRot(pid);
   scn.applyPos(pid);
   ThreeDSpace * space = scn.get3DSpace();
+
+  //Restore previous camera translation
+  adjustment3D.x *= -1;
+  adjustment3D.y *= -1;
+  adjustment3D.z *= -1;
+  scn.translateCam(adjustment3D);
 
   std::vector<GraphicalObject*> goList = space->getObjects();
   for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
