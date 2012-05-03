@@ -14,7 +14,7 @@ Scene::Scene()
 {
 	cPos = {0,0,0};
 	cDir = {1,1,-1};
-	 fFrustumScale = 1.0f ;  fzNear = 1.0f;  fzFar = 10.0f;
+	 fFrustumScale = 1.0f ;  fzNear = 1.0f;  fzFar = 25.0f;
 	memset(&worldPos.m, 0, sizeof(worldPos.m));
 	memset(&worldRotX.m, 0, sizeof(worldRotX.m));
 	memset(&worldRotY.m, 0, sizeof(worldRotY.m));
@@ -108,9 +108,13 @@ void Scene::applyRot(GLuint shader)
 	GLuint posLocZ = glGetUniformLocation(shader, "worldRotZ");
     glUniformMatrix4fv(posLocZ , 1, GL_FALSE, worldRotZ.m);
 
-	//Lägg på scale, ändra på plats? eller sammla alla uniforms på samma ställe?
+	//Lägg på worldScale och worldOrigin, ändra på plats? eller sammla alla uniforms på samma ställe?
+
 	GLuint scaleLoc = glGetUniformLocation(shader, "worldScale");
 	glUniform1f(scaleLoc, threeDSpace->getScale());
+
+	GLuint worldOriLoc = glGetUniformLocation(shader, "worldOrigin");
+	glUniform3f(worldOriLoc, threeDSpace->origin.x,threeDSpace->origin.y,threeDSpace->origin.z);
 }
 
 void Scene::setRotation(){

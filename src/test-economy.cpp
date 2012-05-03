@@ -124,7 +124,7 @@ void init()
 	//std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
 
 	defaultScene->selectNext();
-
+	
 
 	pGO = defaultScene->getSelected().at(0);
 
@@ -138,6 +138,8 @@ void init()
 	grObj3->translate(zoom);
 	zoom = {0,0,-2};
 	grObj2->translate(zoom);
+
+	defaultScene->get3DSpace()->setOrigin({0,0,1});
 
 	numwindows++;
 }
@@ -329,15 +331,25 @@ std::cout << "--------------------------- PRESSED P -------------------- !11!!\n
 		return;
 	case '-':
 std::cout << "--------------------------- PRESSED - -------------------- !11!!\n";
-		pGO->incrementScale(-0.05f);
+		if(!worldCtrl){
+			pGO->incrementScale(-0.05f);
+		}
+		else{			
+		    defaultScene->get3DSpace()->incrementScale(-0.05f);
+		}		
 		 glutPostRedisplay();
-			  return;
+		return;
 
 	case '+':
 std::cout << "--------------------------- PRESSED + -------------------- !11!!\n";
-		pGO->incrementScale(0.05f);
- glutPostRedisplay();
-			  return;
+		if(!worldCtrl){
+			pGO->incrementScale(0.05f);
+		}
+		else{			
+		    defaultScene->get3DSpace()->incrementScale(0.05f);
+		}		
+ 		glutPostRedisplay();
+		return;
       case 'c': //highlights all objects
 std::cout << "--------------------------- PRESSED C -------------------- !11!!\n";
 
