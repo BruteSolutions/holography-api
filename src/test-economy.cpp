@@ -347,6 +347,11 @@ std::cout << "--------------------------- PRESSED C -------------------- !11!!\n
 
 		  glutPostRedisplay();
 		  return;
+	case 'b':
+std::cout << "--------------------------- PRESSED B -------------------- !11!!\n";
+		pGO->setMesh((!pGO->hasMesh()));
+		glutPostRedisplay();
+		return;
 	}
 }
 

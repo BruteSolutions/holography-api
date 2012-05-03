@@ -26,6 +26,9 @@ class GraphicalObject
 		float scale;
 		void translate(Vec3 trans);
 		Vec3 origin; 
+		
+		bool hasMesh();
+		void setMesh(bool mesh);
 
 	float angleX, angleY, angleZ;
 	private:
@@ -36,6 +39,7 @@ class GraphicalObject
 		float *vertexData, *colorData;
     	Vec3 pos;
 		Mat4 objectRotX,objectRotY,objectRotZ;
+		bool mesh;
 
 };
 #endif

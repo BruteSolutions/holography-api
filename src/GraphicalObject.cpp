@@ -77,7 +77,10 @@ void GraphicalObject::draw()
   glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
   glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-  glDrawArrays(GL_TRIANGLES, 0, vertexDataSize/4);
+  if(mesh)  
+ 	 glDrawArrays(GL_LINE_STRIP, 0, vertexDataSize/4);
+  else
+  	 glDrawArrays(GL_TRIANGLES, 0, vertexDataSize/4);
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
@@ -161,3 +164,13 @@ void GraphicalObject::setOrigin(Vec3 ori)
 {
         origin = ori;
 }
+
+bool GraphicalObject::hasMesh()
+{
+	return mesh;
+}
+void GraphicalObject::setMesh(bool set)
+{
+	mesh = set;
+}
+
