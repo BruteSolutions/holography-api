@@ -11,7 +11,8 @@ ThreeDSpace::ThreeDSpace() {
   objects.reserve(10);
   Vec3 origin = {0,0,0};
   setOrigin(origin);
-  selected  = std::vector<GraphicalObject*>();
+  selected  = std::vector<GraphicalObject*>(); 
+  scale=1;
 }
 
 std::vector<GraphicalObject*> ThreeDSpace::getObjects()
@@ -42,6 +43,23 @@ void ThreeDSpace::bindBuffers(){
   for (std::vector<GraphicalObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
     (*it)->bindBufferData();
   }
+}
+
+void ThreeDSpace::resize(double factor)
+{
+	scale *= factor;
+}
+void ThreeDSpace::setScale(double _scale)
+{
+	scale = _scale;
+}
+double ThreeDSpace::getScale()
+{
+	return scale;
+}
+void ThreeDSpace::incrementScale(double inc)
+{
+	scale += inc;
 }
 
 

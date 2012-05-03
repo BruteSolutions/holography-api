@@ -107,7 +107,12 @@ void Scene::applyRot(GLuint shader)
 
 	GLuint posLocZ = glGetUniformLocation(shader, "worldRotZ");
     glUniformMatrix4fv(posLocZ , 1, GL_FALSE, worldRotZ.m);
+
+	//Lägg på scale, ändra på plats? eller sammla alla uniforms på samma ställe?
+	GLuint scaleLoc = glGetUniformLocation(shader, "worldScale");
+	glUniform1f(scaleLoc, threeDSpace->getScale());
 }
+
 void Scene::setRotation(){
 	worldRotX.m[5] = cos(angleX);
 	worldRotX.m[6] = -sin(angleX);

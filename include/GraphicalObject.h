@@ -23,7 +23,11 @@ class GraphicalObject
     void applyTransformation(GLuint shader);
 	void applyRotation(GLuint shader);
 //	void rotate(Vec3 trans);
-		float scale;
+		
+		void resize(double factor);
+		void setScale(double _scale);
+		double getScale();
+		void incrementScale(double inc);
 		void translate(Vec3 trans);
 		Vec3 origin; 
 		
@@ -40,6 +44,7 @@ class GraphicalObject
     	Vec3 pos;
 		Mat4 objectRotX,objectRotY,objectRotZ;
 		bool mesh;
+		float scale;
 
 };
 #endif

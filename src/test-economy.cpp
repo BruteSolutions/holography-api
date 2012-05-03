@@ -322,17 +322,20 @@ std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n
 		  glutPostRedisplay();
 		return;
 	  case 'p':
+std::cout << "--------------------------- PRESSED P -------------------- !11!!\n";
 		defaultScene->selectNext();
 		selGOs = defaultScene->getSelected();
 		pGO = selGOs.at(0);
 		return;
 	case '-':
-		pGO->scale-=0.05f;
+std::cout << "--------------------------- PRESSED - -------------------- !11!!\n";
+		pGO->incrementScale(-0.05f);
 		 glutPostRedisplay();
 			  return;
 
 	case '+':
-		pGO->scale+=0.05f;
+std::cout << "--------------------------- PRESSED + -------------------- !11!!\n";
+		pGO->incrementScale(0.05f);
  glutPostRedisplay();
 			  return;
       case 'c': //highlights all objects

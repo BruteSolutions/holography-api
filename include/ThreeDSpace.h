@@ -16,6 +16,12 @@ class ThreeDSpace
 		Vec3 origin;
 		int current;
 		std::vector<GraphicalObject*> selected;
+		float scale;
+		void resize(double factor);
+		void setScale(double _scale);
+		double getScale();
+		void incrementScale(double inc);
+		void applyScale();
 };
 
 #endif

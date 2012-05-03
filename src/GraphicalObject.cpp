@@ -175,3 +175,20 @@ void GraphicalObject::setMesh(bool set)
 	mesh = set;
 }
 
+
+void GraphicalObject::resize(double factor)
+{
+	scale *= factor;
+}
+void GraphicalObject::setScale(double _scale)
+{
+	scale = _scale;
+}
+double GraphicalObject::getScale()
+{
+	return scale;
+}
+void GraphicalObject::incrementScale(double inc)
+{
+	scale += inc;
+}
