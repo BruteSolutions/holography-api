@@ -14,6 +14,7 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 {	
 	vertexData = _vertexData;
 	colorData = _colorData;	
+	origin={0,0,0};
 	
 	vertexDataSize = _vertexDataSize;
 	colorDataSize = _colorDataSize;
@@ -143,9 +144,9 @@ for(int i = 0; i < 16; i++){
 
 	GLuint posLocZ = glGetUniformLocation(shader, "objectRotZ");
     glUniformMatrix4fv(posLocZ , 1, GL_FALSE, objectRotZ.m);
-/*
+
     GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
-    glUniform3f(originLoc, origin.x,origin.y,origin.z);*/
+    glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
 
 void GraphicalObject::translate(Vec3 trans)

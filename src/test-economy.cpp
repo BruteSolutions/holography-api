@@ -133,6 +133,7 @@ void init()
 	//Flytta bak objekten lite;
 	Vec3 zoom = {1,0,-3};
 	grObj1->translate(zoom);
+	grObj1->setOrigin({-1,-1,0});
 	zoom = {-1,0,-3};
 	grObj3->translate(zoom);
 	zoom = {0,0,-2};
