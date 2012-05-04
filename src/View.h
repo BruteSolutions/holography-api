@@ -18,14 +18,14 @@ class View
 		View(Display display);
 		void setProjectorsRedFactor(int rFactor);
 		void highlightBackground(bool h);
-		Projector getProjector(int index);
-		Display getDisplay();
+		Projector * getProjector(int index);
+		Display * getDisplay();
 		void toggleGrid(bool g);
 		void setDisplay(Display display);
 		void updateView(Scene s);
 	private:
 		bool highlightBackground;
 		bool showGrid;
-		Display display;
+		Display * display;
 };
 #endif /* VIEW_H_ */
