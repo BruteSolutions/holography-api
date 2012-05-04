@@ -59,7 +59,6 @@ void Configuration::writeToStream(std::ofstream& os){
 	os << factor.x << factor.y  << factor.z;
 	os << pos.x << pos.y  << pos.z;
 	os << dir.x << dir.y  << dir.z;
-	os.close();
 }
 Configuration* Configuration::readStream(std::ifstream& is){
 	Vec3 Tfactor;
@@ -68,6 +67,5 @@ Configuration* Configuration::readStream(std::ifstream& is){
 	is >> Tfactor.x >> Tfactor.y  >> Tfactor.z;
 	is >> Tpos.x >> Tpos.y  >> Tpos.z;
 	is >> Tdir.x >> Tdir.y  >> Tdir.z;
-	is.close();
    return new Configuration(Tpos, Tdir, Tfactor);
 }

@@ -19,15 +19,15 @@ class UniversalConfiguration{
 public:
 
 
-	UniversalConfiguration(std::vector<Configuration> cs, ColorTranslator ct);
+	UniversalConfiguration(std::vector<Configuration>* cs, ColorTranslator* ct);
 	std::vector<Configuration> getProjectorConfigurations();
-	ColorTranslator*	getColorTranslator();
+	ColorTranslator* getColorTranslator();
 	static UniversalConfiguration* readStream(std::ifstream& is);
 	void writeToStream(std::ofstream& os);
 
 private:
 	std::vector<Configuration> configurations;
-	ColorTranslator colorTrans;
+	ColorTranslator* colorTrans;
 };
 
 #endif /* UNIVERSALCONFIGURATION_H_ */
