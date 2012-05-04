@@ -1,11 +1,11 @@
 #include "View.h";
 /*
- * Metoder startade. Vissa saknar implementering då jag inte hittar
- * lämpliga metoder för det i Display.
+ * Metoder startade. Vissa saknar implementering dÃ¥ jag inte hittar
+ * lÃ¤mpliga metoder fÃ¶r det i Display.
  *
- * Är ej heller grafisk på något sätt. Behöver mergas med påbörjad grafisk variant.
+ * Ã„r ej heller grafisk pÃ¥ nÃ¥got sÃ¤tt. BehÃ¶ver mergas med pÃ¥bÃ¶rjad grafisk variant.
  *
- * Bör inte View ha en referens till Controller då det grafiska måste
+ * BÃ¶r inte View ha en referens till Controller dÃ¥ det grafiska mÃ¥ste
  * kunna uppdatera Controller?
  */
 View::View(){
@@ -23,6 +23,7 @@ View::View(Display display){
  * method should update Scene when it is changed.
  */
 void View::setProjectorsRedFactor(int rFactor){
+	View::display.
 	//TODO
 	//Don't know how to do this
 }
@@ -44,9 +45,9 @@ void View::highlightBackground(bool h){
 
 /*
  * Returns the specified projector. Is useful if only
- * one projector’s colour balancing needs to be adjusted.
+ * one projectorâ€™s colour balancing needs to be adjusted.
  */
-Projector View::getProjector(int index){
+Projector * View::getProjector(int index){
 	//TODO
 	//Don't know how to do this. Can't find any methods for it
 	return null;
@@ -55,7 +56,7 @@ Projector View::getProjector(int index){
 /*
  * Returns the Display used
  */
-Display View::getDisplay(){
+Display * View::getDisplay(){
 	return Display;
 }
 
@@ -83,3 +84,4 @@ void View::updateView(Scene s){
 	//TODO
 	//Don't know how to do this. Can't find any methods for it
 }
+ 
