@@ -1,7 +1,7 @@
 /*
  * Controller.h
  *
- *  Created on: 25 apr 2012
+ *  Edited on: 3 may 2012
  *      Author: Helena
  */
 
@@ -9,26 +9,35 @@
 #define CONTROLLER_H_
 #include "GraphicalObject.h"
 #include "View.h"
+#include "Model.h"
 #include "Shared.h"
 
 class Controller
 {
 	public:
 		Controller(Model model, View view);
+//		void MouseListener(MouseEvent me); Needs to get something imported
+//		void KeyboardListener(KeyboardEvent ke);
 		bool backgroundHighlightning();
-		Model getModel();
+		Model * getModel();
 		int getState();
-		View getView();
-		GraphicalObject selectedObject();
+		View * getView();
+		void highlightBackground();
+		void highlightBackground(bool highlight)
+		void unHighlightBackground();
+		void rotateWorld();
+		GraphicalObject * selectedObject();
 		bool showMesh();
 		bool showGrid();
+		void translateWorld();
 	private:
 		int state;
 		bool backgroundHighlightning;
 		bool showGrid;
 		bool showMesh;
-		View view;
-		Model model;
+		GraphicalObject * selectedObject;
+		View * view;
+		Model * model;
 };
 
 
