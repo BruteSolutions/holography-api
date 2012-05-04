@@ -8,25 +8,28 @@
 #include <iostream>
 #include <vector>
 #include "Shared.h"
-#include "Configuration.h"
 #include "ColorTranslator.h"
 #include "UniversalConfiguration.h"
 using namespace std;
 
 static void save(UniversalConfiguration uc, String path){
 	ofstream file(path);
-	if (file.is_open())	{
+	if (file.is_open())
 		uc.writeToStream(file);
-	}
-	else cout << "Unable to open file";
+	else
+		cout << "Unable to open file";
 	file.close();
 }
 
 static UniversalConfiguration load(String path){
 	ifstream file(path);
 	if(file.is_open()){
-		uc.readStream(file);
-	} else cout << "File error";
+		UniversalConfiguration* uc = UniversalConfiguration::readStream(file);
+	}
+	else{
+		cout << "File error";
+		return;
+	}
 	file.close();
 	return uc;
 }
