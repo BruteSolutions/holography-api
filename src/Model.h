@@ -3,7 +3,8 @@
  *
  *  Created on: 25 apr 2012
  *      Author: Helena
- *      First try, only the methods listed is there.
+ *      
+ * 	Edited 2012-05-03
  *
  *      Should there be a cursor?
  */
@@ -24,6 +25,7 @@ class Model
 		void addGraphicalObject(GraphicalObject object);
 		void setCursorsColor(int r, int g, int b);
 		Vec3 getCursorsPosition();
+		void highlightBackground(bool highlight);
 		void setCursorsPosition(Vec3 position);
 		Vec3 getCameraPosition();
 		void setCamerasPosition(Vec3 position);
@@ -32,7 +34,7 @@ class Model
 		Scene getScene();
 		void rescale();
 	private:
-		Scene scene;
+		Scene * scene;
 		//Cursor? Class and header cannot be found?
 };
 
