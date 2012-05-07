@@ -192,3 +192,23 @@ void GraphicalObject::incrementScale(double inc)
 {
 	scale += inc;
 }
+
+/**
+Tries to center the object around the given position. Relative to the cameras position.
+Doesent take rotation into account
+*/
+
+void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
+{
+	 Vec3 finalOffset;
+	for(int i=0; i<vertexDataSize; i+=4) {
+		float x = vertexData[i], y = vertexData[i+1], z = vertexData[i+2], w = vertexData[i+3];
+		finalOffset.x += optPos.x - (x + camPos.x);
+		finalOffset.y += optPos.y - (y + camPos.y);
+		finalOffset.z += optPos.z - (x + camPos.z);
+	}
+	finalOffset.x = finalOffset.x/(vertexDataSize/4);
+	finalOffset.y = finalOffset.y/(vertexDataSize/4);
+	finalOffset.z = finalOffset.z/(vertexDataSize/4);
+	pos = finalOffset;
+}

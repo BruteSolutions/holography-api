@@ -33,6 +33,7 @@ class GraphicalObject
 		
 		bool hasMesh();
 		void setMesh(bool mesh);
+		void center(Vec3 camPos, Vec3 optPos);
 
 	float angleX, angleY, angleZ;
 	private:

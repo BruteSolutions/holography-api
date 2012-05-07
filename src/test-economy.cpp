@@ -21,8 +21,40 @@ Display* displayHandeler;
 Scene * defaultScene;
 int highlightState = 0;
 
-GraphicalObject * grObj1, *pGO, * grObj2, *grObj3;
+GraphicalObject * grObj1, *pGO, * grObj2, *grObj3, *testObj;
 std::vector<GraphicalObject*> selGOs;
+
+//--------------------------TEST OBJECT-----------------------------------
+#define horRTop 100.0f, 0.2f, -2.0f, 1.0f
+#define horRBot 100.0f, -0.2f, -2.0f, 1.0f
+#define horLTop -100.0f, 0.2f, -2.0f, 1.0f
+#define horLBot -100.0f, -0.2f -2.0f, 1.0f
+
+#define verTopL 0.1f, 100.0f, -2.0f, 1.0f
+#define verTopR 0.1f, 100.0f, -2.0f, 1.0f
+#define verBotL -0.1f, -100.0f, -2.0f, 1.0f
+#define verBotR 0.1f, -100.0f, -2.0f, 1.0f
+
+#define testColor 1.0f, 0.0f, 0.0f, 1.0f
+
+float testObject[] = {
+	verTopL, verBotL, verBotR,
+	verBotR, verTopR, verTopL,
+	
+	horRTop, horLTop, horLBot,
+	horLBot, horRTop, horRBot,
+};
+
+float testObjectColor[] = {
+	testColor,testColor,testColor,
+	testColor,testColor,testColor,
+
+	testColor,testColor,testColor,
+	testColor,testColor,testColor,
+
+};
+//--------------------------TEST OBJECT END-----------------------------------
+
 /*
 float vertexData2[] = {
 	0.75f, 0.75f, 0.0f, 1.0f,
@@ -106,11 +138,12 @@ void init()
 	grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	//testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
 	defaultScene = new Scene();
 	defaultScene->get3DSpace()->addObject(grObj1);
 	defaultScene->get3DSpace()->addObject(grObj2);
 	defaultScene->get3DSpace()->addObject(grObj3);
-
+//	defaultScene->get3DSpace()->addObject(testObj);
 	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
 	
 
@@ -150,7 +183,7 @@ void addProjector(){
 		exit(1);
 	}
 
-	Vec3 pos = {(float) (numwindows*2), 0, 0}, dir = {0, 0, 0};
+	Vec3 pos = {(float) (numwindows*1.1f), 0, 0}, dir = {0, 0, 0};
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
 
 	bindBuffer();
@@ -300,6 +333,12 @@ std::cout << "--------------------------- PRESSED 8 -------------------- !11!!\n
 		pGO->angleX += 0.1f;
 		  glutPostRedisplay();
 		return;
+
+		case '9':
+std::cout << "--------------------------- PRESSED 9 -------------------- !11!!\n";
+			pGO->center(defaultScene->getCameraPosition(), {0,0,-2});
+			glutPostRedisplay();
+			return;
 
 	  case '4':
 std::cout << "--------------------------- PRESSED 4 -------------------- !11!!\n";
