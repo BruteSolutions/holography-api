@@ -16,26 +16,21 @@ using namespace std;
  * Throws IOException.
  */
 static void save(UniversalConfiguration uc, String path){
-	ofstream file(path);
-	if (file.is_open())
-		uc.writeToStream(file);
-	else
-		cout << "Unable to open file";
-	file.close();
+    ofstream file(path);
+    if(!file.is_open())
+        throw(string("IOException"));
+    uc.writeToStream(file);
+    file.close();
 }
 
 /* Loads the configurations in the file identified by path and returns them in a UniversalConfiguration object. 
  * If the loading fails, an IOException will be thrown.
  */
 static UniversalConfiguration load(String path){
-	ifstream file(path);
-	if(file.is_open()){
-		UniversalConfiguration* uc = UniversalConfiguration::readStream(file);
-	}
-	else{
-		cout << "File error";
-		return;
-	}
-	file.close();
-	return uc;
+    ifstream file(path);
+    if(!file.is_open())
+        throw(string("IOException");
+    UniversalConfiguration* uc = UniversalConfiguration::readStream(file);
+    file.close();
+    return uc;
 }
