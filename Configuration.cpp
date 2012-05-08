@@ -4,33 +4,6 @@
 #include "Configuration.h"
 using namespace std;
 
-
-//int main () {
-////  ifstream file ("example.bin", ios::in|ios::binary|ios::ate);
-//  std::ofstream file("example.bin");
-//
-//  if (file.is_open())
-//  {
-//	  Vec3 factor = {0.123f, 0.23f, 0.8f};
-//	  Configuration* conf = new Configuration(factor,factor,factor);
-//	  conf->writeToStream(file);
-//  }
-//  else std::cout << "Unable to open file";
-//
-//
-//  std::ifstream file2("example.bin");
-//
-//    if (file2.is_open())
-//    {
-//    	Configuration* test = Configuration::readStream(file2);
-//    	std::cout << test->getDirection().x;
-//
-//    }
-//    else std::cout << "Unable to open file";
-//
-//  return 0;
-//}
-
 /* Constructs a Configuration object with the given parameters as instance variables. */
 Configuration::Configuration(Vec3 _pos, Vec3 _dir, Vec3 _factor){
     pos = _pos;
