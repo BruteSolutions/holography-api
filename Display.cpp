@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : Display.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
 #include <iostream>
 #include <string>
 #include "Display.h"
@@ -14,76 +6,69 @@ using namespace std;
 #include "ColorTranslator.h"
 
 int main(void) {
-	Display();
-	return 0;
+    Display();
+    return 0;
 }
+
 int numProjectors;
 
+Display::Display(){
 
-Display::Display(){;
+    // Hårdkodad color
+    float flo[3] = { 1.0f, 1.0f, 1.0f};
+    myColorTrans = ColorTranslator(flo);
+    myMonitor = Monitor();
 
-
-	// Hårdkodad color
-	float flo[3] = { 1.0f, 1.0f, 1.0f};
-	myColorTrans = ColorTranslator(flo);
-	myMonitor = Monitor();
-
-	// in i config fil och hämta antal projektorer
-	//TODO
-	numProjectors = 4; // Temp
-	for(int i = 0; i<numProjectors; i++){
-		//TODO This does not work at all, just placed there because it can compile
-		projectorList[i] = new Projector(&numProjectors,2049);
-	}
-
-
+    // in i config fil och hämta antal projektorer
+    //TODO
+    numProjectors = 4; // Temp
+    for(int i = 0; i<numProjectors; i++){
+	//TODO This does not work at all, just placed there because it can compile
+   	 projectorList[i] = new Projector(&numProjectors,2049);
+    }
 }
 
+/* Displays the 3D space given on the regular monitor as well as the holographic display. */
 void Display::display(Scene scn){
-	//myColorTrans->apply();
-	//todo göra klart
-//	apply colorTranslator
-//	for each(Projector p in projector):
-//		p.display(scn);
-//	m.display(scn);
-//
-
-	for(int i = 0; i<numProjectors; i++){
-		projectorList[i]->display(scn);
-	}
-	myMonitor.display(scn);
+    for(int i = 0; i<numProjectors; i++){
+	projectorList[i]->display(scn);
+    }
+    myMonitor.display(scn);
 }
 
+/* Returns an array of the projector objects associated with the holographic display. */
 Projector** Display::getProjectors(){
-	return projectorList;
+    return projectorList;
 }
 
+/* Returns the Monitor object associated with the computer’s ordinary display. */
 Monitor* Display::getMonitor(){
-	return &myMonitor;
+    return &myMonitor;
 }
 
-
+/* Returns the component used by the Display object to impose default colour settings on each projector. */
 ColorTranslator* Display::getColorTranslator(){
-	return &myColorTrans;
+    return &myColorTrans;
 }
 
 double Display::getBoundingCube(){
 	//todo
 }
+
+/* Brightens the background of the holographic display. If the background is already highlighted, nothing will change. */
 void Display::highlight(){
-	//todo
-	//	for each(Projector p in projector):
-	//	       p.highlight();
-	for(int i = 0; i<numProjectors;i++){
-		projectorList[i]->highlight();
-	}
+    for(int i = 0; i<numProjectors;i++){
+        projectorList[i]->highlight();
+    }
 }
+
+/* Darkens the background of the holographic display. If the background is not highlighted, nothing will change. */
 void Display::unHighlight(){
-	//todo
-	for(int i = 0; i<numProjectors;i++){
-		projectorList[i]->unHighlight();
-	}
+    for(int i = 0; i<numProjectors;i++){
+        projectorList[i]->unHighlight();
+    }
 }
+
 //void setConfigurations(UniversalConfiguration uc){
 //	//todo
 //
