@@ -14,12 +14,11 @@ int numProjectors;
 
 Display::Display(){
 
-    // Hårdkodad color
+    // Hardcoded color
     float flo[3] = { 1.0f, 1.0f, 1.0f};
     myColorTrans = ColorTranslator(flo);
     myMonitor = Monitor();
 
-    // in i config fil och hämta antal projektorer
     //TODO
     numProjectors = 4; // Temp
     for(int i = 0; i<numProjectors; i++){
