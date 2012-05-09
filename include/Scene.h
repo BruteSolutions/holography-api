@@ -26,6 +26,12 @@ public:
     void applyRot(GLuint shader);
     void setRotation();
     float angleX, angleY,angleZ;
+    void rotateX(float angle);
+	void rotateY(float angle);
+	void rotateZ(float angle);
+	void rotateXRad(float angle);
+	void rotateYRad(float angle);
+	void rotateZRad(float angle);
     void merge(Scene * scene);
 private:        
     Vec4* matMult(Vec3 vec3);

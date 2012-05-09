@@ -133,6 +133,7 @@ void Scene::setRotation() {
     worldRotZ.m[5] = cos(angleZ); 
 }
 
+//Should we implement this?
 void Scene::translateCam(Vec3 trans) {
     //TODO: make trans depend on the direction the camera is facing
     Vec4* transRel = matMult(trans);
@@ -199,4 +200,29 @@ Vec4* Scene::matMult(Vec3 trans) {
             res->w = r;
     }
     return res;
+}
+
+
+void Scene::rotateX(float angle) {
+	angleX+=angle;
+}
+
+void Scene::rotateY(float angle) {
+	angleY+=angle;
+}
+
+void Scene::rotateZ(float angle) {
+	angleZ+=angle;
+}
+
+void Scene::rotateXRad(float angle) {
+	//TODO
+}
+
+void Scene::rotateYRad(float angle) {
+	//TODO
+}
+
+void Scene::rotateZRad(float angle) {
+	//TODO
 }
