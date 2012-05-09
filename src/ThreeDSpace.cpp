@@ -8,58 +8,52 @@
 #include "ThreeDSpace.h"
 
 ThreeDSpace::ThreeDSpace() {
-  objects.reserve(10);
-  Vec3 origin = {0,0,0};
-  setOrigin(origin);
-  selected  = std::vector<GraphicalObject*>(); 
-  scale=1;
+    objects.reserve(10);
+    Vec3 origin = {0, 0, 0};
+    setOrigin(origin);
+    selected = std::vector<GraphicalObject*>(); 
+    scale = 1;
 }
 
-std::vector<GraphicalObject*> ThreeDSpace::getObjects()
-{
-  return objects;
+std::vector<GraphicalObject*> ThreeDSpace::getObjects() {
+    return objects;
 }
 
-void ThreeDSpace::addObject(GraphicalObject * obj)
-{
-  objects.push_back(obj);
+void ThreeDSpace::addObject(GraphicalObject * object) {
+    objects.push_back(object);
 }
 
-void ThreeDSpace::setOrigin(Vec3 org)
-{
-  origin=org;
-}
-void ThreeDSpace::selectNext(){
-	selected.clear();
-	selected.push_back(objects.at(current));
-	current++;
-	if(current >= objects.size()){
-		current = 0;
-	}
+void ThreeDSpace::setOrigin(Vec3 org) {
+    origin = org;
 }
 
-void ThreeDSpace::bindBuffers(){
-
-  for (std::vector<GraphicalObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
-    (*it)->bindBufferData();
-  }
+void ThreeDSpace::selectNext() {
+    selected.clear();
+    selected.push_back(objects.at(current));
+    current++;
+    if(current >= objects.size()) {
+        current = 0;
+    }
 }
 
-void ThreeDSpace::resize(double factor)
-{
-	scale *= factor;
-}
-void ThreeDSpace::setScale(double _scale)
-{
-	scale = _scale;
-}
-double ThreeDSpace::getScale()
-{
-	return scale;
-}
-void ThreeDSpace::incrementScale(double inc)
-{
-	scale += inc;
+void ThreeDSpace::bindBuffers() {
+    for (std::vector<GraphicalObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
+        (*it)->bindBufferData();
+    }
 }
 
+void ThreeDSpace::resize(double factor) {
+    scale *= factor;
+}
 
+void ThreeDSpace::setScale(double _scale) {
+    scale = _scale;
+}
+
+double ThreeDSpace::getScale() {
+    return scale;
+}
+
+void ThreeDSpace::incrementScale(double inc) {
+    scale += inc;
+}

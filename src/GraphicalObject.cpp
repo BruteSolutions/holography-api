@@ -6,12 +6,10 @@
 #include "Shared.h"
 #include "GraphicalObject.h"
 
-GraphicalObject::GraphicalObject()
-{
+GraphicalObject::GraphicalObject() {
 }
 
-GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float _colorData[], int _colorDataSize)
-{	
+GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float _colorData[], int _colorDataSize) {	
 	vertexData = _vertexData;
 	colorData = _colorData;	
 	origin={0,0,0};
@@ -42,67 +40,55 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	angleZ = 0;
 }
 
-float GraphicalObject::getFirstTri()
-{
-	return vertexData[0];
-}
 
-float* GraphicalObject::getVertexData()
-{	
+float* GraphicalObject::getVertexData() {	
 	return vertexData;
 }
 
-float* GraphicalObject::getColorData()
-{	
+float* GraphicalObject::getColorData() {	
 	return colorData;
 }
 
-int GraphicalObject::getVertexDataSize()
-{	
+int GraphicalObject::getVertexDataSize() {	
 	return vertexDataSize;
 }
 
-int GraphicalObject::getColorDataSize()
-{	
+int GraphicalObject::getColorDataSize() {	
 	return colorDataSize;
 }
 
-void GraphicalObject::draw()
-{
-  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
+void GraphicalObject::draw() {
+	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
 
-  glEnableVertexAttribArray(0);			
-  glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(0);			
+	glEnableVertexAttribArray(1);
 
-  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);	
-  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
-  glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);	
+	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-  if(mesh)  
- 	 glDrawArrays(GL_LINE_STRIP, 0, vertexDataSize/4);
-  else
-  	 glDrawArrays(GL_TRIANGLES, 0, vertexDataSize/4);
+	if(mesh)  
+		glDrawArrays(GL_LINE_STRIP, 0, vertexDataSize/4);
+	else
+		glDrawArrays(GL_TRIANGLES, 0, vertexDataSize/4);
 
-  glDisableVertexAttribArray(0);
-  glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
 }
 
-void GraphicalObject::bindBufferData()
-{
+void GraphicalObject::bindBufferData() {
+	glGenBuffers(1, &positionBufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
+	glBufferData(GL_ARRAY_BUFFER, getVertexDataSize()*4, getVertexData(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);	
 
-  glGenBuffers(1, &positionBufferObject);
-  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
-  glBufferData(GL_ARRAY_BUFFER, getVertexDataSize()*4, getVertexData(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);	
-
-  glGenBuffers(1, &positionBufferObject2);
-  glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
-  glBufferData(GL_ARRAY_BUFFER, getColorDataSize()*4, getColorData(), GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glFlush();
+	glGenBuffers(1, &positionBufferObject2);
+	glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject2);
+	glBufferData(GL_ARRAY_BUFFER, getColorDataSize()*4, getColorData(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glFlush();
 }
-void GraphicalObject::rotate(){
-
+void GraphicalObject::rotate() {
 	objectRotX.m[5] = cos(angleX);
 	objectRotX.m[6] = -sin(angleX);
 	objectRotX.m[9] = sin(angleX);
@@ -119,20 +105,21 @@ void GraphicalObject::rotate(){
 	objectRotZ.m[5] = cos(angleZ); 
 
 }
-void GraphicalObject::applyRotation(GLuint shader){
-/*	for(int i = 0; i < 16; i++){
+void GraphicalObject::applyRotation(GLuint shader) {
+	/*	
+	for(int i = 0; i < 16; i++){
 		printf("%f ",objectRotX.m[i]);
 	}
 	printf("\n");
-for(int i = 0; i < 16; i++){
+	for(int i = 0; i < 16; i++){
 		printf("%f ",objectRotY.m[i]);
 	}
 	printf("\n");
-for(int i = 0; i < 16; i++){
+	for(int i = 0; i < 16; i++){
 		printf("%f ",objectRotZ.m[i]);
 	}
 	printf("\n");*/
-//skapa en metod som sätter alla uniforms istället
+	//create a function that sets all uniforms instead
 	GLuint scaleLoc = glGetUniformLocation(shader, "scale");
 	glUniform1f(scaleLoc, scale);
 	//std::cout << "\n\n"<<scale<<"\n\n";
@@ -149,47 +136,42 @@ for(int i = 0; i < 16; i++){
     glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
 
-void GraphicalObject::translate(Vec3 trans)
-{
-  Vec3 newPos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
-  pos = newPos;
+void GraphicalObject::translate(Vec3 trans) {
+	Vec3 newPos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
+	pos = newPos;
 }
 
-void GraphicalObject::applyTransformation(GLuint shader)
-{
+void GraphicalObject::applyTransformation(GLuint shader) {
     GLuint posLoc = glGetUniformLocation(shader, "objectPos");
     glUniform3f(posLoc, pos.x, pos.y, pos.z);
 }
 
-void GraphicalObject::setOrigin(Vec3 ori)
-{
+void GraphicalObject::setOrigin(Vec3 ori) {
         origin = ori;
 }
 
-bool GraphicalObject::hasMesh()
-{
+bool GraphicalObject::hasMesh() {
 	return mesh;
 }
-void GraphicalObject::setMesh(bool set)
-{
+
+void GraphicalObject::setMesh(bool set) {
 	mesh = set;
 }
 
 
-void GraphicalObject::resize(double factor)
-{
+void GraphicalObject::resize(double factor) {
 	scale *= factor;
 }
-void GraphicalObject::setScale(double _scale)
-{
+
+void GraphicalObject::setScale(double _scale) {
 	scale = _scale;
 }
-double GraphicalObject::getScale()
-{
+
+double GraphicalObject::getScale() {
 	return scale;
 }
-void GraphicalObject::incrementScale(double inc)
-{
+
+void GraphicalObject::incrementScale(double inc) {
 	scale += inc;
 }
 
@@ -200,7 +182,7 @@ Doesent take rotation into account
 
 void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
 {
-	 Vec3 finalOffset;
+	Vec3 finalOffset;
 	for(int i=0; i<vertexDataSize; i+=4) {
 		float x = vertexData[i], y = vertexData[i+1], z = vertexData[i+2], w = vertexData[i+3];
 		finalOffset.x += optPos.x - (x + camPos.x);
@@ -212,3 +194,28 @@ void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
 	finalOffset.z = finalOffset.z/(vertexDataSize/4);
 	pos = finalOffset;
 }
+
+void GraphicalObject::rotateX(float angle) {
+	angleX+=angle;
+}
+
+void GraphicalObject::rotateY(float angle) {
+	angleY+=angle;
+}
+
+void GraphicalObject::rotateZ(float angle) {
+	angleZ+=angle;
+}
+
+void GraphicalObject::rotateXRad(float angle) {
+	//TODO
+}
+
+void GraphicalObject::rotateYRad(float angle) {
+	//TODO
+}
+
+void GraphicalObject::rotateZRad(float angle) {
+	//TODO
+}
+

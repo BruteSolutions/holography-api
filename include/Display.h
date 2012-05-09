@@ -14,27 +14,27 @@
 
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
-class Display
-{
-	public:
-		Display();
-		void display(Scene scn);
-		std::vector<Projector>* getProjectors();
-		Monitor* getMonitor();
-		ColorTranslator* getColorTranslator();
-		void addProjector(Projector *p);
-		double getBoundingCube();
-		void highlight();
-		void unHighlight();
-		//void setConfigurations(UniversalConfiguration uc);
-		//UniversalConfiguration getConfigurations();
-	private:
-		Monitor *monitor;
-		std::vector<Projector> *projectorList;
-		ColorTranslator *colorTranslator;
-		int numProjectors;
-		//final int WIDTH:
-		//final int HEIGHT:
 
+class Display {
+public:
+    Display();
+    void display(Scene scene);
+    std::vector<Projector>* getProjectors();
+    Monitor* getMonitor();
+    ColorTranslator* getColorTranslator();
+    void addProjector(Projector *projector);
+    double getBoundingCube();
+    void highlight();
+    void unHighlight();
+    //void setConfigurations(UniversalConfiguration uc);
+    //UniversalConfiguration getConfigurations();
+private:
+    Monitor *monitor;
+    std::vector<Projector> *projectorList;
+    ColorTranslator *colorTranslator;
+    int numProjectors;
+    //final int WIDTH:
+    //final int HEIGHT:
 };
-#endif /* DISPLAY_H_ */
+
+#endif

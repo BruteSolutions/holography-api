@@ -6,18 +6,19 @@
 
 //Class might be redundant as everything can be done with a shader
 
-class ColorTranslator{
-private: 
+class ColorTranslator {
+private:
     Vec3 factor;
     Shader * shader;
 public:
-	ColorTranslator();
-	ColorTranslator(const ColorTranslator& copy);
-	ColorTranslator(Vec3 factor);
+    ColorTranslator();
+    ColorTranslator(const ColorTranslator& copy);
+    ColorTranslator(Vec3 factor);
     ~ColorTranslator();
-	void setConversionFactor(Vec3 factor);
-	Vec3 getConversionFactor() const;
-	Shader* getShader() ;
+    void setConversionFactor(Vec3 factor);
+    Vec3 getConversionFactor() const;
+    Shader* getShader();
     void apply( /*GLuint program*/ );
 };
+
 #endif

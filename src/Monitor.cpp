@@ -15,46 +15,42 @@
 /**
  * Monitor constructor.
  */
-Monitor::Monitor()
-{
-  Vec3 pos = {0,0,0}, dir = {0,0,0};
-  proj = new Projector(NULL, 0, pos, dir);
+Monitor::Monitor() {
+	Vec3 pos = {0,0,0}, dir = {0,0,0};
+	proj = new Projector(NULL, 0, pos, dir);
 }
 
 /**
  * Monitor destructor.
  */
-Monitor::~Monitor()
-{
-  delete proj;
+Monitor::~Monitor() {
+	delete proj;
 }
-Projector* Monitor::getProjector(){
+Projector* Monitor::getProjector() {
 	return proj;
 }
+
 /**
  * Displays a scene.
  * @param scn Scene to display.
  */
-void Monitor::display(Scene scn)
-{
-  proj->display(scn);
+void Monitor::display(Scene scene) {
+  proj->display(scene);
 }
 
 /**
  * Adds a shader to rendering.
  * @param s Shader to add.
  */
-void Monitor::addShader(Shader s)
-{
-  shaders.push_back(s);
-  proj->addShader(s);
+void Monitor::addShader(Shader shader) {
+	shaders.push_back(shader);
+	proj->addShader(shader);
 }
 
 /**
  * Returns a list of shaders.
  * @return All associated shaders.
  */
-std::vector<Shader> Monitor::getShaders()
-{
+std::vector<Shader> Monitor::getShaders() {
   return(shaders);
 }

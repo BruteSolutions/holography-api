@@ -55,7 +55,6 @@ void main()
 	position2 +=  vec4(camPos.x, camPos.y,camPos.z,0);
 	
 	
-	
 		//Perspective matrix	
 	position2 = worldPos * position2;
 		//Scale

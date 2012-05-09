@@ -3,19 +3,16 @@
 
 struct Configuration {};
 
-struct Vec3
-{
-	float x,y,z;
+struct Vec3 {
+    float x, y, z;
 };
 
-struct Vec4
-{
-	float x,y,z,w;
+struct Vec4 {
+    float x, y, z, w;
 };
 
-struct Mat4
-{
-	float m[16];
+struct Mat4 {
+    float m[16];
 };
 
 #endif

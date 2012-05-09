@@ -5,17 +5,16 @@
 /**
  * Monitor class.
  */
-class Monitor
-{
-  public:
+class Monitor {
+public:
     Monitor();
     ~Monitor();
-    void display(Scene scn);
-    void addShader(Shader s);
+    void display(Scene scene);
+    void addShader(Shader shader);
     std::vector<Shader> getShaders();
-	Projector * getProjector();
+    Projector * getProjector();
 
-  private:
+private:
     unsigned int bufferSize;
     std::vector<Shader> shaders;
     Projector * proj;

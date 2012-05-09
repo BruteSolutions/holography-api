@@ -15,17 +15,17 @@
 #include <string>
 #include <fstream>
 
-typedef struct Uniforms_struct{
-  std::string param;
-  GLuint id;
-  Uniforms_struct(std::string a, GLuint b){
-    param = a;
-    id = b;
-  }
+typedef struct Uniforms_struct {
+    std::string param;
+    GLuint id;
+    Uniforms_struct(std::string a, GLuint b) {
+        param = a;
+        id = b;
+    }
 } uniform_t;
 
 class Shader {
-  public:
+public:
     Shader(std::string vsPath, std::string  fsPath);
     void setVertexShader(GLuint openglRef);
     void setFragmentShader(GLuint openglRef);
@@ -35,10 +35,10 @@ class Shader {
     std::vector<uniform_t> getParameters();
     void removeParameter(std::string name);
     void addParameter(std::string name, GLuint p);
-	std::string loadFileToString(std::string path);
-	GLuint glcppShaderSource(std::string const &shader_string, GLenum type);
+    std::string loadFileToString(std::string path);
+    GLuint glcppShaderSource(std::string const &shader_string, GLenum type);
 
-  private:
+private:
     GLuint compileShader(std::string path, GLenum type);
     GLuint compileProgram();
 
@@ -46,4 +46,4 @@ class Shader {
     std::vector<uniform_t> uniforms;
 };
 
-#endif /* SHADER_H_ */
+#endif

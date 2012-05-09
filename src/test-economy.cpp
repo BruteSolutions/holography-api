@@ -324,13 +324,13 @@ std::cout << "--------------------------- PRESSED M -------------------- !11!!\n
 		return;
 	  case '7':
 std::cout << "--------------------------- PRESSED 7 -------------------- !11!!\n";
-		pGO->angleX -= 0.1f;
+		pGO->rotateX(-0.1f);
 		  glutPostRedisplay();
 
 		return;
 	  case '8':
 std::cout << "--------------------------- PRESSED 8 -------------------- !11!!\n";
-		pGO->angleX += 0.1f;
+		pGO->rotateX(0.1f);
 		  glutPostRedisplay();
 		return;
 
@@ -342,24 +342,24 @@ std::cout << "--------------------------- PRESSED 9 -------------------- !11!!\n
 
 	  case '4':
 std::cout << "--------------------------- PRESSED 4 -------------------- !11!!\n";
-		pGO->angleY -= 0.1f;
+		pGO->rotateY(-0.1f);
 		  glutPostRedisplay();
 
 		return;
 	  case '5':
 std::cout << "--------------------------- PRESSED 5 -------------------- !11!!\n";
-		pGO->angleY += 0.1f;
+		pGO->rotateY(0.1f);
 		  glutPostRedisplay();
 		return;
 	  case '1':
 std::cout << "--------------------------- PRESSED 1 -------------------- !11!!\n";
-		pGO->angleZ -= 0.1f;
+		pGO->rotateZ(-0.1f);;
 		  glutPostRedisplay();
 
 		return;
 	  case '2':
 std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n";
-		pGO->angleZ += 0.1f;
+		pGO->rotateZ(0.1f);
 		  glutPostRedisplay();
 		return;
 	  case 'p':
