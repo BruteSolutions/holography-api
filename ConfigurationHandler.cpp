@@ -15,7 +15,7 @@ using namespace std;
 /* Saves the configurations specified by the UniversalConfiguration object to a file specified by path. 
  * Throws IOException.
  */
-static void save(UniversalConfiguration uc, String path){
+static void save(UniversalConfiguration uc, String path) throw(std::string){
     ofstream file(path);
     if(!file.is_open())
         throw(string("IOException"));
@@ -26,7 +26,7 @@ static void save(UniversalConfiguration uc, String path){
 /* Loads the configurations in the file identified by path and returns them in a UniversalConfiguration object. 
  * If the loading fails, an IOException will be thrown.
  */
-static UniversalConfiguration load(String path){
+static UniversalConfiguration load(String path) throw(std::string){
     ifstream file(path);
     if(!file.is_open())
         throw(string("IOException");
