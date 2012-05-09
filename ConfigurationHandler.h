@@ -16,8 +16,8 @@
 
 class ConfigurationHandler{
 public:
-	static void save(UniversalConfiguration uc, String path);
-	static void load(String path);
+	static void save(UniversalConfiguration uc, String path) throw(std::string);
+	static void load(String path) throw(std::string);
 };
 
 #endif /* CONFIGURATIONHANDLER_H_ */
