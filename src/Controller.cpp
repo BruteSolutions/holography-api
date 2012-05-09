@@ -58,6 +58,7 @@ void Controller::unHighlightBackground() {
 	}
 }
 
+//De här finns redan i openGl om ni kollar i test-economy men de fungerar bara på själva fönstren
 //void Controller::MouseListener(MouseEvent me){
 //TODO
 //}
@@ -85,26 +86,59 @@ View * Controller::getView() {
 	return view;
 }
 
-void Controller::rotateWorld(){
+void Controller::rotateObject(Vec3 rotationAngles){
+	//State bs?
+	
+	selectedObject->rotateX(rotationAngles.x);
+	selectedObject->rotateY(rotationAngles.y);
+	selectedObject->rotateZ(rotationAngles.z);
+}
+
+void Controller::rotateWorld(Vec3 rotationAngles){
 	Controller::state=1;
+	
+	model->getScene()->rotateX(rotationAngles.x);
+	model->getScene()->rotateY(rotationAngles.y);
+	model->getScene()->rotateZ(rotationAngles.z);
+	
 	//TODO: Rotate world action
 	//Should be done through scene.threeDSpace.GraphicalObject but cannot find it.
 }
 
 GraphicalObject * Controller::selectedObject() {
-	return Controller::selectedObject;
+	return selectedObject;
 }
 
-bool Controller::showMesh() {
-	return Controller::showMesh;
+GraphicalObject * Controller::selectedNextObject() {
+	model->getScene()->selectNext();	
+	selectedObject = model->getScene()->getSelected().at(0);
+	return selectedObject;
+}
+
+bool Controller::showMesh() {	
+	selectedObject->setMesh(true);
+	return true;
+}
+
+bool Controller::toggleMesh() {	
+	selectedObject->setMesh(!selectedObject.hasMesh());
+	return selectedObject->hasMesh();
 }
 
 bool Controller::showGrid() {
-	return Controller::showGrid;
+	return showGrid;
 }
 
-void Controller::translateWorld(){
+void Controller::translateWorld(Vec3 translation){
 	state=2;
 	//TODO
 	//translate is positioned in GraphicalObject, which is in threeDSpace, which is in scene.
+	/*
+	When Scene is updated.
+	model->getScene()->translate(translation);
+	*/
+	//TEMP
+	model->getScene()->cPos.x += translation.x;
+	model->getScene()->cPos.y += translation.y;
+	model->getScene()->cPos.z += translation.z;
 }

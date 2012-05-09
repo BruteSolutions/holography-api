@@ -93,7 +93,7 @@ void Model::setCamerasDirectionOfSight(Vec3 direction){
  * Returns the Scene. Must be provided when View wants it in order to
  * update some visual settings that the user has changed (like highlighting the background).
  */
-Scene Model::getScene(){
+Scene * Model::getScene(){
 	return Model::scene;
 }
 

@@ -31,7 +31,7 @@ class Model
 		void setCamerasPosition(Vec3 position);
 		Vec3 getCamerasDirectionOfSight();
 		void setCamerasDirectionOfSight(Vec3 direction);
-		Scene getScene();
+		Scene * getScene();
 		void rescale();
 	private:
 		Scene * scene;

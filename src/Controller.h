@@ -25,11 +25,13 @@ class Controller
 		void highlightBackground();
 		void highlightBackground(bool highlight)
 		void unHighlightBackground();
-		void rotateWorld();
+		void rotateWorld(Vec3 r);
+		void rotateObject(Vec3 rotationAngles);
 		GraphicalObject * selectedObject();
+		GraphicalObject * selectedNextObject();
 		bool showMesh();
 		bool showGrid();
-		void translateWorld();
+		void translateWorld(Vec3 t);
 	private:
 		int state;
 		bool backgroundHighlightning;
