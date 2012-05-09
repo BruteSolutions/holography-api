@@ -172,7 +172,7 @@ void init()
 	zoom = {0,0,-2};
 	grObj2->translate(zoom);
 
-	defaultScene->get3DSpace()->setOrigin({0,0,-1});
+	defaultScene->get3DSpace()->setOrigin({0,0,2});
 
 	numwindows++;
 }
