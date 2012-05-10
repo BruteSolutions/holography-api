@@ -11,6 +11,7 @@ ThreeDSpace::ThreeDSpace() {
     objects.reserve(10);
     Vec3 origin = {0, 0, 0};
     setOrigin(origin);
+    current = 0;
     selected = std::vector<GraphicalObject*>(); 
     scale = 1;
 }
