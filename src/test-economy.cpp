@@ -205,7 +205,51 @@ void reshape (int w, int h)
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 //do something here to fix shaders
 }
+bool leftmousebutton = false;
+bool rightmousebutton = false;
+bool middlemousebutton = false;
+int mouse_x;
+int mouse_y;
+void mouse(int button, int state, int x, int y) {
+	std::cout << "Mouse function" << button << " " << state << " coord ( " << x <<", "<< y << " )"<< std::endl;
+	//left mouse button = 0
+	//right mouse button = 2
+	//middle mouse button = 1
+ 	//scroll forward = button 3
+	//scroll backward = button 4
+	mouse_x = x;
+	mouse_y = y;
+	switch (button)
+	{
+		case 0: if(state == 0) leftmousebutton = true; else leftmousebutton = false; return;
+		case 1: if(state == 0) middlemousebutton = true; else middlemousebutton = false; return;
+		case 2: if(state == 0) rightmousebutton = true; else rightmousebutton = false; return;
+		case 3: defaultScene->get3DSpace()->incrementScale(0.05f); glutPostRedisplay(); return;
+		case 4: defaultScene->get3DSpace()->incrementScale(-0.05f); glutPostRedisplay(); return;
 
+	};
+
+}
+void motion(int x, int y){
+	if(leftmousebutton){
+		defaultScene->rotateY((float) (x - mouse_x) / 100);
+		defaultScene->rotateX((float) (y - mouse_y)/ 100);
+
+		glutPostRedisplay();
+
+	}
+	if(rightmousebutton){
+		Vec3 pos = {(float) (x-mouse_x) / 100, (float) (y-mouse_y) /100, 0.0f};
+		    
+		defaultScene->translateCam(pos);
+
+		glutPostRedisplay();
+
+	}
+		mouse_x = x;
+		mouse_y = y;
+
+}
 bool worldCtrl = false;
 void keyboard(unsigned char key, int x, int y)
 {
