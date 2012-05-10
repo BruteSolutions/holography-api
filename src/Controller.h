@@ -23,7 +23,7 @@ class Controller
 		int getState();
 		View * getView();
 		void highlightBackground();
-		void highlightBackground(bool highlight)
+		void highlightBackground(bool highlight);
 		void unHighlightBackground();
 		void rotateWorld(Vec3 r);
 		void rotateObject(Vec3 rotationAngles);
