@@ -21,7 +21,7 @@ class View
 		Projector * getProjector(int index);
 		Display * getDisplay();
 		void toggleGrid(bool g);
-		void setDisplay(Display display);
+		void setDisplay(Display * display);
 		void updateView(Scene s);
 	private:
 		bool highlightBackground;
