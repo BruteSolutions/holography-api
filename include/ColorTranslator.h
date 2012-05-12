@@ -4,21 +4,18 @@
 #include "Shared.h"
 #include "Shader.h"
 
-//Class might be redundant as everything can be done with a shader
-
 class ColorTranslator {
 private:
     Vec3 factor;
     Shader * shader;
 public:
-    ColorTranslator();
-    ColorTranslator(const ColorTranslator& copy);
-    ColorTranslator(Vec3 factor);
+    ColorTranslator() throws ( std::string );
+    ColorTranslator( Vec3 factor ) throws ( std::string );
     ~ColorTranslator();
-    void setConversionFactor(Vec3 factor);
+    void setConversionFactor( Vec3 factor ) throws ( std::string );
     Vec3 getConversionFactor() const;
     Shader* getShader();
-    void apply( /*GLuint program*/ );
+    void setFactorUniform();
 };
 
 #endif
