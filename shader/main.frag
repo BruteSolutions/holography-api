@@ -12,7 +12,7 @@ void main()
 	float g = factor.y * color.y;
 	float b = factor.z * color.z;
 
-  vec3 processed = vec3((r+b+g)/3, 0.0f, 0.0f);
+  vec3 processed = vec3(r+g+b, 0.0f, 0.0f); //eftersom r+g+b kan max vara 1.0
 
   if(useHighlight == 1.0f) {
     processed.x = 1.0f - processed.x;
