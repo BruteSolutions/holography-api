@@ -1,6 +1,7 @@
 #ifndef __ColorTranslator_H
 #define __ColorTranslator_H
 #include <GL/freeglut.h>
+#include <string>
 #include "Shared.h"
 #include "Shader.h"
 
