@@ -10,12 +10,12 @@ private:
     Vec3 factor;
     Shader * shader;
 public:
-    ColorTranslator() throws ( std::string );
-    ColorTranslator( Vec3 factor ) throws ( std::string );
+    ColorTranslator() throw ( std::string );
+    ColorTranslator( Vec3 factor ) throw ( std::string );
     ~ColorTranslator();
-    void setConversionFactor( Vec3 factor ) throws ( std::string );
+    void setConversionFactor( Vec3 factor ) throw ( std::string );
     Vec3 getConversionFactor() const;
-    Shader* getShader();
+    Shader* getShader() const;
     void setFactorUniform();
 };
 

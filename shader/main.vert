@@ -61,5 +61,14 @@ void main()
 	position2 = worldScale*vec4(position2.x, position2.y, position2.z, position2.w/worldScale);
 
 	gl_Position = position2;
+  gl_Position.x += gl_Position.y/2;
+  gl_Position.y *= 2;
+  gl_Position.z *= 1/2;
+  gl_Position.w += gl_Position.y/2;
+  //vec2 ndc = gl_Position.xy * gl_Position.w;
+  //float m = 0.8;
+  //ndc.y = ndc.y*(m + ndc.x*(1-m));
+  //ndc.y /= max(ndc.x + 3, 1);
+  //gl_Position.xy = ndc.xy / gl_Position.w;
 }
 

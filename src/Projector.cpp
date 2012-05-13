@@ -152,7 +152,7 @@ void Projector::display(Scene scene) {
 
 
 	glUseProgram(pid);
-	colorTranslator->apply();
+	colorTranslator->setFactorUniform();
 
 	//Apply camera translation based on projector position
 	Vec3 adjustment3D = pos;
