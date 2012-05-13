@@ -13,12 +13,10 @@ uniform mat4 worldRotZ;
 uniform mat4 objectRotX;
 uniform mat4 objectRotY;
 uniform mat4 objectRotZ;
+uniform mat4 keystone;
 uniform float scale;
 uniform float worldScale;
 uniform vec3 worldOrigin;
-
-
-
 
 smooth out vec4 color;
 
@@ -60,15 +58,6 @@ void main()
 		//Scale
 	position2 = worldScale*vec4(position2.x, position2.y, position2.z, position2.w/worldScale);
 
-	gl_Position = position2;
-  gl_Position.x += gl_Position.y/2;
-  gl_Position.y *= 2;
-  gl_Position.z *= 1/2;
-  gl_Position.w += gl_Position.y/2;
-  //vec2 ndc = gl_Position.xy * gl_Position.w;
-  //float m = 0.8;
-  //ndc.y = ndc.y*(m + ndc.x*(1-m));
-  //ndc.y /= max(ndc.x + 3, 1);
-  //gl_Position.xy = ndc.xy / gl_Position.w;
+	gl_Position = keystone * position2;
 }
 

@@ -21,6 +21,24 @@ Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : high
 	bufferSize = len;
 	setPosition(pos);
 	setDirection(dir);
+
+  memset(keystone.m, 0, sizeof(keystone.m));
+  for(int i = 0; i < 16; i += 5) {
+    keystone.m[i] = 1.0;
+  }
+
+/*
+    1.0000         0         0    0.1429
+    0.1429    0.8571         0    0.1429
+         0         0    0.8571         0
+    0.1429         0         0    1.0000
+  keystone.m[3] = 0.1429;
+  keystone.m[4] = 0.1429;
+  keystone.m[5] = 0.8571;
+  keystone.m[7] = 0.1429;
+  keystone.m[10] = 0.8571;
+  keystone.m[12] = 0.1429;
+*/
 }
 
 /*
@@ -150,9 +168,12 @@ void Projector::display(Scene scene) {
 		pid = colorTranslator->getShader()->getShaderProgram();
 	}
 
-
 	glUseProgram(pid);
 	colorTranslator->setFactorUniform();
+
+  //Apply keystone correction
+  GLuint keystonePos = glGetUniformLocation(pid, "keystone");
+  glUniformMatrix4fv(keystonePos, 1, GL_FALSE, keystone.m);
 
 	//Apply camera translation based on projector position
 	Vec3 adjustment3D = pos;

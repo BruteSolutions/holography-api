@@ -85,7 +85,16 @@ float colorData2[] = {
 #define RIGHT 0.5f, -0.5f, 0.0f, 1.0f
 #define TOP 0.0f, 0.5f, 0.0f, 1.0f
 #define REAR 0.0f, 0.0f, -1.0f, 1.0f
+float ny[] =  {
+ -1, -1, 0, 1,
+ -1,  1, 0, 1,
+  1,  1, 0, 1,
+ -1, -1, 0, 1,
+  1,  1, 0, 1,
+  1, -1, 0, 1
+};
 float vertexData[] = {
+ 
 LEFT, RIGHT, TOP,
 
 TOP, LEFT, REAR,
@@ -135,14 +144,16 @@ void init()
   //if an object is added in a later stage, everywindow has to rebind their buffer
 
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
-	grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	/*grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);*/
 	//testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
+	GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
 	defaultScene = new Scene();
-	defaultScene->get3DSpace()->addObject(grObj1);
+	/*defaultScene->get3DSpace()->addObject(grObj1);
 	defaultScene->get3DSpace()->addObject(grObj2);
-	defaultScene->get3DSpace()->addObject(grObj3);
+	defaultScene->get3DSpace()->addObject(grObj3);*/
+	defaultScene->get3DSpace()->addObject(grobj);
 //	defaultScene->get3DSpace()->addObject(testObj);
 	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
 	
@@ -164,13 +175,15 @@ void init()
 	//initial zoom out
 
 	//Flytta bak objekten lite;
-	Vec3 zoom = {1,0,-3};
-	grObj1->translate(zoom);
-	grObj1->setOrigin({-1,-1,0});
+	Vec3 zoom = {0,0,-3};
+	//grObj1->translate(zoom);
+	//grObj1->setOrigin({-1,-1,0});
+	grobj->translate(zoom);
+	grobj->setOrigin({-1,-1,0});
 	zoom = {-1,0,-3};
-	grObj3->translate(zoom);
+	//grObj3->translate(zoom);
 	zoom = {0,0,-2};
-	grObj2->translate(zoom);
+	//grObj2->translate(zoom);
 
 	defaultScene->get3DSpace()->setOrigin({0,0,2});
 

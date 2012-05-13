@@ -1,6 +1,7 @@
 #ifndef PROJECTOR_H_
 #define PROJECTOR_H_
 
+#include <string.h>
 #include "ColorTranslator.h"
 
 class Projector {
@@ -21,6 +22,8 @@ public:
     Vec3 getDirection();
     void setPosition(Vec3 position);
     void setDirection(Vec3 direction_);
+
+    Mat4 keystone;
 
 private:
     std::vector<Shader> shaders;
