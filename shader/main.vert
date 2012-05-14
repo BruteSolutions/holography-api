@@ -40,8 +40,7 @@ void main()
 		//Set world origin
 	position2 = vec4(position2.x, position2.y, position2.z, position.w) + vec4(worldOrigin.x, worldOrigin.y, worldOrigin.z, 0);
 	
-	//Add objectpos for nice world rotation
-	position2+= vec4(objectPos.x, objectPos.y, objectPos.z, 0);
+	
 	
 	
 		//Rotate
@@ -51,7 +50,9 @@ void main()
 	
 		//Add translations
 	position2 +=  vec4(camPos.x, camPos.y,camPos.z,0);
+	//Add objectpos for nice world rotation
 	
+	position2+= vec4(objectPos.x, objectPos.y, objectPos.z, 0);
 	
 		//Perspective matrix	
 	position2 = worldPos * position2;
