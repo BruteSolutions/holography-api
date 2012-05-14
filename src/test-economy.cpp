@@ -4,7 +4,6 @@
 #include <vector>
 
 #include <glload/gl_3_3.h>
-#include <GL/freeglut.h>
 
 #include "Shared.h"
 #include "Shader.h"
@@ -15,6 +14,14 @@
 #include "Projector.h"
 //#include "FileLoader.h"
 #include "Display.h"
+
+
+#include <iostream>
+#include <GL/glut.h>
+#include <cstdlib>
+using namespace std;
+
+
 
 Projector * p1, * p2;
 Display* displayHandeler;
@@ -140,6 +147,12 @@ void bindBuffer(){
 	defaultScene->get3DSpace()->bindBuffers();
 }
 
+static int primitive = 0;
+void disp(void);
+void menu(int a);
+void subMenu(int a);
+
+
 void init()
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
@@ -176,19 +189,71 @@ void init()
 	//initial zoom out
 
 	//Flytta bak objekten lite;
-	Vec3 zoom = {1.25f,0,-3};
+	Vec3 zoom = {1.25f,0,-5};
 	grObj1->translate(zoom);
 	grObj1->setOrigin({-1,-1,0});
 //	grobj->translate(zoom);
 //	grobj->setOrigin({-1,-1,0});
-	zoom = {-1,0,-3};
+	zoom = {-1,0,-5};
 	grObj3->translate(zoom);
-	zoom = {0,0,-2};
+	zoom = {0,0,-4};
 	grObj2->translate(zoom);
 
-	defaultScene->get3DSpace()->setOrigin({0,0,2});
+	defaultScene->get3DSpace()->setOrigin({0,0,4});
 
 	numwindows++;
+	
+}
+
+
+	//-------------------------------------------------------------------------
+	//  Set up the GLUT Menus.
+	//-------------------------------------------------------------------------
+	void setupMenus ()
+	{
+
+
+		int menIdSub = glutCreateMenu(subMenu);
+		  glutAddMenuEntry("Red", 1);
+		  glutAddMenuEntry("Blue", 2);
+		  glutAddMenuEntry("Green", 3);
+		  glutAddMenuEntry("RGB", 4); 
+		  
+		int menIdMain = glutCreateMenu(menu);
+		  glutAddMenuEntry("Rotation On", 1);
+		  glutAddMenuEntry("Translation On", 2);
+		  glutAddSubMenu("Change Color", menIdSub);
+		  glutAddMenuEntry("Quit", 4);
+		
+		glutAttachMenu(GLUT_RIGHT_BUTTON);
+		
+		
+	
+	}
+
+void menu(int value){
+	std::cout << "---------------------------------HELLO MOTO!-----------------------------" << std::endl;
+	std::cout << "                                 " << value << std::endl;
+  if(value == 0){
+  }else{
+  	std::cout << "Selected " << value <<std::endl;
+    primitive=value;
+  }
+  
+  // you would want to redraw now
+  glutPostRedisplay();
+}
+void subMenu(int value){
+	std::cout << "---------------------------------SUB PRESSED!-----------------------------" << std::endl;
+	std::cout << "                                 " << value << std::endl;
+  if(value == 0){
+  }else{
+  	std::cout << "SUB-" << value <<std::endl;
+    primitive=value;
+  }
+  
+  // you would want to redraw now
+  glutPostRedisplay();
 }
 
 void addProjector(){
@@ -264,6 +329,9 @@ void motion(int x, int y){
 		mouse_y = y;
 
 }
+
+
+
 bool worldCtrl = false;
 void keyboard(unsigned char key, int x, int y)
 {

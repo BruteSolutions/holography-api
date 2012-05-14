@@ -137,11 +137,11 @@ void Scene::setRotation() {
 void Scene::translateCam(Vec3 trans) {
     //TODO: make trans depend on the direction the camera is facing
     Vec4* transRel = matMult(trans);
-    std::cout << "Transrel : " << transRel->x << " " << transRel->y << " " << transRel-> z << " " << transRel-> w << "\n";
+//    std::cout << "Transrel : " << transRel->x << " " << transRel->y << " " << transRel-> z << " " << transRel-> w << "\n";
 
     Vec3 newPos = {cPos.x + transRel->x, cPos.y + transRel->y, cPos.z + transRel->z};
     cPos = newPos;
-    std::cout << "campos:" << cPos.x << " " << cPos.y << " " << cPos.z << "\n";
+    //std::cout << "campos:" << cPos.x << " " << cPos.y << " " << cPos.z << "\n";
 }
 
 Vec4* Scene::matMult(Vec3 trans) {

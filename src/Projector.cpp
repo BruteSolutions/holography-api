@@ -197,12 +197,14 @@ void Projector::display(Scene scene) {
 		(*it)->applyRotation(pid);
 		//Apply highlight setting
 		float val = highlighted ? 1.0f : 0.0f;
-		std::cout << val << std::endl;
+		//std::cout << val << std::endl;
 		GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
 		glUniform1f(loc, val);
 
 		(*it)->draw();
 	}
+		
+	
 
 	glUseProgram(0);
 	glutSwapBuffers();
