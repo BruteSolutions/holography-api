@@ -33,8 +33,11 @@ public:
 	void rotateYRad(float angle);
 	void rotateZRad(float angle);
     void merge(Scene * scene);
+    void toggleBackgroundHighlightning();
+    bool getBackgroundHighlightning();
 private:        
     Vec4* matMult(Vec3 vec3);
+    bool backgroundHighlightning;
 };
 
 #endif

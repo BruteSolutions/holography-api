@@ -54,7 +54,7 @@ Scene::Scene() {
     worldPos.m[11] = -1.0f;
 
     //worldPos.m[15]=1.0f;
-
+	backgroundHighlightning = false;
     threeDSpace = new ThreeDSpace();
 }
 
@@ -225,4 +225,12 @@ void Scene::rotateYRad(float angle) {
 
 void Scene::rotateZRad(float angle) {
 	//TODO
+}
+
+void Scene::toggleBackgroundHighlightning() {
+	backgroundHighlightning = !backgroundHighlightning;
+}
+
+bool Scene::getBackgroundHighlightning() {
+	return backgroundHighlightning;
 }

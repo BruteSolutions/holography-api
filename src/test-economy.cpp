@@ -2,6 +2,7 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <gtk/gtk.h>
 
 #include <glload/gl_3_3.h>
 
@@ -15,6 +16,8 @@
 //#include "FileLoader.h"
 #include "Display.h"
 
+#include "examplewindow.h"
+#include <gtkmm/main.h>
 
 #include <iostream>
 #include <GL/glut.h>
@@ -151,6 +154,9 @@ static int primitive = 0;
 void disp(void);
 void menu(int a);
 void subMenu(int a);
+void file_ok_sel( GtkWidget        *w,
+                         GtkFileSelection *fs );
+void startFileBrowser();
 
 
 void init()
@@ -203,6 +209,8 @@ void init()
 
 	numwindows++;
 	
+	
+
 }
 
 
@@ -214,7 +222,7 @@ void init()
 
 
 		int menIdSub = glutCreateMenu(subMenu);
-		  glutAddMenuEntry("Red", 1);
+		  glutAddMenuEntry("Redxcvsdfddddddddddddddddddddddddddddddddddddddddddddddddddddas", 1);
 		  glutAddMenuEntry("Blue", 2);
 		  glutAddMenuEntry("Green", 3);
 		  glutAddMenuEntry("RGB", 4); 
@@ -309,6 +317,7 @@ void mouse(int button, int state, int x, int y) {
 	};
 
 }
+		GtkWidget *filew;
 void motion(int x, int y){
 	if(leftmousebutton){
 		defaultScene->rotateY((float) (x - mouse_x) / 100);
@@ -363,7 +372,7 @@ std::cout << "--------------------------- PRESSED A -------------------- !11!!\n
 		  pos = {0.05f, 0.0f, 0.0f};
 		  defaultScene->translateCam(pos);
 		}
-	fprintf(stderr,"redisplay\n");
+	//fprintf(stderr,"redisplay\n");
 			glutPostRedisplay();
 		  return;
       case 'd':
@@ -533,7 +542,58 @@ std::cout << "--------------------------- PRESSED B -------------------- !11!!\n
 		pGO->setMesh((!pGO->hasMesh()));
 		glutPostRedisplay();
 		return;
+	case ',':	
+std::cout << "--------------------------- PRESSED , -------------------- !11!!\n";
+		 startFileBrowser();
+		 glutPostRedisplay();
+		 return;
+	case 'l':	
+std::cout << "--------------------------- PRESSED . -------------------- !11!!\n";
+		defaultScene->toggleBackgroundHighlightning();
+		glutPostRedisplay();
+		return;
 	}
 }
 
+void startFileBrowser() {
+	gtk_init (0, 0);
+		
+	/* Create a new file selection widget */
+	filew = gtk_file_selection_new ("File selection");
+
+	g_signal_connect (filew, "destroy",
+			      G_CALLBACK (gtk_main_quit), NULL);
+	/* Connect the ok_button to file_ok_sel function */
+	g_signal_connect (GTK_FILE_SELECTION (filew)->ok_button,
+			  "clicked", G_CALLBACK (file_ok_sel), (gpointer) filew);
+
+	/* Connect the cancel_button to destroy the widget */
+	g_signal_connect_swapped (GTK_FILE_SELECTION (filew)->cancel_button,
+			              "clicked", G_CALLBACK (gtk_widget_destroy),
+				  filew);
+
+	/* Lets set the filename, as if this were a save dialog, and we are giving
+	 a default filename */
+	gtk_file_selection_set_filename (GTK_FILE_SELECTION(filew), 
+					 "penguin.png");
+
+	gtk_widget_show (filew);
+	gtk_main ();
+  	return;
+}
+
+char * currentfilepath;
 unsigned int defaults(unsigned int displayMode, int &width, int &height) {return displayMode;}
+
+/* Get the selected filename and print it to the console */
+void file_ok_sel( GtkWidget        *w,
+                         GtkFileSelection *fs )
+{
+	
+    currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
+    gtk_widget_destroy(filew);
+	//defaultScene->merge(FileLoader::loadFile(currentfilepath));
+	gtk_main_quit();
+}
+
+

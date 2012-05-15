@@ -24,6 +24,18 @@ endif
 #ifndef LIBXMLLIBS
 # LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
 #endif
+ifndef GTKMMLIBS
+  GTKMMLIBS = $(shell pkg-config gtkmm-2.4 --libs)
+endif
+ifndef GTKMMCFLAGS
+  GTKMMCFLAGS = $(shell pkg-config gtkmm-2.4 --cflags)
+endif
+ifndef GTKLIBS
+  GTKLIBS = $(shell pkg-config --libs gtk+-2.0)
+endif
+ifndef GTKCFLAGS
+  GTKCFLAGS = $(shell pkg-config --cflags gtk+-2.0)
+endif
 # put in CFLAGS $(LIBXMLCFLAGS) 
 # put in LIBS $(LIBXMLLIBS) -lGL 
 ifeq ($(config),debug)
@@ -33,10 +45,10 @@ ifeq ($(config),debug)
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DDEBUG -D_DEBUG
   INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include -Iinclude
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES) -std=c++0x
-  CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) -g
+  CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) $(GTKCFLAGS) $(GTKMMCFLAGS) -g
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
-  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGLU $(LIBXMLLIBS)
+  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGLU $(LIBXMLLIBS) $(GTKLIBS) $(GTKMMLIBS)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += ../framework/lib/libframeworkD.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -50,10 +62,10 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
+	$(OBJDIR)/test-economy.o  $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
 
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
-
+#$(OBJDIR)/examplewindow.o
 RESOURCES := \
 
 SHELLTYPE := msdos
@@ -116,6 +128,10 @@ endif
 $(OBJDIR)/test-economy.o: $(SRCPATH)/test-economy.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+#$(OBJDIR)/examplewindow.o: $(SRCPATH)/examplewindow.cpp
+#	@echo $(notdir $<)
+#	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Projector.o: $(SRCPATH)/Projector.cpp
 	@echo $(notdir $<)
