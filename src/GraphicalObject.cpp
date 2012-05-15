@@ -106,7 +106,6 @@ void GraphicalObject::rotate() {
 
 }
 void GraphicalObject::setHighlightUniform(GLuint shader){
- std::cout <<" Bajs" << std::endl;
 	GLuint highlightLoc = glGetUniformLocation(shader, "highlight");
     glUniform1f(highlightLoc, highlight);
 }
@@ -140,9 +139,12 @@ void GraphicalObject::applyRotation(GLuint shader) {
     GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
     glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
+void GraphicalObject::setHighlight(bool _bool) {
+	highlight = _bool;
+}
+
 void GraphicalObject::toggleHighlight(){
 	highlight = !highlight;
-	std::cout << "Gihlight :" << highlight << std::endl;
 }
 void GraphicalObject::translate(Vec3 trans) {
 	Vec3 newPos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};

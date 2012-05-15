@@ -535,10 +535,9 @@ std::cout << "--------------------------- PRESSED C -------------------- !11!!\n
 		    displayHandeler->unHighlight();
 		  }
 */
-		 
-		  pGO->toggleHighlight();
-		  glutPostRedisplay();
-		  return;
+		pGO->toggleHighlight();
+		glutPostRedisplay();
+		return;
 	case 'b':
 std::cout << "--------------------------- PRESSED B -------------------- !11!!\n";
 		pGO->setMesh((!pGO->hasMesh()));

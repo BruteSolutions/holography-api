@@ -30,6 +30,7 @@ public:
 	void resize(double factor);
 	void setHighlightUniform(GLuint shader);
 	void toggleHighlight();
+	void setHighlight(bool _bool);
 	void setScale(double _scale);
 	double getScale();
 	void incrementScale(double inc);

@@ -199,7 +199,6 @@ void Projector::display(Scene scene) {
 		(*it)->applyTransformation(pid);
 		(*it)->rotate();
 		(*it)->applyRotation(pid);
-		std::cout << "setting highlight" << std::endl;
 		(*it)->setHighlightUniform(pid);
 		//Apply highlight setting
 		//float val = highlighted ? 1.0f : 0.0f;
