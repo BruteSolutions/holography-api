@@ -526,7 +526,7 @@ std::cout << "--------------------------- PRESSED + -------------------- !11!!\n
 		return;
       case 'c': //highlights all objects
 std::cout << "--------------------------- PRESSED C -------------------- !11!!\n";
-
+/*
 		  highlightState = highlightState ? 0 : 1;
 		  if(highlightState) {
 			displayHandeler->highlight();
@@ -534,7 +534,9 @@ std::cout << "--------------------------- PRESSED C -------------------- !11!!\n
 		  else {
 		    displayHandeler->unHighlight();
 		  }
-
+*/
+		 
+		  pGO->toggleHighlight();
 		  glutPostRedisplay();
 		  return;
 	case 'b':

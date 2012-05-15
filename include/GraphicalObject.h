@@ -28,12 +28,15 @@ public:
 	void applyRotation(GLuint shader);
 //	void rotate(Vec3 trans);	
 	void resize(double factor);
+	void setHighlightUniform(GLuint shader);
+	void toggleHighlight();
 	void setScale(double _scale);
 	double getScale();
 	void incrementScale(double inc);
 	void translate(Vec3 trans);
 	Vec3 origin; 	
 	bool hasMesh();
+	bool highlighted();
 	void setMesh(bool mesh);
 	void center(Vec3 camPos, Vec3 optPos);
 	//When following floats are private: the first triangle is permanently meshed. WHY?=
@@ -43,6 +46,7 @@ private:
 	GLuint positionBufferObject;
 	GLuint positionBufferObject2;
 	GLuint positionBufferObject3;
+	bool highlight;
 	int vertexDataSize, colorDataSize;
 	float *vertexData, *colorData;
 	Vec3 pos;

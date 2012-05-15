@@ -2,7 +2,8 @@
 
 smooth in vec4 color;
 uniform vec3 factor;
-uniform float useHighlight;
+//uniform float useHighlight;
+uniform float highlight;
 
 out vec4 outputColor;
 
@@ -14,11 +15,11 @@ void main()
 
   vec3 processed = vec3(r+g+b, 0.0f, 0.0f); //eftersom r+g+b kan max vara 1.0
 
-  if(useHighlight == 1.0f) {
-    processed.x = 1.0f - processed.x;
+  if(highlight == 1.0f) {
+    processed.x = processed.x + 0.5f; //- processed.x;
   }
 
 	outputColor.xyz = processed;
   outputColor.w = color.w;
-outputColor = color;
+//outputColor = color;
 }

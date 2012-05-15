@@ -13,7 +13,7 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	vertexData = _vertexData;
 	colorData = _colorData;	
 	origin={0,0,0};
-	
+	highlight = false;
 	vertexDataSize = _vertexDataSize;
 	colorDataSize = _colorDataSize;
 	memset(&pos, 0, 4*3);
@@ -105,6 +105,11 @@ void GraphicalObject::rotate() {
 	objectRotZ.m[5] = cos(angleZ); 
 
 }
+void GraphicalObject::setHighlightUniform(GLuint shader){
+ std::cout <<" Bajs" << std::endl;
+	GLuint highlightLoc = glGetUniformLocation(shader, "highlight");
+    glUniform1f(highlightLoc, highlight);
+}
 void GraphicalObject::applyRotation(GLuint shader) {
 	/*	
 	for(int i = 0; i < 16; i++){
@@ -135,7 +140,10 @@ void GraphicalObject::applyRotation(GLuint shader) {
     GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
     glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
-
+void GraphicalObject::toggleHighlight(){
+	highlight = !highlight;
+	std::cout << "Gihlight :" << highlight << std::endl;
+}
 void GraphicalObject::translate(Vec3 trans) {
 	Vec3 newPos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
 	pos = newPos;

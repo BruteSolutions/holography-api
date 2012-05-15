@@ -199,11 +199,14 @@ void Projector::display(Scene scene) {
 		(*it)->applyTransformation(pid);
 		(*it)->rotate();
 		(*it)->applyRotation(pid);
+		std::cout << "setting highlight" << std::endl;
+		(*it)->setHighlightUniform(pid);
 		//Apply highlight setting
-		float val = highlighted ? 1.0f : 0.0f;
+		//float val = highlighted ? 1.0f : 0.0f;
+		
 		//std::cout << val << std::endl;
-		GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
-		glUniform1f(loc, val);
+		//GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
+		//glUniform1f(loc, val);
 
 		(*it)->draw();
 	}
