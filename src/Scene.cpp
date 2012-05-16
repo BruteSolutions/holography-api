@@ -124,7 +124,7 @@ void Scene::merge(Scene *scene) {
 
 /**
  * Writes the current world and camera position.
- * @param Shader program ID.
+ * @param shader program ID.
  */
 void Scene::applyPos(GLuint shader) {
     GLuint posLoc = glGetUniformLocation(shader, "worldPos");
@@ -136,7 +136,7 @@ void Scene::applyPos(GLuint shader) {
 
 /**
  * Applies the current rotation.
- * @param Shader program ID.
+ * @param shader program ID.
  */
 void Scene::applyRot(GLuint shader) {
     GLuint posLocX = glGetUniformLocation(shader, "worldRotX");

@@ -1,9 +1,3 @@
-//============================================================================
-// Name        : Shader.cpp
-// Author      : David och Fredric E.
-// Description : Shader class implementation.
-//============================================================================
-
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -44,7 +38,6 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
 /**
  * Compile the given shader and return ID.
  * @param path Path to the shader source file.
- * @param type Type of shader.
  * @return Shader ID.
  */
 std::string Shader::loadFileToString(std::string path) {
@@ -59,6 +52,13 @@ std::string Shader::loadFileToString(std::string path) {
     return filetext;
 }
 
+/**
+ * Compiles the given shader source of the given type.
+ * @param shader_string Source code of shader.
+ * @param type Type of shader.
+ * @return Shader ID.
+ *
+ */
 GLuint Shader::glcppShaderSource(std::string const &shader_string, GLenum type) {
     GLuint shader = glCreateShader(type);
     GLchar const *shader_source = shader_string.c_str();
@@ -69,6 +69,12 @@ GLuint Shader::glcppShaderSource(std::string const &shader_string, GLenum type) 
     return shader;
 }
 
+/**
+ * Compiles shader file at path of the given type.
+ * @param path File path to shader.
+ * @param type Type of shader.
+ * @return Shader program ID.
+ */
 GLuint Shader::compileShader(std::string path, GLenum type) {
     GLuint shader = glcppShaderSource(loadFileToString(path), type);
     return shader;
