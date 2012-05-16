@@ -10,6 +10,9 @@
 #include "Scene.h"
 #include <cstring>
 
+/**
+ * Scene constructor initiates all matrices.
+ */
 Scene::Scene() {
     cPos = {0, 0, 0};
     cDir = {1, 1, -1};
@@ -58,30 +61,60 @@ Scene::Scene() {
     threeDSpace = new ThreeDSpace();
 }
 
+/**
+ * Returns the current 3D-space.
+ * @return Current 3D-space.
+ */
 ThreeDSpace* Scene::get3DSpace() {
     return threeDSpace;
 }
 
+/**
+ * Retrieves the current camera position.
+ * @return Current camera position.
+ */
 Vec3 Scene::getCameraPosition() {
     return cPos;
 }
 
+/**
+ * Selects the next item in 3D-space.
+ */
 void Scene::selectNext() {
     threeDSpace->selectNext();
 }
 
+/**
+ * Retrieves the next object from 3D-space.
+ * @return Retrieves the next GraphicalObject.
+ */
 GraphicalObject * Scene::getNext() {
     return threeDSpace->objects.at(0);
 }
 
+/**
+ * Retrieves the current selection state.
+ * @return Current selection state.
+ */
 std::vector<GraphicalObject*> Scene::getSelected() {
     return threeDSpace->selected;
 }
 
+/**
+ * Retrieves the next selected object.
+ * @return Retrieves the next selection object.
+ */
 GraphicalObject * Scene::getNextSelected() { ; }
 
+/**
+ * TODO.
+ */
 void Scene::deselectAll() { ; }
 
+/**
+ * Merges a given scene to the current 3D-space.
+ * @param scene Scene to merge.
+ */
 void Scene::merge(Scene *scene) {
     std::vector<GraphicalObject*> newObjects = scene->get3DSpace()->getObjects();
     for (std::vector<GraphicalObject*>::iterator it = newObjects.begin(); it != newObjects.end(); it++) {
@@ -89,6 +122,10 @@ void Scene::merge(Scene *scene) {
     }
 }
 
+/**
+ * Writes the current world and camera position.
+ * @param Shader program ID.
+ */
 void Scene::applyPos(GLuint shader) {
     GLuint posLoc = glGetUniformLocation(shader, "worldPos");
     glUniformMatrix4fv(posLoc, 1, GL_FALSE, worldPos.m);
@@ -97,6 +134,10 @@ void Scene::applyPos(GLuint shader) {
     glUniform3f(posLoc2, cPos.x, cPos.y, cPos.z);
 }
 
+/**
+ * Applies the current rotation.
+ * @param Shader program ID.
+ */
 void Scene::applyRot(GLuint shader) {
     GLuint posLocX = glGetUniformLocation(shader, "worldRotX");
     glUniformMatrix4fv(posLocX , 1, GL_FALSE, worldRotX.m);
@@ -116,6 +157,9 @@ void Scene::applyRot(GLuint shader) {
     glUniform3f(worldOriLoc, threeDSpace->origin.x,threeDSpace->origin.y,threeDSpace->origin.z);
 }
 
+/**
+ * Updates the current world rotation matrix.
+ */
 void Scene::setRotation() {
     worldRotX.m[5] = cos(angleX);
     worldRotX.m[6] = -sin(angleX);
@@ -133,7 +177,10 @@ void Scene::setRotation() {
     worldRotZ.m[5] = cos(angleZ); 
 }
 
-//Should we implement this?
+/**
+ * Translates camera.
+ * @param trans Translation vector.
+ */
 void Scene::translateCam(Vec3 trans) {
     //TODO: make trans depend on the direction the camera is facing
     Vec4* transRel = matMult(trans);
@@ -144,6 +191,11 @@ void Scene::translateCam(Vec3 trans) {
     //std::cout << "campos:" << cPos.x << " " << cPos.y << " " << cPos.z << "\n";
 }
 
+/**
+ * Multiplies the current translation matrix.
+ * @param trans Translation vector.
+ * @return Returns the updated vector.
+ */
 Vec4* Scene::matMult(Vec3 trans) {
     Vec4 pos = {trans.x, trans.y, trans.z, 1};
     Vec4* res = new Vec4();
@@ -203,34 +255,64 @@ Vec4* Scene::matMult(Vec3 trans) {
 }
 
 
+/**
+ * Rotate the x angle.
+ * @param angle Angular adjustment.
+ */
 void Scene::rotateX(float angle) {
 	angleX+=angle;
 }
 
+/**
+ * Rotate the y angle.
+ * @param angle Angular adjustment.
+ */
 void Scene::rotateY(float angle) {
 	angleY+=angle;
 }
 
+/**
+ * Rotate the z angle.
+ * @param angle Angular adjustment.
+ */
 void Scene::rotateZ(float angle) {
 	angleZ+=angle;
 }
 
+/**
+ * Rotate the x angle.
+ * @param angle Angular adjustment.
+ */
 void Scene::rotateXRad(float angle) {
 	//TODO
 }
 
+/**
+ * Rotate the y angle.
+ * @param angle Angular adjustment.
+ */
 void Scene::rotateYRad(float angle) {
 	//TODO
 }
 
+/**
+ * Rotate the z angle.
+ * @param angle Angular adjustment.
+ */
 void Scene::rotateZRad(float angle) {
 	//TODO
 }
 
+/**
+ * Toggles background highlightning.
+ */
 void Scene::toggleBackgroundHighlightning() {
 	backgroundHighlightning = !backgroundHighlightning;
 }
 
+/**
+ * Gets the current state of background highlightning.
+ */
 bool Scene::getBackgroundHighlightning() {
 	return backgroundHighlightning;
 }
