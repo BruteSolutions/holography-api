@@ -20,6 +20,7 @@ public:
    static UniversalConfiguration load(std::string path) throw(std::string);
 private:
 
+       
 };
 
 
