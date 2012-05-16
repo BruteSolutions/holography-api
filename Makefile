@@ -62,7 +62,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o  $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
+	$(OBJDIR)/test-economy.o  $(OBJDIR)/RawLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o \
 
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
 #$(OBJDIR)/examplewindow.o
@@ -142,6 +142,10 @@ $(OBJDIR)/GraphicalObject.o: $(SRCPATH)/GraphicalObject.cpp
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ColorTranslator.o: $(SRCPATH)/ColorTranslator.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/RawLoader.o: $(SRCPATH)/RawLoader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
