@@ -15,14 +15,16 @@ public:
     void highlight();
     void unHighlight();
     int* getBuffer();
+    void calcKeystone(GLuint pid);
     void display(Scene scene);
     void addShader(Shader shader);
     std::vector<Shader> getShaders();
     Vec3 getPosition();
     Vec3 getDirection();
+    void add(int corner, int xory, float value);
     void setPosition(Vec3 position);
     void setDirection(Vec3 direction_);
-
+    float X1, X2,X3,X4, Y1,Y2,Y3,Y4;
     Mat4 keystone;
 
 private:
