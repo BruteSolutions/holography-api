@@ -28,6 +28,10 @@ void ThreeDSpace::setOrigin(Vec3 org) {
     origin = org;
 }
 
+Vec3 ThreeDSpace::getOrigin() {
+	return origin;
+}
+
 void ThreeDSpace::selectNext() {
     selected.clear();
     selected.push_back(objects.at(current));

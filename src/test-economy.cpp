@@ -563,6 +563,26 @@ std::cout << "--------------------------- PRESSED space !-------------------- !1
 	}
 }
 
+
+
+
+
+gint button_press (GtkWidget *, GdkEvent *);
+void menuitem_response (gchar *);
+GtkWidget *window;
+GtkWidget *vbox;
+GtkWidget *exit_button;
+
+
+
+void destroyMenu();
+void destroyMenu() {
+	gtk_widget_destroy(window);
+    gtk_widget_destroy (vbox);
+    gtk_main_quit();
+}
+
+
 void startFileBrowser() {
 	gtk_init (0, 0);
 		
@@ -581,6 +601,7 @@ void startFileBrowser() {
 				  filew);
 
 	/* Lets set the filename, as if this were a save dialog, and we are giving
+
 	 a default filename */
 	gtk_file_selection_set_filename (GTK_FILE_SELECTION(filew), 
 					 "penguin.png");
@@ -601,25 +622,6 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	//defaultScene->merge(FileLoader::loadFile(currentfilepath));
 	gtk_main_quit();
 }
-
-
-
-
-gint button_press (GtkWidget *, GdkEvent *);
-void menuitem_response (gchar *);
-GtkWidget *window;
-GtkWidget *vbox;
-GtkWidget *exit_button;
-
-
-
-void destroyMenu();
-void destroyMenu() {
-	gtk_widget_destroy(window);
-    gtk_widget_destroy (vbox);
-    gtk_main_quit();
-}
-
 
 void selectNextObject();
 void selectNextObject() {
@@ -646,6 +648,30 @@ void highlightBackground() {
 	destroyMenu();
 }
 
+void toggleHighlight();
+void toggleHighlight() {
+	pGO->toggleHighlight();
+	destroyMenu();
+}
+
+void centerObject();
+void centerObject() {
+	Vec3 ori = {-defaultScene->get3DSpace()->getOrigin().x,-defaultScene->get3DSpace()->getOrigin().y,-defaultScene->get3DSpace()->getOrigin().z};
+	pGO->center(defaultScene->getCameraPosition(), ori);
+	std::cout << "ORINGIN " << defaultScene->get3DSpace()->getOrigin().x << defaultScene->get3DSpace()->getOrigin().y << defaultScene->get3DSpace()->getOrigin().z << std::endl;
+	destroyMenu();
+}
+
+void toggleMesh();
+void toggleMesh() {
+	pGO->setMesh(!pGO->hasMesh());
+	destroyMenu();
+}
+
+const char*  boolToString(bool b);
+const char*  boolToString(bool b) {
+  return b ? "true" : "false";
+}
 
 void startMenu() {
     GtkWidget *menu;
@@ -654,7 +680,7 @@ void startMenu() {
     GtkWidget *menu_items;
     
     
-    GtkWidget *worldCtrl_button, *selectNext_button, *highlightBackground_button;
+    GtkWidget *worldCtrl_button, *selectNext_button, *highlightBackground_button, *toggleHighlight_button, *centerObject_button, *toggleMesh_button;
     char buf[128];
     int i;
 
@@ -662,7 +688,7 @@ void startMenu() {
 
     /* create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_usize (GTK_WIDGET (window), 300, 200);
+    gtk_widget_set_usize (GTK_WIDGET (window), 400, 300);
     gtk_window_set_title (GTK_WINDOW (window), "GTK Menu Test");
     gtk_signal_connect (GTK_OBJECT (window), "delete_event",
                         (GtkSignalFunc) gtk_main_quit, NULL);
@@ -709,7 +735,8 @@ void startMenu() {
     gtk_widget_show (exit_button);
     
     /* Toggle worldCtrl button*/
-	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl");
+//	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + boolToString(worldCtrl));
+	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + worldCtrl);
     gtk_signal_connect_object (GTK_OBJECT (worldCtrl_button), "clicked",
        (GtkSignalFunc) toggleWorldControl, GTK_OBJECT (window));
     gtk_box_pack_end (GTK_BOX (vbox), worldCtrl_button, TRUE, TRUE, 2);
@@ -723,11 +750,34 @@ void startMenu() {
     gtk_widget_show (selectNext_button);
 	
 	/* Hightlight background button */
-	highlightBackground_button = gtk_button_new_with_label ("Highlight background");
+	//highlightBackground_button = gtk_button_new_with_label ("Highlight background: " << boolToString(defaultScene->getBackgroundHighlightning()));
+	highlightBackground_button = gtk_button_new_with_label ("Highlight background: " + defaultScene->getBackgroundHighlightning());
     gtk_signal_connect_object (GTK_OBJECT (highlightBackground_button), "clicked",
        (GtkSignalFunc) highlightBackground, GTK_OBJECT (window));
     gtk_box_pack_end (GTK_BOX (vbox), highlightBackground_button, TRUE, TRUE, 2);
     gtk_widget_show (highlightBackground_button);
+    
+    /* toggleHighlight_button */
+    toggleHighlight_button = gtk_button_new_with_label ("Toggle object highlight");
+    gtk_signal_connect_object (GTK_OBJECT (toggleHighlight_button), "clicked",
+       (GtkSignalFunc) toggleHighlight, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), toggleHighlight_button, TRUE, TRUE, 2);
+    gtk_widget_show (toggleHighlight_button);
+    
+    /* centerObject_button */
+    centerObject_button = gtk_button_new_with_label ("Center object around origin");
+    gtk_signal_connect_object (GTK_OBJECT (centerObject_button), "clicked",
+       (GtkSignalFunc) centerObject, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), centerObject_button, TRUE, TRUE, 2);
+    gtk_widget_show (centerObject_button);
+    
+    /* toggleMesh_button */
+    //toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + boolToString(pGO->hasMesh()));
+    toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + pGO->hasMesh());
+    gtk_signal_connect_object (GTK_OBJECT (toggleMesh_button), "clicked",
+       (GtkSignalFunc) toggleMesh, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), toggleMesh_button, TRUE, TRUE, 2);
+    gtk_widget_show (toggleMesh_button);
 	
     /* And finally we append the menu-item to the menu-bar -- this is the
      * "root" menu-item I have been raving about =) */

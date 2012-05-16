@@ -202,6 +202,7 @@ void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
 	finalOffset.x = finalOffset.x/(vertexDataSize/4);
 	finalOffset.y = finalOffset.y/(vertexDataSize/4);
 	finalOffset.z = finalOffset.z/(vertexDataSize/4);
+	std::cout << "--------------------------------------------POS--"<<finalOffset.x<<finalOffset.y<<finalOffset.z <<" ---------------------------------------------" <<std::endl;
 	pos = finalOffset;
 }
 

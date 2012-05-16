@@ -10,6 +10,7 @@ public:
     std::vector<GraphicalObject*> getObjects();
     void addObject(GraphicalObject * object);
     void setOrigin(Vec3 org);
+    Vec3 getOrigin();
     void bindBuffers();
     void selectNext();
     std::vector<GraphicalObject*> objects;
