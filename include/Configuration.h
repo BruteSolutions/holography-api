@@ -13,17 +13,17 @@
 
 class Configuration{
 public:
-	Configuration(Vec3 pos, Vec3 dir, Vec3 factor);
-	static Configuration* readStream(std::ifstream& is) throw(std::string);
-	void writeToStream(std::ofstream& os) throw(std::string);
-	Vec3 getPosition();
-	Vec3 getDirection();
-	Vec3 getColorTranslatorFactor();
+    Configuration(Vec3 pos, Vec3 dir, Vec3 factor);
+    static Configuration* readStream(std::ifstream& is) throw(std::string);
+    void writeToStream(std::ofstream& os) throw(std::string);
+    Vec3 getPosition();
+    Vec3 getDirection();
+    Vec3 getColorTranslatorFactor();
 
 
 private:
-	Vec3 pos;
-	Vec3 dir;
-	Vec3 factor;
+    Vec3 pos;
+    Vec3 dir;
+    Vec3 factor;
 };
 #endif /* CONFIGURATION_H_ */
