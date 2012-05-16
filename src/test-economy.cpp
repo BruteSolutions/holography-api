@@ -206,7 +206,7 @@ void init()
 	zoom = {0,0,-4};
 	grObj2->translate(zoom);
 
-	defaultScene->get3DSpace()->setOrigin({0,0,4});
+	defaultScene->get3DSpace()->setOrigin({1,2,3});
 
 	numwindows++;
 	
@@ -569,7 +569,7 @@ std::cout << "--------------------------- PRESSED space !-------------------- !1
 
 gint button_press (GtkWidget *, GdkEvent *);
 void menuitem_response (gchar *);
-GtkWidget *window;
+GtkWidget *window, *window2;
 GtkWidget *vbox;
 GtkWidget *exit_button;
 
@@ -671,6 +671,11 @@ void toggleMesh() {
 const char*  boolToString(bool b);
 const char*  boolToString(bool b) {
   return b ? "true" : "false";
+}
+
+void enter_callback (GtkWidget *widget, GtkWidget *entry );
+void enter_callback( GtkWidget *widget, GtkWidget *entry ) {
+	std::cout << gtk_entry_get_text(GTK_ENTRY(entry)) << std::endl;
 }
 
 void startMenu() {
@@ -778,6 +783,21 @@ void startMenu() {
        (GtkSignalFunc) toggleMesh, GTK_OBJECT (window));
     gtk_box_pack_end (GTK_BOX (vbox), toggleMesh_button, TRUE, TRUE, 2);
     gtk_widget_show (toggleMesh_button);
+    
+    /* Create the GtkText widget */
+	GtkWidget *entry = gtk_entry_new_with_max_length (50);
+	gtk_signal_connect(GTK_OBJECT(entry), "activate", GTK_SIGNAL_FUNC(enter_callback), entry);
+    gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
+    gtk_widget_show (entry);
+    gtk_entry_set_text (GTK_ENTRY (entry), "Set world origin on the form: x,y,z: current: ");
+    char* s;
+     asprintf(&s, "%f %f", defaultScene->get3DSpace()->getOrigin().x, defaultScene->get3DSpace()->getOrigin().y);    
+   // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().x);    
+   // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().y); 
+   // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().z); 
+
+	gtk_entry_append_text (GTK_ENTRY (entry), s);
+	
 	
     /* And finally we append the menu-item to the menu-bar -- this is the
      * "root" menu-item I have been raving about =) */
