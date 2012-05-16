@@ -157,8 +157,9 @@ void subMenu(int a);
 void file_ok_sel( GtkWidget        *w,
                          GtkFileSelection *fs );
 void startFileBrowser();
+void startMenu();
 
-
+//void setupMenus();
 void init()
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
@@ -209,7 +210,6 @@ void init()
 
 	numwindows++;
 	
-	
 
 }
 
@@ -233,7 +233,7 @@ void init()
 		  glutAddSubMenu("Change Color", menIdSub);
 		  glutAddMenuEntry("Quit", 4);
 		
-		glutAttachMenu(GLUT_RIGHT_BUTTON);
+		glutAttachMenu(GLUT_MIDDLE_BUTTON);
 		
 		
 	
@@ -250,6 +250,7 @@ void menu(int value){
   
   // you would want to redraw now
   glutPostRedisplay();
+ glutPostOverlayRedisplay();
 }
 void subMenu(int value){
 	std::cout << "---------------------------------SUB PRESSED!-----------------------------" << std::endl;
@@ -262,6 +263,7 @@ void subMenu(int value){
   
   // you would want to redraw now
   glutPostRedisplay();
+  glutPostOverlayRedisplay();
 }
 
 void addProjector(){
@@ -553,6 +555,11 @@ std::cout << "--------------------------- PRESSED . -------------------- !11!!\n
 		defaultScene->toggleBackgroundHighlightning();
 		glutPostRedisplay();
 		return;
+	case ' ':	
+std::cout << "--------------------------- PRESSED space !-------------------- !11!!\n";
+		startMenu();
+		glutPostRedisplay();
+		return;
 	}
 }
 
@@ -587,9 +594,7 @@ char * currentfilepath;
 unsigned int defaults(unsigned int displayMode, int &width, int &height) {return displayMode;}
 
 /* Get the selected filename and print it to the console */
-void file_ok_sel( GtkWidget        *w,
-                         GtkFileSelection *fs )
-{
+void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	
     currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
     gtk_widget_destroy(filew);
@@ -597,4 +602,177 @@ void file_ok_sel( GtkWidget        *w,
 	gtk_main_quit();
 }
 
+
+
+
+gint button_press (GtkWidget *, GdkEvent *);
+void menuitem_response (gchar *);
+GtkWidget *window;
+GtkWidget *vbox;
+GtkWidget *exit_button;
+
+
+
+void destroyMenu();
+void destroyMenu() {
+	gtk_widget_destroy(window);
+    gtk_widget_destroy (vbox);
+    gtk_main_quit();
+}
+
+
+void selectNextObject();
+void selectNextObject() {
+	pGO->setHighlight(FALSE);
+	defaultScene->selectNext();
+	selGOs = defaultScene->getSelected();
+	pGO = selGOs.at(0);
+	pGO->setHighlight(TRUE);
+	
+	destroyMenu();
+}
+
+void toggleWorldControl();
+void toggleWorldControl() {
+	worldCtrl = !worldCtrl;
+	std::cout << "World controll now " << worldCtrl << std::endl;
+	destroyMenu();
+}
+
+void highlightBackground();
+void highlightBackground() {
+	defaultScene->toggleBackgroundHighlightning();
+	glutPostRedisplay();
+	destroyMenu();
+}
+
+
+void startMenu() {
+    GtkWidget *menu;
+    GtkWidget *menu_bar;
+    GtkWidget *root_menu;
+    GtkWidget *menu_items;
+    
+    
+    GtkWidget *worldCtrl_button, *selectNext_button, *highlightBackground_button;
+    char buf[128];
+    int i;
+
+    gtk_init (0, 0);
+
+    /* create a new window */
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_widget_set_usize (GTK_WIDGET (window), 300, 200);
+    gtk_window_set_title (GTK_WINDOW (window), "GTK Menu Test");
+    gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+                        (GtkSignalFunc) gtk_main_quit, NULL);
+
+    /* Init the menu-widget, and remember -- never
+     * gtk_show_widget() the menu widget!! 
+     * This is the menu that holds the menu items, the one that
+     * will pop up when you click on the "Root Menu" in the app */
+    menu = gtk_menu_new ();
+        
+	//Create load file menu option
+	menu_items = gtk_menu_item_new_with_label ("Load file");  
+	gtk_menu_append (GTK_MENU (menu), menu_items);
+	gtk_signal_connect_object (GTK_OBJECT (menu_items), "activate",
+                GTK_SIGNAL_FUNC (startFileBrowser), (gpointer) g_strdup ("Load file"));
+	 gtk_widget_show (menu_items);
+	
+    /* This is the root menu, and will be the label
+     * displayed on the menu bar.  There won't be a signal handler attached,
+     * as it only pops up the rest of the menu when pressed. */
+    root_menu = gtk_menu_item_new_with_label ("File");
+
+    gtk_widget_show (root_menu);
+
+    /* Now we specify that we want our newly created "menu" to be the menu
+     * for the "root menu" */
+    gtk_menu_item_set_submenu (GTK_MENU_ITEM (root_menu), menu);
+
+    /* A vbox to put a menu and a button in: */
+    vbox = gtk_vbox_new (TRUE, 0);
+    gtk_container_add (GTK_CONTAINER (window), vbox);
+    gtk_widget_show (vbox);
+
+    /* Create a menu-bar to hold the menus and add it to our main window */
+    menu_bar = gtk_menu_bar_new ();
+    gtk_box_pack_start (GTK_BOX (vbox), menu_bar, FALSE, FALSE, 2);
+    gtk_widget_show (menu_bar);
+
+    /* Create a exit button  */
+    exit_button = gtk_button_new_with_label ("Exit");
+    gtk_signal_connect_object (GTK_OBJECT (exit_button), "event",
+       (GtkSignalFunc) button_press, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), exit_button, TRUE, TRUE, 2);
+    gtk_widget_show (exit_button);
+    
+    /* Toggle worldCtrl button*/
+	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl");
+    gtk_signal_connect_object (GTK_OBJECT (worldCtrl_button), "clicked",
+       (GtkSignalFunc) toggleWorldControl, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), worldCtrl_button, TRUE, TRUE, 2);
+    gtk_widget_show (worldCtrl_button);
+	
+	/* Select next object button*/
+	selectNext_button = gtk_button_new_with_label ("Select next object");
+    gtk_signal_connect_object (GTK_OBJECT (selectNext_button), "clicked",
+       (GtkSignalFunc) selectNextObject, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), selectNext_button, TRUE, TRUE, 2);
+    gtk_widget_show (selectNext_button);
+	
+	/* Hightlight background button */
+	highlightBackground_button = gtk_button_new_with_label ("Highlight background");
+    gtk_signal_connect_object (GTK_OBJECT (highlightBackground_button), "clicked",
+       (GtkSignalFunc) highlightBackground, GTK_OBJECT (window));
+    gtk_box_pack_end (GTK_BOX (vbox), highlightBackground_button, TRUE, TRUE, 2);
+    gtk_widget_show (highlightBackground_button);
+	
+    /* And finally we append the menu-item to the menu-bar -- this is the
+     * "root" menu-item I have been raving about =) */
+    gtk_menu_bar_append (GTK_MENU_BAR (menu_bar), root_menu);
+
+    /* always display the window as the last step so it all splashes on
+     * the screen at once. */
+    gtk_widget_show (window);
+
+    gtk_main ();
+
+}
+
+/* Respond to a button-press by posting a menu passed in as widget.
+ *
+ * Note that the "widget" argument is the menu being posted, NOT
+ * the button that was pressed.
+ */
+
+ gint button_press( GtkWidget *widget,
+                          GdkEvent *event )
+{
+	std::cout << "button press---------------------------"<<std::endl;
+    if (event->type == GDK_BUTTON_PRESS) {
+        GdkEventButton *bevent = (GdkEventButton *) event; 
+   //     gtk_menu_popup (GTK_MENU (widget), NULL, NULL, NULL, NULL,
+     //                   bevent->button, bevent->time);
+     	std::cout << "QUIT---------------------------"<<std::endl;
+     	gtk_widget_destroy(window);
+     	gtk_widget_destroy (vbox);
+     	gtk_main_quit();
+        /* Tell calling code that we have handled this event; the buck
+         * stops here. */
+        return TRUE;
+    }
+
+    /* Tell calling code that we have not handled this event; pass it on. */
+    return FALSE;
+}
+
+
+/* Print a string when a menu item is selected */
+
+ void menuitem_response( gchar *string )
+{
+    printf ("%s\n", string);
+}
 
