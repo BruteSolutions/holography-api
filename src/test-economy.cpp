@@ -222,7 +222,7 @@ void init()
 
 
 		int menIdSub = glutCreateMenu(subMenu);
-		  glutAddMenuEntry("Redxcvsdfddddddddddddddddddddddddddddddddddddddddddddddddddddas", 1);
+		  glutAddMenuEntry("Red", 1);
 		  glutAddMenuEntry("Blue", 2);
 		  glutAddMenuEntry("Green", 3);
 		  glutAddMenuEntry("RGB", 4); 
