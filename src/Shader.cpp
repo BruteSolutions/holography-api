@@ -26,14 +26,23 @@ using namespace std;
  * @param fsPath path to the fragment shader file.
  * An empty string indicates no shader.
  */
-Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0), progId(0) {
+Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0), progId(0) throw (std::string){
     if (vsPath != "") {
         vertexId = compileShader("shader/" + vsPath, GL_VERTEX_SHADER);
+    }
+    else{
+    	throw std::string(
+				"VertexShaderNotFoundException(The vertex shader file name is empty.)");
     }
 
     if (fsPath != "") {
         fragId = compileShader("shader/" + fsPath, GL_FRAGMENT_SHADER);
     }
+    else{
+		throw std::string(
+				"FragmentShaderNotFoundException(The fragment shader file name is empty.)");
+    }
+
 
     if (vertexId && fragId) {
         progId = compileProgram();
@@ -47,14 +56,24 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
  * @param type Type of shader.
  * @return Shader ID.
  */
-std::string Shader::loadFileToString(std::string path) {
+std::string Shader::loadFileToString(std::string path)throw (std::string) {
     std::ifstream ifile(path);
     std::string filetext;
+
+    if(ifile.fail()){
+    	throw std::string(
+    					"FileNotFoundException(The file was not found or could not be opened.)");
+    }
 
     while (ifile.good()) {
         std::string line;
         std::getline(ifile, line);
         filetext.append(line + "\n");
+    }
+
+    if(!ifile.eof()){
+    	throw std::string(
+    	    					"IllegalShaderException(The shader file was correct.)");
     }
     return filetext;
 }
@@ -78,7 +97,7 @@ GLuint Shader::compileShader(std::string path, GLenum type) {
  * Compile shaders into a program.
  * @return Program ID.
  */
-GLuint Shader::compileProgram() {
+GLuint Shader::compileProgram() throw (std::string){
     std::cout << "Compiling program\n";
     GLuint program = glCreateProgram();
 
@@ -89,9 +108,10 @@ GLuint Shader::compileProgram() {
 
     GLint status;
     glGetProgramiv(program, GL_LINK_STATUS, &status);
-    
+
     if (status == GL_FALSE)
-        throw "Error in program compilation";
+    	throw std::string(
+    	    	    					"CompilationException(The compliation failed.)");
 
     return program;
 }
