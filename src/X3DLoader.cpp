@@ -9,6 +9,7 @@
 #include <config.h>
 #endif
 
+#include <fstream>
 #include <string>
 #include <cstdlib>
 #include <cstdio>
@@ -24,6 +25,10 @@
  * @return returns a Scene object containing the object in the file
  */
 Scene* X3DLoader::loadFile( std::string path ) throws ( std::string ) {
+   //Check that the file we're trying to load actually exists
+   std::ifstream ifile(path);
+   if( ifile.fail() ) throw( string( "X3DFileNotFoundException" ) );
+  
     // Set the global C and C++ locale to the user-configured locale,
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
     std::locale::global(std::locale(""));
@@ -119,7 +124,7 @@ Scene* X3DLoader::loadFile( std::string path ) throws ( std::string ) {
         return scene;
  
  /* TODO: kolla vilket exception som kastas för ogiltiga filer */
-    } catch( const std::exception& e ) { // catches LIBXML++ exception
+    } catch( const std::exception& e ) { // catches LIBXML++ exception 2.6
         throw std::string(e.what());
     }
 }
@@ -193,5 +198,3 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
         faces->push_back( tmp );
     }
 }
-
-
