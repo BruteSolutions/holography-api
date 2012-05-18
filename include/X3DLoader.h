@@ -24,7 +24,7 @@ struct Vec3Int {
 
 class X3DLoader : FileLoader {
 public:
-    static Scene* loadFile( std::string path ) throws ( std::string );
+    static Scene* loadFile( std::string path ) throw ( std::string );
 
 private:
     static void copyCoordIndex( const char* input, std::vector<Vec3Int> *faceVector, int coordOffset );
