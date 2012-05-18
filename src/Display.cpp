@@ -125,7 +125,7 @@ void Display::setConfigurations(UniversalConfiguration uc){
 UniversalConfiguration * Display::getConfigurations(){
 	configs = new std::vector<Configuration>();
 	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++) {
-		configs->push_back(*((*it).getConfiguration()));
+		configs->push_back(it->getConfiguration());
 	}
-	return new UniversalConfiguration(configs, colorTranslator);
+	return (new UniversalConfiguration(configs, colorTranslator));
 }

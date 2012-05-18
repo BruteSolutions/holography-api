@@ -2,6 +2,7 @@
 #define PROJECTOR_H_
 
 #include <string.h>
+#include "Configuration.h"
 #include "ColorTranslator.h"
 
 class Projector {
@@ -26,6 +27,7 @@ public:
     void setDirection(Vec3 direction_);
     float X1, X2,X3,X4, Y1,Y2,Y3,Y4;
     Mat4 keystone;
+    void moveKeystoneCorner(int corner, int xory, float value);
 
 private:
     std::vector<Shader> shaders;
