@@ -41,8 +41,12 @@ ColorTranslator::~ColorTranslator() {
  * that will be converted to red.
  */
 void ColorTranslator::setConversionFactor( Vec3 factor ) throw ( std::string ) {
-    if( factor.x < 0 || factor.y < 0 || factor.z < 0 )
-        throw std::string("IllegalArgumentException(A conversion-factor is less than 0.)");
+    if (factor.x < 0)
+    	throw std::string("IllegalArgumentException(The first conversion-factor is less than 0.)");
+	if (factor.y < 0)
+		throw std::string("IllegalArgumentException(The second conversion-factor is less than 0.)");
+	if (factor.z < 0)
+		throw std::string("IllegalArgumentException(The third conversion-factor is less than 0.)");
     float factorSum = factor.x + factor.y + factor.z;
     if( factorSum > 1 ){ //normalize components so that the sum will be one
     	factor.x = factor.x / factorSum;
