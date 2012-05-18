@@ -104,3 +104,27 @@ void Display::unHighlight() {
 	 (*it).unHighlight();
 	}
 }
+/**
+ * Set the configuration for the projectors
+ * @param UniversalConfiguration uc to set
+ */
+void Display::setConfigurations(UniversalConfiguration uc){
+	colorTranslator = uc.getColorTranslator();
+	configs = uc.getProjectorConfigurations();
+	int min = configs->size() < projectorList->size() ? configs->size() : projectorList->size();
+	for (int i = 0; i<min; i++) {
+		(projectorList->at(i)).setConfiguration(configs->at(i));
+	}
+	
+}
+/**
+ * Get the configuration from the projectors.
+ * @return UnivercalConfiguration
+ */
+UniversalConfiguration * Display::getConfigurations(){
+	configs = new std::vector<Configuration>();
+	for (std::vector<Projector>::iterator it = projectorList->begin(); it != projectorList->end(); it++) {
+		configs->push_back(*((*it).getConfiguration()));
+	}
+	return new UniversalConfiguration(configs, colorTranslator);
+}
