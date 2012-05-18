@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "Monitor.h"
 #include "Projector.h"
+#include "UniversalConfiguration.h"
 
 /**
  * Initiates the associated objects.
