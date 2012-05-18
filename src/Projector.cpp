@@ -14,8 +14,7 @@
 using namespace std;
 
 /**
- * Creates a new projector with buffer of size len at the place pointer with position pos
- * and direction dir;
+ * Creates a new projector with a buffer of size len at the place pointer with position pos and direction dir;
  */
 Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) {
 	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
@@ -48,55 +47,44 @@ Projector::Projector(int * pointer, unsigned int len) {
 }
 
 /**
- * TODO.
+ * An interface to move the corners of the projected image, changing the observed
+ * values so that a new Keystone matrix can be calculated. 
+ * @param corner Which of the four coners to change
+ * @param xory States which component of the coordinate of a corner that should be changed X=0 Y=1
+ * @param value Is the value to increase or decrease the component with
  */
-void Projector::add(int corner, int xory, float value){
-	//std::cout << "corner " << corner << std::endl;
+void Projector::moveKeystoneCorner(int corner, int xory, float value){
 	if(xory == 0){ //x
-		//std::cout << "X" << std::endl;
 		switch(corner){
 			case 0: X1 += value; return;
 			case 1: X2 += value; return;
 			case 2: X3 += value; return;
 			case 3: X4 += value; return;
-			//default: std::cout << "corner " << corner << std::endl; return;
       default: break;
 		}
 	}else{
-		//std::cout << "Y" << std::endl;
 		switch(corner){
-			 
-			case 0: Y1 += value; /*std::cout << " minimizing Y " << std::endl;*/ return;
+			case 0: Y1 += value; return;
 			case 1: Y2 += value; return;
 			case 2: Y3 += value; return;
 			case 3: Y4 += value; return;
-			//default: std::cout << "corner " << corner << std::endl; return;
       default: break;
 		}
 	}
 } 
 
 /**
- * TODO.
+ * Calculates the the keystone matrix and sets a uniform
+ * @param pid is the shader program used when drawing
  */
 void Projector::calcKeystone(GLuint pid){
+		/* The real values */
     float x1= 1, y1=1;
-    //X1= 1, Y1=1;
     float x2=-1, y2=1;
-    //X2=-1, Y2=1;//0.95;
     float x3=-1, y3=-1;
-    //X3=-1, Y3=-1;//0.95;
     float x4= 1, y4=-1;
-    //X4= 1, Y4=-1;
 
-    /*std::cout << "X1: " << X1;
-    std::cout << " X2: " << X2;
-    std::cout << " X3: " << X3;
-    std::cout << " X4: " << X4;
-    std::cout << " Y1: " << Y1;
-    std::cout << " Y2: " << Y2;
-    std::cout << " Y3: " << Y3;
-    std::cout << " Y4: " << Y4 << std::endl;*/
+		/* X1-X4, Y1-Y4 are observed values */
 
     float A [9][9] = { 
     {x1,y1,1,0,0,0,-x1*X1,-y1*X1,-X1},
@@ -108,15 +96,17 @@ void Projector::calcKeystone(GLuint pid){
     {x4,y4,1,0,0,0,-x4*X4,-y4*X4,-X4},
     {0,0,0,x4,y4,1,-x4*Y4,-y4*Y4,-Y4},
     {0,0,0,0 , 0,0,     0,     0,  1}
-    }; //Matrisen
+    };
+    
     float A2[9][9];
     for(int i=0;i<9;i++){
         for(int j=0;j<9;j++){
             A2[i][j] = A[i][j];
         }
     }
-
     float b [9] = { 0,0,0,0,0,0,0,0,1};
+    
+		/* Perform a Gauss Jordan to solve the system A h = b*/
     for(int j=0;j<9;j++){
         int count = j;
         while(count<9 && A[count][j]==0){
@@ -159,7 +149,10 @@ void Projector::calcKeystone(GLuint pid){
     else
         h33 +=b[7];
 
+		/* the matrix responsible for the keystone effect (beware, this is the transponate of the matrix)*/
     float h[16] = { b[0], b[3], 0, b[6], b[1], b[4], 0, b[7], 0, 0, h33, 0, b[2], b[5], 0 , 1 };
+
+    /* set the keystone uniform */
     GLuint keystoneLoc = glGetUniformLocation(pid, "keystone");
     glUniformMatrix4fv(keystoneLoc , 1, GL_FALSE, h);
 }
@@ -247,30 +240,19 @@ void Projector::unHighlight() {
 }
 
 /**
- * Gets a pointer to the memory location of the buffer used by this certain projector.
- * @param
- * @return
- */
-int* Projector::getBuffer() {
-	return pnt;
-}
-
-/**
  * Displays the view through the projector associated with this instance.
  * Prior to that it will also possibly have applied color settings and
  * definitely applied keystone correction on the view.
- * @param
- * @return
+ * @param takes a scene and draws in the current window
  */
 void Projector::display(Scene scene) {
+  /* Draw the background */
 	if(scene.getBackgroundHighlightning())
 		glClearColor(0.9,0,0,0);
 	else
 		glClearColor(0,0,0,0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	glClear(GL_DEPTH_BUFFER_BIT);
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -278,29 +260,28 @@ void Projector::display(Scene scene) {
 
 	GLuint pid;
 
-	//necessary??
+	/* Fetch the shader program to use */
 	if(shaders.size()) {
 		pid = shaders[0].getShaderProgram();
 	}else {
 		pid = colorTranslator->getShader()->getShaderProgram();
 	}
-
 	glUseProgram(pid);
+	
+	/* Sets the factor which decides how the color components affects the red end color */
 	colorTranslator->setFactorUniform();
 
+	/* Calculate keystone and set the uniform */
 	calcKeystone(pid);
-  //Apply keystone correction
-//  GLuint keystonePos = glGetUniformLocation(pid, "keystone");
-//  glUniformMatrix4fv(keystonePos, 1, GL_FALSE, keystone.m);
 
 	//Apply camera translation based on projector position
 	Vec3 adjustment3D = pos;
 	scene.translateCam(adjustment3D);
 
+	/* Calculate world rotation and position */
 	scene.setRotation();
 	scene.applyRot(pid);
 	scene.applyPos(pid);
-	ThreeDSpace * space = scene.get3DSpace();
 
 	//Restore previous camera translation
 	adjustment3D.x *= -1;
@@ -308,18 +289,14 @@ void Projector::display(Scene scene) {
 	adjustment3D.z *= -1;
 	scene.translateCam(adjustment3D);
 
+	//Iterate over every graphical object in the scene and draw them in the current window
+	ThreeDSpace * space = scene.get3DSpace();
 	std::vector<GraphicalObject*> goList = space->getObjects();
 	for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
 		(*it)->applyTransformation(pid);
-		(*it)->rotate();
-		(*it)->applyRotation(pid);
+		(*it)->rotate(); /* calculates the rotation matrices */
+		(*it)->applyRotation(pid); /* sets the rotation uniforms and links matrices */
 		(*it)->setHighlightUniform(pid);
-		//Apply highlight setting
-		//float val = highlighted ? 1.0f : 0.0f;
-		
-		//GLuint loc = glGetUniformLocation(colorTranslator->getShader()->getShaderProgram(), "useHighlight");
-		//glUniform1f(loc, val);
-
 		(*it)->draw();
 	}
 		
@@ -330,18 +307,15 @@ void Projector::display(Scene scene) {
 
 /**
  * Gets the list of in use shaders.
- * @param void;
- * @return std::list<Shader>
+ * @return A list of shaders used by the projector
  */
-
 std::vector<Shader> Projector::getShaders() {
 	return shaders;
 }
 
 /**
- * Adds a shader "s" to the list of shaders.
- * @param Shader s, the Shader you want to add to the list.
- * @return void
+ * Adds a shader object to the list of shaders.
+ * @param shader the shader to add to the list.
  */
 void Projector::addShader(Shader shader) {
 	shaders.push_back(shader);  

@@ -7,11 +7,11 @@
 
 class FileLoader {
 public:
-    static Scene* loadFile(std::string path);
+    static Scene* loadFile(std::string path) throw ( std::string );
 
 private:
-    static int theRightFileType(std::string path);
-    static int determineNumberFromFiletype(std::string path);
+    static int checkFileExtension(std::string path);
+    static int getFileExtensionCode(std::string path);
 };
 
 #endif

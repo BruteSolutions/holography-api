@@ -14,7 +14,7 @@ public:
     Configuration getConfiguration();
     void highlight();
     void unHighlight();
-    int* getBuffer();
+    int* getBuffer(); //not implemented
     void calcKeystone(GLuint pid);
     void display(Scene scene);
     void addShader(Shader shader);

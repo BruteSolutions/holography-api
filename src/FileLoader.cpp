@@ -1,27 +1,31 @@
 #include <string>
 #include "FileLoader.h"
+#include "RawLoader.h"
 #include "X3DLoader.h"
 #include "Scene.h" 
 
 /**
  * Loads a file, and from which creates a Scene object.
+ * @param path the filepath to load a file from
+ * @return A Scene containing the contents acquired from the specified file
  */ 
-Scene* FileLoader::loadFile(std::string path) {
-	switch(theRightFileType(path)) {
-        case -1: // Faild filetype.
-			puts("Not a valid file type");
-			throw 255;
+Scene* FileLoader::loadFile(std::string path) throw ( std::string ) {
+	switch(checkFiletype(path)) {
+				case 0: // Filetype BS Raw
+					return RawLoader::loadFile(path);
         case 1: // Filetype X3D
-        	// Call the X3D fileloader and return its result.
         	return X3DLoader::loadFile(path);
-        default: // should not be reachable, method call died.
-        	puts("Method to determine filetype crashed.");
-        	throw 254;
+        default: // Whenever a filetype is not recognized
+        	throw "IllegalFiletypeException";
 		
     };
 }
-
-int FileLoader::theRightFileType(std::string path) {
+/**
+ * Checks if the specified file has a valid file extension
+ * @returns an int representing which file extension was present, if a unknown
+ * file extension was present return -1.
+ */
+int FileLoader::checkFileExtension(std::string path) {
 	char dot = '.';
 	int i = 0;
 	while(path[i] != dot) {
@@ -30,23 +34,31 @@ int FileLoader::theRightFileType(std::string path) {
     	i++;
     }
     
-	// i should now be where first . occures (and hence filetype)
-	char* filetype = new char[path.length()-i];
+	// i should now be at where the first '.' occures (and hence file extension)
+	char* fileExtension = new char[path.length()-i];
 	int count = 0; 
-	while(i > path.length()) {
-    	filetype[count] = path[i];
+	while(i < path.length()) {
+    	fileExtension[count] = path[i];
     	i++;
     	count++;
-    }
-	// now filetype should contain the filetype ready for getting.
+  }
+	// now fileExtension should contain the file extension of the file.
 
-	std::string output = filetype;
-	return determineNumberFromFiletype(output);
+	std::string output = fileExtension;
+	return getFileExtensionCode(output);
 }
+/**
+ * Get the code representing the file extension
+ * @param fileExtension will be compared internally with known file extensions
+ * @returns an int representing which file extension was present, if a unknown
+ * file extension was present return -1.
+ */
 
-int FileLoader::determineNumberFromFiletype(std::string filetype) {
-	if(filetype.compare(".X3D") || filetype.compare(".x3d"))
+int FileLoader::getFileExtensionCode(std::string fileExtension) {
+	if(fileExtension.compare(".X3D") || fileExtension.compare(".x3d"))
 	    return 1;
+	else if (fileExtension.compare(".bs") || fileExtension.compare(".BS"))
+			return 2;
 	else
 		return -1;
 }
