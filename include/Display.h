@@ -1,9 +1,3 @@
-/*
- * Display.h
- *
- *  Created on: Feb 22, 2012
- *      Author: fericss
- */
 #include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 #include <vector>
@@ -26,11 +20,12 @@ public:
     double getBoundingCube();
     void highlight();
     void unHighlight();
-    //void setConfigurations(UniversalConfiguration uc);
-    //UniversalConfiguration getConfigurations();
+    void setConfigurations(UniversalConfiguration uc);
+    UniversalConfiguration * getConfigurations();
 private:
     Monitor *monitor;
-    std::vector<Projector> *projectorList;
+    std::vector<Projector> * projectorList;
+    std::vector<Configuration> * configs;
     ColorTranslator *colorTranslator;
     int numProjectors;
     //final int WIDTH:
