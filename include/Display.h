@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Monitor.h"
 #include "Projector.h"
+#include "UniversalConfiguration.h"
 
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
