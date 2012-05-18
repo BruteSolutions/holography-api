@@ -6,7 +6,9 @@
 #include "Shared.h"
 #include "GraphicalObject.h"
 #include "ThreeDSpace.h"
-
+/**
+ * ThreeDSpace constructor initiates important variables.
+ */
 ThreeDSpace::ThreeDSpace() {
     objects.reserve(10);
     Vec3 origin = {0, 0, 0};
@@ -16,22 +18,43 @@ ThreeDSpace::ThreeDSpace() {
     scale = 1;
 }
 
+/**
+ * Returns a vector containing all the GraphicalObjects
+ * currently in the ThreeDSpace.
+ * @return Vector with all GraphicalObjects.
+ */
 std::vector<GraphicalObject*> ThreeDSpace::getObjects() {
     return objects;
 }
 
+/**
+ * Adds an GraphicalObject to the ThreeDSpace.
+ * @param object Graphical object  
+ */
 void ThreeDSpace::addObject(GraphicalObject * object) {
     objects.push_back(object);
 }
 
+/**
+ * Sets the origin which all object in the ThreeDSpace 
+ * will rotate around.
+ * @param org New origin.
+ */
 void ThreeDSpace::setOrigin(Vec3 org) {
     origin = org;
 }
 
+/**
+ * Returns the origin of the ThreeDSpace.
+ * @return Origin of the ThreeDSpace.
+ */
 Vec3 ThreeDSpace::getOrigin() {
 	return origin;
 }
 
+/**
+ * Selects the next GraphicalObject in the ThreeDSpace.
+ */
 void ThreeDSpace::selectNext() {
     selected.clear();
     selected.push_back(objects.at(current));
@@ -41,24 +64,43 @@ void ThreeDSpace::selectNext() {
     }
 }
 
+/**
+ * Binds buffer data for all the GraphicalObjects in the ThreeDSpace.
+ */
 void ThreeDSpace::bindBuffers() {
     for (std::vector<GraphicalObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
         (*it)->bindBufferData();
     }
 }
 
+/**
+ * Resize the ThreeDSpace.
+ * @param factor The scaling factor.
+ */
 void ThreeDSpace::resize(double factor) {
     scale *= factor;
 }
 
+/**
+ * Sets the scale for the ThreeDSpace.
+ * @param _scale New scale.
+ */
 void ThreeDSpace::setScale(double _scale) {
     scale = _scale;
 }
 
+/**
+ * Returns the scale of the ThreeDSpace.
+ * @return The scale of the ThreeDSpace.
+ */
 double ThreeDSpace::getScale() {
     return scale;
 }
 
+/**
+ * Increment the scale of the ThreeDSpace.
+ * @param inc The increment.
+ */
 void ThreeDSpace::incrementScale(double inc) {
     scale += inc;
 }
