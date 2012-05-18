@@ -23,7 +23,11 @@
  * @param path is the path to the X3D-file
  * @return returns a Scene object containing the object in the file
  */
-Scene* X3DLoader::loadFile( std::string path ) throws ( std::string ) {
+Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
+    //Check that the file we're trying to load actually exists
+   std::ifstream ifile(path);
+   if( ifile.fail() ) throw( string( "X3DFileNotFoundException" ) );
+   
     // Set the global C and C++ locale to the user-configured locale,
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
     std::locale::global(std::locale(""));
@@ -119,8 +123,9 @@ Scene* X3DLoader::loadFile( std::string path ) throws ( std::string ) {
         return scene;
  
  /* TODO: kolla vilket exception som kastas för ogiltiga filer */
-    } catch( const std::exception& e ) { // catches LIBXML++ exception
-        throw std::string(e.what());
+    } catch( const std::exception& e ) { // catches LIBXML++ exception 2.6
+        if( e.what().find( "parse error" ) != string::npos ) throw( string( "IllegalX3DFileException" ) );
+        else throw std::string(e.what());
     }
 }
 
