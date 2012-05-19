@@ -50,7 +50,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-demo.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o\
+	$(OBJDIR)/test-demo.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o $(OBJDIR)/TestMonitor.o\
 
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
 
@@ -185,6 +185,10 @@ $(OBJDIR)/TestColorTranslator.o: $(SRCPATH)/TestColorTranslator.cpp
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/TestConfiguration.o: $(SRCPATH)/TestConfiguration.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/TestMonitor.o: $(SRCPATH)/TestMonitor.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

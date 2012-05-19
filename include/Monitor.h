@@ -2,6 +2,7 @@
 #define MONITOR_H_
 
 #include "Projector.h"
+
 /**
  * Monitor class.
  */

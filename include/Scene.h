@@ -1,10 +1,9 @@
-#ifndef __SCENE_H
-#define __SCENE_H
+#ifndef SCENE_H_
+#define SCENE_H_
+
 #include "Shader.h"
 #include "Shared.h"
 #include "ThreeDSpace.h"
-#include <glload/gl_3_3.h>
-#include <GL/freeglut.h>
 
 class Scene {
 public:

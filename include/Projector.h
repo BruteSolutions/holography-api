@@ -4,6 +4,7 @@
 #include <string.h>
 #include "Configuration.h"
 #include "ColorTranslator.h"
+#include "Scene.h"
 
 class Projector {
 public:

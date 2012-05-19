@@ -39,10 +39,9 @@
 #include "TestShader.h"
 #include "TestColorTranslator.h"
 #include "TestConfiguration.h"
+#include "TestMonitor.h"
 
 using namespace std;
-
-
 
 Projector * p1, * p2;
 Display* displayHandeler;
@@ -175,8 +174,7 @@ void disp(void);
 void menu(int a);
 void subMenu(int a);
 #ifdef GTK_ENABLED
-void file_ok_sel( GtkWidget        *w,
-                         GtkFileSelection *fs );
+void file_ok_sel(GtkWidget * w, GtkFileSelection * fs);
 #endif
 void startFileBrowser();
 void startMenu();
@@ -188,6 +186,7 @@ int runTests()
   framework.addTestCase(new TestShader());
   framework.addTestCase(new TestColorTranslator());
   framework.addTestCase(new TestConfiguration());
+  framework.addTestCase(new TestMonitor());
 
   if(framework.test()) {
     std::cout << "All tests passed." << std::endl;
@@ -199,7 +198,6 @@ int runTests()
   }
 }
 
-//void setupMenus();
 void init(int argc, char ** argv)
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
@@ -258,44 +256,39 @@ void init(int argc, char ** argv)
 
 }
 
-
-	//-------------------------------------------------------------------------
-	//  Set up the GLUT Menus.
-	//-------------------------------------------------------------------------
-	void setupMenus ()
-	{
-
-
-		int menIdSub = glutCreateMenu(subMenu);
-		  glutAddMenuEntry("Red", 1);
-		  glutAddMenuEntry("Blue", 2);
-		  glutAddMenuEntry("Green", 3);
-		  glutAddMenuEntry("RGB", 4); 
-		  
-		int menIdMain = glutCreateMenu(menu);
-		  glutAddMenuEntry("Rotation On", 1);
-		  glutAddMenuEntry("Translation On", 2);
-		  glutAddSubMenu("Change Color", menIdSub);
-		  glutAddMenuEntry("Quit", 4);
-		
-		glutAttachMenu(GLUT_MIDDLE_BUTTON);
-		
-		
-	
-	}
+//-------------------------------------------------------------------------
+//  Set up the GLUT Menus.
+//-------------------------------------------------------------------------
+void setupMenus ()
+{
+  int menIdSub = glutCreateMenu(subMenu);
+    glutAddMenuEntry("Red", 1);
+    glutAddMenuEntry("Blue", 2);
+    glutAddMenuEntry("Green", 3);
+    glutAddMenuEntry("RGB", 4); 
+    
+  int menIdMain = glutCreateMenu(menu);
+    glutAddMenuEntry("Rotation On", 1);
+    glutAddMenuEntry("Translation On", 2);
+    glutAddSubMenu("Change Color", menIdSub);
+    glutAddMenuEntry("Quit", 4);
+  
+  glutAttachMenu(GLUT_MIDDLE_BUTTON);
+}
 
 void menu(int value){
 	std::cout << "---------------------------------HELLO MOTO!-----------------------------" << std::endl;
 	std::cout << "                                 " << value << std::endl;
   if(value == 0){
-  }else{
+  }
+  else{
   	std::cout << "Selected " << value <<std::endl;
     primitive=value;
   }
   
   // you would want to redraw now
   glutPostRedisplay();
- glutPostOverlayRedisplay();
+  glutPostOverlayRedisplay();
 }
 void subMenu(int value){
 	std::cout << "---------------------------------SUB PRESSED!-----------------------------" << std::endl;
@@ -325,10 +318,9 @@ void addProjector(){
 	numwindows++;
 }
 
-
 void display()
 {
-//	displayHandeler->getMonitor()->display(*defaultScene);
+  //displayHandeler->getMonitor()->display(*defaultScene);
 	if(displayHandeler == NULL) fprintf(stderr,"display not initialized\n");
 	displayHandeler->display(*defaultScene);
 }
@@ -339,11 +331,13 @@ void reshape (int w, int h)
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 //do something here to fix shaders
 }
+
 bool leftmousebutton = false;
 bool rightmousebutton = false;
 bool middlemousebutton = false;
 int mouse_x;
 int mouse_y;
+
 void mouse(int button, int state, int x, int y) {
 	std::cout << "Mouse function" << button << " " << state << " coord ( " << x <<", "<< y << " )"<< std::endl;
 	//left mouse button = 0
@@ -360,13 +354,13 @@ void mouse(int button, int state, int x, int y) {
 		case 2: if(state == 0) rightmousebutton = true; else rightmousebutton = false; return;
 		case 3: defaultScene->get3DSpace()->incrementScale(0.05f); glutPostRedisplay(); return;
 		case 4: defaultScene->get3DSpace()->incrementScale(-0.05f); glutPostRedisplay(); return;
-
 	};
-
 }
+
 #ifdef GTK_ENABLED
 		GtkWidget *filew;
 #endif
+
 void motion(int x, int y){
 	if(leftmousebutton){
 		defaultScene->rotateY((float) (x - mouse_x) / 100);
@@ -387,8 +381,6 @@ void motion(int x, int y){
 		mouse_y = y;
 
 }
-
-
 
 bool worldCtrl = false;
 void keyboard(unsigned char key, int x, int y)
@@ -736,136 +728,135 @@ void enter_callback( GtkWidget *widget, GtkWidget *entry ) {
 
 void startMenu() {
 #ifdef GTK_ENABLED
-    GtkWidget *menu;
-    GtkWidget *menu_bar;
-    GtkWidget *root_menu;
-    GtkWidget *menu_items;
+  GtkWidget *menu;
+  GtkWidget *menu_bar;
+  GtkWidget *root_menu;
+  GtkWidget *menu_items;
+
+
+  GtkWidget *worldCtrl_button, *selectNext_button, *highlightBackground_button, *toggleHighlight_button, *centerObject_button, *toggleMesh_button;
+  char buf[128];
+  int i;
+
+  gtk_init (0, 0);
+
+  /* create a new window */
+  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_usize (GTK_WIDGET (window), 400, 300);
+  gtk_window_set_title (GTK_WINDOW (window), "GTK Menu Test");
+  gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+                    (GtkSignalFunc) gtk_main_quit, NULL);
+
+  /* Init the menu-widget, and remember -- never
+  * gtk_show_widget() the menu widget!! 
+  * This is the menu that holds the menu items, the one that
+  * will pop up when you click on the "Root Menu" in the app */
+  menu = gtk_menu_new ();
     
-    
-    GtkWidget *worldCtrl_button, *selectNext_button, *highlightBackground_button, *toggleHighlight_button, *centerObject_button, *toggleMesh_button;
-    char buf[128];
-    int i;
+  //Create load file menu option
+  menu_items = gtk_menu_item_new_with_label ("Load file");  
+  gtk_menu_append (GTK_MENU (menu), menu_items);
+  gtk_signal_connect_object (GTK_OBJECT (menu_items), "activate",
+            GTK_SIGNAL_FUNC (startFileBrowser), (gpointer) g_strdup ("Load file"));
+  gtk_widget_show (menu_items);
 
-    gtk_init (0, 0);
+  /* This is the root menu, and will be the label
+  * displayed on the menu bar.  There won't be a signal handler attached,
+  * as it only pops up the rest of the menu when pressed. */
+  root_menu = gtk_menu_item_new_with_label ("File");
 
-    /* create a new window */
-    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_usize (GTK_WIDGET (window), 400, 300);
-    gtk_window_set_title (GTK_WINDOW (window), "GTK Menu Test");
-    gtk_signal_connect (GTK_OBJECT (window), "delete_event",
-                        (GtkSignalFunc) gtk_main_quit, NULL);
+  gtk_widget_show (root_menu);
 
-    /* Init the menu-widget, and remember -- never
-     * gtk_show_widget() the menu widget!! 
-     * This is the menu that holds the menu items, the one that
-     * will pop up when you click on the "Root Menu" in the app */
-    menu = gtk_menu_new ();
-        
-	//Create load file menu option
-	menu_items = gtk_menu_item_new_with_label ("Load file");  
-	gtk_menu_append (GTK_MENU (menu), menu_items);
-	gtk_signal_connect_object (GTK_OBJECT (menu_items), "activate",
-                GTK_SIGNAL_FUNC (startFileBrowser), (gpointer) g_strdup ("Load file"));
-	 gtk_widget_show (menu_items);
-	
-    /* This is the root menu, and will be the label
-     * displayed on the menu bar.  There won't be a signal handler attached,
-     * as it only pops up the rest of the menu when pressed. */
-    root_menu = gtk_menu_item_new_with_label ("File");
+  /* Now we specify that we want our newly created "menu" to be the menu
+  * for the "root menu" */
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (root_menu), menu);
 
-    gtk_widget_show (root_menu);
+  /* A vbox to put a menu and a button in: */
+  vbox = gtk_vbox_new (TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (window), vbox);
+  gtk_widget_show (vbox);
 
-    /* Now we specify that we want our newly created "menu" to be the menu
-     * for the "root menu" */
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (root_menu), menu);
+  /* Create a menu-bar to hold the menus and add it to our main window */
+  menu_bar = gtk_menu_bar_new ();
+  gtk_box_pack_start (GTK_BOX (vbox), menu_bar, FALSE, FALSE, 2);
+  gtk_widget_show (menu_bar);
 
-    /* A vbox to put a menu and a button in: */
-    vbox = gtk_vbox_new (TRUE, 0);
-    gtk_container_add (GTK_CONTAINER (window), vbox);
-    gtk_widget_show (vbox);
+  /* Create a exit button  */
+  exit_button = gtk_button_new_with_label ("Exit");
+  gtk_signal_connect_object (GTK_OBJECT (exit_button), "event",
+   (GtkSignalFunc) button_press, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), exit_button, TRUE, TRUE, 2);
+  gtk_widget_show (exit_button);
 
-    /* Create a menu-bar to hold the menus and add it to our main window */
-    menu_bar = gtk_menu_bar_new ();
-    gtk_box_pack_start (GTK_BOX (vbox), menu_bar, FALSE, FALSE, 2);
-    gtk_widget_show (menu_bar);
+  /* Toggle worldCtrl button*/
+  //	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + boolToString(worldCtrl));
+  worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + worldCtrl);
+  gtk_signal_connect_object (GTK_OBJECT (worldCtrl_button), "clicked",
+   (GtkSignalFunc) toggleWorldControl, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), worldCtrl_button, TRUE, TRUE, 2);
+  gtk_widget_show (worldCtrl_button);
 
-    /* Create a exit button  */
-    exit_button = gtk_button_new_with_label ("Exit");
-    gtk_signal_connect_object (GTK_OBJECT (exit_button), "event",
-       (GtkSignalFunc) button_press, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), exit_button, TRUE, TRUE, 2);
-    gtk_widget_show (exit_button);
-    
-    /* Toggle worldCtrl button*/
-//	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + boolToString(worldCtrl));
-	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + worldCtrl);
-    gtk_signal_connect_object (GTK_OBJECT (worldCtrl_button), "clicked",
-       (GtkSignalFunc) toggleWorldControl, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), worldCtrl_button, TRUE, TRUE, 2);
-    gtk_widget_show (worldCtrl_button);
-	
-	/* Select next object button*/
-	selectNext_button = gtk_button_new_with_label ("Select next object");
-    gtk_signal_connect_object (GTK_OBJECT (selectNext_button), "clicked",
-       (GtkSignalFunc) selectNextObject, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), selectNext_button, TRUE, TRUE, 2);
-    gtk_widget_show (selectNext_button);
-	
-	/* Hightlight background button */
-	//highlightBackground_button = gtk_button_new_with_label ("Highlight background: " << boolToString(defaultScene->getBackgroundHighlightning()));
-	highlightBackground_button = gtk_button_new_with_label ("Highlight background: " + defaultScene->getBackgroundHighlightning());
-    gtk_signal_connect_object (GTK_OBJECT (highlightBackground_button), "clicked",
-       (GtkSignalFunc) highlightBackground, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), highlightBackground_button, TRUE, TRUE, 2);
-    gtk_widget_show (highlightBackground_button);
-    
-    /* toggleHighlight_button */
-    toggleHighlight_button = gtk_button_new_with_label ("Toggle object highlight");
-    gtk_signal_connect_object (GTK_OBJECT (toggleHighlight_button), "clicked",
-       (GtkSignalFunc) toggleHighlight, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), toggleHighlight_button, TRUE, TRUE, 2);
-    gtk_widget_show (toggleHighlight_button);
-    
-    /* centerObject_button */
-    centerObject_button = gtk_button_new_with_label ("Center object around origin");
-    gtk_signal_connect_object (GTK_OBJECT (centerObject_button), "clicked",
-       (GtkSignalFunc) centerObject, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), centerObject_button, TRUE, TRUE, 2);
-    gtk_widget_show (centerObject_button);
-    
-    /* toggleMesh_button */
-    //toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + boolToString(pGO->hasMesh()));
-    toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + pGO->hasMesh());
-    gtk_signal_connect_object (GTK_OBJECT (toggleMesh_button), "clicked",
-       (GtkSignalFunc) toggleMesh, GTK_OBJECT (window));
-    gtk_box_pack_end (GTK_BOX (vbox), toggleMesh_button, TRUE, TRUE, 2);
-    gtk_widget_show (toggleMesh_button);
-    
-    /* Create the GtkText widget */
-	GtkWidget *entry = gtk_entry_new_with_max_length (50);
-	gtk_signal_connect(GTK_OBJECT(entry), "activate", GTK_SIGNAL_FUNC(enter_callback), entry);
-    gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
-    gtk_widget_show (entry);
-    gtk_entry_set_text (GTK_ENTRY (entry), "Set world origin on the form: x,y,z: current: ");
-    char* s;
-     asprintf(&s, "%f %f", defaultScene->get3DSpace()->getOrigin().x, defaultScene->get3DSpace()->getOrigin().y);    
-   // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().x);    
-   // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().y); 
-   // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().z); 
+  /* Select next object button*/
+  selectNext_button = gtk_button_new_with_label ("Select next object");
+  gtk_signal_connect_object (GTK_OBJECT (selectNext_button), "clicked",
+   (GtkSignalFunc) selectNextObject, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), selectNext_button, TRUE, TRUE, 2);
+  gtk_widget_show (selectNext_button);
 
-	gtk_entry_append_text (GTK_ENTRY (entry), s);
-	
-	
-    /* And finally we append the menu-item to the menu-bar -- this is the
-     * "root" menu-item I have been raving about =) */
-    gtk_menu_bar_append (GTK_MENU_BAR (menu_bar), root_menu);
+  /* Hightlight background button */
+  //highlightBackground_button = gtk_button_new_with_label ("Highlight background: " << boolToString(defaultScene->getBackgroundHighlightning()));
+  highlightBackground_button = gtk_button_new_with_label ("Highlight background: " + defaultScene->getBackgroundHighlightning());
+  gtk_signal_connect_object (GTK_OBJECT (highlightBackground_button), "clicked",
+   (GtkSignalFunc) highlightBackground, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), highlightBackground_button, TRUE, TRUE, 2);
+  gtk_widget_show (highlightBackground_button);
 
-    /* always display the window as the last step so it all splashes on
-     * the screen at once. */
-    gtk_widget_show (window);
+  /* toggleHighlight_button */
+  toggleHighlight_button = gtk_button_new_with_label ("Toggle object highlight");
+  gtk_signal_connect_object (GTK_OBJECT (toggleHighlight_button), "clicked",
+   (GtkSignalFunc) toggleHighlight, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), toggleHighlight_button, TRUE, TRUE, 2);
+  gtk_widget_show (toggleHighlight_button);
 
-    gtk_main ();
+  /* centerObject_button */
+  centerObject_button = gtk_button_new_with_label ("Center object around origin");
+  gtk_signal_connect_object (GTK_OBJECT (centerObject_button), "clicked",
+   (GtkSignalFunc) centerObject, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), centerObject_button, TRUE, TRUE, 2);
+  gtk_widget_show (centerObject_button);
 
+  /* toggleMesh_button */
+  //toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + boolToString(pGO->hasMesh()));
+  toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + pGO->hasMesh());
+  gtk_signal_connect_object (GTK_OBJECT (toggleMesh_button), "clicked",
+   (GtkSignalFunc) toggleMesh, GTK_OBJECT (window));
+  gtk_box_pack_end (GTK_BOX (vbox), toggleMesh_button, TRUE, TRUE, 2);
+  gtk_widget_show (toggleMesh_button);
+
+  /* Create the GtkText widget */
+  GtkWidget *entry = gtk_entry_new_with_max_length (50);
+  gtk_signal_connect(GTK_OBJECT(entry), "activate", GTK_SIGNAL_FUNC(enter_callback), entry);
+  gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
+  gtk_widget_show (entry);
+  gtk_entry_set_text (GTK_ENTRY (entry), "Set world origin on the form: x,y,z: current: ");
+  char* s;
+  asprintf(&s, "%f %f", defaultScene->get3DSpace()->getOrigin().x, defaultScene->get3DSpace()->getOrigin().y);    
+  // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().x);    
+  // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().y); 
+  // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().z); 
+
+  gtk_entry_append_text (GTK_ENTRY (entry), s);
+
+
+  /* And finally we append the menu-item to the menu-bar -- this is the
+  * "root" menu-item I have been raving about =) */
+  gtk_menu_bar_append (GTK_MENU_BAR (menu_bar), root_menu);
+
+  /* always display the window as the last step so it all splashes on
+  * the screen at once. */
+  gtk_widget_show (window);
+
+  gtk_main ();
 #endif
 }
 
@@ -906,4 +897,3 @@ void startMenu() {
 }
 
 #endif
-
