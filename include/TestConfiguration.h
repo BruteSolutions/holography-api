@@ -9,6 +9,7 @@ class TestConfiguration : public TestCase
   public:
     TestConfiguration();
     void run();
+    std::string componentName() { return("Configuration"); }
   private:
     std::ofstream of;
 };

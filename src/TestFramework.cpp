@@ -1,4 +1,5 @@
 #include "TestFramework.h"
+#include <iostream>
 
 TestFramework::TestFramework()
 {
@@ -17,12 +18,17 @@ bool TestFramework::test()
   {
     try
     {
+      std::cout << "[*] Testing component: " << (*it)->componentName()
+                << ".. ";
       (*it)->run();
     }
     catch(...)
     {
+      std::cout << "failure." << std::endl;
       return(false);
     }
+
+    std::cout << "success." << std::endl;
   }
 
   return(true);

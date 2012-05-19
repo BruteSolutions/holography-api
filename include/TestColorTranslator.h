@@ -8,6 +8,7 @@ class TestColorTranslator : public TestCase
   public:
     TestColorTranslator();
     void run();
+    std::string componentName() { return("ColorTranslator"); }
 };
 
 #endif

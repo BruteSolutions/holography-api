@@ -8,6 +8,7 @@ class TestShader : public TestCase
   public:
     TestShader();
     void run();
+    std::string componentName() { return("Shader"); }
 };
 
 #endif

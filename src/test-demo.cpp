@@ -159,10 +159,12 @@ void runTests()
   framework.addTestCase(new TestConfiguration());
 
   if(framework.test()) {
-    std::cout << "All tests passed. tl;dr: success." << std::endl;
+    std::cout << "All tests passed." << std::endl;
+    exit(0);
   }
   else {
     std::cerr << "Your code is bad and you should feel bad." << std::endl;
+    exit(1);
   }
 }
 
@@ -204,7 +206,6 @@ void init()
   //if an object is added in a later stage, everywindow has to rebind their buffer
 #ifdef RUN_TEST
   runTests();
-  exit(0);
 #endif
 
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
