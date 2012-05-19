@@ -40,6 +40,7 @@
 #include "TestColorTranslator.h"
 #include "TestConfiguration.h"
 #include "TestMonitor.h"
+#include "TestDisplay.h"
 
 using namespace std;
 
@@ -187,6 +188,7 @@ int runTests()
   framework.addTestCase(new TestColorTranslator());
   framework.addTestCase(new TestConfiguration());
   framework.addTestCase(new TestMonitor());
+  framework.addTestCase(new TestDisplay());
 
   if(framework.test()) {
     std::cout << "All tests passed." << std::endl;
