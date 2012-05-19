@@ -1,3 +1,6 @@
+//#define GTK_ENABLED
+#define RUN_TEST
+
 #ifndef GTK_ENABLED
 #define TRUE 1
 #define FALSE 0
@@ -31,6 +34,13 @@
 #include <iostream>
 #include <GL/glut.h>
 #include <cstdlib>
+
+#include "TestCase.h"
+#include "TestFramework.h"
+#include "TestShader.h"
+#include "TestColorTranslator.h"
+#include "TestConfiguration.h"
+
 using namespace std;
 
 
@@ -137,7 +147,25 @@ float colorData[] = {
 
 	BROWN_COLOR, BROWN_COLOR, BROWN_COLOR,
 };
+
 int numwindows = 0;
+
+void runTests()
+{
+  TestFramework framework;
+
+  framework.addTestCase(new TestShader());
+  framework.addTestCase(new TestColorTranslator());
+  framework.addTestCase(new TestConfiguration());
+
+  if(framework.test()) {
+    std::cout << "All tests passed. tl;dr: success." << std::endl;
+  }
+  else {
+    std::cerr << "Your code is bad and you should feel bad." << std::endl;
+  }
+}
+
 void graphicSettings(){
     //    glEnable(GL_CULL_FACE);
 	//glCullFace(GL_FRONT);
@@ -174,6 +202,10 @@ void startMenu();
 void init()
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
+#ifdef RUN_TEST
+  runTests();
+  exit(0);
+#endif
 
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
 	grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
@@ -872,3 +904,4 @@ void startMenu() {
 }
 
 #endif
+

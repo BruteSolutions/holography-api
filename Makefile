@@ -29,7 +29,7 @@ endif
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
   TARGETDIR  = .
-  TARGET     = $(TARGETDIR)/test-economy
+  TARGET     = $(TARGETDIR)/test-demo
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DDEBUG -D_DEBUG
   INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include -Iinclude
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES) -std=c++0x
@@ -50,7 +50,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-economy.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o\
+	$(OBJDIR)/test-demo.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o\
 
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
 
@@ -70,7 +70,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 	@:
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES)
-	@echo Linking test-economy
+	@echo Linking test-demo
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -91,7 +91,7 @@ else
 endif
 
 clean:
-	@echo Cleaning test-economy
+	@echo Cleaning test-demo
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -113,7 +113,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/test-economy.o: $(SRCPATH)/test-economy.cpp
+$(OBJDIR)/test-demo.o: $(SRCPATH)/test-demo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

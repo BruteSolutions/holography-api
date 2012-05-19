@@ -7,7 +7,7 @@ TestShader::TestShader()
 
 void TestShader::run()
 {
-  Shader s("", "");
+  Shader s("main.vert", "main.frag");
 
   //try different methods, repeatedly
   for(int i = 0; i < 100; i++) {

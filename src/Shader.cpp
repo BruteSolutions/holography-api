@@ -1,4 +1,3 @@
-#include <iostream>
 #include <algorithm>
 #include <cstring>
 #include <string>
@@ -36,7 +35,6 @@ Shader::Shader(std::string vsPath, std::string fsPath) : vertexId(0), fragId(0),
     if (vertexId && fragId) {
         progId = compileProgram();
     }
-    std::cout << "End of Shader-constructor \n";
 }
 
 /**
@@ -97,7 +95,6 @@ GLuint Shader::compileShader(std::string path, GLenum type) {
  * @return Program ID.
  */
 GLuint Shader::compileProgram() {
-    std::cout << "Compiling program\n";
     GLuint program = glCreateProgram();
 
     glAttachShader(program, fragId);
