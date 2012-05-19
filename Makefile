@@ -52,6 +52,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/test-demo.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o $(OBJDIR)/TestMonitor.o $(OBJDIR)/TestDisplay.o $(OBJDIR)/TestProjector.o\
 
+#$(OBJDIR)/TestFileLoader.o add when testing with complete setup
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
 
 RESOURCES := \
@@ -197,6 +198,10 @@ $(OBJDIR)/TestDisplay.o: $(SRCPATH)/TestDisplay.cpp
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/TestProjector.o: $(SRCPATH)/TestProjector.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/TestFileLoader.o: $(SRCPATH)/TestFileLoader.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

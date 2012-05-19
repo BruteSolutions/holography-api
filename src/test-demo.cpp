@@ -42,6 +42,7 @@
 #include "TestMonitor.h"
 #include "TestDisplay.h"
 #include "TestProjector.h"
+//#include "TestFileLoader.h"
 
 using namespace std;
 
@@ -191,6 +192,7 @@ int runTests()
   framework.addTestCase(new TestMonitor());
   framework.addTestCase(new TestDisplay());
   framework.addTestCase(new TestProjector());
+  //framework.addTestCase(new TestFileLoader());
 
   if(framework.test()) {
     std::cout << "All tests passed." << std::endl;
