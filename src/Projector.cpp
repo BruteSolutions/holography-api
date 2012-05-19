@@ -16,7 +16,8 @@ using namespace std;
 /**
  * Creates a new projector with a buffer of size len at the place pointer with position pos and direction dir;
  */
-Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : highlighted(false) {
+Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) :
+  highlighted(false), configuration(pos, dir, {0.5, 0.5, 0.5}) {
 	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
 	pnt = pointer;
 	bufferSize = len;
@@ -41,7 +42,8 @@ Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) : high
  * Creates a new projector with buffer of size len at the place pointer with position (0,0,0)
  * and direction (0,0,0);
  */
-Projector::Projector(int * pointer, unsigned int len) { 
+Projector::Projector(int * pointer, unsigned int len) :
+  configuration({0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.5, 0.5, 0.5}) { 
 	Vec3 pos = {0,0,0}, dir = {0,0,0};
 	Projector(pointer, len, pos, dir);
 }
@@ -198,7 +200,7 @@ unsigned int Projector::getBufferSize() {
 }
 
 /**
-  Returns the associated colortranslator object.
+ * Returns the associated colortranslator object.
  * @return Colortranslator object.
  */
 ColorTranslator * Projector::getColorTranslator() {

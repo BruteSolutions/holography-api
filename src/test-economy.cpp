@@ -1,8 +1,15 @@
+#ifndef GTK_ENABLED
+#define TRUE 1
+#define FALSE 0
+#endif
+
 #include <iostream>
 #include <list>
 #include <string>
 #include <vector>
+#ifdef GTK_ENABLED
 #include <gtk/gtk.h>
+#endif
 
 #include <glload/gl_3_3.h>
 
@@ -16,8 +23,10 @@
 //#include "FileLoader.h"
 #include "Display.h"
 
+#ifdef GTK_ENABLED
 #include "examplewindow.h"
 #include <gtkmm/main.h>
+#endif
 
 #include <iostream>
 #include <GL/glut.h>
@@ -154,8 +163,10 @@ static int primitive = 0;
 void disp(void);
 void menu(int a);
 void subMenu(int a);
+#ifdef GTK_ENABLED
 void file_ok_sel( GtkWidget        *w,
                          GtkFileSelection *fs );
+#endif
 void startFileBrowser();
 void startMenu();
 
@@ -319,7 +330,9 @@ void mouse(int button, int state, int x, int y) {
 	};
 
 }
+#ifdef GTK_ENABLED
 		GtkWidget *filew;
+#endif
 void motion(int x, int y){
 	if(leftmousebutton){
 		defaultScene->rotateY((float) (x - mouse_x) / 100);
@@ -567,23 +580,27 @@ std::cout << "--------------------------- PRESSED space !-------------------- !1
 
 
 
+#ifdef GTK_ENABLED
 gint button_press (GtkWidget *, GdkEvent *);
 void menuitem_response (gchar *);
 GtkWidget *window, *window2;
 GtkWidget *vbox;
 GtkWidget *exit_button;
+#endif
 
 
 
-void destroyMenu();
 void destroyMenu() {
+#ifdef GTK_ENABLED
 	gtk_widget_destroy(window);
     gtk_widget_destroy (vbox);
     gtk_main_quit();
+#endif
 }
 
 
 void startFileBrowser() {
+#ifdef GTK_ENABLED
 	gtk_init (0, 0);
 		
 	/* Create a new file selection widget */
@@ -608,12 +625,14 @@ void startFileBrowser() {
 
 	gtk_widget_show (filew);
 	gtk_main ();
+  #endif
   	return;
 }
 
 char * currentfilepath;
 unsigned int defaults(unsigned int displayMode, int &width, int &height) {return displayMode;}
 
+#ifdef GTK_ENABLED
 /* Get the selected filename and print it to the console */
 void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	
@@ -622,6 +641,7 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	//defaultScene->merge(FileLoader::loadFile(currentfilepath));
 	gtk_main_quit();
 }
+#endif
 
 void selectNextObject();
 void selectNextObject() {
@@ -673,12 +693,15 @@ const char*  boolToString(bool b) {
   return b ? "true" : "false";
 }
 
+#ifdef GTK_ENABLED
 void enter_callback (GtkWidget *widget, GtkWidget *entry );
 void enter_callback( GtkWidget *widget, GtkWidget *entry ) {
 	std::cout << gtk_entry_get_text(GTK_ENTRY(entry)) << std::endl;
 }
+#endif
 
 void startMenu() {
+#ifdef GTK_ENABLED
     GtkWidget *menu;
     GtkWidget *menu_bar;
     GtkWidget *root_menu;
@@ -809,8 +832,10 @@ void startMenu() {
 
     gtk_main ();
 
+#endif
 }
 
+#ifdef GTK_ENABLED
 /* Respond to a button-press by posting a menu passed in as widget.
  *
  * Note that the "widget" argument is the menu being posted, NOT
@@ -846,3 +871,4 @@ void startMenu() {
     printf ("%s\n", string);
 }
 
+#endif
