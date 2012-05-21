@@ -26,6 +26,25 @@ endif
 #endif
 # put in CFLAGS $(LIBXMLCFLAGS) 
 # put in LIBS $(LIBXMLLIBS) -lGL 
+
+#GTK
+ifndef GTKMMLIBS
+  GTKMMLIBS = $(shell pkg-config gtkmm-2.4 --libs)
+endif
+ifndef GTKMMCFLAGS
+  GTKMMCFLAGS = $(shell pkg-config gtkmm-2.4 --cflags)
+endif
+ifndef GTKLIBS
+  GTKLIBS = $(shell pkg-config --libs gtk+-2.0)
+endif
+ifndef GTKCFLAGS
+  GTKCFLAGS = $(shell pkg-config --cflags gtk+-2.0)
+endif
+#GTK END
+
+# put in CFLAGS: $(GTKCFLAGS) $(GTKMMCFLAGS)
+# put in LIBS: $(GTKLIBS) $(GTKMMLIBS)
+
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
   TARGETDIR  = .
