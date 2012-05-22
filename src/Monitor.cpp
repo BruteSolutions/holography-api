@@ -16,7 +16,7 @@
  * Monitor constructor.
  */
 Monitor::Monitor() {
-	Vec3 pos = {0,0,0}, dir = {0,0,0};
+	Vec3 pos = {0,0,-15}, dir = {0,0,0};
 	proj = new Projector(NULL, 0, pos, dir);
 }
 

@@ -14,5 +14,7 @@ struct Vec4 {
 struct Mat4 {
     float m[16];
 };
-
+struct KeystoneSetting{
+    float k[8];
+};
 #endif

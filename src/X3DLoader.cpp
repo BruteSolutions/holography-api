@@ -26,7 +26,7 @@
 Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
     //Check that the file we're trying to load actually exists
    std::ifstream ifile(path);
-   if( ifile.fail() ) throw( string( "X3DFileNotFoundException" ) );
+   if( ifile.fail() ) throw( std::string( "X3DFileNotFoundException" ) );
    
     // Set the global C and C++ locale to the user-configured locale,
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
@@ -87,7 +87,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
         
         /* Creates the color vector, read color from the file */
         for (int i = 0; i < size; i += 4) {
-            colorData[ i     ] = 0.0; 
+            colorData[ i     ] = 1.0; 
             colorData[ i + 1 ] = 0.0; 
             colorData[ i + 2 ] = 0.0; 
             colorData[ i + 3 ] = 1.0;
@@ -124,8 +124,8 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
  
  /* TODO: kolla vilket exception som kastas för ogiltiga filer */
     } catch( const std::exception& e ) { // catches LIBXML++ exception 2.6
-        if( e.what().find( "parse error" ) != string::npos ) throw( string( "IllegalX3DFileException" ) );
-        else throw std::string(e.what());
+       // if( e.what().find( "parse error" ) != string::npos ) throw( std::string( "IllegalX3DFileException" ) );
+        /*else*/ throw std::string(e.what());
     }
 }
 

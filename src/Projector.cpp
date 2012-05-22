@@ -47,6 +47,16 @@ Projector::Projector(int * pointer, unsigned int len) :
 	Vec3 pos = {0,0,0}, dir = {0,0,0};
 	Projector(pointer, len, pos, dir);
 }
+void Projector::setKeystoneObserved(KeystoneSetting f){
+    X1 = f.k[0];
+    Y1 = f.k[1];
+    X2 = f.k[2];
+    Y2 = f.k[3];
+    X3 = f.k[4];
+    Y3 = f.k[5];
+    X4 = f.k[6];
+    Y4 = f.k[7];
+}
 
 /**
  * An interface to move the corners of the projected image, changing the observed
@@ -56,6 +66,7 @@ Projector::Projector(int * pointer, unsigned int len) :
  * @param value Is the value to increase or decrease the component with
  */
 void Projector::moveKeystoneCorner(int corner, int xory, float value){
+
 	if(xory == 0){ //x
 		switch(corner){
 			case 0: X1 += value; return;
@@ -79,13 +90,16 @@ void Projector::moveKeystoneCorner(int corner, int xory, float value){
  * Calculates the the keystone matrix and sets a uniform
  * @param pid is the shader program used when drawing
  */
-void Projector::calcKeystone(GLuint pid){
+void Projector::calcKeystone(GLuint pid) throw (std::string){
 		/* The real values */
     float x1= 1, y1=1;
     float x2=-1, y2=1;
     float x3=-1, y3=-1;
     float x4= 1, y4=-1;
-
+//for(int i = 0; i < 8; i++){
+	std::cout << "X1: " << X1 << "X2: " << X2 << "X3: " << X3 << "X4: " << X4 <<
+ "Y1: " << Y1 << "Y2: " << Y2 << "Y3: " << Y3 << "Y4: " << Y4 << std::endl;
+//}
 		/* X1-X4, Y1-Y4 are observed values */
 
     float A [9][9] = { 
@@ -100,12 +114,6 @@ void Projector::calcKeystone(GLuint pid){
     {0,0,0,0 , 0,0,     0,     0,  1}
     };
     
-    float A2[9][9];
-    for(int i=0;i<9;i++){
-        for(int j=0;j<9;j++){
-            A2[i][j] = A[i][j];
-        }
-    }
     float b [9] = { 0,0,0,0,0,0,0,0,1};
     
 		/* Perform a Gauss Jordan to solve the system A h = b*/
@@ -114,6 +122,9 @@ void Projector::calcKeystone(GLuint pid){
         while(count<9 && A[count][j]==0){
             count++;
         }
+	if(count == 9){
+		throw "InvalidKeystoneSettingException";
+	}
         for(int i=0;i<9;i++){
             float tmp;
             tmp=A[j][i];

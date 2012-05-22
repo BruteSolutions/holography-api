@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string.h>
 #include "Shared.h"
+#include "Scene.h"
 #include "RawLoader.h"
 
 /** 
@@ -78,8 +79,8 @@ static Scene* loadFile(std::string path) throw (std::string) {
 
 			/* Add object to the scene */
 			GraphicalObject * object = new GraphicalObject(vertexData, numTriangles*12, colorData, numTriangles*12); 
-			object.translate(pos);
-			scene.addObject(object); 
+			object->translate(pos);
+			scene->get3DSpace()->addObject(object); 
 	}
 	return scene;
 	

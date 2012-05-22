@@ -18,12 +18,12 @@ endif
 ifndef AR
   AR = ar
 endif
-# ifndef LIBXMLCFLAGS
-# LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
-# endif
-#ifndef LIBXMLLIBS
-# LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
-#endif
+ifndef LIBXMLCFLAGS
+ LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
+ endif
+ifndef LIBXMLLIBS
+ LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
+endif
 # put in CFLAGS $(LIBXMLCFLAGS) 
 # put in LIBS $(LIBXMLLIBS) -lGL 
 
@@ -44,6 +44,7 @@ endif
 
 # put in CFLAGS: $(GTKCFLAGS) $(GTKMMCFLAGS)
 # put in LIBS: $(GTKLIBS) $(GTKMMLIBS)
+#put in OBJECTS $(OBJDIR)/RawLoader.o  $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o
 
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
@@ -52,10 +53,10 @@ ifeq ($(config),debug)
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DDEBUG -D_DEBUG
   INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include -Iinclude
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES) -std=c++0x
-  CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) -g
+  CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) $(GTKCFLAGS) $(GTKMMCFLAGS) -g
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
-  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGLU $(LIBXMLLIBS)
+  LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGLU -lGL  $(LIBXMLLIBS) $(GTKLIBS) $(GTKMMLIBS)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += ../framework/lib/libframeworkD.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -69,7 +70,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-demo.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o $(OBJDIR)/TestMonitor.o $(OBJDIR)/TestDisplay.o $(OBJDIR)/TestProjector.o\
+	$(OBJDIR)/test-demo.o $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o $(OBJDIR)/TestMonitor.o $(OBJDIR)/TestDisplay.o $(OBJDIR)/TestProjector.o\
 
 #$(OBJDIR)/TestFileLoader.o add when testing with complete setup
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
@@ -182,6 +183,10 @@ $(OBJDIR)/Display.o: $(SRCPATH)/Display.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 	 
+
+$(OBJDIR)/RawLoader.o: $(SRCPATH)/RawLoader.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS)-o "$@" -c "$<"
 
 $(OBJDIR)/X3DLoader.o: $(SRCPATH)/X3DLoader.cpp
 	@echo $(notdir $<)

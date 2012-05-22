@@ -1,4 +1,4 @@
-//#define GTK_ENABLED
+#define GTK_ENABLED
 
 #ifndef GTK_ENABLED
 #define TRUE 1
@@ -12,7 +12,7 @@
 #ifdef GTK_ENABLED
 #include <gtk/gtk.h>
 #endif
-
+#include <cmath>
 #include <glload/gl_3_3.h>
 
 #include "Shared.h"
@@ -22,11 +22,11 @@
 #include "Scene.h"
 #include "ColorTranslator.h"
 #include "Projector.h"
-//#include "FileLoader.h"
+#include "FileLoader.h"
 #include "Display.h"
 
 #ifdef GTK_ENABLED
-#include "examplewindow.h"
+//#include "examplewindow.h"
 #include <gtkmm/main.h>
 #endif
 
@@ -118,11 +118,62 @@ float colorData2[] = {
 float ny[] =  {
  -1, -1, 0, 1,
  -1,  1, 0, 1,
-  1,  1, 0, 1,
- -1, -1, 0, 1,
+  0,  0, 0, 1,
+ 0, 0, 0, 1,
   1,  1, 0, 1,
   1, -1, 0, 1
 };
+float cube[] =  {
+ -1, -1, 1, 1, //triangle 1
+ -1,  1, 1, 1,
+  1,  1, 1, 1,
+
+ -1, -1, 1, 1, //triangle 2
+  1,  1, 1, 1,
+  1, -1, 1, 1,
+
+  1, -1, -1, 1,
+  1,  1, -1, 1,
+  1,  1,  1, 1,
+
+  1, -1, -1, 1,
+  1,  1,  1, 1,
+  1, -1,  1, 1,
+
+ -1,  1, -1, 1,
+ -1,  1,  1, 1,
+  1,  1,  1, 1,
+ 
+ -1,  1, -1, 1,
+  1,  1,  1, 1,
+  1,  1, -1, 1,
+
+ -1, -1, -1, 1, //triangle 1
+ -1,  1, -1, 1,
+  1,  1, -1, 1,
+
+ -1, -1, -1, 1, //triangle 2
+  1,  1, -1, 1,
+  1, -1, -1, 1,
+
+  -1, -1, -1, 1,
+  -1,  1, -1, 1,
+  -1,  1,  1, 1,
+
+  -1, -1, -1, 1,
+  -1,  1,  1, 1,
+  -1, -1,  1, 1,
+
+ -1,  -1, -1, 1,
+ -1,  -1,  1, 1,
+  1,  -1,  1, 1,
+ 
+ -1,  -1, -1, 1,
+  1,  -1,  1, 1,
+  1,  -1, -1, 1,
+
+};
+
 float vertexData[] = {
  
 LEFT, RIGHT, TOP,
@@ -148,7 +199,55 @@ float colorData[] = {
 
 	BROWN_COLOR, BROWN_COLOR, BROWN_COLOR,
 };
+float colorData2[] = {
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+  1,  1, 1, 1,
 
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+  1,  1, 1, 1,
+
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+  0.75,  0.75, 0.75, 1,
+
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+  0.8,  0.8, 0.8, 1,
+};
 int numwindows = 0;
 
 void graphicSettings(){
@@ -214,16 +313,18 @@ void init(int argc, char ** argv)
   }
 
 	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
-	grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	//grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	//grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
+	//grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	//testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
-	//GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
+	GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
+	//GraphicalObject * grobj = new GraphicalObject(cube, sizeof(cube)/4, colorData2, sizeof(cube)/4);
+	
 	defaultScene = new Scene();
-	defaultScene->get3DSpace()->addObject(grObj1);
-	defaultScene->get3DSpace()->addObject(grObj2);
-	defaultScene->get3DSpace()->addObject(grObj3);
-//	defaultScene->get3DSpace()->addObject(grobj);
+	//defaultScene->get3DSpace()->addObject(grObj1);
+	//defaultScene->get3DSpace()->addObject(grObj2);
+	//defaultScene->get3DSpace()->addObject(grObj3);
+	defaultScene->get3DSpace()->addObject(grobj);
 //	defaultScene->get3DSpace()->addObject(testObj);
 	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
 	
@@ -245,17 +346,16 @@ void init(int argc, char ** argv)
 	//initial zoom out
 
 	//Flytta bak objekten lite;
-	Vec3 zoom = {1.25f,0,-5};
-	grObj1->translate(zoom);
-	grObj1->setOrigin({-1,-1,0});
+	//grObj1->setOrigin({1,1,1});
+	//grObj1->translate({4,4,4});
 //	grobj->translate(zoom);
-//	grobj->setOrigin({-1,-1,0});
-	zoom = {-1,0,-5};
-	grObj3->translate(zoom);
-	zoom = {0,0,-4};
-	grObj2->translate(zoom);
+	//grobj->setOrigin({0,0,0});
+//	grObj2->setOrigin({3,3,3});
+	//grObj2->translate({3,3,3});
+//	grObj3->setOrigin({2,2,2});
+	//grObj3->translate({2,2,2});
 
-	defaultScene->get3DSpace()->setOrigin({1,2,3});
+	defaultScene->get3DSpace()->setOrigin({0,0,0});
 
 	numwindows++;
 	
@@ -316,7 +416,8 @@ void addProjector(){
 		exit(1);
 	}
 
-	Vec3 pos = {(float) (numwindows*1.1f), 0, 0}, dir = {0, 0, 0};
+	Vec3 pos = {(float) (numwindows*1.05f), 0, -15}, dir = {0, 0, 0};
+	//Vec3 pos = {0,0,-10}, dir = {0,0,0};
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
 
 	bindBuffer();
@@ -334,8 +435,20 @@ void display()
 
 void reshape (int w, int h)
 {
-	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+  //Alt 0: Reshape everything
+glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 //do something here to fix shaders
+/*
+//Alt 1: Maximize viewing area
+defaultScene->worldPos.m[0] = defaultScene->fFrustumScale / (w / (float)h);
+defaultScene->worldPos.m[5] = defaultScene->fFrustumScale;
+glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+/* //Alt 2: Keep a rectanglish view area
+if(w < h)
+glViewport(0, 0, (GLsizei) w, (GLsizei) w);
+else
+glViewport(0, 0, (GLsizei) h, (GLsizei) h);
+*/
 }
 
 bool leftmousebutton = false;
@@ -369,6 +482,7 @@ void mouse(int button, int state, int x, int y) {
 
 void motion(int x, int y){
 	if(leftmousebutton){
+		
 		defaultScene->rotateY((float) (x - mouse_x) / 100);
 		defaultScene->rotateX((float) (y - mouse_y)/ 100);
 
@@ -387,8 +501,15 @@ void motion(int x, int y){
 		mouse_y = y;
 
 }
-
+int proj = 0;
+int corner = 0;
 bool worldCtrl = false;
+int keystone = 0;
+KeystoneSetting ks[] = { 
+{ 1, 1, -1, 1, -1, -1, 1, -1},
+{ 0.91, 0.87,-1.01,0.99,-0.98,-0.99,0.9,-0.96},
+{ 0.98, 0.97,-1,1,-0.97,-0.98,0.96, -0.98 },
+{ 1, 1, -0.97, 0.97, -0.95, -0.98, 0.98, -0.99}};
 void keyboard(unsigned char key, int x, int y)
 {
 	Vec3 pos;
@@ -422,6 +543,10 @@ std::cout << "--------------------------- PRESSED A -------------------- !11!!\n
 	//fprintf(stderr,"redisplay\n");
 			glutPostRedisplay();
 		  return;
+      case 'M':
+		pGO->rotateX(3.14159/2);
+		glutPostRedisplay();
+return;
       case 'd':
 std::cout << "--------------------------- PRESSED D -------------------- !11!!\n";
 		if(!worldCtrl){
@@ -504,7 +629,7 @@ std::cout << "--------------------------- PRESSED M -------------------- !11!!\n
 		defaultScene->angleZ += 0.1f;
 		  glutPostRedisplay();
 		return;
-	  case '7':
+/*	  case '7':
 std::cout << "--------------------------- PRESSED 7 -------------------- !11!!\n";
 		pGO->rotateX(-0.1f);
 		  glutPostRedisplay();
@@ -543,7 +668,31 @@ std::cout << "--------------------------- PRESSED 1 -------------------- !11!!\n
 std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n";
 		pGO->rotateZ(0.1f);
 		  glutPostRedisplay();
-		return;
+		return;*/
+case '1':
+	displayHandeler->getProjectors()->at(proj).moveKeystoneCorner(corner, 0, -0.01);
+	glutPostRedisplay();
+	return;
+case '2':
+	displayHandeler->getProjectors()->at(proj).moveKeystoneCorner(corner, 0, 0.01);
+	glutPostRedisplay();
+	return;
+case '3':
+	displayHandeler->getProjectors()->at(proj).moveKeystoneCorner(corner, 1, -0.01);
+	glutPostRedisplay();
+	return;
+case '4':
+	displayHandeler->getProjectors()->at(proj).moveKeystoneCorner(corner, 1, 0.01);
+	glutPostRedisplay();
+	return;
+case '7':
+	corner++;
+	if(corner == 4) corner = 0;
+	return;
+case '8':
+	proj++;
+	if(proj >= displayHandeler->getProjectors()->size()) proj = 0;
+	return;
 	  case 'p':
 std::cout << "--------------------------- PRESSED P -------------------- !11!!\n";
 		defaultScene->selectNext();
@@ -605,6 +754,17 @@ std::cout << "--------------------------- PRESSED space !-------------------- !1
 		startMenu();
 		glutPostRedisplay();
 		return;
+//predefined keystone settings
+case 'k':
+	keystone++;
+	if(keystone >= 4){
+		keystone = 0;
+	}
+	displayHandeler->getProjectors()->at(proj).setKeystoneObserved(ks[keystone]);
+	std::cout << "Keystone setting: " << keystone << " On projector: " << proj << std::endl;
+
+	glutPostRedisplay();
+	return;
 	}
 }
 
@@ -670,7 +830,7 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	
     currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
     gtk_widget_destroy(filew);
-	//defaultScene->merge(FileLoader::loadFile(currentfilepath));
+	//defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
 	gtk_main_quit();
 }
 #endif
@@ -795,8 +955,8 @@ void startMenu() {
   gtk_widget_show (exit_button);
 
   /* Toggle worldCtrl button*/
-  //	worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + boolToString(worldCtrl));
-  worldCtrl_button = gtk_button_new_with_label ("Toggle worldCtrl: " + worldCtrl);
+  gchar* _toggled = (gchar*)(worldCtrl ? "Toggle worldCtrl: True" : "Toggle worldCtrl: False");
+  worldCtrl_button = gtk_button_new_with_label (_toggled);
   gtk_signal_connect_object (GTK_OBJECT (worldCtrl_button), "clicked",
    (GtkSignalFunc) toggleWorldControl, GTK_OBJECT (window));
   gtk_box_pack_end (GTK_BOX (vbox), worldCtrl_button, TRUE, TRUE, 2);
@@ -806,12 +966,12 @@ void startMenu() {
   selectNext_button = gtk_button_new_with_label ("Select next object");
   gtk_signal_connect_object (GTK_OBJECT (selectNext_button), "clicked",
    (GtkSignalFunc) selectNextObject, GTK_OBJECT (window));
-  gtk_box_pack_end (GTK_BOX (vbox), selectNext_button, TRUE, TRUE, 2);
+  gtk_box_pack_end (GTK_BOX (vbox), selectNext_button, TRUE, TRUE, 2); 
   gtk_widget_show (selectNext_button);
 
   /* Hightlight background button */
-  //highlightBackground_button = gtk_button_new_with_label ("Highlight background: " << boolToString(defaultScene->getBackgroundHighlightning()));
-  highlightBackground_button = gtk_button_new_with_label ("Highlight background: " + defaultScene->getBackgroundHighlightning());
+   _toggled = (gchar*)(defaultScene->getBackgroundHighlightning() ? "Highlight background: True" : "Highlight background: False");
+  highlightBackground_button = gtk_button_new_with_label (_toggled);
   gtk_signal_connect_object (GTK_OBJECT (highlightBackground_button), "clicked",
    (GtkSignalFunc) highlightBackground, GTK_OBJECT (window));
   gtk_box_pack_end (GTK_BOX (vbox), highlightBackground_button, TRUE, TRUE, 2);
@@ -832,8 +992,8 @@ void startMenu() {
   gtk_widget_show (centerObject_button);
 
   /* toggleMesh_button */
-  //toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + boolToString(pGO->hasMesh()));
-  toggleMesh_button = gtk_button_new_with_label ("Toggle mesh: " + pGO->hasMesh());
+   _toggled = (gchar*)(pGO->hasMesh() ? "Toggle mesh: True" : "Toggle mesh: False");
+  toggleMesh_button = gtk_button_new_with_label (_toggled);
   gtk_signal_connect_object (GTK_OBJECT (toggleMesh_button), "clicked",
    (GtkSignalFunc) toggleMesh, GTK_OBJECT (window));
   gtk_box_pack_end (GTK_BOX (vbox), toggleMesh_button, TRUE, TRUE, 2);

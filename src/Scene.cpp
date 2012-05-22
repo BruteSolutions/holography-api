@@ -32,7 +32,7 @@ Scene::Scene() {
     */
 
     worldRotX.m[0] = 1;
-    worldRotX.m[5] = -1;
+    worldRotX.m[5] = 1;
     worldRotX.m[10] = 1;
     worldRotX.m[15] = 1;    
 
@@ -55,6 +55,11 @@ Scene::Scene() {
     worldPos.m[10] = (fzFar + fzNear)/(fzNear - fzFar);
     worldPos.m[14] = (2*fzFar*fzNear)/(fzNear - fzFar);
     worldPos.m[11] = -1.0f;
+angleX=0;
+angleY=0;
+angleZ=0;
+    memset(&w.m, 0, sizeof(w.m));
+    w.m[0] = 1; w.m[5] = 1; w.m[ 10] = 1; w.m[15] = 1;
 
     //worldPos.m[15]=1.0f;
 	backgroundHighlightning = false;
@@ -139,6 +144,8 @@ void Scene::applyPos(GLuint shader) {
  * @param shader program ID.
  */
 void Scene::applyRot(GLuint shader) {
+    GLuint rotLoc = glGetUniformLocation(shader, "worldRot");
+    glUniformMatrix4fv(rotLoc, 1, GL_FALSE, w.m);
     GLuint posLocX = glGetUniformLocation(shader, "worldRotX");
     glUniformMatrix4fv(posLocX , 1, GL_FALSE, worldRotX.m);
 
@@ -161,7 +168,7 @@ void Scene::applyRot(GLuint shader) {
  * Updates the current world rotation matrix.
  */
 void Scene::setRotation() {
-    worldRotX.m[5] = cos(angleX);
+/*    worldRotX.m[5] = cos(angleX);
     worldRotX.m[6] = -sin(angleX);
     worldRotX.m[9] = sin(angleX);
     worldRotX.m[10] = cos(angleX); 
@@ -174,7 +181,7 @@ void Scene::setRotation() {
     worldRotZ.m[0] = cos(angleZ);
     worldRotZ.m[1] = -sin(angleZ);
     worldRotZ.m[4] = sin(angleZ);
-    worldRotZ.m[5] = cos(angleZ); 
+    worldRotZ.m[5] = cos(angleZ); */
 }
 
 /**
@@ -259,8 +266,31 @@ Vec4* Scene::matMult(Vec3 trans) {
  * Rotate the x angle.
  * @param angle Angular adjustment.
  */
+
 void Scene::rotateX(float angle) {
-	angleX+=angle;
+     
+    Mat4 m;
+    memset(&m.m, 0, sizeof(m));
+    m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
+m.m[5] = cos(angle);
+m.m[6] = sin(angle);
+m.m[9] = -sin(angle);
+m.m[10] = cos(angle);
+    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
+    Mat4 w2;
+    memset(&w2.m, 0, sizeof(w2));
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+	    for(int k=0;k<4;k++){
+	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+            }
+        }
+    }
+    w = w2;
+    
+ 
+
+//    angleX+=angle;
 }
 
 /**
@@ -268,7 +298,29 @@ void Scene::rotateX(float angle) {
  * @param angle Angular adjustment.
  */
 void Scene::rotateY(float angle) {
-	angleY+=angle;
+    Mat4 m;//= { cos(angle), 0, -sin(angle), 0, 0, 1, 0, 0, sin(angle), 0, cos(angle), 0, 0, 0, 0, 1};
+    memset(&m.m, 0, sizeof(m));
+    m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
+    m.m[0] = cos(angle);
+    m.m[2] = -sin(angle);
+    m.m[8] = sin(angle);
+    m.m[10] = cos(angle); 
+
+    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
+    Mat4 w2;
+    memset(&w2.m, 0, sizeof(w2));
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+	    for(int k=0;k<4;k++){
+	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+            }
+        }
+    }
+    w = w2;
+    
+ 
+
+    angleY+=angle;
 }
 
 /**
@@ -276,7 +328,29 @@ void Scene::rotateY(float angle) {
  * @param angle Angular adjustment.
  */
 void Scene::rotateZ(float angle) {
-	angleZ+=angle;
+
+    Mat4 m;// = { cos(angle), sin(angle), 0, 0, -sin(angle), cos(angle) , 0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1};
+    memset(&m.m, 0, sizeof(m));
+    m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
+    m.m[0] = cos(angle);
+    m.m[1] = sin(angle);
+    m.m[4] = -sin(angle);
+    m.m[5] = cos(angle);  
+   //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
+    Mat4 w2;
+    memset(&w2.m, 0, sizeof(w2));
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+	    for(int k=0;k<4;k++){
+	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+            }
+        }
+    }
+    w = w2;
+    
+ 
+    
+    angleZ+=angle;
 }
 
 /**

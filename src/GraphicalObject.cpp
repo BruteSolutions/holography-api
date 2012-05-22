@@ -24,8 +24,9 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	highlight = false;
 	vertexDataSize = _vertexDataSize;
 	colorDataSize = _colorDataSize;
+	mesh=0;
 	memset(&pos, 0, 4*3);
-	memset(&objectRotX.m, 0, sizeof(objectRotX.m));
+/*	memset(&objectRotX.m, 0, sizeof(objectRotX.m));
 	memset(&objectRotY.m, 0, sizeof(objectRotY.m));
 	memset(&objectRotZ.m, 0, sizeof(objectRotZ.m));
 	objectRotX.m[0]=1;
@@ -41,11 +42,13 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	objectRotZ.m[0]=1;
 	objectRotZ.m[5]=1;
 	objectRotZ.m[10]=1;
-	objectRotZ.m[15]=1;
+	objectRotZ.m[15]=1;*/
 	scale = 1;
 	angleX = 0;
 	angleY = 0;
 	angleZ = 0;
+    memset(&w.m, 0, sizeof(w.m));
+    w.m[0] = 1; w.m[5] = 1; w.m[ 10] = 1; w.m[15] = 1;
 }
 
 /**
@@ -124,7 +127,7 @@ void GraphicalObject::bindBufferData() {
  * based on the rotation variables angleX, angleY ,angleZ.
  */
 void GraphicalObject::rotate() {
-	objectRotX.m[5] = cos(angleX);
+	/*objectRotX.m[5] = cos(angleX);
 	objectRotX.m[6] = -sin(angleX);
 	objectRotX.m[9] = sin(angleX);
 	objectRotX.m[10] = cos(angleX); 
@@ -137,7 +140,7 @@ void GraphicalObject::rotate() {
 	objectRotZ.m[0] = cos(angleZ);
 	objectRotZ.m[1] = -sin(angleZ);
 	objectRotZ.m[4] = sin(angleZ);
-	objectRotZ.m[5] = cos(angleZ); 
+	objectRotZ.m[5] = cos(angleZ); */
 
 }
 
@@ -174,6 +177,9 @@ void GraphicalObject::applyRotation(GLuint shader) {
 	GLuint scaleLoc = glGetUniformLocation(shader, "scale");
 	glUniform1f(scaleLoc, scale);
 	//std::cout << "\n\n"<<scale<<"\n\n";
+    GLuint rotLoc = glGetUniformLocation(shader, "objectRot");
+    glUniformMatrix4fv(rotLoc, 1, GL_FALSE, w.m);
+/*
 	GLuint posLocX = glGetUniformLocation(shader, "objectRotX");
     glUniformMatrix4fv(posLocX , 1, GL_FALSE, objectRotX.m);
 	
@@ -182,7 +188,7 @@ void GraphicalObject::applyRotation(GLuint shader) {
 
 	GLuint posLocZ = glGetUniformLocation(shader, "objectRotZ");
     glUniformMatrix4fv(posLocZ , 1, GL_FALSE, objectRotZ.m);
-
+*/
     GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
     glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
@@ -210,8 +216,8 @@ void GraphicalObject::toggleHighlight(){
  * @param trans A Vec3 containing the offset values.
  */
 void GraphicalObject::translate(Vec3 trans) {
-	Vec3 newPos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
-	pos = newPos;
+	pos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
+	origin = {origin.x+trans.x, origin.y+trans.y, origin.z+trans.z};
 }
 
 /**
@@ -304,30 +310,91 @@ void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
 	pos = finalOffset;
 }
 
-/**
- * Rotates the object around the x axis.
- * @param angle The rotation angle in degrees.
- */
 void GraphicalObject::rotateX(float angle) {
-	angleX+=angle;
+     
+    Mat4 m;
+    memset(&m.m, 0, sizeof(m));
+    m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
+m.m[5] = cos(angle);
+m.m[6] = sin(angle);
+m.m[9] = -sin(angle);
+m.m[10] = cos(angle);
+    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
+    Mat4 w2;
+    memset(&w2.m, 0, sizeof(w2));
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+	    for(int k=0;k<4;k++){
+	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+            }
+        }
+    }
+    w = w2;
+    
+ 
+
+//    angleX+=angle;
 }
 
 /**
- * Rotates the object around the y axis.
- * @param angle The rotation angle in degrees.
+ * Rotate the y angle.
+ * @param angle Angular adjustment.
  */
 void GraphicalObject::rotateY(float angle) {
-	angleY+=angle;
+    Mat4 m;//= { cos(angle), 0, -sin(angle), 0, 0, 1, 0, 0, sin(angle), 0, cos(angle), 0, 0, 0, 0, 1};
+    memset(&m.m, 0, sizeof(m));
+    m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
+    m.m[0] = cos(angle);
+    m.m[2] = -sin(angle);
+    m.m[8] = sin(angle);
+    m.m[10] = cos(angle); 
+
+    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
+    Mat4 w2;
+    memset(&w2.m, 0, sizeof(w2));
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+	    for(int k=0;k<4;k++){
+	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+            }
+        }
+    }
+    w = w2;
+    
+ 
+
+    angleY+=angle;
 }
 
 /**
- * Rotates the object around the z axis.
- * @param angle The rotation angle in degrees.
+ * Rotate the z angle.
+ * @param angle Angular adjustment.
  */
 void GraphicalObject::rotateZ(float angle) {
-	angleZ+=angle;
-}
 
+    Mat4 m;// = { cos(angle), sin(angle), 0, 0, -sin(angle), cos(angle) , 0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1};
+    memset(&m.m, 0, sizeof(m));
+    m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
+    m.m[0] = cos(angle);
+    m.m[1] = sin(angle);
+    m.m[4] = -sin(angle);
+    m.m[5] = cos(angle);  
+   //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
+    Mat4 w2;
+    memset(&w2.m, 0, sizeof(w2));
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+	    for(int k=0;k<4;k++){
+	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+            }
+        }
+    }
+    w = w2;
+    
+ 
+    
+    angleZ+=angle;
+}
 /**
  * Rotates the object around the x axis.
  * @param angle The rotation angle in radians.

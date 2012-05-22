@@ -37,6 +37,7 @@ public:
     
 private:        
     Vec4* matMult(Vec3 vec3);
+    Mat4 w;
     bool backgroundHighlightning;
 };
 

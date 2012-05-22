@@ -1,6 +1,6 @@
 #include <string>
 #include "FileLoader.h"
-#include "RawLoader.h"
+//#include "RawLoader.h"
 #include "X3DLoader.h"
 #include "Scene.h" 
 
@@ -10,9 +10,9 @@
  * @return A Scene containing the contents acquired from the specified file
  */ 
 Scene* FileLoader::loadFile(std::string path) throw ( std::string ) {
-	switch(checkFiletype(path)) {
-				case 0: // Filetype BS Raw
-					return RawLoader::loadFile(path);
+	switch(checkFileExtension(path)) {
+				//case 0: // Filetype BS Raw
+					//return RawLoader::loadFile(path);
         case 1: // Filetype X3D
         	return X3DLoader::loadFile(path);
         default: // Whenever a filetype is not recognized

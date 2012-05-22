@@ -51,6 +51,7 @@ private:
 	int vertexDataSize, colorDataSize;
 	float *vertexData, *colorData;
 	Vec3 pos;
+	Mat4 w;
 	Mat4 objectRotX,objectRotY,objectRotZ;
 	bool mesh;
 	float scale;

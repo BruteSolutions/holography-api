@@ -1,4 +1,5 @@
 #include <string>
+#include "Scene.h"
 #include "FileLoader.h"
 class RawLoader : FileLoader
 {
