@@ -16,7 +16,8 @@ public:
 	int getColorDataSize();
 	void bindBufferData();
 	void draw();
-	void setOrigin(Vec3 ori);	
+	void setOrigin(Vec3 ori);
+	Vec3 getOrigin();	
 	void rotate();
 	void rotateX(float angle);
 	void rotateY(float angle);
@@ -39,6 +40,7 @@ public:
 	bool hasMesh();
 	bool highlighted();
 	void setMesh(bool mesh);
+	void setPosition(Vec3 pos);
 	void center(Vec3 camPos, Vec3 optPos);
 	//When following floats are private: the first triangle is permanently meshed. WHY?=
 	float angleX, angleY, angleZ;
@@ -51,7 +53,7 @@ private:
 	int vertexDataSize, colorDataSize;
 	float *vertexData, *colorData;
 	Vec3 pos;
-	Mat4 w;
+	Mat4 rotationMatrix;
 	Mat4 objectRotX,objectRotY,objectRotZ;
 	bool mesh;
 	float scale;

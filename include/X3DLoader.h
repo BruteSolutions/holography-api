@@ -1,5 +1,5 @@
 #ifndef __X3DLOADER_H
-#define __X3DLoader_H
+#define __X3DLOADER_H
 #include <string>
 #include <vector>
 #include <glload/gl_3_3.h>
@@ -27,8 +27,8 @@ public:
     static Scene* loadFile( std::string path ) throw ( std::string );
 
 private:
-    static void copyCoordIndex( const char* input, std::vector<Vec3Int> *faceVector, int coordOffset );
-    static void copyPoints( const char* input, std::vector<Vec4> *pointVector );
+    static void copyCoordIndex( const char* input, std::vector<Vec3Int> *faceVector, int coordOffset ) throw (std::string);
+    static void copyPoints( const char* input, std::vector<Vec4> *pointVector ) throw (std::string);
 };
 
 #endif

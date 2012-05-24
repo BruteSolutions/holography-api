@@ -1,5 +1,4 @@
 #include <vector>
-
 #include <glload/gl_3_3.h>
 #include <GL/freeglut.h>
 
@@ -270,6 +269,14 @@ void Projector::display(Scene scene) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glDepthRange(0,1);
+	
+	//test
+	
+
+	//float g_lightPos[4] = { 10, 10, -100, 1 };  // Position of light
+	//glLightfv(GL_LIGHT0, GL_POSITION, g_lightPos);
+
+	//endtest
 
 	GLuint pid;
 
@@ -280,7 +287,8 @@ void Projector::display(Scene scene) {
 		pid = colorTranslator->getShader()->getShaderProgram();
 	}
 	glUseProgram(pid);
-	
+
+
 	/* Sets the factor which decides how the color components affects the red end color */
 	colorTranslator->setFactorUniform();
 

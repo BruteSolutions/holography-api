@@ -3,7 +3,9 @@
 #include <cstring>
 #include <stdio.h>
 #include <math.h>
+#include "Scene.h"
 #include "Shared.h"
+#include "Matrix.h"
 #include "GraphicalObject.h"
 
 GraphicalObject::GraphicalObject() {
@@ -19,36 +21,35 @@ GraphicalObject::GraphicalObject() {
  */
 GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float _colorData[], int _colorDataSize) {	
 	vertexData = _vertexData;
-	colorData = _colorData;	
-	origin={0,0,0};
-	highlight = false;
+	colorData = _colorData;
 	vertexDataSize = _vertexDataSize;
 	colorDataSize = _colorDataSize;
+	float avgX=0,avgY=0,avgZ=0;
+/* calculate center of mass */
+	for(int i=0;i<vertexDataSize;i+=4){
+	    avgX += vertexData[i];
+	    avgY += vertexData[i+1];
+	    avgZ += vertexData[i+2];
+	}
+
+	avgX = avgX*4 / vertexDataSize;
+	avgY = avgY*4 / vertexDataSize;
+	avgZ = avgZ*4 / vertexDataSize;
+
+	origin={avgX,avgY,avgZ};
+	std::cout << "origin = " << avgX << ", " << avgY << ", " << avgZ << std::endl;
+	highlight = false;
+
 	mesh=0;
 	memset(&pos, 0, 4*3);
-/*	memset(&objectRotX.m, 0, sizeof(objectRotX.m));
-	memset(&objectRotY.m, 0, sizeof(objectRotY.m));
-	memset(&objectRotZ.m, 0, sizeof(objectRotZ.m));
-	objectRotX.m[0]=1;
-	objectRotX.m[5]=1;
-	objectRotX.m[10]=1;
-	objectRotX.m[15]=1;	
 
-	objectRotY.m[0]=1;
-	objectRotY.m[5]=1;
-	objectRotY.m[10]=1;
-	objectRotY.m[15]=1;
-
-	objectRotZ.m[0]=1;
-	objectRotZ.m[5]=1;
-	objectRotZ.m[10]=1;
-	objectRotZ.m[15]=1;*/
 	scale = 1;
 	angleX = 0;
 	angleY = 0;
 	angleZ = 0;
-    memset(&w.m, 0, sizeof(w.m));
-    w.m[0] = 1; w.m[5] = 1; w.m[ 10] = 1; w.m[15] = 1;
+
+    memset(&rotationMatrix.m, 0, sizeof(rotationMatrix.m));
+    rotationMatrix.m[0] = 1; rotationMatrix.m[5] = 1; rotationMatrix.m[ 10] = 1; rotationMatrix.m[15] = 1;
 }
 
 /**
@@ -82,7 +83,9 @@ int GraphicalObject::getVertexDataSize() {
 int GraphicalObject::getColorDataSize() {	
 	return colorDataSize;
 }
-
+void GraphicalObject::setPosition(Vec3 newPos){
+	pos = newPos;
+}
 /**
  * Draws the object.
  */
@@ -178,7 +181,7 @@ void GraphicalObject::applyRotation(GLuint shader) {
 	glUniform1f(scaleLoc, scale);
 	//std::cout << "\n\n"<<scale<<"\n\n";
     GLuint rotLoc = glGetUniformLocation(shader, "objectRot");
-    glUniformMatrix4fv(rotLoc, 1, GL_FALSE, w.m);
+    glUniformMatrix4fv(rotLoc, 1, GL_FALSE, rotationMatrix.m);
 /*
 	GLuint posLocX = glGetUniformLocation(shader, "objectRotX");
     glUniformMatrix4fv(posLocX , 1, GL_FALSE, objectRotX.m);
@@ -216,6 +219,7 @@ void GraphicalObject::toggleHighlight(){
  * @param trans A Vec3 containing the offset values.
  */
 void GraphicalObject::translate(Vec3 trans) {
+	//std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
 	pos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
 	origin = {origin.x+trans.x, origin.y+trans.y, origin.z+trans.z};
 }
@@ -237,7 +241,9 @@ void GraphicalObject::applyTransformation(GLuint shader) {
 void GraphicalObject::setOrigin(Vec3 ori) {
         origin = ori;
 }
-
+Vec3 GraphicalObject::getOrigin(){
+	return origin;
+}
 /**
  * Checks if the object is meshed.
  * @return True if the object is meshed.
@@ -319,21 +325,10 @@ m.m[5] = cos(angle);
 m.m[6] = sin(angle);
 m.m[9] = -sin(angle);
 m.m[10] = cos(angle);
-    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
-    Mat4 w2;
-    memset(&w2.m, 0, sizeof(w2));
-    for(int i=0;i<4;i++){
-        for(int j=0;j<4;j++){
-	    for(int k=0;k<4;k++){
-	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
-            }
-        }
-    }
-    w = w2;
-    
- 
 
-//    angleX+=angle;
+    rotationMatrix = Mat4::matrixMultiplication(m, rotationMatrix);
+
+    angleX+=angle;
 }
 
 /**
@@ -341,7 +336,7 @@ m.m[10] = cos(angle);
  * @param angle Angular adjustment.
  */
 void GraphicalObject::rotateY(float angle) {
-    Mat4 m;//= { cos(angle), 0, -sin(angle), 0, 0, 1, 0, 0, sin(angle), 0, cos(angle), 0, 0, 0, 0, 1};
+    Mat4 m;
     memset(&m.m, 0, sizeof(m));
     m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
     m.m[0] = cos(angle);
@@ -349,19 +344,7 @@ void GraphicalObject::rotateY(float angle) {
     m.m[8] = sin(angle);
     m.m[10] = cos(angle); 
 
-    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
-    Mat4 w2;
-    memset(&w2.m, 0, sizeof(w2));
-    for(int i=0;i<4;i++){
-        for(int j=0;j<4;j++){
-	    for(int k=0;k<4;k++){
-	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
-            }
-        }
-    }
-    w = w2;
-    
- 
+    rotationMatrix = Mat4::matrixMultiplication(m, rotationMatrix);
 
     angleY+=angle;
 }
@@ -372,27 +355,16 @@ void GraphicalObject::rotateY(float angle) {
  */
 void GraphicalObject::rotateZ(float angle) {
 
-    Mat4 m;// = { cos(angle), sin(angle), 0, 0, -sin(angle), cos(angle) , 0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1};
+    Mat4 m;
     memset(&m.m, 0, sizeof(m));
     m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
     m.m[0] = cos(angle);
     m.m[1] = sin(angle);
     m.m[4] = -sin(angle);
     m.m[5] = cos(angle);  
-   //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
-    Mat4 w2;
-    memset(&w2.m, 0, sizeof(w2));
-    for(int i=0;i<4;i++){
-        for(int j=0;j<4;j++){
-	    for(int k=0;k<4;k++){
-	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
-            }
-        }
-    }
-    w = w2;
-    
- 
-    
+
+    rotationMatrix = Mat4::matrixMultiplication(m, rotationMatrix);
+
     angleZ+=angle;
 }
 /**

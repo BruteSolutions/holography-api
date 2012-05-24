@@ -26,18 +26,20 @@ public:
     void setRotation();
     float angleX, angleY,angleZ;
     void rotateX(float angle);
-	void rotateY(float angle);
-	void rotateZ(float angle);
-	void rotateXRad(float angle);
-	void rotateYRad(float angle);
-	void rotateZRad(float angle);
+    void rotateY(float angle);
+    void rotateZ(float angle);
+    void rotateXRad(float angle);
+    void rotateYRad(float angle);
+    void rotateZRad(float angle);
+    void autoRescale();
     void merge(Scene * scene);
     void toggleBackgroundHighlightning();
     bool getBackgroundHighlightning();
-    
+    Mat4 getWMatrix(){return w;};
+    Mat4 getWiMatrix(){return wi;};
 private:        
     Vec4* matMult(Vec3 vec3);
-    Mat4 w;
+    Mat4 w, wi;
     bool backgroundHighlightning;
 };
 

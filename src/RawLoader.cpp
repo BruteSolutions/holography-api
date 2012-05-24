@@ -2,6 +2,13 @@
 #include <string>
 #include <fstream>
 #include <string.h>
+#include <glload/gl_3_3.h>
+#include <GL/freeglut.h>
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "Shared.h"
 #include "Scene.h"
 #include "RawLoader.h"
@@ -11,16 +18,18 @@
  * @param path the filepath which to create a scene from
  * @return a Scene containing the objects specified in the file
  */
-static Scene* loadFile(std::string path) throw (std::string) {
+Scene* RawLoader::loadFile(std::string path) throw (std::string) {
+	std::cout << "hej" << std::endl;
 	std::ifstream rawfile;
 	Vec3 pos;
 	char nl;
 	float * vertexData, * colorData;
 	unsigned int numObjects, numTriangles;
 	Scene * scene = new Scene();
-	
+
 	/* open the file */
 	rawfile.open(path);
+	std::cout << "hej" << std::endl;
 	if( rawfile.is_open() ) { 
 		/* read the amount of objects the file contains */
 		rawfile >> numObjects;
@@ -28,7 +37,7 @@ static Scene* loadFile(std::string path) throw (std::string) {
 		/* make sure the line ends with a \n */		
 		rawfile.get(nl);
 		if(nl != '\n') throw std::string("IllegalRAWFileException");
-
+//		std::cout << "numObjects
 		for(int i = 0; i < numObjects; i++) {
 			/* Read the objects position */
 			rawfile >> pos.x >> pos.y >> pos.z;
@@ -39,50 +48,57 @@ static Scene* loadFile(std::string path) throw (std::string) {
 
 			/* Read the amount of triangles of this object */
 			rawfile >> numTriangles;
-			
+			std::cout << "numTriangles " << numTriangles;
 			rawfile.get(nl);
 			if(nl != '\n') throw std::string("IllegalRAWFileException");
 
 			/* if the amount was 0, then something is obviously wrong */
 			if(numTriangles == 0) throw std::string("IllegalRAWFileException"); 
-
+			std::cout << std::endl;
 			vertexData = new float[numTriangles*12];
 			colorData = new float[numTriangles*12];
-
-			for(int j = 0; j < numTriangles*12; j++){
-				/* if there wasn't enough data or other error */
-				if(rawfile.fail()) throw std::string ("GenericIOException");
-				if(j%4 == 3) vertexData[j] = 1;
-				else{
-					rawfile >> vertexData[j];
-				
-					/* if a newline appeared before reading all data */
-					rawfile.get(nl);
-					if(nl == '\n'){ if(j+2 != numTriangles*12) { throw std::string("IllegalRAWFileException"); } }
+		
+			for(int triangle = 0; triangle < numTriangles; triangle++){
+				for(int j = 0; j < 12; j++){
+					/* if there wasn't enough data or other error */
+					if(rawfile.fail()){std::cout << "inside fail" << std::endl; throw std::string ("GenericIOException");}
+					if(j%4 == 3) vertexData[j] = 1;
+					else{
+						rawfile >> vertexData[j];
+						/* if a newline appeared before reading all data */
+						rawfile.get(nl);
+						if(nl == '\n'){ if(j+2 != 12) { throw std::string("IllegalRAWFileException"); } }
+					}
+						std::cout << vertexData[j] <<" ";
 				}
+				std::cout << std::endl;
 			}
-			for(int j = 0; j < numTriangles *12; j++){
-				/* if there wasn't enough data or other error */				
-				if(rawfile.fail()) throw std::string ("GenericIOException");
-				if(j%4 == 3){
-					colorData[j] = 1;
-				}else{
-					rawfile >> colorData[j];
-					if(colorData[j] < 0 || colorData[j] > 255) throw std::string("IllegalRAWFileException");
-					colorData[j] /= 255;
+			for(int triangle = 0; triangle < numTriangles; triangle++){
+				for(int j = 0; j < 12; j++){
+					/* if there wasn't enough data or other error */				
+					if(rawfile.fail()){throw std::string ("GenericIOException");}
+					if(j%4 == 3){
+						colorData[j] = 1;
+					}else{
+						rawfile >> colorData[j];
+						if(colorData[j] < 0 || colorData[j] > 255) throw std::string("IllegalRAWFileException");
+						colorData[j] /= 255;
 					
-					/* if a newline appeared before reading all data */					
-					rawfile.get(nl);
-					if(nl == '\n'){ if(j+2 != numTriangles*12) throw std::string("IllegalRAWFileException"); }
+						/* if a newline appeared before reading all data */					
+						rawfile.get(nl);
+						if(nl == '\n'){ if(j+2 != 12){ throw std::string("IllegalRAWFileException"); }}
+					}
+						std::cout << colorData[j] <<" ";
 				}
-			}
+			std::cout << std::endl;			
 
+			}
 			/* Add object to the scene */
 			GraphicalObject * object = new GraphicalObject(vertexData, numTriangles*12, colorData, numTriangles*12); 
 			object->translate(pos);
 			scene->get3DSpace()->addObject(object); 
-	}
-	return scene;
+		}
+		return scene;
 	
 	}else{
 		throw std::string("RAWFileNotFoundException");

@@ -63,7 +63,9 @@ void ThreeDSpace::selectNext() {
         current = 0;
     }
 }
-
+void ThreeDSpace::clearSelected() {
+   selected.clear();
+}
 /**
  * Binds buffer data for all the GraphicalObjects in the ThreeDSpace.
  */
@@ -102,5 +104,7 @@ double ThreeDSpace::getScale() {
  * @param inc The increment.
  */
 void ThreeDSpace::incrementScale(double inc) {
+
     scale += inc;
+    std::cout << scale << std::endl;
 }

@@ -24,14 +24,16 @@ smooth out vec4 color;
 
 void main()
 {
-
+		
+	
 	color = theColor;
 	
-	vec4 position2 = vec4(0,0,0,0);
+	vec4 position2 = position;
 	
 		//Move object to origin
 	vec4 coordRelatedToOrigin = vec4(position.x, position.y ,position.z,position.w) - vec4(objOrigin.x,objOrigin.y,objOrigin.z,0);
 		//Rotate around origin
+	//vec4 rotated;
 	vec4 rotated = objectRot * coordRelatedToOrigin;	
 	//vec4 rotated = objectRotY*objectRotZ*objectRotX*setOrigin;
 		//Scale the object
@@ -40,7 +42,8 @@ void main()
 		//Restore position
 	position2 = rotated + vec4(objOrigin.x,objOrigin.y,objOrigin.z, 0);
 
-//	position2+= vec4(objectPos.x, objectPos.y, objectPos.z, 0);
+	position2+= vec4(objectPos.x, objectPos.y, objectPos.z, 0);
+	//position2 = coordRelatedToOrigin;
 
 		//Set world origin
 	position2 = vec4(position2.x, position2.y, position2.z, position.w) - vec4(worldOrigin.x, worldOrigin.y, worldOrigin.z, 0);
@@ -53,6 +56,10 @@ void main()
 		//Rotate
 	position2 = worldRot * position2;
 	//position2 = worldRotY*worldRotZ*worldRotX*position2;
+		
+		//Scale
+	position2 = worldScale*vec4(position2.x, position2.y, position2.z, 0);
+	position2.w = position.w;
 		//Restore
 	position2 += vec4(worldOrigin.x, worldOrigin.y, worldOrigin.z, 0);
 	
@@ -62,10 +69,8 @@ void main()
 	
 		//Perspective matrix	
 	position2 = worldPos * position2;
-		
-		//Scale
-	position2 = worldScale*vec4(position2.x, position2.y, position2.z, position2.w/worldScale);
-	
+
+
 		//Keystone
 	position2 = keystone * position2;
 	

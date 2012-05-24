@@ -13,6 +13,7 @@ void main()
 	float g = factor.y * color.y;
 	float b = factor.z * color.z;
 
+ //vec3 processed = vec3(1,1,1);// r+g+b);
   vec3 processed = vec3(r+g+b, 0.0f, 0.0f); //eftersom r+g+b kan max vara 1.0
 
   if(highlight == 1.0f) {

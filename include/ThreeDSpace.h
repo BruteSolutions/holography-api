@@ -15,6 +15,7 @@ public:
     void selectNext();
     std::vector<GraphicalObject*> objects;
     Vec3 origin;
+    void clearSelected();
     int current;
     std::vector<GraphicalObject*> selected;
     float scale;

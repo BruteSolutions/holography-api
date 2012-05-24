@@ -33,7 +33,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
     std::locale::global(std::locale(""));
     std::vector<Vec3Int> faces;
     std::vector<Vec4> points;
-
+    std::cout << "hejja" <<std::endl;
     Scene * scene = new Scene();
     float *vertexData;
     float *colorData;
@@ -78,7 +78,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
                 }            
             }
         }
-        
+            std::cout << "hejja" <<std::endl;
         //create a graphical object
         int size = faces.size() * 12; //every face consists of 3 nodes with 4 flouts
         vertexData = new float[ size ];
@@ -136,7 +136,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
  * @param attribute is the attribute Points read from a X3D-file
  * @param points is a vector that new coordinates are pushed to
  */
-void X3DLoader::copyPoints( const char * attribute, std::vector<Vec4> *points ) {
+void X3DLoader::copyPoints( const char * attribute, std::vector<Vec4> *points )  throw (std::string){
     char *pch = 0;
     bool firstRun = true;
     while ( pch != NULL || firstRun ) {
@@ -171,7 +171,7 @@ void X3DLoader::copyPoints( const char * attribute, std::vector<Vec4> *points ) 
  * @param count states where the index should start to count from. This makes it possible to read multiple
  *              Shape brackets containing a CoordIndex each, indices start at 0 in every Shape brace
  */ 
-void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *faces, int count ) {
+void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *faces, int count )  throw (std::string){
     int x, y, z;
     char *pch = 0;
     bool firstRun = true;
@@ -188,13 +188,14 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
         if ( pch == NULL ) {
             break;
         }
-        
+      
         tmp.x = atoi( pch ) + count;
         pch = strtok( NULL, " " );
         tmp.y = atoi( pch ) + count;
         pch = strtok( NULL, " " );
         tmp.z = atoi( pch ) + count;
         pch = strtok( NULL, " "); //-1
+	std::cout << tmp.x << " " << tmp.y << " " << tmp.z << std::endl;
         faces->push_back( tmp );
     }
 }

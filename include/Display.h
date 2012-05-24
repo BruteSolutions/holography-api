@@ -17,6 +17,7 @@ public:
     std::vector<Projector>* getProjectors();
     Monitor* getMonitor();
     ColorTranslator* getColorTranslator();
+    void rebindBuffers(Scene *scene);
     void addProjector(Projector *projector);
     double getBoundingCube();
     void highlight();

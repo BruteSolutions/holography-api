@@ -311,20 +311,22 @@ void init(int argc, char ** argv)
   if(argc == 2 && !strcmp(argv[1], "--test")) {
     exit(runTests());
   }
-
-	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+	std::cout << "Hej1" << std::endl;
+	//defaultScene = FileLoader::loadFile("rawformat.bs");
+	std::cout << "Hej2" << std::endl;
+	defaultScene = FileLoader::loadFile("CadTeapot.x3d");
 	//grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	//grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	//grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	//testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
-	GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
+	//GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
 	//GraphicalObject * grobj = new GraphicalObject(cube, sizeof(cube)/4, colorData2, sizeof(cube)/4);
 	
-	defaultScene = new Scene();
+	//defaultScene = new Scene();
 	//defaultScene->get3DSpace()->addObject(grObj1);
 	//defaultScene->get3DSpace()->addObject(grObj2);
 	//defaultScene->get3DSpace()->addObject(grObj3);
-	defaultScene->get3DSpace()->addObject(grobj);
+	//defaultScene->get3DSpace()->addObject(grobj);
 //	defaultScene->get3DSpace()->addObject(testObj);
 	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
 	
@@ -471,21 +473,29 @@ void mouse(int button, int state, int x, int y) {
 		case 0: if(state == 0) leftmousebutton = true; else leftmousebutton = false; return;
 		case 1: if(state == 0) middlemousebutton = true; else middlemousebutton = false; return;
 		case 2: if(state == 0) rightmousebutton = true; else rightmousebutton = false; return;
-		case 3: defaultScene->get3DSpace()->incrementScale(0.05f); glutPostRedisplay(); return;
-		case 4: defaultScene->get3DSpace()->incrementScale(-0.05f); glutPostRedisplay(); return;
+		case 3: if(state == 0) defaultScene->get3DSpace()->incrementScale(0.05f); glutPostRedisplay(); return;
+		case 4: if(state == 0) defaultScene->get3DSpace()->incrementScale(-0.05f); glutPostRedisplay(); return;
 	};
 }
 
 #ifdef GTK_ENABLED
 		GtkWidget *filew;
 #endif
-
+int objCtrl = false;
 void motion(int x, int y){
+	int mod = glutGetModifiers();
 	if(leftmousebutton){
-		
-		defaultScene->rotateY((float) (x - mouse_x) / 100);
-		defaultScene->rotateX((float) (y - mouse_y)/ 100);
-
+		if(objCtrl){
+			pGO->rotateY((float) (x - mouse_x) / 100);
+			pGO->rotateX((float) (y - mouse_y)/ 100);
+		}else{
+			if(mod == GLUT_ACTIVE_CTRL){ // THIS DOES NOT WORK IF CAPSLOCK IS ON
+				defaultScene->rotateZ((float) (x - mouse_x) / 100);
+			} else{
+				defaultScene->rotateY((float) (x - mouse_x) / 100);
+			}			
+			defaultScene->rotateX((float) (y - mouse_y)/ 100);
+		}
 		glutPostRedisplay();
 
 	}
@@ -515,6 +525,13 @@ void keyboard(unsigned char key, int x, int y)
 	Vec3 pos;
 	switch (key)
 	{
+	  case 'e':
+		objCtrl = !objCtrl;
+		return;
+	  case 'q':
+		defaultScene->autoRescale();
+		glutPostRedisplay();
+		return;
 	  case 27:
 		  glutLeaveMainLoop();
 		  return;
@@ -544,7 +561,7 @@ std::cout << "--------------------------- PRESSED A -------------------- !11!!\n
 			glutPostRedisplay();
 		  return;
       case 'M':
-		pGO->rotateX(3.14159/2);
+		//pGO->rotateX(3.14159/2);
 		glutPostRedisplay();
 return;
       case 'd':
@@ -640,13 +657,13 @@ std::cout << "--------------------------- PRESSED 8 -------------------- !11!!\n
 		pGO->rotateX(0.1f);
 		  glutPostRedisplay();
 		return;
-
+*/
 		case '9':
 std::cout << "--------------------------- PRESSED 9 -------------------- !11!!\n";
 			pGO->center(defaultScene->getCameraPosition(), {0,0,-2});
 			glutPostRedisplay();
 			return;
-
+/*
 	  case '4':
 std::cout << "--------------------------- PRESSED 4 -------------------- !11!!\n";
 		pGO->rotateY(-0.1f);
@@ -669,7 +686,7 @@ std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n
 		pGO->rotateZ(0.1f);
 		  glutPostRedisplay();
 		return;*/
-case '1':
+/*case '1':
 	displayHandeler->getProjectors()->at(proj).moveKeystoneCorner(corner, 0, -0.01);
 	glutPostRedisplay();
 	return;
@@ -688,7 +705,7 @@ case '4':
 case '7':
 	corner++;
 	if(corner == 4) corner = 0;
-	return;
+	return;*/
 case '8':
 	proj++;
 	if(proj >= displayHandeler->getProjectors()->size()) proj = 0;
@@ -830,7 +847,8 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	
     currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
     gtk_widget_destroy(filew);
-	//defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
+	defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
+    displayHandeler->rebindBuffers(defaultScene);
 	gtk_main_quit();
 }
 #endif

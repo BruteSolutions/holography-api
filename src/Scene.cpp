@@ -31,25 +31,25 @@ Scene::Scene() {
     worldRotX.m[15]=1;
     */
 
-    worldRotX.m[0] = 1;
+/*    worldRotX.m[0] = 1;
     worldRotX.m[5] = 1;
     worldRotX.m[10] = 1;
     worldRotX.m[15] = 1;    
-
-    worldRotY.m[0] = 1;
+*/
+/*    worldRotY.m[0] = 1;
     worldRotY.m[5] = 1;
     worldRotY.m[10] = 1;
     worldRotY.m[15] = 1;
     //worldRotY.m[1]=0.707106781;
     //worldRotY.m[15]=1;
-
-    worldRotZ.m[0] = 1;
+*/
+/*    worldRotZ.m[0] = 1;
     worldRotZ.m[5] = 1;
     worldRotZ.m[10] = 1;
     worldRotZ.m[15] = 1;
     //worldRotZ.m[1]=0.707106781;
     //worldRotZ.m[15]=1;
-
+*/
     worldPos.m[0] = fFrustumScale;
     worldPos.m[5] = fFrustumScale;
     worldPos.m[10] = (fzFar + fzNear)/(fzNear - fzFar);
@@ -59,6 +59,8 @@ angleX=0;
 angleY=0;
 angleZ=0;
     memset(&w.m, 0, sizeof(w.m));
+    memset(&wi.m, 0, sizeof(w.m));
+    wi.m[0] = 1; wi.m[5] = 1; wi.m[ 10] = 1; wi.m[15] = 1;
     w.m[0] = 1; w.m[5] = 1; w.m[ 10] = 1; w.m[15] = 1;
 
     //worldPos.m[15]=1.0f;
@@ -114,7 +116,9 @@ GraphicalObject * Scene::getNextSelected() { ; }
 /**
  * TODO.
  */
-void Scene::deselectAll() { ; }
+void Scene::deselectAll() { 
+	threeDSpace->clearSelected(); 
+}
 
 /**
  * Merges a given scene to the current 3D-space.
@@ -190,11 +194,12 @@ void Scene::setRotation() {
  */
 void Scene::translateCam(Vec3 trans) {
     //TODO: make trans depend on the direction the camera is facing
-    Vec4* transRel = matMult(trans);
+    //Vec4* transRel = matMult(trans);
 //    std::cout << "Transrel : " << transRel->x << " " << transRel->y << " " << transRel-> z << " " << transRel-> w << "\n";
 
-    Vec3 newPos = {cPos.x + transRel->x, cPos.y + transRel->y, cPos.z + transRel->z};
-    cPos = newPos;
+    //Vec3 newPos = {cPos.x + transRel->x, cPos.y + transRel->y, cPos.z + transRel->z};
+    //cPos = newPos;
+    cPos = { cPos.x + trans.x, cPos.y + trans.y, cPos.z + trans.z };
     //std::cout << "campos:" << cPos.x << " " << cPos.y << " " << cPos.z << "\n";
 }
 
@@ -260,7 +265,44 @@ Vec4* Scene::matMult(Vec3 trans) {
     }
     return res;
 }
+void Scene::autoRescale(){
+	std::vector<GraphicalObject*> objects = get3DSpace()->getObjects();
 
+	float avgX=0,avgY=0,avgZ = 0;
+	float floats = 0;
+	float max = 0.00001;
+	for(int i = 0; i < objects.size(); i++){
+//		float vertexData[objects.at(i)->getVertexDataSize()];
+		GraphicalObject * object = objects.at(i);
+		object->setPosition({0,0,0});
+//		vertexData = objects.at(i)->getVertexData();
+		floats += object->getVertexDataSize();
+		for(int j = 0; j < object->getVertexDataSize(); j+=4){
+			avgX += object->getVertexData()[j];
+			avgY += object->getVertexData()[j+1];
+			avgZ += object->getVertexData()[j+2];
+		}
+	}
+	
+	avgX /= floats;
+	avgY /= floats;
+	avgZ /= floats;
+	for(int i = 0; i < objects.size(); i++){
+		
+		objects.at(i)->translate({-avgX,-avgY,-avgZ});
+	}
+	for(int i = 0; i < objects.size(); i++){
+		//float * vertexData = (float *)objects.at(i)->getVertexData();
+		GraphicalObject * object = objects.at(i);
+		for(int j = 0; j < objects.at(i)->getVertexDataSize(); j++){
+			if(j%4 == 3) continue;
+			if(max < abs(object->getVertexData()[j])) max = abs(object->getVertexData()[j]);
+		}
+	}
+	std::cout << "TJENA" << std::endl;
+	get3DSpace()->setScale(5/max);
+	
+}
 
 /**
  * Rotate the x angle.
@@ -276,17 +318,30 @@ m.m[5] = cos(angle);
 m.m[6] = sin(angle);
 m.m[9] = -sin(angle);
 m.m[10] = cos(angle);
+    Mat4 mi;
+    memset(&mi.m, 0, sizeof(mi));
+    mi.m[0] = 1; mi.m[5] = 1; mi.m[ 10] = 1; mi.m[15] = 1;
+mi.m[5] = cos(-angle);
+mi.m[6] = sin(-angle);
+mi.m[9] = -sin(-angle);
+mi.m[10] = cos(-angle);
+
+
     //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
     Mat4 w2;
+    Mat4 w2i;
+    memset(&w2i.m, 0, sizeof(w2i));
     memset(&w2.m, 0, sizeof(w2));
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
 	    for(int k=0;k<4;k++){
 	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+	    	w2i.m[i+4*j] += mi.m[i+4*k]*wi.m[k+4*j];
             }
         }
     }
     w = w2;
+    wi = w2i;
     
  
 
@@ -305,18 +360,28 @@ void Scene::rotateY(float angle) {
     m.m[2] = -sin(angle);
     m.m[8] = sin(angle);
     m.m[10] = cos(angle); 
-
+    Mat4 mi;//= { cos(angle), 0, -sin(angle), 0, 0, 1, 0, 0, sin(angle), 0, cos(angle), 0, 0, 0, 0, 1};
+    memset(&mi.m, 0, sizeof(mi));
+    mi.m[0] = 1; mi.m[5] = 1; mi.m[ 10] = 1; mi.m[15] = 1;
+    mi.m[0] = cos(-angle);
+    mi.m[2] = -sin(-angle);
+    mi.m[8] = sin(-angle);
+    mi.m[10] = cos(-angle); 
     //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
     Mat4 w2;
+    Mat4 w2i;
+    memset(&w2i.m, 0, sizeof(w2i));
     memset(&w2.m, 0, sizeof(w2));
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
 	    for(int k=0;k<4;k++){
 	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+	    	w2i.m[i+4*j] += mi.m[i+4*k]*wi.m[k+4*j];
             }
         }
     }
     w = w2;
+    wi = w2i;
     
  
 
@@ -336,17 +401,28 @@ void Scene::rotateZ(float angle) {
     m.m[1] = sin(angle);
     m.m[4] = -sin(angle);
     m.m[5] = cos(angle);  
+    Mat4 mi;// = { cos(angle), sin(angle), 0, 0, -sin(angle), cos(angle) , 0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1};
+    memset(&mi.m, 0, sizeof(mi));
+    mi.m[0] = 1; mi.m[5] = 1; mi.m[ 10] = 1; mi.m[15] = 1;
+    mi.m[0] = cos(-angle);
+    mi.m[1] = sin(-angle);
+    mi.m[4] = -sin(-angle);
+    mi.m[5] = cos(-angle);  
    //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
     Mat4 w2;
+    Mat4 w2i;
+    memset(&w2i.m, 0, sizeof(w2i));
     memset(&w2.m, 0, sizeof(w2));
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
 	    for(int k=0;k<4;k++){
 	    	w2.m[i+4*j] += m.m[i+4*k]*w.m[k+4*j];
+	    	w2i.m[i+4*j] += mi.m[i+4*k]*wi.m[k+4*j];
             }
         }
     }
     w = w2;
+    wi = w2i;
     
  
     

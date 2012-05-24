@@ -1,6 +1,7 @@
 Då hardware inte flippat bilden
 
 Projector 0
+Keystone setting 1
 Hardware V-16
 Hardware H 54
 Software
@@ -14,6 +15,7 @@ Y3: -0.99
 Y4: -0.96
 
 Projector 1
+Keystone setting 2
 Hardware V-16
 Hardware H 15
 
@@ -28,6 +30,7 @@ Y3: -0.98
 Y4: -0.98
 
 Projector 2
+Keystone setting 3
 Hardware V-16
 Hardware H-15
 Software
