@@ -58,7 +58,7 @@ ifeq ($(config),debug)
   LDFLAGS   += -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
   LIBS      += -lframeworkD -lglloadD -lglimgD -lglutilD -lglmeshD -lfreeglutD -lGLU -lGL  $(LIBXMLLIBS) $(GTKLIBS) $(GTKMMLIBS)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += ../framework/lib/libframework.a
+  LDDEPS    += ../framework/lib/libframeworkD.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   SRCPATH		 = src
   define PREBUILDCMDS
