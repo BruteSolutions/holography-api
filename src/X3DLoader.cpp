@@ -117,7 +117,9 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
             vertexData[ k + 2 ] = points.at( face.z ).z;
             vertexData[ k + 3 ] = points.at( face.z ).w;
         }
-
+				if(size == 0){ // means that we didnt find data for us to load
+					throw std::string("InvalidX3DFileException");
+				}
         scene->get3DSpace()->addObject( new GraphicalObject( vertexData, size, colorData, size ) );
         
         return scene;
