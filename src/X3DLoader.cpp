@@ -177,7 +177,7 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
     bool firstRun = true;
     int i = 0;
     while ( pch != NULL || firstRun ) {
-        Vec3Int tmp;
+        Vec3Int tmp,tmp2;
         if ( firstRun ) { 
             firstRun = false; 
             pch = strtok( (char*) attribute, " " );
@@ -188,15 +188,30 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
         if ( pch == NULL ) {
             break;
         }
-      
-        tmp.x = atoi( pch ) + count;
+      	
+        tmp.x = atoi( pch );
+        if(tmp.x == -1) throw std::string("InvalidX3DFileException");
         pch = strtok( NULL, " " );
-        tmp.y = atoi( pch ) + count;
+        tmp.y = atoi( pch );
+        if(tmp.y == -1) throw std::string("InvalidX3DFileException");
         pch = strtok( NULL, " " );
-        tmp.z = atoi( pch ) + count;
-        pch = strtok( NULL, " "); //-1
-	std::cout << tmp.x << " " << tmp.y << " " << tmp.z << std::endl;
-        faces->push_back( tmp );
+        tmp.z = atoi( pch );
+        if(tmp.z == -1) throw std::string("InvalidX3DFileException");
+        pch = strtok( NULL, " "); //face index value or -1
+        tmp2.z = atoi( pch );
+        if(tmp2.z >= 0){ //square
+        	pch = strtok( NULL, " "); //-1
+        	if(atoi( pch ) != -1) throw std::string("InvalidX3DFileException");
+        	tmp2.x = tmp.y;
+        	tmp2.y = tmp.z;
+        	i=1;
+        }//else triangle
+        
+				//std::cout << tmp.x << " " << tmp.y << " " << tmp.z << std::endl;
+        faces->push_back( {tmp.x+count,tmp.y+count,tmp.z+count} );
+        if(i==1){ //square, add another face
+        	faces->push_back( {tmp2.x+count,tmp.y+count,tmp.z+count} );
+        }
     }
 }
 
