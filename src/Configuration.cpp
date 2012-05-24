@@ -4,10 +4,12 @@
 #include "Configuration.h"
 using namespace std;
 
-/* Constructs a Configuration object with the given parameters as instance variables. 
- * @param _pos the position value of the Configuration object
- * @param _dir the direction value of the Configuration object
- * @param _factor the factor value of the Configuration object
+/**
+ * Constructs a new Configuration object with the specified position, direction
+ * and conversion factor.
+ * @param _pos the position of the projector.
+ * @param _dir the direction of the projector.
+ * @param _factor the conversion factor used by the ColorTranslator object.
  */
 Configuration::Configuration( Vec3 _pos, Vec3 _dir, Vec3 _factor ){
     pos = _pos;
@@ -15,35 +17,41 @@ Configuration::Configuration( Vec3 _pos, Vec3 _dir, Vec3 _factor ){
     factor = _factor;
 }
 
-/* Returns the ColorTranslator that should be used by the projector described. 
+/**
  * Returns the position of the projector.
- * @return pos the position of the projector
+ * @return pos a vector containing the position of the projector.
  */
 Vec3 Configuration::getPosition(){
     return pos;
 }
 
-/* Returns the direction of the projector.
- * @return dir the direction of the projector
+/**
+ * Returns the direction of the projector.
+ * @return dir a vector containing the direction of the projector.
  */
 Vec3 Configuration::getDirection(){
     return dir;
 }
 
-/* Returns the factor of the color translator.
- * @return factor the factor of the color translator
+/**
+ * Returns the conversion factor of the color translator.
+ * @return factor a vector containing the conversion factor of the color
+ * translator.
  */
 Vec3 Configuration::getColorTranslatorFactor(){
     return factor;
 }
 
-/* Writes this object to the underlying stream. 
- * @param os the output stream
+/**
+ * Writes the contents of this object to the specified file stream.
+ * @param os the output stream.
+ * @throws GenericIOException if the stream is not open or if writing to the
+ * stream fails.
  */
 void Configuration::writeToStream( std::ofstream& os ) throw ( std::string )  {
     if( !os.is_open() ) throw( string( "GenericIOException" ) );
     os.exceptions( ofstream::failbit | ofstream::eofbit );    
-    try{	
+    try{    
         os << factor.x << factor.y  << factor.z;
         os << pos.x << pos.y  << pos.z;
         os << dir.x << dir.y  << dir.z;
@@ -53,9 +61,17 @@ void Configuration::writeToStream( std::ofstream& os ) throw ( std::string )  {
     }
 }
 
-/* Reads the underlying stream and constructs a Configuration object which is returned. 
- * @param is the input stream
- * @return Configuration the configuration read.
+/**
+ * Reads and constructs a new Configuration object from the specified file
+ * stream.
+ * @param is the input stream.
+ * @return a new Configuration object from the contents read from the file
+ * stream.
+ * @throws GenericIOException if the stream is not open.
+ * @throws InsufficientDataException if not all of the data sufficient for
+ * constructing a new Configuration object can be read from the stream.
+ * @throws IllegalFormatException if the stream data does not match the expected
+ * format.
  */
 Configuration* Configuration::readStream( std::ifstream& is ) throw ( std::string ) {
     if( !is.is_open() ) throw( string( "GenericIOException" ) );
@@ -67,10 +83,10 @@ Configuration* Configuration::readStream( std::ifstream& is ) throw ( std::strin
         is >> Tdir.x >> Tdir.y  >> Tdir.z;
     }
     catch( ifstream::failure e ){
-	if( is.fail() ){
-	     if( is.eof() ) throw( string( "InsufficientDataException" ) );
-	     else throw( string( "IllegalFormatException" ) );
-	  }
+    if( is.fail() ){
+         if( is.eof() ) throw( string( "InsufficientDataException" ) );
+         else throw( string( "IllegalFormatException" ) );
+      }
      }
     return new Configuration( Tpos, Tdir, Tfactor );
 }
