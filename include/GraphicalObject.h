@@ -17,7 +17,8 @@ public:
 	void bindBufferData();
 	void draw();
 	void setOrigin(Vec3 ori);
-	Vec3 getOrigin();	
+	Vec3 getOrigin();
+	void setColorTriangle(int index, Vec3Int color);	
 	void rotate();
 	void rotateX(float angle);
 	void rotateY(float angle);

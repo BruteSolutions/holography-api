@@ -69,6 +69,29 @@ float* GraphicalObject::getColorData() {
 }
 
 /**
+ * Sets a triangle at an index to the specified color
+ * @param index is the index of the triangle to change color on
+ * @param color is a 3 int vector taking a value between 0 255 for each component invalid values will be set to zero
+ */
+void GraphicalObject::setColorTriangle(int index, Vec3Int color){
+	if(!(color.x >= 0 && color.x <= 255)){
+		color.x = 0;
+	}
+	if(!(color.y >= 0 && color.y <= 255)){
+	  color.y = 0;
+	}
+	if(!(color.z >= 0 && color.z <= 255)){
+	  color.z = 0;
+	}
+	for(int i = 0, j = 0; i < colorDataSize; i+=4, j++){
+		if(j == index){
+      colorData[i] = color.x/255;
+			colorData[i+1] = color.y/255;
+			colorData[i+2] = color.z/255;
+		}
+	}
+}
+/**
  * Returns the color data vertex size.
  * @return Color data vertex size.
  */
