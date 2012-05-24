@@ -318,7 +318,7 @@ m.m[5] = cos(angle);
 m.m[6] = sin(angle);
 m.m[9] = -sin(angle);
 m.m[10] = cos(angle);
-    Mat4 mi;
+  /*  Mat4 mi;
     memset(&mi.m, 0, sizeof(mi));
     mi.m[0] = 1; mi.m[5] = 1; mi.m[ 10] = 1; mi.m[15] = 1;
 mi.m[5] = cos(-angle);
@@ -341,8 +341,8 @@ mi.m[10] = cos(-angle);
         }
     }
     w = w2;
-    wi = w2i;
-    
+    wi = w2i;*/
+      w = Mat4::matrixMultiplication(m,w);
  
 
 //    angleX+=angle;
@@ -360,7 +360,7 @@ void Scene::rotateY(float angle) {
     m.m[2] = -sin(angle);
     m.m[8] = sin(angle);
     m.m[10] = cos(angle); 
-    Mat4 mi;//= { cos(angle), 0, -sin(angle), 0, 0, 1, 0, 0, sin(angle), 0, cos(angle), 0, 0, 0, 0, 1};
+    /*Mat4 mi;//= { cos(angle), 0, -sin(angle), 0, 0, 1, 0, 0, sin(angle), 0, cos(angle), 0, 0, 0, 0, 1};
     memset(&mi.m, 0, sizeof(mi));
     mi.m[0] = 1; mi.m[5] = 1; mi.m[ 10] = 1; mi.m[15] = 1;
     mi.m[0] = cos(-angle);
@@ -382,8 +382,8 @@ void Scene::rotateY(float angle) {
     }
     w = w2;
     wi = w2i;
-    
- 
+    */
+  w = Mat4::matrixMultiplication(m,w); 
 
     angleY+=angle;
 }
@@ -401,17 +401,17 @@ void Scene::rotateZ(float angle) {
     m.m[1] = sin(angle);
     m.m[4] = -sin(angle);
     m.m[5] = cos(angle);  
-    Mat4 mi;// = { cos(angle), sin(angle), 0, 0, -sin(angle), cos(angle) , 0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1};
+/*    Mat4 mi;// = { cos(angle), sin(angle), 0, 0, -sin(angle), cos(angle) , 0, 0, 0, 0, 1, 0, 0, 0 ,0 ,1};
     memset(&mi.m, 0, sizeof(mi));
     mi.m[0] = 1; mi.m[5] = 1; mi.m[ 10] = 1; mi.m[15] = 1;
     mi.m[0] = cos(-angle);
     mi.m[1] = sin(-angle);
     mi.m[4] = -sin(-angle);
     mi.m[5] = cos(-angle);  
-   //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m
-    Mat4 w2;
-    Mat4 w2i;
-    memset(&w2i.m, 0, sizeof(w2i));
+   //w = { w[0], m[5]*w[1]+ m[9]*w[2], m[6]*w[1] + m[10]*w[2], w[0][3], m*/
+//    Mat4 w2;
+//    Mat4 w2i;
+/*    memset(&w2i.m, 0, sizeof(w2i));
     memset(&w2.m, 0, sizeof(w2));
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
@@ -422,8 +422,8 @@ void Scene::rotateZ(float angle) {
         }
     }
     w = w2;
-    wi = w2i;
-    
+    wi = w2i;*/
+  w = Mat4::matrixMultiplication(m,w);  
  
     
     angleZ+=angle;
