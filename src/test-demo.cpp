@@ -848,8 +848,8 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
     currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
     gtk_widget_destroy(filew);
 	defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
-    displayHandeler->rebindBuffers(defaultScene);
-	gtk_main_quit();
+    displayHandeler->rebindBuffers(defaultScene); //Is really important
+    destroyMenu();
 }
 #endif
 
