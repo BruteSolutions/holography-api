@@ -33,7 +33,6 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
     std::locale::global(std::locale(""));
     std::vector<Vec3Int> faces;
     std::vector<Vec4> points;
-    std::cout << "hejja" <<std::endl;
     Scene * scene = new Scene();
     float *vertexData;
     float *colorData;
@@ -58,6 +57,9 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
                                 if ( strcmp( reader.get_name().c_str(), "coordIndex" ) == 0 ) {
                                     copyCoordIndex( reader.get_value().c_str(), &faces, coordIndexOffset );
                                 }
+                                if ( strcmp( reader.get_name().c_str(), "colorIndex" ) == 0 ) {
+                                	//handle color per triangle
+                                }
                             } while ( reader.move_to_next_attribute() );
                         }
                         while ( reader.read() ) { //skipping CADPart CADFace Shape
@@ -72,13 +74,21 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
                                     coordIndexOffset = points.size(); //the next time a shape is loaded it will add faces at the end
                                 }
                             }
+                            if ( strcmp( reader.get_name().c_str(), "Color" ) == 0 ) {
+                            	if ( reader.has_attributes() ) {
+                            		reader.move_to_first_attribute();
+                            		do {
+                            			if ( strcmp( reader.get_name().c_str(), "color" ) == 0 ) {
+                            				//handle color coords
+                            			}
+                            		} while ( reader.move_to_next_attribute() );
+                            }
                             if ( strcmp( reader.get_name().c_str(), "IndexedFaceSet" ) == 0) { break; }
                         }
                     }
                 }            
             }
         }
-            std::cout << "hejja" <<std::endl;
         //create a graphical object
         int size = faces.size() * 12; //every face consists of 3 nodes with 4 flouts
         vertexData = new float[ size ];
@@ -117,9 +127,9 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
             vertexData[ k + 2 ] = points.at( face.z ).z;
             vertexData[ k + 3 ] = points.at( face.z ).w;
         }
-				if(size == 0){ // means that we didnt find data for us to load
-					throw std::string("InvalidX3DFileException");
-				}
+        if(size == 0){ // means that we didnt find data for us to load
+            throw std::string("InvalidX3DFileException");
+        }
         scene->get3DSpace()->addObject( new GraphicalObject( vertexData, size, colorData, size ) );
         
         return scene;
@@ -184,6 +194,7 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
             firstRun = false; 
             pch = strtok( (char*) attribute, " " );
         } else {
+            i = 0;
             pch = strtok ( NULL, " " );
         }
         
@@ -204,7 +215,7 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
         if(tmp2.z >= 0){ //square
         	pch = strtok( NULL, " "); //-1
         	if(atoi( pch ) != -1) throw std::string("InvalidX3DFileException");
-        	tmp2.x = tmp.y;
+        	tmp2.x = tmp.x;
         	tmp2.y = tmp.z;
         	i=1;
         }//else triangle
