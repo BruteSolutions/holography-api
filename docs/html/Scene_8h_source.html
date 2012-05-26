@@ -47,50 +47,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Scene.h</div>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef __SCENE_H</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define __SCENE_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &quot;Shader.h&quot;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Shared.h&quot;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;ThreeDSpace.h&quot;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;glload/gl_3_3.h&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;GL/freeglut.h&gt;</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a><a class="code" href="classScene.html">00009</a> <span class="keyword">class </span><a class="code" href="classScene.html">Scene</a> {
-<a name="l00010"></a>00010 <span class="keyword">public</span>:
-<a name="l00011"></a>00011     <a class="code" href="classScene.html#ad10176d75a9cc0da56626f682d083507">Scene</a>();
-<a name="l00012"></a>00012     ThreeDSpace * <a class="code" href="classScene.html#ab74403c449c1431acab9c783331b2da0">get3DSpace</a>();        
-<a name="l00013"></a>00013     Vec3 <a class="code" href="classScene.html#a24db151a098841ac7e6e6bcf7205936d">getCameraPosition</a>();
-<a name="l00014"></a>00014     <span class="keywordtype">void</span> <a class="code" href="classScene.html#aec4584d46e3c6b84167e2543f1a3debb">translateCam</a>(Vec3 trans);
-<a name="l00015"></a>00015 
-<a name="l00016"></a>00016     ThreeDSpace * threeDSpace;
-<a name="l00017"></a>00017     Vec3 cPos, cDir;
-<a name="l00018"></a>00018     <span class="keywordtype">void</span> <a class="code" href="classScene.html#acebcb8d63dbee5b93684697560ef9b87">selectNext</a>();
-<a name="l00019"></a>00019     GraphicalObject * <a class="code" href="classScene.html#afd7622d2711b6bf5de1e0c10e4c7888e">getNext</a>();
-<a name="l00020"></a>00020     GraphicalObject * <a class="code" href="classScene.html#a16ccb8a2a70b9f569e3200e102ffc50e">getNextSelected</a>();
-<a name="l00021"></a>00021     <span class="keywordtype">void</span> <a class="code" href="classScene.html#afc4e124efa0700e2fc2108896b90fd04">deselectAll</a>();
-<a name="l00022"></a>00022     std::vector&lt;GraphicalObject*&gt; <a class="code" href="classScene.html#ae3dc001c52db9e46815991c1584e6c56">getSelected</a>();
-<a name="l00023"></a>00023     Mat4 worldPos, worldRotX, worldRotY, worldRotZ;
-<a name="l00024"></a>00024     <span class="keywordtype">void</span> <a class="code" href="classScene.html#ae1bf59ba2fe9e6a6ddd62a1b9acf54e3">applyPos</a>(GLuint shader);
-<a name="l00025"></a>00025     <span class="keywordtype">float</span> fFrustumScale ; <span class="keywordtype">float</span> fzNear; <span class="keywordtype">float</span> fzFar;
-<a name="l00026"></a>00026     <span class="keywordtype">void</span> <a class="code" href="classScene.html#ad8977c8d6af90aee27e99c93124a0231">applyRot</a>(GLuint shader);
-<a name="l00027"></a>00027     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a80d8d660eb485e41aa0ad0ac5e130e64">setRotation</a>();
-<a name="l00028"></a>00028     <span class="keywordtype">float</span> angleX, angleY,angleZ;
-<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="classScene.html#aadba0549da987fa2a34d928dc132f759">rotateX</a>(<span class="keywordtype">float</span> angle);
-<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="classScene.html#a371818ec48a73b3d26bf68b73652d7c1">rotateY</a>(<span class="keywordtype">float</span> angle);
-<a name="l00031"></a>00031         <span class="keywordtype">void</span> <a class="code" href="classScene.html#a76932b0837c578d05de254dfe0304d6e">rotateZ</a>(<span class="keywordtype">float</span> angle);
-<a name="l00032"></a>00032         <span class="keywordtype">void</span> <a class="code" href="classScene.html#a52947077b36d09d8fb01f199473ba323">rotateXRad</a>(<span class="keywordtype">float</span> angle);
-<a name="l00033"></a>00033         <span class="keywordtype">void</span> <a class="code" href="classScene.html#a7b1752ca9b485c97990c094cdbdfd5b7">rotateYRad</a>(<span class="keywordtype">float</span> angle);
-<a name="l00034"></a>00034         <span class="keywordtype">void</span> <a class="code" href="classScene.html#a1881e9dfcfeb572ec91c24ead09bbf76">rotateZRad</a>(<span class="keywordtype">float</span> angle);
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SCENE_H_</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SCENE_H_</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;Shader.h&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;Shared.h&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;ThreeDSpace.h&quot;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="classScene.html">00008</a> <span class="keyword">class </span><a class="code" href="classScene.html">Scene</a> {
+<a name="l00009"></a>00009 <span class="keyword">public</span>:
+<a name="l00010"></a>00010     <a class="code" href="classScene.html#ad10176d75a9cc0da56626f682d083507">Scene</a>();
+<a name="l00011"></a>00011     <a class="code" href="classThreeDSpace.html">ThreeDSpace</a> * <a class="code" href="classScene.html#ab74403c449c1431acab9c783331b2da0">get3DSpace</a>();        
+<a name="l00012"></a>00012     <a class="code" href="structVec3.html">Vec3</a> <a class="code" href="classScene.html#a24db151a098841ac7e6e6bcf7205936d">getCameraPosition</a>();
+<a name="l00013"></a>00013     <span class="keywordtype">void</span> <a class="code" href="classScene.html#aec4584d46e3c6b84167e2543f1a3debb">translateCam</a>(<a class="code" href="structVec3.html">Vec3</a> trans);
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015     <a class="code" href="classThreeDSpace.html">ThreeDSpace</a> * threeDSpace;
+<a name="l00016"></a>00016     <a class="code" href="structVec3.html">Vec3</a> cPos, cDir;
+<a name="l00017"></a>00017     <span class="keywordtype">void</span> <a class="code" href="classScene.html#acebcb8d63dbee5b93684697560ef9b87">selectNext</a>();
+<a name="l00018"></a>00018     <a class="code" href="classGraphicalObject.html">GraphicalObject</a> * <a class="code" href="classScene.html#afd7622d2711b6bf5de1e0c10e4c7888e">getNext</a>();
+<a name="l00019"></a>00019     <a class="code" href="classGraphicalObject.html">GraphicalObject</a> * <a class="code" href="classScene.html#a16ccb8a2a70b9f569e3200e102ffc50e">getNextSelected</a>();
+<a name="l00020"></a>00020     <span class="keywordtype">void</span> <a class="code" href="classScene.html#afc4e124efa0700e2fc2108896b90fd04">deselectAll</a>();
+<a name="l00021"></a>00021     std::vector&lt;GraphicalObject*&gt; <a class="code" href="classScene.html#ae3dc001c52db9e46815991c1584e6c56">getSelected</a>();
+<a name="l00022"></a>00022     <a class="code" href="structMat4.html">Mat4</a> worldPos, worldRotX, worldRotY, worldRotZ;
+<a name="l00023"></a>00023     <span class="keywordtype">void</span> <a class="code" href="classScene.html#ae1bf59ba2fe9e6a6ddd62a1b9acf54e3">applyPos</a>(GLuint shader);
+<a name="l00024"></a>00024     <span class="keywordtype">float</span> fFrustumScale ; <span class="keywordtype">float</span> fzNear; <span class="keywordtype">float</span> fzFar;
+<a name="l00025"></a>00025     <span class="keywordtype">void</span> <a class="code" href="classScene.html#ad8977c8d6af90aee27e99c93124a0231">applyRot</a>(GLuint shader);
+<a name="l00026"></a>00026     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a80d8d660eb485e41aa0ad0ac5e130e64">setRotation</a>();
+<a name="l00027"></a>00027     <span class="keywordtype">float</span> angleX, angleY,angleZ;
+<a name="l00028"></a>00028     <span class="keywordtype">void</span> <a class="code" href="classScene.html#aadba0549da987fa2a34d928dc132f759">rotateX</a>(<span class="keywordtype">float</span> angle);
+<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a371818ec48a73b3d26bf68b73652d7c1">rotateY</a>(<span class="keywordtype">float</span> angle);
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a76932b0837c578d05de254dfe0304d6e">rotateZ</a>(<span class="keywordtype">float</span> angle);
+<a name="l00031"></a>00031     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a52947077b36d09d8fb01f199473ba323">rotateXRad</a>(<span class="keywordtype">float</span> angle);
+<a name="l00032"></a>00032     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a7b1752ca9b485c97990c094cdbdfd5b7">rotateYRad</a>(<span class="keywordtype">float</span> angle);
+<a name="l00033"></a>00033     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a1881e9dfcfeb572ec91c24ead09bbf76">rotateZRad</a>(<span class="keywordtype">float</span> angle);
+<a name="l00034"></a>00034     <span class="keywordtype">void</span> autoRescale();
 <a name="l00035"></a>00035     <span class="keywordtype">void</span> <a class="code" href="classScene.html#ae7ce397f040f9f0d7f2b65bb3b613aad">merge</a>(<a class="code" href="classScene.html">Scene</a> * scene);
 <a name="l00036"></a>00036     <span class="keywordtype">void</span> <a class="code" href="classScene.html#a52ce62bd6896ec02c61e187303887ee0">toggleBackgroundHighlightning</a>();
 <a name="l00037"></a>00037     <span class="keywordtype">bool</span> <a class="code" href="classScene.html#abd47005abd1021b8170ac38ad8ee2a3c">getBackgroundHighlightning</a>();
-<a name="l00038"></a>00038     
-<a name="l00039"></a>00039 <span class="keyword">private</span>:        
-<a name="l00040"></a>00040     Vec4* matMult(Vec3 vec3);
-<a name="l00041"></a>00041     <span class="keywordtype">bool</span> backgroundHighlightning;
-<a name="l00042"></a>00042 };
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <span class="preprocessor">#endif</span>
+<a name="l00038"></a>00038     <a class="code" href="structMat4.html">Mat4</a> getWMatrix(){<span class="keywordflow">return</span> w;};
+<a name="l00039"></a>00039     <a class="code" href="structMat4.html">Mat4</a> getWiMatrix(){<span class="keywordflow">return</span> wi;};
+<a name="l00040"></a>00040 <span class="keyword">private</span>:        
+<a name="l00041"></a>00041     <a class="code" href="structVec4.html">Vec4</a>* matMult(<a class="code" href="structVec3.html">Vec3</a> vec3);
+<a name="l00042"></a>00042     <a class="code" href="structMat4.html">Mat4</a> w, wi;
+<a name="l00043"></a>00043     <span class="keywordtype">bool</span> backgroundHighlightning;
+<a name="l00044"></a>00044 };
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -107,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 16 2012 23:42:43 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

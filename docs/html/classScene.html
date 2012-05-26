@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -59,14 +60,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ad10176d75a9cc0da56626f682d083507">Scene</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ThreeDSpace *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ab74403c449c1431acab9c783331b2da0">get3DSpace</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a24db151a098841ac7e6e6bcf7205936d">getCameraPosition</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#aec4584d46e3c6b84167e2543f1a3debb">translateCam</a> (Vec3 trans)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classThreeDSpace.html">ThreeDSpace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ab74403c449c1431acab9c783331b2da0">get3DSpace</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a24db151a098841ac7e6e6bcf7205936d">getCameraPosition</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#aec4584d46e3c6b84167e2543f1a3debb">translateCam</a> (<a class="el" href="structVec3.html">Vec3</a> trans)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#acebcb8d63dbee5b93684697560ef9b87">selectNext</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">GraphicalObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#afd7622d2711b6bf5de1e0c10e4c7888e">getNext</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">GraphicalObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a16ccb8a2a70b9f569e3200e102ffc50e">getNextSelected</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classGraphicalObject.html">GraphicalObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#afd7622d2711b6bf5de1e0c10e4c7888e">getNext</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classGraphicalObject.html">GraphicalObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a16ccb8a2a70b9f569e3200e102ffc50e">getNextSelected</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#afc4e124efa0700e2fc2108896b90fd04">deselectAll</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; GraphicalObject * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ae3dc001c52db9e46815991c1584e6c56">getSelected</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classGraphicalObject.html">GraphicalObject</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ae3dc001c52db9e46815991c1584e6c56">getSelected</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ae1bf59ba2fe9e6a6ddd62a1b9acf54e3">applyPos</a> (GLuint shader)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ad8977c8d6af90aee27e99c93124a0231">applyRot</a> (GLuint shader)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a80d8d660eb485e41aa0ad0ac5e130e64">setRotation</a> ()</td></tr>
@@ -76,25 +77,31 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a52947077b36d09d8fb01f199473ba323">rotateXRad</a> (float angle)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a7b1752ca9b485c97990c094cdbdfd5b7">rotateYRad</a> (float angle)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a1881e9dfcfeb572ec91c24ead09bbf76">rotateZRad</a> (float angle)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43cd7232f4c439745bb6bd09bfe723a0"></a><!-- doxytag: member="Scene::autoRescale" ref="a43cd7232f4c439745bb6bd09bfe723a0" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>autoRescale</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#ae7ce397f040f9f0d7f2b65bb3b613aad">merge</a> (<a class="el" href="classScene.html">Scene</a> *scene)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a52ce62bd6896ec02c61e187303887ee0">toggleBackgroundHighlightning</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#abd47005abd1021b8170ac38ad8ee2a3c">getBackgroundHighlightning</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f77af2ea1e74e27ebfd61ad81b558eb"></a><!-- doxytag: member="Scene::getWMatrix" ref="a6f77af2ea1e74e27ebfd61ad81b558eb" args="()" -->
+<a class="el" href="structMat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getWMatrix</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36a8a9707d64708c0bd9af27a6602e51"></a><!-- doxytag: member="Scene::getWiMatrix" ref="a36a8a9707d64708c0bd9af27a6602e51" args="()" -->
+<a class="el" href="structMat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getWiMatrix</b> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a751c2cd2faf59a0f1fc6764cbbb3e30c"></a><!-- doxytag: member="Scene::threeDSpace" ref="a751c2cd2faf59a0f1fc6764cbbb3e30c" args="" -->
-ThreeDSpace *&#160;</td><td class="memItemRight" valign="bottom"><b>threeDSpace</b></td></tr>
+<a class="el" href="classThreeDSpace.html">ThreeDSpace</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>threeDSpace</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ddf41e31f1c3fee31a52a9a898703f3"></a><!-- doxytag: member="Scene::cPos" ref="a0ddf41e31f1c3fee31a52a9a898703f3" args="" -->
-Vec3&#160;</td><td class="memItemRight" valign="bottom"><b>cPos</b></td></tr>
+<a class="el" href="structVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cPos</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f21d486a60d29c7a531a748ae8312bc"></a><!-- doxytag: member="Scene::cDir" ref="a0f21d486a60d29c7a531a748ae8312bc" args="" -->
-Vec3&#160;</td><td class="memItemRight" valign="bottom"><b>cDir</b></td></tr>
+<a class="el" href="structVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cDir</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab262ca600b9a5f92418f6eaf437bb336"></a><!-- doxytag: member="Scene::worldPos" ref="ab262ca600b9a5f92418f6eaf437bb336" args="" -->
-Mat4&#160;</td><td class="memItemRight" valign="bottom"><b>worldPos</b></td></tr>
+<a class="el" href="structMat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>worldPos</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae452de3381a84afc87711da71e0cc774"></a><!-- doxytag: member="Scene::worldRotX" ref="ae452de3381a84afc87711da71e0cc774" args="" -->
-Mat4&#160;</td><td class="memItemRight" valign="bottom"><b>worldRotX</b></td></tr>
+<a class="el" href="structMat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>worldRotX</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a288f0349fcb11e7c50fdd163eb23304a"></a><!-- doxytag: member="Scene::worldRotY" ref="a288f0349fcb11e7c50fdd163eb23304a" args="" -->
-Mat4&#160;</td><td class="memItemRight" valign="bottom"><b>worldRotY</b></td></tr>
+<a class="el" href="structMat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>worldRotY</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b99400a175eb643dc70b200e648f6ac"></a><!-- doxytag: member="Scene::worldRotZ" ref="a7b99400a175eb643dc70b200e648f6ac" args="" -->
-Mat4&#160;</td><td class="memItemRight" valign="bottom"><b>worldRotZ</b></td></tr>
+<a class="el" href="structMat4.html">Mat4</a>&#160;</td><td class="memItemRight" valign="bottom"><b>worldRotZ</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab067b58fc1a606cbcb88fbe776e0560d"></a><!-- doxytag: member="Scene::fFrustumScale" ref="ab067b58fc1a606cbcb88fbe776e0560d" args="" -->
 float&#160;</td><td class="memItemRight" valign="bottom"><b>fFrustumScale</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00ec0a4d7c0b640f3be5dd35be576753"></a><!-- doxytag: member="Scene::fzNear" ref="a00ec0a4d7c0b640f3be5dd35be576753" args="" -->
@@ -197,7 +204,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ThreeDSpace * Scene::get3DSpace </td>
+          <td class="memname"><a class="el" href="classThreeDSpace.html">ThreeDSpace</a> * Scene::get3DSpace </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -232,7 +239,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Vec3 Scene::getCameraPosition </td>
+          <td class="memname"><a class="el" href="structVec3.html">Vec3</a> Scene::getCameraPosition </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -250,7 +257,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GraphicalObject * Scene::getNext </td>
+          <td class="memname"><a class="el" href="classGraphicalObject.html">GraphicalObject</a> * Scene::getNext </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -259,7 +266,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 </div>
 <div class="memdoc">
 <p>Retrieves the next object from 3D-space. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Retrieves the next GraphicalObject. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Retrieves the next <a class="el" href="classGraphicalObject.html">GraphicalObject</a>. </dd></dl>
 
 </div>
 </div>
@@ -268,7 +275,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GraphicalObject * Scene::getNextSelected </td>
+          <td class="memname"><a class="el" href="classGraphicalObject.html">GraphicalObject</a> * Scene::getNextSelected </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -286,7 +293,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; GraphicalObject * &gt; Scene::getSelected </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classGraphicalObject.html">GraphicalObject</a> * &gt; Scene::getSelected </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -525,7 +532,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
         <tr>
           <td class="memname">void Scene::translateCam </td>
           <td>(</td>
-          <td class="paramtype">Vec3&#160;</td>
+          <td class="paramtype"><a class="el" href="structVec3.html">Vec3</a>&#160;</td>
           <td class="paramname"><em>trans</em></td><td>)</td>
           <td></td>
         </tr>
@@ -561,7 +568,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>angleZ</b></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 16 2012 23:42:44 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:32 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -41,6 +41,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -59,13 +60,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ae972fffea6f7ca1d627ef48c3d841bb3">Display</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a83c8747af2e4a4e2c2f59f9e30dd12d7">display</a> (<a class="el" href="classScene.html">Scene</a> scene)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; Projector &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#af2463d86a214259bb89fb00e0ced3065">getProjectors</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Monitor *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ab27364120a2b6e513d14e9ae39b031f9">getMonitor</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ColorTranslator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a2e319a064952d0a7b1c510d23682a784">getColorTranslator</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a30e759876c38401a623f31095d161054">addProjector</a> (Projector *projector)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classProjector.html">Projector</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#af2463d86a214259bb89fb00e0ced3065">getProjectors</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMonitor.html">Monitor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ab27364120a2b6e513d14e9ae39b031f9">getMonitor</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classColorTranslator.html">ColorTranslator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a2e319a064952d0a7b1c510d23682a784">getColorTranslator</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76d139338c3ae5903f9cc2c6505a41aa"></a><!-- doxytag: member="Display::rebindBuffers" ref="a76d139338c3ae5903f9cc2c6505a41aa" args="(Scene *scene)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>rebindBuffers</b> (<a class="el" href="classScene.html">Scene</a> *scene)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a30e759876c38401a623f31095d161054">addProjector</a> (<a class="el" href="classProjector.html">Projector</a> *projector)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a06d5de5525021158585fb4fdfd19fabb">getBoundingCube</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#afd96105e1c0b6d8e0e6433331482fe6e">highlight</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ad5cca0a6d4980aaf229de2be156231cd">unHighlight</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a556c8af9f7923ca3bd51231399c8c62c">setConfigurations</a> (<a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> uc)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ad6fb864e50d126c22c3de548a7fbe666">getConfigurations</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae972fffea6f7ca1d627ef48c3d841bb3"></a><!-- doxytag: member="Display::Display" ref="ae972fffea6f7ca1d627ef48c3d841bb3" args="()" -->
@@ -93,7 +98,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Display::addProjector </td>
           <td>(</td>
-          <td class="paramtype">Projector *&#160;</td>
+          <td class="paramtype"><a class="el" href="classProjector.html">Projector</a> *&#160;</td>
           <td class="paramname"><em>projector</em></td><td>)</td>
           <td></td>
         </tr>
@@ -103,7 +108,7 @@ Public Member Functions</h2></td></tr>
 <p>Adds a projector to the display. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">projector</td><td>Projector to be added. </td></tr>
+    <tr><td class="paramname">projector</td><td><a class="el" href="classProjector.html">Projector</a> to be added. </td></tr>
   </table>
   </dd>
 </dl>
@@ -157,7 +162,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ColorTranslator * Display::getColorTranslator </td>
+          <td class="memname"><a class="el" href="classColorTranslator.html">ColorTranslator</a> * Display::getColorTranslator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -170,12 +175,30 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad6fb864e50d126c22c3de548a7fbe666"></a><!-- doxytag: member="Display::getConfigurations" ref="ad6fb864e50d126c22c3de548a7fbe666" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> * Display::getConfigurations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Get the configuration from the projectors. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>UnivercalConfiguration </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ab27364120a2b6e513d14e9ae39b031f9"></a><!-- doxytag: member="Display::getMonitor" ref="ab27364120a2b6e513d14e9ae39b031f9" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Monitor * Display::getMonitor </td>
+          <td class="memname"><a class="el" href="classMonitor.html">Monitor</a> * Display::getMonitor </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -193,7 +216,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; Projector &gt; * Display::getProjectors </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classProjector.html">Projector</a> &gt; * Display::getProjectors </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -220,6 +243,30 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Highlights the display. </p>
+
+</div>
+</div>
+<a class="anchor" id="a556c8af9f7923ca3bd51231399c8c62c"></a><!-- doxytag: member="Display::setConfigurations" ref="a556c8af9f7923ca3bd51231399c8c62c" args="(UniversalConfiguration uc)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Display::setConfigurations </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a>&#160;</td>
+          <td class="paramname"><em>uc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Set the configuration for the projectors </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a></td><td>uc to set </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -259,7 +306,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 16 2012 23:42:43 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
