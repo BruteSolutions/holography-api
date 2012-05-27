@@ -17,7 +17,7 @@ public:
     Configuration getConfiguration();
     void highlight();
     void unHighlight();
-    int* getBuffer(); //not implemented
+    int* getBuffer(); //not implemented not needed
     void calcKeystone(GLuint pid) throw (std::string);
     void display(Scene scene);
     void addShader(Shader shader);
@@ -30,15 +30,15 @@ public:
     void setKeystoneObserved(KeystoneSetting f);
 private:
     std::vector<Shader> shaders;
-    int * pnt;
-    unsigned int bufferSize;
+    int * pnt; //not used
+    unsigned int bufferSize; //not used
     ColorTranslator * colorTranslator;
     Configuration configuration;
     bool highlighted;
     Vec3 pos;
     Vec3 direction;
     Mat4 keystone;
-    float X1, X2,X3,X4, Y1,Y2,Y3,Y4;
+    float X1,X2,X3,X4, Y1,Y2,Y3,Y4; //keystone observed values
 };
 
 #endif

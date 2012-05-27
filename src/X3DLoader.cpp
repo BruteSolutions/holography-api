@@ -92,6 +92,9 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
         }
         //create a graphical object
         int size = faces.size() * 12; //every face consists of 3 nodes with 4 flouts
+        if(size == 0){ // means that we didnt find data for us to load
+            throw std::string("InvalidX3DFileException");
+        }
         vertexData = new float[ size ];
         colorData = new float[ size ];
         int x = 0, y = 0;
@@ -111,7 +114,6 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
                     y = 0;
                 }
             }
-            //std::cout << "Color for triangle " << (i+1)/4 << " corner " << (x+1) << ": " << colorData[ i ] << " " << colorData[ i+1 ] << " " << colorData[ i+2 ] <<  " " << colorData[ i+3 ] << std::endl;
         }
         /* Creates the coord vector that builds triangles */
         for (int f = 0, i = 0, j = 4, k = 8; f < faces.size(); f++, i += 12, j += 12, k += 12) {
@@ -133,16 +135,13 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
             std::cout << "Vertex for triangle " << f << " corner " << 2 << ": " << vertexData[ k ] << " " << vertexData[ k+1 ] << " " << vertexData[ k+2 ] <<  " " << vertexData[ k+3 ] << std::endl;
 
         }
-        if(size == 0){ // means that we didnt find data for us to load
-            throw std::string("InvalidX3DFileException");
-        }
+
         scene->get3DSpace()->addObject( new GraphicalObject( vertexData, size, colorData, size ) );
         
         return scene;
  
- /* TODO: kolla vilket exception som kastas för ogiltiga filer */
     } catch( const std::exception& e ) { // catches LIBXML++ exception 2.6
-       // if( e.what().find( "parse error" ) != string::npos ) throw( std::string( "IllegalX3DFileException" ) );
+       if( e.what().find( "parse error" ) != string::npos ) throw( std::string( "IllegalX3DFileException" ) );
         /*else*/ throw std::string(e.what());
     }
 }
@@ -226,13 +225,10 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
         	i=1;
         }//else triangle
         
-		std::cout << "first triangle: " << tmp.x << " " << tmp.y << " " << tmp.z << std::endl;
-        faces->push_back( {tmp.x+count,tmp.y+count,tmp.z+count} );
+		faces->push_back( {tmp.x+count,tmp.y+count,tmp.z+count} );
         if(i==1){ //square, add another face
-		std::cout << "second triangle: " << tmp2.x << " " << tmp2.y << " " << tmp2.z << std::endl;
-        	faces->push_back( {tmp2.x+count,tmp2.y+count,tmp2.z+count} );
+			faces->push_back( {tmp2.x+count,tmp2.y+count,tmp2.z+count} );
         }
-        std::cout << "size: " << faces->size() <<std::endl;
     }
 }
 

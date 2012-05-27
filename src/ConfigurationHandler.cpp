@@ -27,12 +27,10 @@ void ConfigurationHandler::save( UniversalConfiguration *uc, char * path ){
 UniversalConfiguration* ConfigurationHandler::load( char * path )  throw (std::string ) {
     //Check that the configuration we're trying to load actually exists
     std::ifstream ifile( path );
-    std::cout << "adasda" << std::endl;
     if( ifile.fail() ) throw( std::string( "FileNotFoundException" ) );
 
     std::ifstream is( path );
     UniversalConfiguration* uc = UniversalConfiguration::readStream( is );
-       std::cout << "adasda" << std::endl;
     is.close();
     return uc;
 }

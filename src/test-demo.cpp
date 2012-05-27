@@ -861,8 +861,7 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
     gtk_widget_destroy(filew);
 
 	defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
-	if(pGO == NULL)
-		selectNextObject();
+
     displayHandeler->rebindBuffers(defaultScene); //Is really important
 }
 #endif

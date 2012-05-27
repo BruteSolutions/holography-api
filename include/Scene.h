@@ -22,7 +22,7 @@ public:
     Mat4 worldPos, worldRotX, worldRotY, worldRotZ;
     void applyPos(GLuint shader);
     float fFrustumScale ; float fzNear; float fzFar;
-    void applyRot(GLuint shader);
+    void setUniforms(GLuint shader);
     void setRotation();
     float angleX, angleY,angleZ;
     void rotateX(float angle);
@@ -35,11 +35,8 @@ public:
     void merge(Scene * scene);
     void toggleBackgroundHighlightning();
     bool getBackgroundHighlightning();
-    Mat4 getWMatrix(){return w;};
-    Mat4 getWiMatrix(){return wi;};
 private:        
-    Vec4* matMult(Vec3 vec3);
-    Mat4 w, wi;
+    Mat4 rotationMatrix;
     bool backgroundHighlightning;
 };
 

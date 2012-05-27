@@ -48,9 +48,9 @@ UniversalConfiguration* UniversalConfiguration::readStream( ifstream& is ) throw
         is >> configSize;
     }
     catch( ifstream::failure e ){
-        std::cout << "hallå" << std::endl;
+
         if( is.fail() ){
-            if( is.eof() ) {  std::cout << "hallå" << std::endl; throw( string( "InsufficientDataException" ) );}
+            if( is.eof() ) { throw( string( "InsufficientDataException" ) );}
             else throw( string( "IllegalFormatException" ) );
         }
     }

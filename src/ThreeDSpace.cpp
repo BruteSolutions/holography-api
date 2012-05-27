@@ -88,9 +88,13 @@ void ThreeDSpace::selectNext() {
         current = 0;
     }
 }
+/**
+ *
+ */
 void ThreeDSpace::clearSelected() {
    selected.clear();
 }
+
 /**
  * Binds buffer data for all the GraphicalObjects in the ThreeDSpace.
  */

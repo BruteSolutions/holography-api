@@ -17,46 +17,28 @@ using namespace std;
  * Creates a new projector with a buffer of size len at the place pointer with position pos and direction dir;
  */
 Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) :
-  highlighted(false), configuration(pos, dir, {0.5, 0.25, 0.25}) {
-	colorTranslator = new ColorTranslator(configuration.getColorTranslatorFactor()); //Creates a ColorTranslator with default values.
-	pnt = pointer;
-	bufferSize = len;
-	setPosition(pos);
-	setDirection(dir);
-  X1 = 1;
-  X2 = -1;
-  X3 = -1;
-  X4 = 1;
-  Y1 = 1;
-  Y2 = 1;
-  Y3 = -1;
-  Y4 = -1;
+    highlighted(false), configuration(pos, dir, {0.5, 0.25, 0.25}) {
+    colorTranslator = new ColorTranslator(configuration.getColorTranslatorFactor()); //Creates a ColorTranslator with default values.
+    pnt = pointer;
 
-  memset(keystone.m, 0, sizeof(keystone.m));
-  for(int i = 0; i < 16; i += 5) {
-    keystone.m[i] = 1.0;
-  }
-}/*
-Projector::Projector(Configuration *c){
-  bufferSize = 0;
-  pnt = NULL;
-    colorTranslator = new ColorTranslator(configuration.getColorTranslatorFactor());
-    pos = configuration.getPosition();
-    direction = configuration.getDirection();
-     X1 = 1;
-  X2 = -1;
-  X3 = -1;
-  X4 = 1;
-  Y1 = 1;
-  Y2 = 1;
-  Y3 = -1;
-  Y4 = -1;
+    bufferSize = len;
+    setPosition(pos);
+    setDirection(dir);
+    X1 = 1;
+    X2 = -1;
+    X3 = -1;
+    X4 = 1;
+    Y1 = 1;
+    Y2 = 1;
+    Y3 = -1;
+    Y4 = -1;
 
-  memset(keystone.m, 0, sizeof(keystone.m));
-  for(int i = 0; i < 16; i += 5) {
-    keystone.m[i] = 1.0;
-  }
-}*/
+    memset(keystone.m, 0, sizeof(keystone.m));
+    for(int i = 0; i < 16; i += 5) {
+        keystone.m[i] = 1.0;
+    }
+}
+
 /**
  * Creates a new projector with buffer of size len at the place pointer with position (0,0,0)
  * and direction (0,0,0);
@@ -94,7 +76,7 @@ void Projector::moveKeystoneCorner(int corner, int xory, float value){
 			case 3: X4 += value; return;
       default: break;
 		}
-	}else{
+	}else{ //y
 		switch(corner){
 			case 0: Y1 += value; return;
 			case 1: Y2 += value; return;
@@ -110,16 +92,16 @@ void Projector::moveKeystoneCorner(int corner, int xory, float value){
  * @param pid is the shader program used when drawing
  */
 void Projector::calcKeystone(GLuint pid) throw (std::string){
-		/* The real values */
+    /* The real values */
     float x1= 1, y1=1;
     float x2=-1, y2=1;
     float x3=-1, y3=-1;
     float x4= 1, y4=-1;
-//for(int i = 0; i < 8; i++){
-	std::cout << "X1: " << X1 << "X2: " << X2 << "X3: " << X3 << "X4: " << X4 <<
+
+    std::cout << "X1: " << X1 << "X2: " << X2 << "X3: " << X3 << "X4: " << X4 <<
  "Y1: " << Y1 << "Y2: " << Y2 << "Y3: " << Y3 << "Y4: " << Y4 << std::endl;
-//}
-		/* X1-X4, Y1-Y4 are observed values */
+
+    /* X1-X4, Y1-Y4 are observed values */
 
     float A [9][9] = { 
     {x1,y1,1,0,0,0,-x1*X1,-y1*X1,-X1},
@@ -135,15 +117,15 @@ void Projector::calcKeystone(GLuint pid) throw (std::string){
     
     float b [9] = { 0,0,0,0,0,0,0,0,1};
     
-		/* Perform a Gauss Jordan to solve the system A h = b*/
+    /* Perform a Gauss Jordan to solve the system A h = b*/
     for(int j=0;j<9;j++){
         int count = j;
         while(count<9 && A[count][j]==0){
             count++;
         }
-	if(count == 9){
-		throw "InvalidKeystoneSettingException";
-	}
+        if(count == 9){
+           throw "InvalidKeystoneSettingException";
+        }
         for(int i=0;i<9;i++){
             float tmp;
             tmp=A[j][i];
@@ -181,7 +163,7 @@ void Projector::calcKeystone(GLuint pid) throw (std::string){
     else
         h33 +=b[7];
 
-		/* the matrix responsible for the keystone effect (beware, this is the transponate of the matrix)*/
+    /* the matrix responsible for the keystone effect (beware, this is the transponate of the matrix)*/
     float h[16] = { b[0], b[3], 0, b[6], b[1], b[4], 0, b[7], 0, 0, h33, 0, b[2], b[5], 0 , 1 };
 
     /* set the keystone uniform */
@@ -242,10 +224,10 @@ ColorTranslator * Projector::getColorTranslator() {
  * @param c Configuration to be used.
  */
 void Projector::setConfiguration(Configuration c) {
-	configuration = c;
-	colorTranslator->setConversionFactor(configuration.getColorTranslatorFactor());
-	pos = configuration.getPosition();
-	direction = configuration.getDirection();
+  configuration = c;
+  colorTranslator->setConversionFactor(c.getColorTranslatorFactor());
+  pos = c.getPosition();
+  direction = c.getDirection();
 }
 
 /**
@@ -293,14 +275,6 @@ void Projector::display(Scene scene) {
 	glDepthFunc(GL_LEQUAL);
 	glDepthRange(0,1);
 	
-	//test
-	
-
-	//float g_lightPos[4] = { 10, 10, -100, 1 };  // Position of light
-	//glLightfv(GL_LIGHT0, GL_POSITION, g_lightPos);
-
-	//endtest
-
 	GLuint pid;
 
 	/* Fetch the shader program to use */
@@ -323,9 +297,8 @@ void Projector::display(Scene scene) {
 	scene.translateCam(adjustment3D);
 
 	/* Calculate world rotation and position */
-	scene.setRotation();
-	scene.applyRot(pid);
-	scene.applyPos(pid);
+
+	scene.setUniforms(pid);
 
 	//Restore previous camera translation
 	adjustment3D.x *= -1;
@@ -337,9 +310,7 @@ void Projector::display(Scene scene) {
 	ThreeDSpace * space = scene.get3DSpace();
 	std::vector<GraphicalObject*> goList = space->getObjects();
 	for (std::vector<GraphicalObject*>::iterator it = goList.begin(); it != goList.end(); it++) {
-		(*it)->applyTransformation(pid);
-		(*it)->rotate(); /* calculates the rotation matrices */
-		(*it)->applyRotation(pid); /* sets the rotation uniforms and links matrices */
+		(*it)->setUniforms(pid);
 		(*it)->setHighlightUniform(pid);
 		(*it)->draw();
 	}

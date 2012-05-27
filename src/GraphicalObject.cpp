@@ -28,8 +28,9 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	for(int i=0;i<vertexDataSize;i+=4){
 	    avgX += vertexData[i];
 	    avgY += vertexData[i+1];
-	    avgZ = avgZ + vertexData[i+2];
+	    avgZ += vertexData[i+2];
 	}
+
 	avgX = avgX*4 / vertexDataSize;
 	avgY = avgY*4 / vertexDataSize;
 	avgZ = avgZ*4 / vertexDataSize;
@@ -150,28 +151,6 @@ void GraphicalObject::bindBufferData() {
 }
 
 /**
- * Calculates the rotation matrixes needed by the shader to rotate the object
- * based on the rotation variables angleX, angleY ,angleZ.
- */
-void GraphicalObject::rotate() {
-	/*objectRotX.m[5] = cos(angleX);
-	objectRotX.m[6] = -sin(angleX);
-	objectRotX.m[9] = sin(angleX);
-	objectRotX.m[10] = cos(angleX); 
-
-	objectRotY.m[0] = cos(angleY);
-	objectRotY.m[2] = sin(angleY);
-	objectRotY.m[8] = -sin(angleY);
-	objectRotY.m[10] = cos(angleY); 
-
-	objectRotZ.m[0] = cos(angleZ);
-	objectRotZ.m[1] = -sin(angleZ);
-	objectRotZ.m[4] = sin(angleZ);
-	objectRotZ.m[5] = cos(angleZ); */
-
-}
-
-/**
  * Sets the highlight uniform so it can be accessed by the shader.
  * @param shader The shader that uses the highlight uniform.
  */
@@ -181,41 +160,20 @@ void GraphicalObject::setHighlightUniform(GLuint shader){
 }
 
 /**
- * Sets the scale, objectRotX, objectRotY, objectRotZ and objOrigin 
+ * Sets the scale, objectRot, objectPos and objOrigin 
  * uniforms so they can be accessed by the shader.
- * @param shader The shader that uses the scale, objectRotX, 
- * objectRotY, objectRotZ and objOrigin uniforms.
+ * @param shader The shader that uses the scale, objectRot, 
+ * objectPos and objOrigin uniforms.
  */
-void GraphicalObject::applyRotation(GLuint shader) {
-	/*	
-	for(int i = 0; i < 16; i++){
-		printf("%f ",objectRotX.m[i]);
-	}
-	printf("\n");
-	for(int i = 0; i < 16; i++){
-		printf("%f ",objectRotY.m[i]);
-	}
-	printf("\n");
-	for(int i = 0; i < 16; i++){
-		printf("%f ",objectRotZ.m[i]);
-	}
-	printf("\n");*/
-	//create a function that sets all uniforms instead
+void GraphicalObject::setUniforms(GLuint shader) {
+
 	GLuint scaleLoc = glGetUniformLocation(shader, "scale");
 	glUniform1f(scaleLoc, scale);
-	//std::cout << "\n\n"<<scale<<"\n\n";
+    GLuint posLoc = glGetUniformLocation(shader, "objectPos");
+    glUniform3f(posLoc, pos.x, pos.y, pos.z);
     GLuint rotLoc = glGetUniformLocation(shader, "objectRot");
     glUniformMatrix4fv(rotLoc, 1, GL_FALSE, rotationMatrix.m);
-/*
-	GLuint posLocX = glGetUniformLocation(shader, "objectRotX");
-    glUniformMatrix4fv(posLocX , 1, GL_FALSE, objectRotX.m);
-	
-	GLuint posLocY = glGetUniformLocation(shader, "objectRotY");
-    glUniformMatrix4fv(posLocY , 1, GL_FALSE, objectRotY.m);
 
-	GLuint posLocZ = glGetUniformLocation(shader, "objectRotZ");
-    glUniformMatrix4fv(posLocZ , 1, GL_FALSE, objectRotZ.m);
-*/
     GLuint originLoc = glGetUniformLocation(shader, "objOrigin");
     glUniform3f(originLoc, origin.x,origin.y,origin.z);
 }
@@ -243,18 +201,8 @@ void GraphicalObject::toggleHighlight(){
  * @param trans A Vec3 containing the offset values.
  */
 void GraphicalObject::translate(Vec3 trans) {
-	//std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
 	pos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
 	origin = {origin.x+trans.x, origin.y+trans.y, origin.z+trans.z};
-}
-
-/**
- * Sets the objectPos uniform so it can be accessed by the shader.
- * @param shader The shader that uses the objectPos uniform.
- */
-void GraphicalObject::applyTransformation(GLuint shader) {
-    GLuint posLoc = glGetUniformLocation(shader, "objectPos");
-    glUniform3f(posLoc, pos.x, pos.y, pos.z);
 }
 
 /**
@@ -265,9 +213,15 @@ void GraphicalObject::applyTransformation(GLuint shader) {
 void GraphicalObject::setOrigin(Vec3 ori) {
         origin = ori;
 }
+
+/**
+ * Get the objects origin
+ * @return the object origin
+ */
 Vec3 GraphicalObject::getOrigin(){
 	return origin;
 }
+
 /**
  * Checks if the object is meshed.
  * @return True if the object is meshed.
@@ -340,23 +294,25 @@ void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
 	pos = finalOffset;
 }
 
+/**
+ * Rotate the x angle in radians and calculate the rotation.
+ * @param angle Angular adjustment.
+ */
 void GraphicalObject::rotateX(float angle) {
      
     Mat4 m;
     memset(&m.m, 0, sizeof(m));
     m.m[0] = 1; m.m[5] = 1; m.m[ 10] = 1; m.m[15] = 1;
-m.m[5] = cos(angle);
-m.m[6] = sin(angle);
-m.m[9] = -sin(angle);
-m.m[10] = cos(angle);
+    m.m[5] = cos(angle);
+    m.m[6] = sin(angle);
+    m.m[9] = -sin(angle);
+    m.m[10] = cos(angle);
 
     rotationMatrix = Mat4::matrixMultiplication(m, rotationMatrix);
-
-    angleX+=angle;
 }
 
 /**
- * Rotate the y angle.
+ * Rotate the y angle in radians and calculate the rotation.
  * @param angle Angular adjustment.
  */
 void GraphicalObject::rotateY(float angle) {
@@ -369,12 +325,10 @@ void GraphicalObject::rotateY(float angle) {
     m.m[10] = cos(angle); 
 
     rotationMatrix = Mat4::matrixMultiplication(m, rotationMatrix);
-
-    angleY+=angle;
 }
 
 /**
- * Rotate the z angle.
+ * Rotate the z angle in radians and calculate the rotation.
  * @param angle Angular adjustment.
  */
 void GraphicalObject::rotateZ(float angle) {
@@ -388,30 +342,4 @@ void GraphicalObject::rotateZ(float angle) {
     m.m[5] = cos(angle);  
 
     rotationMatrix = Mat4::matrixMultiplication(m, rotationMatrix);
-
-    angleZ+=angle;
 }
-/**
- * Rotates the object around the x axis.
- * @param angle The rotation angle in radians.
- */
-void GraphicalObject::rotateXRad(float angle) {
-	//TODO
-}
-
-/**
- * Rotates the object around the y axis.
- * @param angle The rotation angle in radians.
- */
-void GraphicalObject::rotateYRad(float angle) {
-	//TODO
-}
-
-/**
- * Rotates the object around the z axis.
- * @param angle The rotation angle in radians.
- */
-void GraphicalObject::rotateZRad(float angle) {
-	//TODO
-}
-

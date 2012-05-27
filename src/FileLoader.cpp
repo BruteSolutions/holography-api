@@ -11,12 +11,11 @@
  */ 
 Scene* FileLoader::loadFile(std::string path) throw ( std::string ) {
 	switch(checkFileExtension(path)) {
-	case 0: // Filetype BS Raw
-		return RawLoader::loadFile(path);
+        case 0: // Filetype BS Raw
+		    return RawLoader::loadFile(path);
         case 1: // Filetype X3D
         	//return X3DLoader::loadFile(path);
         default: // Whenever a filetype is not recognized
-		std::cout << "returned " << checkFileExtension(path) << std::endl;
         	throw "IllegalFiletypeException";
 		
     };
@@ -39,7 +38,6 @@ int FileLoader::checkFileExtension(std::string path) {
 std::cout << lastdotpos << std::endl;
     if(lastdotpos <= 0 || lastdotpos >= path.length()-1) return -1;
 	i = lastdotpos;
-//afs/nada.kth.se/home/u/u18nfoxu/gltut/holography-api3/rawformat.bs
 	// i should now be at where the first '.' occures (and hence file extension)
 	char* fileExtension = new char[path.length()-i+1];
 	int count = 0;  
@@ -49,8 +47,7 @@ std::cout << lastdotpos << std::endl;
     	i++;
     	count++;
   }
-//	fileExtension
-	// now fileExtension should contain the file extension of the file.
+// now fileExtension should contain the file extension of the file.
 	std::string output = fileExtension;
 	return getFileExtensionCode(output);
 }
