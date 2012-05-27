@@ -17,7 +17,7 @@ void main()
   vec3 processed = vec3(r+g+b, 0.0f, 0.0f); //eftersom r+g+b kan max vara 1.0
 
   if(highlight == 1.0f) {
-    processed.x = processed.x + 0.5f; //- processed.x;
+    processed.x = processed.x + 0.2f; //- processed.x;
   }
 
 	outputColor.xyz = processed;
