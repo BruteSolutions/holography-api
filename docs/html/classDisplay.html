@@ -63,13 +63,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classProjector.html">Projector</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#af2463d86a214259bb89fb00e0ced3065">getProjectors</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMonitor.html">Monitor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ab27364120a2b6e513d14e9ae39b031f9">getMonitor</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classColorTranslator.html">ColorTranslator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a2e319a064952d0a7b1c510d23682a784">getColorTranslator</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76d139338c3ae5903f9cc2c6505a41aa"></a><!-- doxytag: member="Display::rebindBuffers" ref="a76d139338c3ae5903f9cc2c6505a41aa" args="(Scene *scene)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rebindBuffers</b> (<a class="el" href="classScene.html">Scene</a> *scene)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a76d139338c3ae5903f9cc2c6505a41aa">rebindBuffers</a> (<a class="el" href="classScene.html">Scene</a> *scene)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a30e759876c38401a623f31095d161054">addProjector</a> (<a class="el" href="classProjector.html">Projector</a> *projector)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a06d5de5525021158585fb4fdfd19fabb">getBoundingCube</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#afd96105e1c0b6d8e0e6433331482fe6e">highlight</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ad5cca0a6d4980aaf229de2be156231cd">unHighlight</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a556c8af9f7923ca3bd51231399c8c62c">setConfigurations</a> (<a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> uc)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a541e55345bf13390a80eb3f1706b5bde">setConfigurations</a> (<a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *uc)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ad6fb864e50d126c22c3de548a7fbe666">getConfigurations</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -246,14 +245,38 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>rebindBuffers</b> (<a
 
 </div>
 </div>
-<a class="anchor" id="a556c8af9f7923ca3bd51231399c8c62c"></a><!-- doxytag: member="Display::setConfigurations" ref="a556c8af9f7923ca3bd51231399c8c62c" args="(UniversalConfiguration uc)" -->
+<a class="anchor" id="a76d139338c3ae5903f9cc2c6505a41aa"></a><!-- doxytag: member="Display::rebindBuffers" ref="a76d139338c3ae5903f9cc2c6505a41aa" args="(Scene *scene)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Display::rebindBuffers </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classScene.html">Scene</a> *&#160;</td>
+          <td class="paramname"><em>scene</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Update each window with the buffers containing our objects (has to be called whenever the amount of objects to be drawn are modified or when changing scenes) </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scene</td><td>The scene to be bound to each window handled in display </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a541e55345bf13390a80eb3f1706b5bde"></a><!-- doxytag: member="Display::setConfigurations" ref="a541e55345bf13390a80eb3f1706b5bde" args="(UniversalConfiguration *uc)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Display::setConfigurations </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td>
           <td class="paramname"><em>uc</em></td><td>)</td>
           <td></td>
         </tr>
@@ -306,7 +329,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>rebindBuffers</b> (<a
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

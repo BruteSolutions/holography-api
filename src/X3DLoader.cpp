@@ -17,7 +17,8 @@
 #include "Scene.h"
 #include "Shared.h"
 
-/* Takes a path to an X3D-file and returns a scene containing a graphicalobject
+/**
+ * Takes a path to an X3D-file and returns a scene containing a graphicalobject
  * built from information in the Shape brackets
  *
  * @param path is the path to the X3D-file
@@ -146,7 +147,8 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
     }
 }
 
-/* Takes a Points attribute and saves its content as a vector of coordinates.
+/**
+ * Takes a Points attribute and saves its content as a vector of coordinates.
  * A face instance in the faces vector contains indices that represent the 
  * coordinates in this list. 
  *
@@ -178,7 +180,8 @@ void X3DLoader::copyPoints( const char * attribute, std::vector<Vec4> *points ) 
     }
 }
 
-/* Takes the attribute CoordIndex in a X3D-file and reads it into the faces vector, 
+/**
+ * Takes the attribute CoordIndex in a X3D-file and reads it into the faces vector, 
  * three integer values in the attribute corresponds three different coordinates in
  * a coordinate vector, which builds a face. Every triple of integervalue is followed
  * with -1 which is discarded

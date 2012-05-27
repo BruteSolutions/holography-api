@@ -59,20 +59,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#include &lt;fstream&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00012"></a>00012 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;Shared.h&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;Configuration.h&quot;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;ColorTranslator.h&quot;</span>
-<a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="classConfigurationHandler.html">00017</a> <span class="keyword">class </span><a class="code" href="classConfigurationHandler.html">ConfigurationHandler</a>{
-<a name="l00018"></a>00018 <span class="keyword">public</span>:
-<a name="l00019"></a>00019     <span class="keyword">static</span> <span class="keywordtype">void</span> save(<a class="code" href="classUniversalConfiguration.html">UniversalConfiguration</a> uc, std::string path);
-<a name="l00020"></a>00020     <span class="keyword">static</span> <a class="code" href="classUniversalConfiguration.html">UniversalConfiguration</a> load(std::string path) <span class="keywordflow">throw</span>(std::string);
-<a name="l00021"></a>00021 <span class="keyword">private</span>:   
-<a name="l00022"></a>00022 };
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="preprocessor">#endif </span><span class="comment">/* CONFIGURATIONHANDLER_H_ */</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;glload/gl_3_3.h&gt;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;GL/glut.h&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;Shared.h&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;UniversalConfiguration.h&quot;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;ColorTranslator.h&quot;</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="classConfigurationHandler.html">00020</a> <span class="keyword">class </span><a class="code" href="classConfigurationHandler.html">ConfigurationHandler</a>{
+<a name="l00021"></a>00021 <span class="keyword">public</span>:
+<a name="l00022"></a>00022     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classConfigurationHandler.html#aa674575c4f2239d750ad76b47eb239ad">save</a>(<a class="code" href="classUniversalConfiguration.html">UniversalConfiguration</a> *uc, <span class="keywordtype">char</span> * path);
+<a name="l00023"></a>00023     <span class="keyword">static</span> <a class="code" href="classUniversalConfiguration.html">UniversalConfiguration</a>* <a class="code" href="classConfigurationHandler.html#ab9f2257f8dcaadfb67350c944119176b">load</a>(<span class="keywordtype">char</span> * path) <span class="keywordflow">throw</span>(std::string);
+<a name="l00024"></a>00024 <span class="keyword">private</span>:   
+<a name="l00025"></a>00025 };
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="preprocessor">#endif </span><span class="comment">/* CONFIGURATIONHANDLER_H_ */</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -89,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

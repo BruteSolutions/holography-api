@@ -58,11 +58,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac84c226654e18d389ce21086237d5db9"></a><!-- doxytag: member="ConfigurationHandler::save" ref="ac84c226654e18d389ce21086237d5db9" args="(UniversalConfiguration uc, std::string path)" -->
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (<a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> uc, std::string path)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a843d6df698f61cf393ea1aadd2124e97"></a><!-- doxytag: member="ConfigurationHandler::load" ref="a843d6df698f61cf393ea1aadd2124e97" args="(std::string path)" -->
-static <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> (std::string path)  throw (std::string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigurationHandler.html#aa674575c4f2239d750ad76b47eb239ad">save</a> (<a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *uc, char *path)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigurationHandler.html#ab9f2257f8dcaadfb67350c944119176b">load</a> (char *path)  throw (std::string)</td></tr>
 </table>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab9f2257f8dcaadfb67350c944119176b"></a><!-- doxytag: member="ConfigurationHandler::load" ref="ab9f2257f8dcaadfb67350c944119176b" args="(char *path)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> * ConfigurationHandler::load </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td>  throw (std::string)<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Loads the configurations in the file identified by path and returns them in a <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> object. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Path to the configuration file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> The <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> object created </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa674575c4f2239d750ad76b47eb239ad"></a><!-- doxytag: member="ConfigurationHandler::save" ref="aa674575c4f2239d750ad76b47eb239ad" args="(UniversalConfiguration *uc, char *path)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ConfigurationHandler::save </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td>
+          <td class="paramname"><em>uc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Saves the configurations specified by the <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> object to a file specified by path. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uc</td><td>The <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> to be saved </td></tr>
+    <tr><td class="paramname">path</td><td>Path to where the configuration is supposed to be saved. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="ConfigurationHandler_8h_source.html">ConfigurationHandler.h</a></li>
 <li>ConfigurationHandler.cpp</li>
@@ -82,7 +141,7 @@ static <a class="el" href="classUniversalConfiguration.html">UniversalConfigurat
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

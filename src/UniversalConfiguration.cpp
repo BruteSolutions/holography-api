@@ -8,7 +8,8 @@
 #include "UniversalConfiguration.h"
 using namespace std;
 
-/* Creates a UniversalConfiguration object with the given parameters. 
+/**
+ * Creates a UniversalConfiguration object with the given parameters. 
  * @param cs The vector of configurations
  * @param ct The ColorTranslator
  */
@@ -17,21 +18,24 @@ UniversalConfiguration::UniversalConfiguration( vector<Configuration> * cs, Colo
     colorTrans = ct;
 }
 
-/* Returns a list of Configuration objects each describing the configurations of a projector. 
+/**
+ * Returns a list of Configuration objects each describing the configurations of a projector. 
  * @return vector<Configuration> The configurationlist from the projectors.
  */
 vector<Configuration> * UniversalConfiguration::getProjectorConfigurations(){
     return &configurations;
 }
 
-/* Returns the ColorTranslator object that should be used by the Display class. 
+/**
+ * Returns the ColorTranslator object that should be used by the Display class. 
  * @return ColorTranslator The ColorTranslator 
  */
 ColorTranslator* UniversalConfiguration::getColorTranslator(){
     return colorTrans;
 }
 
-/* Reads the underlying stream and constructs a UniversalConfiguration object which is returned 
+/**
+ * Reads the underlying stream and constructs a UniversalConfiguration object which is returned 
  * @param is The input stream
  * @return UniversalConfiguration The constructed UniversalConfiguration object
  */
@@ -61,7 +65,8 @@ UniversalConfiguration* UniversalConfiguration::readStream( ifstream& is ) throw
     return new UniversalConfiguration( &temp_configurations, new ColorTranslator( temp ) );
 }
 
-/* Writes this object to the underlying stream. 
+/**
+ * Writes this object to the underlying stream. 
  * @param os The output stream
  */
 void UniversalConfiguration::writeToStream( ofstream& os ) throw(std::string) {

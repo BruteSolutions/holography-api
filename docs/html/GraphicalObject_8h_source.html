@@ -66,51 +66,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00017"></a>00017         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a4b5f37bd0b3ac26416ba186ce8a363dd">bindBufferData</a>();
 <a name="l00018"></a>00018         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a78ddb331c286a2b749094b05dfbf3a8f">draw</a>();
 <a name="l00019"></a>00019         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a4da3f17543b491a807049e60026586a6">setOrigin</a>(<a class="code" href="structVec3.html">Vec3</a> ori);
-<a name="l00020"></a>00020         <a class="code" href="structVec3.html">Vec3</a> getOrigin();
+<a name="l00020"></a>00020         <a class="code" href="structVec3.html">Vec3</a> <a class="code" href="classGraphicalObject.html#a70c1917879aeb88cd640c01793ac0bbd">getOrigin</a>();
 <a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#ac07d03dbd89f6b39ac3b0c97ba138583">setColorTriangle</a>(<span class="keywordtype">int</span> index, <a class="code" href="structVec3Int.html">Vec3Int</a> color);        
-<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a917b2adddd00b616e4cd72c9928da75e">rotate</a>();
-<a name="l00023"></a>00023         <span class="keywordtype">void</span> rotateX(<span class="keywordtype">float</span> angle);
-<a name="l00024"></a>00024         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#ae2179d2934799c4e7ac8166e6be9a073">rotateY</a>(<span class="keywordtype">float</span> angle);
-<a name="l00025"></a>00025         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a2620d1eac3a41cbb6b0f3dc0bb6b6335">rotateZ</a>(<span class="keywordtype">float</span> angle);
-<a name="l00026"></a>00026         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a2ce92741efe5a312b265d995386fc828">rotateXRad</a>(<span class="keywordtype">float</span> angle);
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a6d630e8a425e855624919452475703f3">rotateYRad</a>(<span class="keywordtype">float</span> angle);
-<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a9466492d38c28df781d9e8c476f057b8">rotateZRad</a>(<span class="keywordtype">float</span> angle);
-<a name="l00029"></a>00029         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a21f3992649eeee5c3517e471812e439b">applyTransformation</a>(GLuint shader);
-<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#aeae2193ec13fe4d2e355e2f3d5f4d14f">applyRotation</a>(GLuint shader);
-<a name="l00031"></a>00031 <span class="comment">//      void rotate(Vec3 trans);        </span>
-<a name="l00032"></a>00032         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a501ee793d689c1474cf9b5d3ca46b356">resize</a>(<span class="keywordtype">double</span> factor);
-<a name="l00033"></a>00033         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#ab39c8a59da860bcfe56d42aac140e879">setHighlightUniform</a>(GLuint shader);
-<a name="l00034"></a>00034         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#aa3541351751ba02f0a370412eb940925">toggleHighlight</a>();
-<a name="l00035"></a>00035         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#abc3ff1ef131db3b36c40ae04d533daa3">setHighlight</a>(<span class="keywordtype">bool</span> _bool);
-<a name="l00036"></a>00036         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a304ff62328d4ced89fbb88951ca2f355">setScale</a>(<span class="keywordtype">double</span> _scale);
-<a name="l00037"></a>00037         <span class="keywordtype">double</span> <a class="code" href="classGraphicalObject.html#a266b270672c4da50c47bbd4cee7008e8">getScale</a>();
-<a name="l00038"></a>00038         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a2d01a90fa8d7aa54a02e07d9e33eb993">incrementScale</a>(<span class="keywordtype">double</span> inc);
-<a name="l00039"></a>00039         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a6582fd399673a5bd5dfcdbad00ff1966">translate</a>(<a class="code" href="structVec3.html">Vec3</a> trans);
-<a name="l00040"></a>00040         <a class="code" href="structVec3.html">Vec3</a> origin;    
-<a name="l00041"></a>00041         <span class="keywordtype">bool</span> <a class="code" href="classGraphicalObject.html#a99b117674c1de60cac36eadd5be3ff3f">hasMesh</a>();
-<a name="l00042"></a>00042         <span class="keywordtype">bool</span> highlighted();
-<a name="l00043"></a>00043         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a499bbe0e9c9bc5bcff08465f97b60776">setMesh</a>(<span class="keywordtype">bool</span> mesh);
-<a name="l00044"></a>00044         <span class="keywordtype">void</span> setPosition(<a class="code" href="structVec3.html">Vec3</a> pos);
-<a name="l00045"></a>00045         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#abd9b4745450b888e825420c534a7555f">center</a>(<a class="code" href="structVec3.html">Vec3</a> camPos, <a class="code" href="structVec3.html">Vec3</a> optPos);
-<a name="l00046"></a>00046         <span class="comment">//When following floats are private: the first triangle is permanently meshed. WHY?=</span>
-<a name="l00047"></a>00047         <span class="keywordtype">float</span> angleX, angleY, angleZ;
-<a name="l00048"></a>00048         
-<a name="l00049"></a>00049 <span class="keyword">private</span>:
-<a name="l00050"></a>00050         GLuint positionBufferObject;
-<a name="l00051"></a>00051         GLuint positionBufferObject2;
-<a name="l00052"></a>00052         GLuint positionBufferObject3;
-<a name="l00053"></a>00053         <span class="keywordtype">bool</span> highlight;
-<a name="l00054"></a>00054         <span class="keywordtype">int</span> vertexDataSize, colorDataSize;
-<a name="l00055"></a>00055         <span class="keywordtype">float</span> *vertexData, *colorData;
-<a name="l00056"></a>00056         <a class="code" href="structVec3.html">Vec3</a> pos;
-<a name="l00057"></a>00057         <a class="code" href="structMat4.html">Mat4</a> rotationMatrix;
-<a name="l00058"></a>00058         <a class="code" href="structMat4.html">Mat4</a> objectRotX,objectRotY,objectRotZ;
-<a name="l00059"></a>00059         <span class="keywordtype">bool</span> mesh;
-<a name="l00060"></a>00060         <span class="keywordtype">float</span> scale;
-<a name="l00061"></a>00061         
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 };
-<a name="l00064"></a>00064 <span class="preprocessor">#endif</span>
+<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a9a702570748c867e8717b55d01abcd46">rotateX</a>(<span class="keywordtype">float</span> angle);
+<a name="l00023"></a>00023         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#ae2179d2934799c4e7ac8166e6be9a073">rotateY</a>(<span class="keywordtype">float</span> angle);
+<a name="l00024"></a>00024         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a2620d1eac3a41cbb6b0f3dc0bb6b6335">rotateZ</a>(<span class="keywordtype">float</span> angle);
+<a name="l00025"></a>00025         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a0f07f4a577b33f7ece14792fb1d2f99c">setUniforms</a>(GLuint shader);
+<a name="l00026"></a>00026         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a501ee793d689c1474cf9b5d3ca46b356">resize</a>(<span class="keywordtype">double</span> factor);
+<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#ab39c8a59da860bcfe56d42aac140e879">setHighlightUniform</a>(GLuint shader);
+<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#aa3541351751ba02f0a370412eb940925">toggleHighlight</a>();
+<a name="l00029"></a>00029         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#abc3ff1ef131db3b36c40ae04d533daa3">setHighlight</a>(<span class="keywordtype">bool</span> _bool);
+<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a304ff62328d4ced89fbb88951ca2f355">setScale</a>(<span class="keywordtype">double</span> _scale);
+<a name="l00031"></a>00031         <span class="keywordtype">double</span> <a class="code" href="classGraphicalObject.html#a266b270672c4da50c47bbd4cee7008e8">getScale</a>();
+<a name="l00032"></a>00032         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a2d01a90fa8d7aa54a02e07d9e33eb993">incrementScale</a>(<span class="keywordtype">double</span> inc);
+<a name="l00033"></a>00033         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a6582fd399673a5bd5dfcdbad00ff1966">translate</a>(<a class="code" href="structVec3.html">Vec3</a> trans);
+<a name="l00034"></a>00034         <a class="code" href="structVec3.html">Vec3</a> origin;    
+<a name="l00035"></a>00035         <span class="keywordtype">bool</span> <a class="code" href="classGraphicalObject.html#a99b117674c1de60cac36eadd5be3ff3f">hasMesh</a>();
+<a name="l00036"></a>00036         <span class="keywordtype">bool</span> highlighted();
+<a name="l00037"></a>00037         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#a499bbe0e9c9bc5bcff08465f97b60776">setMesh</a>(<span class="keywordtype">bool</span> mesh);
+<a name="l00038"></a>00038         <span class="keywordtype">void</span> setPosition(<a class="code" href="structVec3.html">Vec3</a> pos);
+<a name="l00039"></a>00039         <a class="code" href="structVec3.html">Vec3</a> getPosition();
+<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="classGraphicalObject.html#abd9b4745450b888e825420c534a7555f">center</a>(<a class="code" href="structVec3.html">Vec3</a> camPos, <a class="code" href="structVec3.html">Vec3</a> optPos);
+<a name="l00041"></a>00041         
+<a name="l00042"></a>00042 <span class="keyword">private</span>:
+<a name="l00043"></a>00043         GLuint positionBufferObject;
+<a name="l00044"></a>00044         GLuint positionBufferObject2;
+<a name="l00045"></a>00045         GLuint positionBufferObject3;
+<a name="l00046"></a>00046         <span class="keywordtype">bool</span> highlight;
+<a name="l00047"></a>00047         <span class="keywordtype">float</span> angleX, angleY, angleZ; <span class="comment">/* for future uses */</span>
+<a name="l00048"></a>00048         <span class="keywordtype">int</span> vertexDataSize, colorDataSize;
+<a name="l00049"></a>00049         <span class="keywordtype">float</span> *vertexData, *colorData;
+<a name="l00050"></a>00050         <a class="code" href="structVec3.html">Vec3</a> pos;
+<a name="l00051"></a>00051         <a class="code" href="structMat4.html">Mat4</a> rotationMatrix;
+<a name="l00052"></a>00052         <a class="code" href="structMat4.html">Mat4</a> objectRotX,objectRotY,objectRotZ;
+<a name="l00053"></a>00053         <span class="keywordtype">bool</span> mesh;
+<a name="l00054"></a>00054         <span class="keywordtype">float</span> scale;
+<a name="l00055"></a>00055         
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 };
+<a name="l00058"></a>00058 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -127,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
