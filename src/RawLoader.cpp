@@ -57,32 +57,33 @@ Scene* RawLoader::loadFile(std::string path) throw (std::string) {
 			std::cout << std::endl;
 			vertexData = new float[numTriangles*12];
 			colorData = new float[numTriangles*12];
-		
+			int k = 0;
 			for(int triangle = 0; triangle < numTriangles; triangle++){
-				for(int j = 0; j < 12; j++){
+				for(int j = 0; j < 12; j++, k++){
 					/* if there wasn't enough data or other error */
 					if(rawfile.fail()){std::cout << "inside fail" << std::endl; throw std::string ("GenericIOException");}
-					if(j%4 == 3) vertexData[j] = 1;
+					if(j%4 == 3) vertexData[k] = 1;
 					else{
-						rawfile >> vertexData[j];
+						rawfile >> vertexData[k];
 						/* if a newline appeared before reading all data */
 						rawfile.get(nl);
 						if(nl == '\n'){ if(j+2 != 12) { throw std::string("IllegalRAWFileException"); } }
 					}
-						std::cout << vertexData[j] <<" ";
+						std::cout << vertexData[k] <<" ";
 				}
 				std::cout << std::endl;
 			}
+			k=0;
 			for(int triangle = 0; triangle < numTriangles; triangle++){
-				for(int j = 0; j < 12; j++){
+				for(int j = 0; j < 12; j++,k++){
 					/* if there wasn't enough data or other error */				
 					if(rawfile.fail()){throw std::string ("GenericIOException");}
 					if(j%4 == 3){
-						colorData[j] = 1;
+						colorData[k] = 1;
 					}else{
-						rawfile >> colorData[j];
-						if(colorData[j] < 0 || colorData[j] > 255) throw std::string("IllegalRAWFileException");
-						colorData[j] /= 255;
+						rawfile >> colorData[k];
+						if(colorData[k] < 0 || colorData[k] > 255) throw std::string("IllegalRAWFileException");
+						colorData[k] /= 255;
 					
 						/* if a newline appeared before reading all data */					
 						rawfile.get(nl);
@@ -92,6 +93,9 @@ Scene* RawLoader::loadFile(std::string path) throw (std::string) {
 				}
 			std::cout << std::endl;			
 
+			}
+			for(int z = 0; z < numTriangles*12; z ++){
+				std::cout << vertexData[z] << " ";
 			}
 			/* Add object to the scene */
 			GraphicalObject * object = new GraphicalObject(vertexData, numTriangles*12, colorData, numTriangles*12); 

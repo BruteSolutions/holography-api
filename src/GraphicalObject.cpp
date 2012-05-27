@@ -28,9 +28,8 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	for(int i=0;i<vertexDataSize;i+=4){
 	    avgX += vertexData[i];
 	    avgY += vertexData[i+1];
-	    avgZ += vertexData[i+2];
+	    avgZ = avgZ + vertexData[i+2];
 	}
-
 	avgX = avgX*4 / vertexDataSize;
 	avgY = avgY*4 / vertexDataSize;
 	avgZ = avgZ*4 / vertexDataSize;
