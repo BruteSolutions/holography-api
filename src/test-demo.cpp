@@ -88,21 +88,6 @@ float testObjectColor[] = {
 };
 //--------------------------TEST OBJECT END-----------------------------------
 
-/*
-float vertexData2[] = {
-	0.75f, 0.75f, 0.0f, 1.0f,
-
-	0.75f, -0.75f, 0.0f, 1.0f,
-	-0.75f, -0.75f, 0.0f, 1.0f,	 
-};
-
-float colorData2[] = {
-
-   1.0f, 0.0f, 0.0f, 1.0f,
-	 0.0f, 1.0f, 0.0f, 1.0f,
-	 0.0f, 0.0f, 1.0f, 1.0f,
-};*/
-
 #define FLB -0.5f, -0.5f, 0.5f, 1.0f 
 #define FRB 0.5f, -0.5f, 0.5f, 1.0f
 #define FLT -0.5f, 0.5f, 0.5f, 1.0f
@@ -118,14 +103,6 @@ float colorData2[] = {
 #define RIGHT 0.5f, -0.5f, 0.0f, 1.0f
 #define TOP 0.0f, 0.5f, 0.0f, 1.0f
 #define REAR 0.0f, 0.0f, -1.0f, 1.0f
-float ny[] =  {
- -1, -1, 0, 1,
- -1,  1, 0, 1,
-  0,  0, 0, 1,
- 0, 0, 0, 1,
-  1,  1, 0, 1,
-  1, -1, 0, 1
-};
 
 float vertexData[] = {
  
@@ -152,82 +129,13 @@ float colorData[] = {
 
 	BROWN_COLOR, BROWN_COLOR, BROWN_COLOR,
 };
-float colorData2[] = {
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-  1,  1, 1, 1,
 
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-  1,  1, 1, 1,
-
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-  0.75,  0.75, 0.75, 1,
-
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-  0.8,  0.8, 0.8, 1,
-};
 int numwindows = 0;
 
-void graphicSettings(){
-    //    glEnable(GL_CULL_FACE);
-	//glCullFace(GL_FRONT);
-	//glFrontFace(GL_CW);
-
-//	glEnable(GL_DEPTH_TEST);
-	//glDepthFunc(GL_LEQUAL);
-
-	//glDepthMask(GL_TRUE);
-	//glDepthFunc(GL_LEQUAL);
-	//glEnable(GL_DEPTH_CLAMP);
-        //glDepthRange(0.0f, 1.0f);
-
-    glEnable(GL_DEPTH_TEST);
-   glDepthFunc(GL_LEQUAL);
-   glDepthRange(0,1);
-}
 void bindBuffer(){
 	defaultScene->get3DSpace()->bindBuffers();
 }
 
-static int primitive = 0;
-void disp(void);
-void menu(int a);
-void subMenu(int a);
 #ifdef GTK_ENABLED
 void file_ok_sel(GtkWidget * w, GtkFileSelection * fs);
 #endif
@@ -264,52 +172,11 @@ void init(int argc, char ** argv)
   if(argc == 2 && !strcmp(argv[1], "--test")) {
     exit(runTests());
   }
-  //uc = ConfigurationHandler::load("config2");
-	std::cout << "Hej1" << std::endl;
-	//defaultScene = FileLoader::loadFile("rawformat.bs");
-	std::cout << "Hej2" << std::endl;
-	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
-	//grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	//grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	//grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
-	//testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
-	//GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
-	//GraphicalObject * grobj = new GraphicalObject(cube, sizeof(cube)/4, colorData2, sizeof(cube)/4);
-	
-	defaultScene = new Scene();
-	//defaultScene->get3DSpace()->addObject(grObj1);
-	//defaultScene->get3DSpace()->addObject(grObj2);
-	//defaultScene->get3DSpace()->addObject(grObj3);
-	//defaultScene->get3DSpace()->addObject(grobj);
-//	defaultScene->get3DSpace()->addObject(testObj);
-	//defaultScene->merge(FileLoader::loadFile("CadTeapot.x3d"));
-	
+	defaultScene = new Scene();	
 
 	displayHandeler = new Display(); //add a monitor in here
 
 	bindBuffer(); //bind buffer to monitor window
- 	//graphicSettings();
-	//grObj1 = defaultScene->get3DSpace()->getObjects().at(0);
-	//grObj3 = defaultScene->get3DSpace()->getObjects().at(2);
-	//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
-	//std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
-
-	//defaultScene->selectNext();
-	
-
-	//pGO = defaultScene->getSelected().at(0);
-
-	//initial zoom out
-
-	//Flytta bak objekten lite;
-	//grObj1->setOrigin({1,1,1});
-	//grObj1->translate({4,4,4});
-//	grobj->translate(zoom);
-	//grobj->setOrigin({0,0,0});
-//	grObj2->setOrigin({3,3,3});
-	//grObj2->translate({3,3,3});
-//	grObj3->setOrigin({2,2,2});
-	//grObj3->translate({2,2,2});
 
 	defaultScene->get3DSpace()->setOrigin({0,0,0});
 
@@ -318,94 +185,26 @@ void init(int argc, char ** argv)
 
 }
 
-//-------------------------------------------------------------------------
-//  Set up the GLUT Menus.
-//-------------------------------------------------------------------------
-void setupMenus ()
-{
-  int menIdSub = glutCreateMenu(subMenu);
-    glutAddMenuEntry("Red", 1);
-    glutAddMenuEntry("Blue", 2);
-    glutAddMenuEntry("Green", 3);
-    glutAddMenuEntry("RGB", 4); 
-    
-  int menIdMain = glutCreateMenu(menu);
-    glutAddMenuEntry("Rotation On", 1);
-    glutAddMenuEntry("Translation On", 2);
-    glutAddSubMenu("Change Color", menIdSub);
-    glutAddMenuEntry("Quit", 4);
-  
-  glutAttachMenu(GLUT_MIDDLE_BUTTON);
-}
-
-void menu(int value){
-	std::cout << "---------------------------------HELLO MOTO!-----------------------------" << std::endl;
-	std::cout << "                                 " << value << std::endl;
-  if(value == 0){
-  }
-  else{
-  	std::cout << "Selected " << value <<std::endl;
-    primitive=value;
-  }
-  
-  // you would want to redraw now
-  glutPostRedisplay();
-  glutPostOverlayRedisplay();
-}
-void subMenu(int value){
-	std::cout << "---------------------------------SUB PRESSED!-----------------------------" << std::endl;
-	std::cout << "                                 " << value << std::endl;
-  if(value == 0){
-  }else{
-  	std::cout << "SUB-" << value <<std::endl;
-    primitive=value;
-  }
-  
-  // you would want to redraw now
-  glutPostRedisplay();
-  glutPostOverlayRedisplay();
-}
-
 void addProjector(){
 	if(defaultScene == NULL){
 		std::cout << "ERROR SCENE NOT INITIALIZED";
 		exit(1);
 	}
-    //Configuration * c = uc->getProjectorConfigurations()[numwindows-1];
     
 	Vec3 pos = {(float) (numwindows*1.05f), 0, -15}, dir = {0, 0, 0};
-	//Vec3 pos = {0,0,-10}, dir = {0,0,0};
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
-//    displayHandeler->addProjector(
 	bindBuffer();
-	//graphicSettings();
 	numwindows++;
 }
 
-void display()
-{
-  //displayHandeler->getMonitor()->display(*defaultScene);
+void display() {
 	if(displayHandeler == NULL) fprintf(stderr,"display not initialized\n");
 	displayHandeler->display(*defaultScene);
 }
 
 
-void reshape (int w, int h)
-{
-  //Alt 0: Reshape everything
-glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-//do something here to fix shaders
-/*
-//Alt 1: Maximize viewing area
-defaultScene->worldPos.m[0] = defaultScene->fFrustumScale / (w / (float)h);
-defaultScene->worldPos.m[5] = defaultScene->fFrustumScale;
-glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-/* //Alt 2: Keep a rectanglish view area
-if(w < h)
-glViewport(0, 0, (GLsizei) w, (GLsizei) w);
-else
-glViewport(0, 0, (GLsizei) h, (GLsizei) h);
-*/
+void reshape (int w, int h) {
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 }
 
 bool leftmousebutton = false;
@@ -490,7 +289,6 @@ void motion(int x, int y){
 }
 int proj = 0;
 int corner = 0;
-bool worldCtrl = false;
 int keystone = 0;
 KeystoneSetting ks[] = { 
 { 1, 1, -1, 1, -1, -1, 1, -1},
@@ -502,9 +300,6 @@ void keyboard(unsigned char key, int x, int y)
 	Vec3 pos;
 	switch (key)
 	{
-	  case 'e':
-		objCtrl = !objCtrl;
-		return;
 	  case 'q':
 		defaultScene->autoRescale();
 		glutPostRedisplay();
@@ -512,162 +307,20 @@ void keyboard(unsigned char key, int x, int y)
 	  case 27:
 		  glutLeaveMainLoop();
 		  return;
-	  case 'v':
-std::cout << "--------------------------- PRESSED V -------------------- !11!!\n";
-std::cout << "--------------------------- TOGGLE CTRL -------------------- !11!!\n";
-		worldCtrl = !worldCtrl;
-		if(worldCtrl){
-std::cout << "--------------------------- Controlling world -------------------- !11!!\n";
-		}
-		else{
-std::cout << "--------------------------- Controlling Obj -------------------- !11!!\n";
-		}
-		return;
-	  case 'a':
-std::cout << "--------------------------- PRESSED A -------------------- !11!!\n";
-				
-		if(!worldCtrl){
-		  pos = {-0.05f, 0.0f, 0.0f};		  
-		  pGO->translate(pos);
-     	}
-		else{
-		  pos = {0.05f, 0.0f, 0.0f};
-		  defaultScene->translateCam(pos);
-		}
-	//fprintf(stderr,"redisplay\n");
-			glutPostRedisplay();
-		  return;
-      case 'M':
-		//pGO->rotateX(3.14159/2);
-		glutPostRedisplay();
-return;
-      case 'd':
-std::cout << "--------------------------- PRESSED D -------------------- !11!!\n";
-		if(!worldCtrl){
-		  pos = {0.05f, 0.0f, 0.0f};
-		  pGO->translate(pos);
-		}
-		else{
-		  pos = {-0.05f, 0.0f, 0.0f};
-		  defaultScene->translateCam(pos);
-		}
-		  glutPostRedisplay();
-		  return;
-      case 'w':
-std::cout << "--------------------------- PRESSED W -------------------- !11!!\n";
-		if(!worldCtrl){
-		  pos = {0.0f, 0.05f, 0.0f};
-		  pGO->translate(pos);
-		}
-		else{
-			pos = {0.0f, 0.0f, 0.05f};
-		    defaultScene->translateCam(pos);
-		}
-		  glutPostRedisplay();
-		  return;
+	 
       case 'S':
       std::cout << "Save configuration" << std::endl;
       ConfigurationHandler::save(displayHandeler->getConfigurations(), "config2");
       
       return;
-      case 's':
-std::cout << "--------------------------- PRESSED S -------------------- !11!!\n";
-		if(!worldCtrl){
-		  pos = {0.0f, -0.05f, 0.0f};
-		  pGO->translate(pos);
-		}
-		else {
-			pos = {0.0f, 0.0f, -0.05f};
-		    defaultScene->translateCam(pos);
-		}
-		  glutPostRedisplay();
-		  return;
-      case 'z':
-std::cout << "--------------------------- PRESSED Z -------------------- !11!!\n";
-		  pos = {0.0f, 0.0f, 0.05f};
-		  pGO->translate(pos);
-		  glutPostRedisplay();
-		  return;
-      case 'x':
-std::cout << "--------------------------- PRESSED X -------------------- !11!!\n";
-		  pos = {0.0f, 0.0f, -0.05f};
-		  pGO->translate(pos);
-		  glutPostRedisplay();
-		  return;
-	  case 'y':
-std::cout << "--------------------------- PRESSED Y -------------------- !11!!\n";
-		defaultScene->angleX -= 0.1f;
-		  glutPostRedisplay();
+      
 
-		return;
-	  case 'u':
-std::cout << "--------------------------- PRESSED U -------------------- !11!!\n";
-		defaultScene->angleX += 0.1f;
-		  glutPostRedisplay();
-		return;
-
-	  case 'h':
-std::cout << "--------------------------- PRESSED H -------------------- !11!!\n";
-		defaultScene->angleY -= 0.1f;
-		  glutPostRedisplay();
-
-		return;
-	  case 'j':
-std::cout << "--------------------------- PRESSED J -------------------- !11!!\n";
-		defaultScene->angleY += 0.1f;
-		  glutPostRedisplay();
-		return;
-	  case 'n':
-std::cout << "--------------------------- PRESSED N -------------------- !11!!\n";
-		defaultScene->angleZ -= 0.1f;
-		  glutPostRedisplay();
-
-		return;
-	  case 'm':
-std::cout << "--------------------------- PRESSED M -------------------- !11!!\n";
-		defaultScene->angleZ += 0.1f;
-		  glutPostRedisplay();
-		return;
-/*	  case '7':
-std::cout << "--------------------------- PRESSED 7 -------------------- !11!!\n";
-		pGO->rotateX(-0.1f);
-		  glutPostRedisplay();
-
-		return;
-	  case '8':
-std::cout << "--------------------------- PRESSED 8 -------------------- !11!!\n";
-		pGO->rotateX(0.1f);
-		  glutPostRedisplay();
-		return;
-*/
 		case '9':
 std::cout << "--------------------------- PRESSED 9 -------------------- !11!!\n";
 			pGO->center(defaultScene->getCameraPosition(), {0,0,-2});
 			glutPostRedisplay();
 			return;
-/*
-	  case '4':
-std::cout << "--------------------------- PRESSED 4 -------------------- !11!!\n";
-		pGO->rotateY(-0.1f);
-		  glutPostRedisplay();
 
-		return;
-	  case '5':
-std::cout << "--------------------------- PRESSED 5 -------------------- !11!!\n";
-		pGO->rotateY(0.1f);
-		  glutPostRedisplay();
-		return;
-	  case '1':
-std::cout << "--------------------------- PRESSED 1 -------------------- !11!!\n";
-		pGO->rotateZ(-0.1f);;
-		  glutPostRedisplay();
-
-		return;
-	  case '2':
-std::cout << "--------------------------- PRESSED 2 -------------------- !11!!\n";
-		pGO->rotateZ(0.1f);
-		  glutPostRedisplay();
-		return;*/
 /*case '1':
 	displayHandeler->getProjectors()->at(proj).moveKeystoneCorner(corner, 0, -0.01);
 	glutPostRedisplay();
@@ -700,54 +353,22 @@ std::cout << "--------------------------- PRESSED P -------------------- !11!!\n
 		return;
 	case '-':
 std::cout << "--------------------------- PRESSED - -------------------- !11!!\n";
-		if(!worldCtrl){
+		if(pGO!=NULL){
 			pGO->incrementScale(-0.05f);
 		}
-		else{			
-		    defaultScene->get3DSpace()->incrementScale(-0.05f);
-		}		
 		 glutPostRedisplay();
 		return;
 
 	case '+':
 std::cout << "--------------------------- PRESSED + -------------------- !11!!\n";
-		if(!worldCtrl){
+		if(pGO!=NULL){
 			pGO->incrementScale(0.05f);
 		}
-		else{			
-		    defaultScene->get3DSpace()->incrementScale(0.05f);
-		}		
  		glutPostRedisplay();
 		return;
-      case 'c': //highlights all objects
-std::cout << "--------------------------- PRESSED C -------------------- !11!!\n";
-/*
-		  highlightState = highlightState ? 0 : 1;
-		  if(highlightState) {
-			displayHandeler->highlight();
-		  }
-		  else {
-		    displayHandeler->unHighlight();
-		  }
-*/
-		pGO->toggleHighlight();
-		glutPostRedisplay();
-		return;
-	case 'b':
-std::cout << "--------------------------- PRESSED B -------------------- !11!!\n";
-		pGO->setMesh((!pGO->hasMesh()));
-		glutPostRedisplay();
-		return;
-/*	case ',':	
-std::cout << "--------------------------- PRESSED , -------------------- !11!!\n";
-		 startFileBrowser();
-		 glutPostRedisplay();
-		 return;*/
-	case 'l':	
-std::cout << "--------------------------- PRESSED . -------------------- !11!!\n";
-		defaultScene->toggleBackgroundHighlightning();
-		glutPostRedisplay();
-		return;
+      
+
+	
 	case ' ':	
 std::cout << "--------------------------- PRESSED space !-------------------- !11!!\n";
 		startMenu();
@@ -894,12 +515,6 @@ void selectNextObject() {
 	destroyMenu();
 }
 
-void toggleWorldControl();
-void toggleWorldControl() {
-	worldCtrl = !worldCtrl;
-	std::cout << "World controll now " << worldCtrl << std::endl;
-	destroyMenu();
-}
 
 void highlightBackground();
 void highlightBackground() {
@@ -1049,7 +664,7 @@ void startMenu() {
   GtkWidget *menu_items;
 
 
-  GtkWidget *worldCtrl_button, *selectNext_button, *highlightBackground_button, *toggleHighlight_button, *centerObject_button, *toggleMesh_button;
+  GtkWidget  *selectNext_button, *highlightBackground_button, *toggleHighlight_button, *centerObject_button, *toggleMesh_button;
   char buf[128];
   int i;
 
@@ -1103,13 +718,8 @@ void startMenu() {
   gtk_box_pack_end (GTK_BOX (vbox), exit_button, TRUE, TRUE, 2);
   gtk_widget_show (exit_button);
 
-  /* Toggle worldCtrl button*/
-  gchar* _toggled = (gchar*)(worldCtrl ? "Toggle worldCtrl: True" : "Toggle worldCtrl: False");
-  worldCtrl_button = gtk_button_new_with_label (_toggled);
-  gtk_signal_connect_object (GTK_OBJECT (worldCtrl_button), "clicked",
-   (GtkSignalFunc) toggleWorldControl, GTK_OBJECT (window));
-  gtk_box_pack_end (GTK_BOX (vbox), worldCtrl_button, TRUE, TRUE, 2);
-  gtk_widget_show (worldCtrl_button);
+ 
+  gchar* _toggled;
 
   /* Select next object button*/
   selectNext_button = gtk_button_new_with_label ("Select next object");
