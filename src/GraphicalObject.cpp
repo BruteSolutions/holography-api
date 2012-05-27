@@ -201,7 +201,7 @@ void GraphicalObject::toggleHighlight(){
  */
 void GraphicalObject::translate(Vec3 trans) {
 	pos = {pos.x+trans.x, pos.y+trans.y, pos.z+trans.z};
-	origin = {origin.x+trans.x, origin.y+trans.y, origin.z+trans.z};
+	//origin = {origin.x+trans.x, origin.y+trans.y, origin.z+trans.z};
 }
 
 /**
