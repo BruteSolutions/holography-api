@@ -58,38 +58,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00009"></a><a class="code" href="classProjector.html">00009</a> <span class="keyword">class </span><a class="code" href="classProjector.html">Projector</a> {
 <a name="l00010"></a>00010 <span class="keyword">public</span>:
 <a name="l00011"></a>00011     <a class="code" href="classProjector.html">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len);
-<a name="l00012"></a>00012     <a class="code" href="classProjector.html">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len, <a class="code" href="structVec3.html">Vec3</a> pos, <a class="code" href="structVec3.html">Vec3</a> dir);
-<a name="l00013"></a>00013     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getBufferSize();
-<a name="l00014"></a>00014     <a class="code" href="classColorTranslator.html">ColorTranslator</a> * getColorTranslator();
-<a name="l00015"></a>00015     <span class="keywordtype">void</span> setConfiguration(<a class="code" href="classConfiguration.html">Configuration</a> c);
-<a name="l00016"></a>00016     <a class="code" href="classConfiguration.html">Configuration</a> getConfiguration();
-<a name="l00017"></a>00017     <span class="keywordtype">void</span> highlight();
-<a name="l00018"></a>00018     <span class="keywordtype">void</span> unHighlight();
-<a name="l00019"></a>00019     <span class="keywordtype">int</span>* getBuffer(); <span class="comment">//not implemented</span>
-<a name="l00020"></a>00020     <span class="keywordtype">void</span> calcKeystone(GLuint pid) <span class="keywordflow">throw</span> (std::string);
-<a name="l00021"></a>00021     <span class="keywordtype">void</span> display(<a class="code" href="classScene.html">Scene</a> scene);
-<a name="l00022"></a>00022     <span class="keywordtype">void</span> addShader(<a class="code" href="classShader.html">Shader</a> shader);
-<a name="l00023"></a>00023     std::vector&lt;Shader&gt; getShaders();
-<a name="l00024"></a>00024     <a class="code" href="structVec3.html">Vec3</a> getPosition();
-<a name="l00025"></a>00025     <a class="code" href="structVec3.html">Vec3</a> getDirection();
-<a name="l00026"></a>00026     <span class="keywordtype">void</span> setPosition(<a class="code" href="structVec3.html">Vec3</a> position);
-<a name="l00027"></a>00027     <span class="keywordtype">void</span> setDirection(<a class="code" href="structVec3.html">Vec3</a> direction_);
-<a name="l00028"></a>00028     <span class="keywordtype">void</span> moveKeystoneCorner(<span class="keywordtype">int</span> corner, <span class="keywordtype">int</span> xory, <span class="keywordtype">float</span> value);
-<a name="l00029"></a>00029     <span class="keywordtype">void</span> setKeystoneObserved(<a class="code" href="structKeystoneSetting.html">KeystoneSetting</a> f);
-<a name="l00030"></a>00030 <span class="keyword">private</span>:
-<a name="l00031"></a>00031     std::vector&lt;Shader&gt; shaders;
-<a name="l00032"></a>00032     <span class="keywordtype">int</span> * pnt;
-<a name="l00033"></a>00033     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferSize;
-<a name="l00034"></a>00034     <a class="code" href="classColorTranslator.html">ColorTranslator</a> * colorTranslator;
-<a name="l00035"></a>00035     <a class="code" href="classConfiguration.html">Configuration</a> configuration;
-<a name="l00036"></a>00036     <span class="keywordtype">bool</span> highlighted;
-<a name="l00037"></a>00037     <a class="code" href="structVec3.html">Vec3</a> pos;
-<a name="l00038"></a>00038     <a class="code" href="structVec3.html">Vec3</a> direction;
-<a name="l00039"></a>00039     <a class="code" href="structMat4.html">Mat4</a> keystone;
-<a name="l00040"></a>00040     <span class="keywordtype">float</span> X1, X2,X3,X4, Y1,Y2,Y3,Y4;
-<a name="l00041"></a>00041 };
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#endif</span>
+<a name="l00012"></a>00012     <a class="code" href="classProjector.html">Projector</a>(<a class="code" href="classConfiguration.html">Configuration</a> *c);
+<a name="l00013"></a>00013     <a class="code" href="classProjector.html">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len, <a class="code" href="structVec3.html">Vec3</a> pos, <a class="code" href="structVec3.html">Vec3</a> dir);
+<a name="l00014"></a>00014     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getBufferSize();
+<a name="l00015"></a>00015     <a class="code" href="classColorTranslator.html">ColorTranslator</a> * getColorTranslator();
+<a name="l00016"></a>00016     <span class="keywordtype">void</span> setConfiguration(<a class="code" href="classConfiguration.html">Configuration</a> c);
+<a name="l00017"></a>00017     <a class="code" href="classConfiguration.html">Configuration</a> getConfiguration();
+<a name="l00018"></a>00018     <span class="keywordtype">void</span> highlight();
+<a name="l00019"></a>00019     <span class="keywordtype">void</span> unHighlight();
+<a name="l00020"></a>00020     <span class="keywordtype">int</span>* getBuffer(); <span class="comment">//not implemented not needed</span>
+<a name="l00021"></a>00021     <span class="keywordtype">void</span> calcKeystone(GLuint pid) <span class="keywordflow">throw</span> (std::string);
+<a name="l00022"></a>00022     <span class="keywordtype">void</span> display(<a class="code" href="classScene.html">Scene</a> scene);
+<a name="l00023"></a>00023     <span class="keywordtype">void</span> addShader(<a class="code" href="classShader.html">Shader</a> shader);
+<a name="l00024"></a>00024     std::vector&lt;Shader&gt; getShaders();
+<a name="l00025"></a>00025     <a class="code" href="structVec3.html">Vec3</a> getPosition();
+<a name="l00026"></a>00026     <a class="code" href="structVec3.html">Vec3</a> getDirection();
+<a name="l00027"></a>00027     <span class="keywordtype">void</span> setPosition(<a class="code" href="structVec3.html">Vec3</a> position);
+<a name="l00028"></a>00028     <span class="keywordtype">void</span> setDirection(<a class="code" href="structVec3.html">Vec3</a> direction_);
+<a name="l00029"></a>00029     <span class="keywordtype">void</span> moveKeystoneCorner(<span class="keywordtype">int</span> corner, <span class="keywordtype">int</span> xory, <span class="keywordtype">float</span> value);
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> setKeystoneObserved(<a class="code" href="structKeystoneSetting.html">KeystoneSetting</a> f);
+<a name="l00031"></a>00031 <span class="keyword">private</span>:
+<a name="l00032"></a>00032     std::vector&lt;Shader&gt; shaders;
+<a name="l00033"></a>00033     <span class="keywordtype">int</span> * pnt; <span class="comment">//not used</span>
+<a name="l00034"></a>00034     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferSize; <span class="comment">//not used</span>
+<a name="l00035"></a>00035     <a class="code" href="classColorTranslator.html">ColorTranslator</a> * colorTranslator;
+<a name="l00036"></a>00036     <a class="code" href="classConfiguration.html">Configuration</a> configuration;
+<a name="l00037"></a>00037     <span class="keywordtype">bool</span> highlighted;
+<a name="l00038"></a>00038     <a class="code" href="structVec3.html">Vec3</a> pos;
+<a name="l00039"></a>00039     <a class="code" href="structVec3.html">Vec3</a> direction;
+<a name="l00040"></a>00040     <a class="code" href="structMat4.html">Mat4</a> keystone;
+<a name="l00041"></a>00041     <span class="keywordtype">float</span> X1,X2,X3,X4, Y1,Y2,Y3,Y4; <span class="comment">//keystone observed values</span>
+<a name="l00042"></a>00042 };
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -106,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:31 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

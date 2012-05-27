@@ -8,7 +8,7 @@
 #include "Shared.h"
 
 
-/*
+/**
  * Constructs a new ColorTranslator with a standard conversion factor.
  */
 ColorTranslator::ColorTranslator() throw ( std::string ) {
@@ -17,7 +17,7 @@ ColorTranslator::ColorTranslator() throw ( std::string ) {
     shader = new Shader( "main.vert","main.frag" );
 }
 
-/*
+/**
  * Constructs a new ColorTranslator with the given conversion factor.
  * @param factor a vector of 3 floats that determine the amount of red, green 
  * that will be converted to red. 
@@ -27,14 +27,14 @@ ColorTranslator::ColorTranslator( Vec3 factor ) throw ( std::string ) {
     shader = new Shader( "main.vert","main.frag" );
 }
 
-/*
+/**
  * Destructor.
  */
 ColorTranslator::~ColorTranslator() {
     delete shader;
 }
 
-/*
+/**
  * Sets the factor of this class.
  * If the sum of the components in factor is bigger than 1 normalize the components.
  * @param factor a vector of 3 floats that determine the amount of red, green 
@@ -56,7 +56,7 @@ void ColorTranslator::setConversionFactor( Vec3 factor ) throw ( std::string ) {
     this->factor = factor;
 }
 
-/*
+/**
  * Returns a pointer to the factor of this class
  * @return the factor of this class.
  */
@@ -65,7 +65,7 @@ Vec3 ColorTranslator::getConversionFactor() const
     return factor;
 }
 
-/*
+/**
  * Returns the pointer to the shader object specified (in case apply method isn't the right approach)
  * @return a pointer to the shader object of this class.
  */
@@ -73,7 +73,7 @@ Shader* ColorTranslator::getShader() const {
     return shader; 
 }
 
-/*
+/**
  * Sets the uniform "factor" so that the fragment shader can access the factor of this class.
  */
 void ColorTranslator::setFactorUniform() {

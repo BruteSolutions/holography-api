@@ -51,13 +51,13 @@ std::cout << lastdotpos << std::endl;
 	std::string output = fileExtension;
 	return getFileExtensionCode(output);
 }
+
 /**
  * Get the code representing the file extension
  * @param fileExtension will be compared internally with known file extensions
  * @returns an int representing which file extension was present, if a unknown
  * file extension was present return -1.
  */
-
 int FileLoader::getFileExtensionCode(std::string fileExtension) {
 	if(!fileExtension.compare(".X3D") || !fileExtension.compare(".x3d")){
 	    return 1;

@@ -10,7 +10,8 @@
 #include "UniversalConfiguration.h"
 #include "ConfigurationHandler.h"
 
-/* Saves the configurations specified by the UniversalConfiguration object to a file specified by path. 
+/**
+ * Saves the configurations specified by the UniversalConfiguration object to a file specified by path. 
  * @param uc The UniversalConfiguration to be saved
  * @param path Path to where the configuration is supposed to be saved.
  */
@@ -20,7 +21,8 @@ void ConfigurationHandler::save( UniversalConfiguration *uc, char * path ){
     os.close();
 }
 
-/* Loads the configurations in the file identified by path and returns them in a UniversalConfiguration object. 
+/**
+ * Loads the configurations in the file identified by path and returns them in a UniversalConfiguration object. 
  * @param path Path to the configuration file
  * @return UniversalConfiguration The UniversalConfiguration object created
  */

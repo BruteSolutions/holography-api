@@ -59,19 +59,136 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf91d2417df506abf0f5c8641c539d0c"></a><!-- doxytag: member="UniversalConfiguration::UniversalConfiguration" ref="acf91d2417df506abf0f5c8641c539d0c" args="(std::vector&lt; Configuration &gt; *cs, ColorTranslator *ct)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>UniversalConfiguration</b> (std::vector&lt; <a class="el" href="classConfiguration.html">Configuration</a> &gt; *cs, <a class="el" href="classColorTranslator.html">ColorTranslator</a> *ct)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1bcb01f20c8a022736cd0b26210c34a3"></a><!-- doxytag: member="UniversalConfiguration::getProjectorConfigurations" ref="a1bcb01f20c8a022736cd0b26210c34a3" args="()" -->
-std::vector&lt; <a class="el" href="classConfiguration.html">Configuration</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>getProjectorConfigurations</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78dac986a22dbfc2b53acfaf633503d9"></a><!-- doxytag: member="UniversalConfiguration::getColorTranslator" ref="a78dac986a22dbfc2b53acfaf633503d9" args="()" -->
-<a class="el" href="classColorTranslator.html">ColorTranslator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getColorTranslator</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae54c8cfbd39860caa0427b500489ef59"></a><!-- doxytag: member="UniversalConfiguration::writeToStream" ref="ae54c8cfbd39860caa0427b500489ef59" args="(std::ofstream &amp;os)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeToStream</b> (std::ofstream &amp;os)  throw (std::string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUniversalConfiguration.html#acf91d2417df506abf0f5c8641c539d0c">UniversalConfiguration</a> (std::vector&lt; <a class="el" href="classConfiguration.html">Configuration</a> &gt; *cs, <a class="el" href="classColorTranslator.html">ColorTranslator</a> *ct)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classConfiguration.html">Configuration</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUniversalConfiguration.html#a1bcb01f20c8a022736cd0b26210c34a3">getProjectorConfigurations</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classColorTranslator.html">ColorTranslator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUniversalConfiguration.html#a78dac986a22dbfc2b53acfaf633503d9">getColorTranslator</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUniversalConfiguration.html#ae54c8cfbd39860caa0427b500489ef59">writeToStream</a> (std::ofstream &amp;os)  throw (std::string)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfce05a2995755d57901bf69df229ff0"></a><!-- doxytag: member="UniversalConfiguration::readStream" ref="acfce05a2995755d57901bf69df229ff0" args="(std::ifstream &amp;is)" -->
-static <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>readStream</b> (std::ifstream &amp;is)  throw (std::string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUniversalConfiguration.html#acfce05a2995755d57901bf69df229ff0">readStream</a> (std::ifstream &amp;is)  throw (std::string)</td></tr>
 </table>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acf91d2417df506abf0f5c8641c539d0c"></a><!-- doxytag: member="UniversalConfiguration::UniversalConfiguration" ref="acf91d2417df506abf0f5c8641c539d0c" args="(std::vector&lt; Configuration &gt; *cs, ColorTranslator *ct)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UniversalConfiguration::UniversalConfiguration </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classConfiguration.html">Configuration</a> &gt; *&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classColorTranslator.html">ColorTranslator</a> *&#160;</td>
+          <td class="paramname"><em>ct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Creates a <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> object with the given parameters. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cs</td><td>The vector of configurations </td></tr>
+    <tr><td class="paramname">ct</td><td>The <a class="el" href="classColorTranslator.html">ColorTranslator</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a78dac986a22dbfc2b53acfaf633503d9"></a><!-- doxytag: member="UniversalConfiguration::getColorTranslator" ref="a78dac986a22dbfc2b53acfaf633503d9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classColorTranslator.html">ColorTranslator</a> * UniversalConfiguration::getColorTranslator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the <a class="el" href="classColorTranslator.html">ColorTranslator</a> object that should be used by the <a class="el" href="classDisplay.html">Display</a> class. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="classColorTranslator.html">ColorTranslator</a> The <a class="el" href="classColorTranslator.html">ColorTranslator</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1bcb01f20c8a022736cd0b26210c34a3"></a><!-- doxytag: member="UniversalConfiguration::getProjectorConfigurations" ref="a1bcb01f20c8a022736cd0b26210c34a3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="classConfiguration.html">Configuration</a> &gt; * UniversalConfiguration::getProjectorConfigurations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns a list of <a class="el" href="classConfiguration.html">Configuration</a> objects each describing the configurations of a projector. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>vector&lt;Configuration&gt; The configurationlist from the projectors. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acfce05a2995755d57901bf69df229ff0"></a><!-- doxytag: member="UniversalConfiguration::readStream" ref="acfce05a2995755d57901bf69df229ff0" args="(std::ifstream &amp;is)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> * UniversalConfiguration::readStream </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>is</em></td><td>)</td>
+          <td>  throw (std::string)<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Reads the underlying stream and constructs a <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> object which is returned </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is</td><td>The input stream </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> The constructed <a class="el" href="classUniversalConfiguration.html">UniversalConfiguration</a> object </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae54c8cfbd39860caa0427b500489ef59"></a><!-- doxytag: member="UniversalConfiguration::writeToStream" ref="ae54c8cfbd39860caa0427b500489ef59" args="(std::ofstream &amp;os)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UniversalConfiguration::writeToStream </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>os</em></td><td>)</td>
+          <td>  throw (std::string)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Writes this object to the underlying stream. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The output stream </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="UniversalConfiguration_8h_source.html">UniversalConfiguration.h</a></li>
 <li>UniversalConfiguration.cpp</li>
@@ -91,7 +208,7 @@ static <a class="el" href="classUniversalConfiguration.html">UniversalConfigurat
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 00:17:32 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
