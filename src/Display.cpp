@@ -18,6 +18,10 @@ Display::Display() {
 	//COLORTRANSLATOR??
 	colorTranslator = new ColorTranslator();
 }
+
+/**
+ * TODO
+ */
 void Display::rebindBuffers(Scene *scene) {
 	//save the current window
 	int currentWindow = glutGetWindow();
@@ -38,6 +42,7 @@ void Display::rebindBuffers(Scene *scene) {
 	//change back to the current window
 
 }
+
 /**
  * Displays the given scene.
  * @param scene Scene to display.
@@ -124,6 +129,7 @@ void Display::unHighlight() {
 	 (*it).unHighlight();
 	}
 }
+
 /**
  * Set the configuration for the projectors
  * @param UniversalConfiguration uc to set
@@ -132,12 +138,12 @@ void Display::setConfigurations(UniversalConfiguration *uc){
 	colorTranslator = uc->getColorTranslator();
 	configs = uc->getProjectorConfigurations();
 	int min = configs->size() < projectorList->size() ? configs->size() : projectorList->size();
-	std::cout << "-------min------------: "<<min<<std::endl; 
 	for (int i = 0; i<min; i++) {
 		(projectorList->at(i)).setConfiguration(configs->at(i));
 	}
 	
 }
+
 /**
  * Get the configuration from the projectors.
  * @return UnivercalConfiguration

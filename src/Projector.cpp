@@ -48,6 +48,10 @@ Projector::Projector(int * pointer, unsigned int len) :
 	Vec3 pos = {0,0,0}, dir = {0,0,0};
 	Projector(pointer, len, pos, dir);
 }
+
+/**
+ * TODO
+ */
 void Projector::setKeystoneObserved(KeystoneSetting f){
     X1 = f.k[0];
     Y1 = f.k[1];

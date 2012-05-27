@@ -36,7 +36,6 @@ GraphicalObject::GraphicalObject(float _vertexData[], int _vertexDataSize, float
 	avgZ = avgZ*4 / vertexDataSize;
 
 	origin={avgX,avgY,avgZ};
-	std::cout << "origin = " << avgX << ", " << avgY << ", " << avgZ << std::endl;
 	highlight = false;
 
 	mesh=0;
@@ -290,7 +289,6 @@ void GraphicalObject::center(Vec3 camPos, Vec3 optPos)
 	finalOffset.x = finalOffset.x/(vertexDataSize/4);
 	finalOffset.y = finalOffset.y/(vertexDataSize/4);
 	finalOffset.z = finalOffset.z/(vertexDataSize/4);
-	std::cout << "--------------------------------------------POS--"<<finalOffset.x<<finalOffset.y<<finalOffset.z <<" ---------------------------------------------" <<std::endl;
 	pos = finalOffset;
 }
 
