@@ -88,7 +88,7 @@ std::vector<GraphicalObject*> Scene::getSelected() {
 GraphicalObject * Scene::getNextSelected() { ; }
 
 /**
- * TODO.
+ * Deselected all objects in 3DSpace 
  */
 void Scene::deselectAll() { 
 	threeDSpace->clearSelected(); 
@@ -135,7 +135,8 @@ void Scene::translateCam(Vec3 trans) {
 }
 
 /**
- *
+ * Scales all objects and resets their position to their original position
+ * and moves the camera to its original position to fit all objects in view
  */
 void Scene::autoRescale(){
 	std::vector<GraphicalObject*> objects = get3DSpace()->getObjects();
@@ -172,7 +173,6 @@ void Scene::autoRescale(){
 			if(max < abs(object->getVertexData()[j])) max = abs(object->getVertexData()[j]);
 		}
 	}
-	std::cout << "TJENA" << std::endl;
 	get3DSpace()->setScale(5/max);
 	cPos = { 0, 0, 0 };
 	

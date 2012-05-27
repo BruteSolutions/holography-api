@@ -19,7 +19,6 @@
  * @return a Scene containing the objects specified in the file
  */
 Scene* RawLoader::loadFile(std::string path) throw (std::string) {
-	std::cout << "hej" << std::endl;
 	std::ifstream rawfile;
 	Vec3 pos;
 	char nl;
@@ -29,7 +28,6 @@ Scene* RawLoader::loadFile(std::string path) throw (std::string) {
 
 	/* open the file */
 	rawfile.open(path);
-	std::cout << "hej" << std::endl;
 	if( rawfile.is_open() ) { 
 		/* read the amount of objects the file contains */
 		rawfile >> numObjects;
@@ -48,13 +46,11 @@ Scene* RawLoader::loadFile(std::string path) throw (std::string) {
 
 			/* Read the amount of triangles of this object */
 			rawfile >> numTriangles;
-			std::cout << "numTriangles " << numTriangles;
 			rawfile.get(nl);
 			if(nl != '\n') throw std::string("IllegalRAWFileException");
 
 			/* if the amount was 0, then something is obviously wrong */
 			if(numTriangles == 0) throw std::string("IllegalRAWFileException"); 
-			std::cout << std::endl;
 			vertexData = new float[numTriangles*12];
 			colorData = new float[numTriangles*12];
 			int k = 0;
@@ -69,7 +65,6 @@ Scene* RawLoader::loadFile(std::string path) throw (std::string) {
 						rawfile.get(nl);
 						if(nl == '\n'){ if(j+2 != 12) { throw std::string("IllegalRAWFileException"); } }
 					}
-						std::cout << vertexData[k] <<" ";
 				}
 				std::cout << std::endl;
 			}
@@ -89,13 +84,7 @@ Scene* RawLoader::loadFile(std::string path) throw (std::string) {
 						rawfile.get(nl);
 						if(nl == '\n'){ if(j+2 != 12){ throw std::string("IllegalRAWFileException"); }}
 					}
-						std::cout << colorData[j] <<" ";
-				}
-			std::cout << std::endl;			
-
-			}
-			for(int z = 0; z < numTriangles*12; z ++){
-				std::cout << vertexData[z] << " ";
+				}		
 			}
 			/* Add object to the scene */
 			GraphicalObject * object = new GraphicalObject(vertexData, numTriangles*12, colorData, numTriangles*12); 

@@ -15,12 +15,14 @@ Display::Display() {
 	monitor = new Monitor();
 	projectorList = new std::vector<Projector>();
 
-	//COLORTRANSLATOR??
 	colorTranslator = new ColorTranslator();
 }
 
 /**
- * TODO
+ * Update each window with the buffers containing our objects 
+ * (has to be called whenever the amount of objects to be drawn are modified
+ * or when changing scenes)
+ * @param scene The scene to be bound to each window handled in display
  */
 void Display::rebindBuffers(Scene *scene) {
 	//save the current window

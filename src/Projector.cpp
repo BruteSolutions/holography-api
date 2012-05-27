@@ -50,7 +50,8 @@ Projector::Projector(int * pointer, unsigned int len) :
 }
 
 /**
- * TODO
+ * Set the observed keystone values used when calculating the keystone matrix
+ * @param f Is a KeystoneSetting struct (contains 8 floats) 
  */
 void Projector::setKeystoneObserved(KeystoneSetting f){
     X1 = f.k[0];
