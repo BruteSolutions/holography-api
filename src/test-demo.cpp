@@ -57,24 +57,25 @@ GraphicalObject * grObj1, *pGO, * grObj2, *grObj3, *testObj;
 std::vector<GraphicalObject*> selGOs;
 
 //--------------------------TEST OBJECT-----------------------------------
-#define horRTop 100.0f, 0.2f, -2.0f, 1.0f
-#define horRBot 100.0f, -0.2f, -2.0f, 1.0f
-#define horLTop -100.0f, 0.2f, -2.0f, 1.0f
-#define horLBot -100.0f, -0.2f -2.0f, 1.0f
+#define horRTop 200.0f, 1.0f, -2.0f, 1.0f
+#define horRBot 200.0f, -1.0f, -2.0f, 1.0f
+#define horLTop -200.0f, 1.0f, -2.0f, 1.0f
+#define horLBot -200.0f, -1.0f, -2.0f, 1.0f
 
-#define verTopL 0.1f, 100.0f, -2.0f, 1.0f
-#define verTopR 0.1f, 100.0f, -2.0f, 1.0f
-#define verBotL -0.1f, -100.0f, -2.0f, 1.0f
-#define verBotR 0.1f, -100.0f, -2.0f, 1.0f
+#define verTopL -1.0f, 200.0f, -2.0f, 1.0f
+#define verTopR 1.0f, 200.0f, -2.0f, 1.0f
+#define verBotL -1.0f, -200.0f, -2.0f, 1.0f
+#define verBotR 1.0f, -200.0f, -2.0f, 1.0f
 
 #define testColor 1.0f, 0.0f, 0.0f, 1.0f
-
 float testObject[] = {
-	verTopL, verBotL, verBotR,
-	verBotR, verTopR, verTopL,
+	horRTop, horRBot, horLBot,
+	horLBot, horRTop, horLTop,
 	
-	horRTop, horLTop, horLBot,
-	horLBot, horRTop, horRBot,
+	verTopL, verTopR, verBotL,
+	verBotL, verBotR, verTopR,
+	
+	
 };
 
 float testObjectColor[] = {
@@ -124,56 +125,6 @@ float ny[] =  {
  0, 0, 0, 1,
   1,  1, 0, 1,
   1, -1, 0, 1
-};
-float cube[] =  {
- -1, -1, 1, 1, //triangle 1
- -1,  1, 1, 1,
-  1,  1, 1, 1,
-
- -1, -1, 1, 1, //triangle 2
-  1,  1, 1, 1,
-  1, -1, 1, 1,
-
-  1, -1, -1, 1,
-  1,  1, -1, 1,
-  1,  1,  1, 1,
-
-  1, -1, -1, 1,
-  1,  1,  1, 1,
-  1, -1,  1, 1,
-
- -1,  1, -1, 1,
- -1,  1,  1, 1,
-  1,  1,  1, 1,
- 
- -1,  1, -1, 1,
-  1,  1,  1, 1,
-  1,  1, -1, 1,
-
- -1, -1, -1, 1, //triangle 1
- -1,  1, -1, 1,
-  1,  1, -1, 1,
-
- -1, -1, -1, 1, //triangle 2
-  1,  1, -1, 1,
-  1, -1, -1, 1,
-
-  -1, -1, -1, 1,
-  -1,  1, -1, 1,
-  -1,  1,  1, 1,
-
-  -1, -1, -1, 1,
-  -1,  1,  1, 1,
-  -1, -1,  1, 1,
-
- -1,  -1, -1, 1,
- -1,  -1,  1, 1,
-  1,  -1,  1, 1,
- 
- -1,  -1, -1, 1,
-  1,  -1,  1, 1,
-  1,  -1, -1, 1,
-
 };
 
 float vertexData[] = {
@@ -898,7 +849,7 @@ void startConfigurationBrowser() {
   #endif
   	return;
 }
-
+void selectNextObject();
 char * currentfilepath;
 unsigned int defaults(unsigned int displayMode, int &width, int &height) {return displayMode;}
 
@@ -910,6 +861,8 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
     gtk_widget_destroy(filew);
 
 	defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
+	if(pGO == NULL)
+		selectNextObject();
     displayHandeler->rebindBuffers(defaultScene); //Is really important
 }
 #endif
@@ -928,7 +881,7 @@ void configurationSelected( GtkWidget *w, GtkFileSelection *fs ) {
 }
 #endif
 
-void selectNextObject();
+
 void selectNextObject() {
     if(pGO != NULL){
 	    pGO->setHighlight(FALSE);
@@ -988,18 +941,24 @@ const char*  boolToString(bool b) {
 }
 
 bool showTestObj = FALSE;
+UniversalConfiguration * oldConfiguration;
 void toggleTestObject();
 void toggleTestObject() {
 	if(!showTestObj) {
 		testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
 		defaultScene->get3DSpace()->addObject(testObj);
-		testObj->setOrigin({0,0,-5});
-		testObj->setScale(10);
 		showTestObj = TRUE;
+		if(pGO == NULL)
+			selectNextObject();
+			//SAVE OLD CONFIGURATION
+		oldConfiguration = displayHandeler->getConfigurations();
+		displayHandeler->setConfigurations((ConfigurationHandler::load("testConfig")));
 	}
 	else {
 		defaultScene->get3DSpace()->removeObject(testObj);
 		showTestObj = FALSE;
+			//RESTOR CONFIG
+		displayHandeler->setConfigurations(oldConfiguration);
 	}
 	displayHandeler->rebindBuffers(defaultScene); 
 }
