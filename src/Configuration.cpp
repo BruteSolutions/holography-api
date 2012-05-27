@@ -44,9 +44,9 @@ void Configuration::writeToStream( std::ofstream& os ) throw ( std::string )  {
     if( !os.is_open() ) throw( string( "GenericIOException" ) );
     os.exceptions( ofstream::failbit | ofstream::eofbit );    
     try{	
-        os << factor.x << factor.y  << factor.z;
-        os << pos.x << pos.y  << pos.z;
-        os << dir.x << dir.y  << dir.z;
+        os << factor.x << " " << factor.y << " " << factor.z << "\n";
+        os << pos.x << " " << pos.y << " " << pos.z << "\n";
+        os << dir.x << " " << dir.y << " " << dir.z << "\n";
     }
     catch( ofstream::failure e ){
         if( os.fail() ) throw( string( "GenericIOException" ) );

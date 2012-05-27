@@ -9,6 +9,7 @@
 class Projector {
 public:
     Projector(int * pointer, unsigned int len);
+    Projector(Configuration *c);
     Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir);
     unsigned int getBufferSize();
     ColorTranslator * getColorTranslator();

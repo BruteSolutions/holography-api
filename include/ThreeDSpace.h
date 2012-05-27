@@ -19,6 +19,7 @@ public:
     int current;
     std::vector<GraphicalObject*> selected;
     float scale;
+    void removeObject(GraphicalObject*);
     void resize(double factor);
     void setScale(double _scale);
     double getScale();

@@ -5,7 +5,6 @@
 #include <math.h>
 #include "Scene.h"
 #include "Shared.h"
-#include "Matrix.h"
 #include "GraphicalObject.h"
 
 GraphicalObject::GraphicalObject() {
@@ -105,6 +104,9 @@ int GraphicalObject::getVertexDataSize() {
  */
 int GraphicalObject::getColorDataSize() {	
 	return colorDataSize;
+}
+Vec3 GraphicalObject::getPosition(){
+	return pos;
 }
 void GraphicalObject::setPosition(Vec3 newPos){
 	pos = newPos;

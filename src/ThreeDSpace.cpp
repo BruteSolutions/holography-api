@@ -53,11 +53,36 @@ Vec3 ThreeDSpace::getOrigin() {
 }
 
 /**
+ * Remove an GraphicalObject from the ThreeDSpace.
+ * @param object Graphical object pointer
+ */
+void ThreeDSpace::removeObject(GraphicalObject * object) {
+    std::cout << "removing... " << std::endl;
+    int i = 0;
+    std::cout << objects.size();
+    for (std::vector<GraphicalObject*>::iterator it = objects.begin(); it != objects.end() ; it++) {
+        if((*it) == object) {
+            //vector::erase
+            //iterator erase ( iterator position );
+            std::cout << "equal " << i << std::endl;
+            objects.erase(it);
+            std::cout << "erase " << std::endl;
+            return;
+
+        }
+        std::cout << i << std::endl;
+        i++;
+    }
+}
+/**
  * Selects the next GraphicalObject in the ThreeDSpace.
  */
 void ThreeDSpace::selectNext() {
     selected.clear();
+    if(objects.size() == 0) return;
+    
     selected.push_back(objects.at(current));
+    
     current++;
     if(current >= objects.size()) {
         current = 0;

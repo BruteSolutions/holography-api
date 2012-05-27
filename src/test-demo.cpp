@@ -24,6 +24,7 @@
 #include "Projector.h"
 #include "FileLoader.h"
 #include "Display.h"
+#include "ConfigurationHandler.h"
 
 #ifdef GTK_ENABLED
 //#include "examplewindow.h"
@@ -49,6 +50,7 @@ using namespace std;
 Projector * p1, * p2;
 Display* displayHandeler;
 Scene * defaultScene;
+UniversalConfiguration *uc;
 int highlightState = 0;
 
 GraphicalObject * grObj1, *pGO, * grObj2, *grObj3, *testObj;
@@ -306,15 +308,15 @@ int runTests()
 void init(int argc, char ** argv)
 { // NOT TO SELF, ALL OBJECTS HAS TO BE IN THE scene before any window bindsbufffer redering
   //if an object is added in a later stage, everywindow has to rebind their buffer
-
   //Run tests and terminate if --test is given
   if(argc == 2 && !strcmp(argv[1], "--test")) {
     exit(runTests());
   }
+  //uc = ConfigurationHandler::load("config2");
 	std::cout << "Hej1" << std::endl;
 	//defaultScene = FileLoader::loadFile("rawformat.bs");
 	std::cout << "Hej2" << std::endl;
-	defaultScene = FileLoader::loadFile("CadTeapot.x3d");
+	//defaultScene = FileLoader::loadFile("CadTeapot.x3d");
 	//grObj1 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	//grObj2 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
 	//grObj3 = new GraphicalObject(vertexData, sizeof(vertexData)/4, colorData, sizeof(colorData)/4);
@@ -322,7 +324,7 @@ void init(int argc, char ** argv)
 	//GraphicalObject * grobj = new GraphicalObject(ny, sizeof(ny)/4, colorData, sizeof(ny)/4);
 	//GraphicalObject * grobj = new GraphicalObject(cube, sizeof(cube)/4, colorData2, sizeof(cube)/4);
 	
-	//defaultScene = new Scene();
+	defaultScene = new Scene();
 	//defaultScene->get3DSpace()->addObject(grObj1);
 	//defaultScene->get3DSpace()->addObject(grObj2);
 	//defaultScene->get3DSpace()->addObject(grObj3);
@@ -340,10 +342,10 @@ void init(int argc, char ** argv)
 	//std::cout << "antalet floats " << grObj1->getVertexDataSize() << std::endl;
 	//std::cout << "antalet bytes " << grObj1->getVertexDataSize()*4 << std::endl;
 
-	defaultScene->selectNext();
+	//defaultScene->selectNext();
 	
 
-	pGO = defaultScene->getSelected().at(0);
+	//pGO = defaultScene->getSelected().at(0);
 
 	//initial zoom out
 
@@ -417,11 +419,12 @@ void addProjector(){
 		std::cout << "ERROR SCENE NOT INITIALIZED";
 		exit(1);
 	}
-
+    //Configuration * c = uc->getProjectorConfigurations()[numwindows-1];
+    
 	Vec3 pos = {(float) (numwindows*1.05f), 0, -15}, dir = {0, 0, 0};
 	//Vec3 pos = {0,0,-10}, dir = {0,0,0};
 	displayHandeler->addProjector(new Projector(NULL,0,pos,dir));
-
+//    displayHandeler->addProjector(
 	bindBuffer();
 	//graphicSettings();
 	numwindows++;
@@ -468,13 +471,24 @@ void mouse(int button, int state, int x, int y) {
 	//scroll backward = button 4
 	mouse_x = x;
 	mouse_y = y;
+	int mod = glutGetModifiers();
 	switch (button)
 	{
 		case 0: if(state == 0) leftmousebutton = true; else leftmousebutton = false; return;
 		case 1: if(state == 0) middlemousebutton = true; else middlemousebutton = false; return;
 		case 2: if(state == 0) rightmousebutton = true; else rightmousebutton = false; return;
-		case 3: if(state == 0) defaultScene->get3DSpace()->incrementScale(0.05f); glutPostRedisplay(); return;
-		case 4: if(state == 0) defaultScene->get3DSpace()->incrementScale(-0.05f); glutPostRedisplay(); return;
+		case 3: if(state == 0) if(mod == GLUT_ACTIVE_SHIFT && pGO != NULL) 
+		                            pGO->incrementScale(0.05f); 
+		                       else if (mod != GLUT_ACTIVE_SHIFT) 
+		                            defaultScene->get3DSpace()->incrementScale(0.05f);
+		                       glutPostRedisplay(); 
+		                       return;
+		case 4: if(state == 0) if(mod == GLUT_ACTIVE_SHIFT && pGO != NULL) 
+		                            pGO->incrementScale(-0.05f); 
+		                       else if (mod != GLUT_ACTIVE_SHIFT) 
+		                            defaultScene->get3DSpace()->incrementScale(-0.05f);
+		                       glutPostRedisplay(); 
+		                       return;
 	};
 }
 
@@ -483,33 +497,44 @@ void mouse(int button, int state, int x, int y) {
 #endif
 int objCtrl = false;
 void motion(int x, int y){
-	int mod = glutGetModifiers();
-	if(leftmousebutton){
-		if(objCtrl){
-			pGO->rotateY((float) (x - mouse_x) / 100);
-			pGO->rotateX((float) (y - mouse_y)/ 100);
+    int mod = glutGetModifiers();
+    if(leftmousebutton){
+        if(mod == GLUT_ACTIVE_SHIFT){
+            if(pGO == NULL) return;
+            if(mod == GLUT_ACTIVE_CTRL){
+                pGO->rotateZ((float) (x - mouse_x) /100);
+            }else{
+                pGO->rotateY((float) (x - mouse_x) /100);
+            }
+            pGO->rotateX((float) (y-mouse_y)/ 100);
+        }else{
+            if(mod == GLUT_ACTIVE_CTRL){ // THIS DOES NOT WORK IF CAPSLOCK IS ON
+                defaultScene->rotateZ((float) (x - mouse_x) / 100);
+            } else{
+                defaultScene->rotateY((float) (x - mouse_x) / 100);
+            }   			
+            defaultScene->rotateX((float) (y - mouse_y)/ 100);
+        }
+	    glutPostRedisplay();
+    }
+	if(rightmousebutton){
+		Vec3 pos;		
+		if(mod == GLUT_ACTIVE_CTRL){
+		   pos = {(float) (x-mouse_x) / 100, 0, (float) (y-mouse_y) / 100 };
 		}else{
-			if(mod == GLUT_ACTIVE_CTRL){ // THIS DOES NOT WORK IF CAPSLOCK IS ON
-				defaultScene->rotateZ((float) (x - mouse_x) / 100);
-			} else{
-				defaultScene->rotateY((float) (x - mouse_x) / 100);
-			}			
-			defaultScene->rotateX((float) (y - mouse_y)/ 100);
+		   pos = {(float) (x-mouse_x) / 100, (float) (y-mouse_y) /100, 0.0f};
+		}
+		if(mod == GLUT_ACTIVE_SHIFT){
+		            if(pGO == NULL) return;
+			pGO->translate(pos);
+		}else{
+			defaultScene->translateCam(pos);
 		}
 		glutPostRedisplay();
 
 	}
-	if(rightmousebutton){
-		Vec3 pos = {(float) (x-mouse_x) / 100, (float) (y-mouse_y) /100, 0.0f};
-		    
-		defaultScene->translateCam(pos);
-
-		glutPostRedisplay();
-
-	}
-		mouse_x = x;
-		mouse_y = y;
-
+	mouse_x = x;
+	mouse_y = y;
 }
 int proj = 0;
 int corner = 0;
@@ -588,6 +613,11 @@ std::cout << "--------------------------- PRESSED W -------------------- !11!!\n
 		}
 		  glutPostRedisplay();
 		  return;
+      case 'S':
+      std::cout << "Save configuration" << std::endl;
+      ConfigurationHandler::save(displayHandeler->getConfigurations(), "config2");
+      
+      return;
       case 's':
 std::cout << "--------------------------- PRESSED S -------------------- !11!!\n";
 		if(!worldCtrl){
@@ -756,11 +786,11 @@ std::cout << "--------------------------- PRESSED B -------------------- !11!!\n
 		pGO->setMesh((!pGO->hasMesh()));
 		glutPostRedisplay();
 		return;
-	case ',':	
+/*	case ',':	
 std::cout << "--------------------------- PRESSED , -------------------- !11!!\n";
 		 startFileBrowser();
 		 glutPostRedisplay();
-		 return;
+		 return;*/
 	case 'l':	
 std::cout << "--------------------------- PRESSED . -------------------- !11!!\n";
 		defaultScene->toggleBackgroundHighlightning();
@@ -849,15 +879,17 @@ void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
     gtk_widget_destroy(filew);
 	defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
     displayHandeler->rebindBuffers(defaultScene); //Is really important
-    destroyMenu();
 }
 #endif
 
 void selectNextObject();
 void selectNextObject() {
-	pGO->setHighlight(FALSE);
+    if(pGO != NULL){
+	    pGO->setHighlight(FALSE);
+	}
 	defaultScene->selectNext();
 	selGOs = defaultScene->getSelected();
+	if(selGOs.size() == 0) return;
 	pGO = selGOs.at(0);
 	pGO->setHighlight(TRUE);
 	
@@ -880,21 +912,27 @@ void highlightBackground() {
 
 void toggleHighlight();
 void toggleHighlight() {
+    if(pGO != NULL){
 	pGO->toggleHighlight();
+    }
 	destroyMenu();
 }
 
 void centerObject();
 void centerObject() {
+    if(pGO != NULL){
 	Vec3 ori = {-defaultScene->get3DSpace()->getOrigin().x,-defaultScene->get3DSpace()->getOrigin().y,-defaultScene->get3DSpace()->getOrigin().z};
 	pGO->center(defaultScene->getCameraPosition(), ori);
 	std::cout << "ORINGIN " << defaultScene->get3DSpace()->getOrigin().x << defaultScene->get3DSpace()->getOrigin().y << defaultScene->get3DSpace()->getOrigin().z << std::endl;
+    }
 	destroyMenu();
 }
 
 void toggleMesh();
 void toggleMesh() {
+    if(pGO != NULL){
 	pGO->setMesh(!pGO->hasMesh());
+    }
 	destroyMenu();
 }
 
@@ -903,13 +941,102 @@ const char*  boolToString(bool b) {
   return b ? "true" : "false";
 }
 
+bool showTestObj = FALSE;
+void toggleTestObject();
+void toggleTestObject() {
+if(!showTestObj) {
+testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
+defaultScene->get3DSpace()->addObject(testObj);
+testObj->setOrigin({0,0,-5});
+testObj->setScale(10);
+showTestObj = TRUE;
+}
+else {
+defaultScene->get3DSpace()->removeObject(testObj);
+showTestObj = FALSE;
+}
+displayHandeler->rebindBuffers(defaultScene); 
+}
+void removeSelectedObject();
+void removeSelectedObject() {
+std::cout << "hej" << endl;
+defaultScene->get3DSpace()->removeObject(pGO);
+std::cout << "död" << std::endl;
+displayHandeler->rebindBuffers(defaultScene); 
+ pGO = NULL;
+}
+
+
 #ifdef GTK_ENABLED
 void enter_callback (GtkWidget *widget, GtkWidget *entry );
 void enter_callback( GtkWidget *widget, GtkWidget *entry ) {
-	std::cout << gtk_entry_get_text(GTK_ENTRY(entry)) << std::endl;
+    std::cout << gtk_entry_get_text(GTK_ENTRY(entry)) << std::endl;
+    //std::vector<std::string> coords;
+    //boost
+    //boost::split(coords, (std::string) gtk_entry_get_text(GTK_ENTRY(entry)) , boost::is_any_of(","));
+    char *pch;
+    float x,y,z;
+    char buf[100];
+    int i = 0;
+    strcpy(buf,(const char *) gtk_entry_get_text(GTK_ENTRY(entry)));
+    pch = strtok(buf, ", ");
+    while(pch != NULL && i < 3){
+        if(i == 0)
+            x = atof(pch);
+        else if(i == 1)
+            y = atof(pch);
+        else
+            z = atof(pch); 
+        pch = strtok(NULL, ", ");
+        i++;
+    }
+    if(i != 3){
+        std::cout << "Invalid input, try again" <<std::endl;
+    }else{
+    std::cout << "Extracted coords: " << x << ", " << y << ", " << z << std::endl;
+    //std::cout << "Extracted coords: " << coords[0] <<"," <<coords[1] <<" " <<coords[2] <<std::endl;
+    //Vec3 newOrg = {atof(coords[0]) ,atof(coords[1]), atof(coords[2])};
+    Vec3 newOrg = {x,y,z};
+    defaultScene->get3DSpace()->setOrigin(newOrg);
+    destroyMenu();
+    }
 }
 #endif
-
+#ifdef GTK_ENABLED
+void setObjectOrigin (GtkWidget *widget, GtkWidget *entry );
+void setObjectOrigin ( GtkWidget *widget, GtkWidget *entry ) {
+    std::cout << gtk_entry_get_text(GTK_ENTRY(entry)) << std::endl;
+    //std::vector<std::string> coords;
+    //boost
+    //boost::split(coords, (std::string) gtk_entry_get_text(GTK_ENTRY(entry)) , boost::is_any_of(","));
+    char *pch;
+    float x,y,z;
+    char buf[100];
+    int i = 0;
+    strcpy(buf,(const char *) gtk_entry_get_text(GTK_ENTRY(entry)));
+    pch = strtok(buf, ", ");
+    while(pch != NULL && i < 3){
+        if(i == 0)
+            x = atof(pch);
+        else if(i == 1)
+            y = atof(pch);
+        else
+            z = atof(pch); 
+        pch = strtok(NULL, ", ");
+        i++;
+    }
+    if(i != 3){
+        std::cout << "Invalid input, try again" <<std::endl;
+    }else{
+    std::cout << "Extracted coords: " << x << ", " << y << ", " << z << std::endl;
+    //std::cout << "Extracted coords: " << coords[0] <<"," <<coords[1] <<" " <<coords[2] <<std::endl;
+    //Vec3 newOrg = {atof(coords[0]) ,atof(coords[1]), atof(coords[2])};
+    Vec3 newOrg = {x,y,z};
+    pGO->setOrigin(newOrg);
+    destroyMenu();
+    }
+}
+#endif
 void startMenu() {
 #ifdef GTK_ENABLED
   GtkWidget *menu;
@@ -1008,7 +1135,24 @@ void startMenu() {
    (GtkSignalFunc) centerObject, GTK_OBJECT (window));
   gtk_box_pack_end (GTK_BOX (vbox), centerObject_button, TRUE, TRUE, 2);
   gtk_widget_show (centerObject_button);
+  
+  //Create toogle test object option
+  gchar* _toggled2 = (gchar*)(showTestObj ? "Toggle test object: True" : "Toggle test object: False");
+  GtkWidget *menu_testObject = gtk_menu_item_new_with_label (_toggled2);  
+  gtk_menu_append (GTK_MENU (menu), menu_testObject);
+  gtk_signal_connect_object (GTK_OBJECT (menu_testObject), "activate",
+            GTK_SIGNAL_FUNC (toggleTestObject), (gpointer) g_strdup ("Toggle test object"));
+  gtk_widget_show (menu_testObject);
+   //Create remove selected object option
+if(pGO != NULL) {
+ GtkWidget *menu_removeObject = gtk_menu_item_new_with_label ("Remove selected object");  
+ gtk_menu_append (GTK_MENU (menu), menu_removeObject);
+ gtk_signal_connect_object (GTK_OBJECT (menu_removeObject), "activate",
+GTK_SIGNAL_FUNC (removeSelectedObject), (gpointer) g_strdup ("Remove selected object"));
+ gtk_widget_show (menu_removeObject);
 
+} 
+if( pGO != NULL){
   /* toggleMesh_button */
    _toggled = (gchar*)(pGO->hasMesh() ? "Toggle mesh: True" : "Toggle mesh: False");
   toggleMesh_button = gtk_button_new_with_label (_toggled);
@@ -1016,21 +1160,45 @@ void startMenu() {
    (GtkSignalFunc) toggleMesh, GTK_OBJECT (window));
   gtk_box_pack_end (GTK_BOX (vbox), toggleMesh_button, TRUE, TRUE, 2);
   gtk_widget_show (toggleMesh_button);
+}
+ /* Create the GtkText widget worldorigin */
+  GtkWidget *entry = gtk_entry_new_with_max_length (100);
+  GtkWidget *label;
 
-  /* Create the GtkText widget */
-  GtkWidget *entry = gtk_entry_new_with_max_length (50);
-  gtk_signal_connect(GTK_OBJECT(entry), "activate", GTK_SIGNAL_FUNC(enter_callback), entry);
+  //gtk_entry_set_text (GTK_ENTRY (entry), "Set world origin on the form: x,y,z: current: ");
+  char buf2[100];
+  sprintf( buf2, "Set world origin on the form: x,y,z: current: %.04g,%.04g,%.04g", defaultScene->get3DSpace()->getOrigin().x, defaultScene->get3DSpace()->getOrigin().y, defaultScene->get3DSpace()->getOrigin().z);
+  gchar* s = (gchar*) buf2; //("" + defaultScene->get3DSpace()->getOrigin().x + "," + defaultScene->get3DSpace()->getOrigin().y + "," defaultScene->get3DSpace()->getOrigin().z); 
+  
+  label =  gtk_label_new( s);
+gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+  
+  gtk_widget_show (label);
+    gtk_signal_connect(GTK_OBJECT(entry), "activate", GTK_SIGNAL_FUNC(enter_callback), entry);
   gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
+  
   gtk_widget_show (entry);
-  gtk_entry_set_text (GTK_ENTRY (entry), "Set world origin on the form: x,y,z: current: ");
-  char* s;
-  asprintf(&s, "%f %f", defaultScene->get3DSpace()->getOrigin().x, defaultScene->get3DSpace()->getOrigin().y);    
-  // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().x);    
-  // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().y); 
-  // asprintf(&s, "%.4f,", defaultScene->get3DSpace()->getOrigin().z); 
+  //gtk_label_append_text (GTK_ENTRY (entry), s);
+if(pGO != NULL){
+/* Create the GtkText widget objectorigin */
+  GtkWidget *objectoriginentry = gtk_entry_new_with_max_length (100);
+  GtkWidget *objectoriginlabel;
 
-  gtk_entry_append_text (GTK_ENTRY (entry), s);
-
+  //gtk_entry_set_text (GTK_ENTRY (entry), "Set world origin on the form: x,y,z: current: ");
+  char bufoo2[100];
+  sprintf( bufoo2, "Set object origin on the form: x,y,z: current: %.04g,%.04g,%.04g", pGO->getOrigin().x, pGO->getOrigin().y, pGO->getOrigin().z);
+  gchar* s2 = (gchar*) bufoo2; //("" + defaultScene->get3DSpace()->getOrigin().x + "," + defaultScene->get3DSpace()->getOrigin().y + "," defaultScene->get3DSpace()->getOrigin().z); 
+  
+  objectoriginlabel =  gtk_label_new( s2);
+gtk_box_pack_start (GTK_BOX (vbox), objectoriginlabel, TRUE, TRUE, 0);
+  
+  gtk_widget_show (objectoriginlabel);
+    gtk_signal_connect(GTK_OBJECT(objectoriginentry), "activate", GTK_SIGNAL_FUNC(setObjectOrigin), objectoriginentry);
+  gtk_box_pack_start (GTK_BOX (vbox), objectoriginentry, TRUE, TRUE, 0);
+  
+  gtk_widget_show (objectoriginentry);
+  //gtk_label_append_text (GTK_ENTRY (entry), s);
+}
 
   /* And finally we append the menu-item to the menu-bar -- this is the
   * "root" menu-item I have been raving about =) */

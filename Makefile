@@ -18,12 +18,12 @@ endif
 ifndef AR
   AR = ar
 endif
-ifndef LIBXMLCFLAGS
- LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
- endif
-ifndef LIBXMLLIBS
- LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
-endif
+#ifndef LIBXMLCFLAGS
+# LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
+#endif
+#ifndef LIBXMLLIBS
+# LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
+#endif
 # put in CFLAGS $(LIBXMLCFLAGS) 
 # put in LIBS $(LIBXMLLIBS) -lGL 
 
@@ -70,7 +70,7 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/test-demo.o $(OBJDIR)/FileLoader.o $(OBJDIR)/RawLoader.o $(OBJDIR)/X3DLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o $(OBJDIR)/TestMonitor.o $(OBJDIR)/TestDisplay.o $(OBJDIR)/TestProjector.o\
+	$(OBJDIR)/test-demo.o $(OBJDIR)/FileLoader.o $(OBJDIR)/RawLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/ConfigurationHandler.o $(OBJDIR)/UniversalConfiguration.o $(OBJDIR)/TestFramework.o $(OBJDIR)/TestShader.o $(OBJDIR)/TestColorTranslator.o $(OBJDIR)/TestConfiguration.o $(OBJDIR)/TestMonitor.o $(OBJDIR)/TestDisplay.o $(OBJDIR)/TestProjector.o\
 
 #$(OBJDIR)/TestFileLoader.o add when testing with complete setup
 # $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
@@ -163,6 +163,10 @@ $(OBJDIR)/Shader.o: $(SRCPATH)/Shader.cpp
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Configuration.o: $(SRCPATH)/Configuration.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ConfigurationHandler.o: $(SRCPATH)/ConfigurationHandler.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

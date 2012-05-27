@@ -7,6 +7,7 @@
 #include "GraphicalObject.h"
 #include "ThreeDSpace.h"
 #include "Scene.h"
+#include "Configuration.h"
 #include "ColorTranslator.h"
 #include "Projector.h"
 
@@ -16,8 +17,8 @@ using namespace std;
  * Creates a new projector with a buffer of size len at the place pointer with position pos and direction dir;
  */
 Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) :
-  highlighted(false), configuration(pos, dir, {0.5, 0.5, 0.5}) {
-	colorTranslator = new ColorTranslator(); //Creates a ColorTranslator with default values.
+  highlighted(false), configuration(pos, dir, {0.5, 0.25, 0.25}) {
+	colorTranslator = new ColorTranslator(configuration.getColorTranslatorFactor()); //Creates a ColorTranslator with default values.
 	pnt = pointer;
 	bufferSize = len;
 	setPosition(pos);
@@ -35,14 +36,33 @@ Projector::Projector(int * pointer, unsigned int len, Vec3 pos, Vec3 dir) :
   for(int i = 0; i < 16; i += 5) {
     keystone.m[i] = 1.0;
   }
-}
+}/*
+Projector::Projector(Configuration *c){
+  bufferSize = 0;
+  pnt = NULL;
+    colorTranslator = new ColorTranslator(configuration.getColorTranslatorFactor());
+    pos = configuration.getPosition();
+    direction = configuration.getDirection();
+     X1 = 1;
+  X2 = -1;
+  X3 = -1;
+  X4 = 1;
+  Y1 = 1;
+  Y2 = 1;
+  Y3 = -1;
+  Y4 = -1;
 
+  memset(keystone.m, 0, sizeof(keystone.m));
+  for(int i = 0; i < 16; i += 5) {
+    keystone.m[i] = 1.0;
+  }
+}*/
 /**
  * Creates a new projector with buffer of size len at the place pointer with position (0,0,0)
  * and direction (0,0,0);
  */
 Projector::Projector(int * pointer, unsigned int len) :
-  configuration({0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.5, 0.5, 0.5}) { 
+  configuration({0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.5, 0.25, 0.25}) { 
 	Vec3 pos = {0,0,0}, dir = {0,0,0};
 	Projector(pointer, len, pos, dir);
 }

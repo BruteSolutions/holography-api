@@ -36,19 +36,21 @@ ColorTranslator* UniversalConfiguration::getColorTranslator(){
  * @return UniversalConfiguration The constructed UniversalConfiguration object
  */
 UniversalConfiguration* UniversalConfiguration::readStream( ifstream& is ) throw(std::string) {
-    if( !is.is_open() ) throw( string( "GenericIOException" ) );
+    if( !is.is_open() ) throw ( string( "GenericIOException" ) );
     Vec3 temp;
     std::vector<Configuration> temp_configurations;
     int configSize;
-
+    
     is.exceptions( ifstream::failbit | ifstream::eofbit );
     try{
+
         is >> temp.x >> temp.y >> temp.z;
         is >> configSize;
     }
     catch( ifstream::failure e ){
+        std::cout << "hallå" << std::endl;
         if( is.fail() ){
-            if( is.eof() ) throw( string( "InsufficientDataException" ) );
+            if( is.eof() ) {  std::cout << "hallå" << std::endl; throw( string( "InsufficientDataException" ) );}
             else throw( string( "IllegalFormatException" ) );
         }
     }
@@ -67,8 +69,8 @@ void UniversalConfiguration::writeToStream( ofstream& os ) throw(std::string) {
     
     os.exceptions( ofstream::failbit | ofstream::eofbit ); 
     try{
-    os << colorTrans->getConversionFactor().x << colorTrans->getConversionFactor().y << colorTrans->getConversionFactor().z;
-    os << configurations.size();
+    os << colorTrans->getConversionFactor().x << " " << colorTrans->getConversionFactor().y << " " << colorTrans->getConversionFactor().z << "\n";
+    os << configurations.size() << "\n";
     }
     catch(ofstream::failure e){   
 	if( os.fail() ) throw( string( "GenericIOException" ) );

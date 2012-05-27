@@ -1,7 +1,7 @@
 #include <string>
 #include "FileLoader.h"
 #include "RawLoader.h"
-#include "X3DLoader.h"
+//#include "X3DLoader.h"
 #include "Scene.h" 
 
 /**
@@ -14,7 +14,7 @@ Scene* FileLoader::loadFile(std::string path) throw ( std::string ) {
 	case 0: // Filetype BS Raw
 		return RawLoader::loadFile(path);
         case 1: // Filetype X3D
-        	return X3DLoader::loadFile(path);
+        	//return X3DLoader::loadFile(path);
         default: // Whenever a filetype is not recognized
 		std::cout << "returned " << checkFileExtension(path) << std::endl;
         	throw "IllegalFiletypeException";
@@ -27,20 +27,23 @@ Scene* FileLoader::loadFile(std::string path) throw ( std::string ) {
  * file extension was present return -1.
  */
 int FileLoader::checkFileExtension(std::string path) {
-	std::cout << "hej3" << std::endl;
 	char dot = '.';
 	int i = 0;
-	while(path[i] != dot) {
-    	if(i > path.length())
-        	return -1;
+/*has to take last dot*/
+	int lastdotpos = 0;
+	while(i < path.length()) {
+		if(path[i] == dot)
+            lastdotpos = i;
     	i++;
     }
-    
+std::cout << lastdotpos << std::endl;
+    if(lastdotpos <= 0 || lastdotpos >= path.length()-1) return -1;
+	i = lastdotpos;
+//afs/nada.kth.se/home/u/u18nfoxu/gltut/holography-api3/rawformat.bs
 	// i should now be at where the first '.' occures (and hence file extension)
 	char* fileExtension = new char[path.length()-i+1];
-std::cout << " path.length-i " << (path.length()-i+1) << std::endl;
-	int count = 0; 
-	std::cout << "count " << count << " i " << i << std::endl;
+	int count = 0;  
+
 	while(i < path.length()+1) {
     	fileExtension[count] = path[i];
     	i++;
@@ -48,9 +51,7 @@ std::cout << " path.length-i " << (path.length()-i+1) << std::endl;
   }
 //	fileExtension
 	// now fileExtension should contain the file extension of the file.
-	std::cout << "count " << count << " i " << i << std::endl;
 	std::string output = fileExtension;
-	std::cout << "hej3" << std::endl;
 	return getFileExtensionCode(output);
 }
 /**
@@ -61,12 +62,10 @@ std::cout << " path.length-i " << (path.length()-i+1) << std::endl;
  */
 
 int FileLoader::getFileExtensionCode(std::string fileExtension) {
-	std::cout << "hejt" << fileExtension << "lol"<< std::endl;
 	if(!fileExtension.compare(".X3D") || !fileExtension.compare(".x3d")){
-		std::cout << "hejt" << fileExtension << "lol"<< std::endl;
 	    return 1;
 	}else if (!fileExtension.compare(".bs") || !fileExtension.compare(".BS")){
-			return 0;
+        return 0;
 	}else{
 		return -1;
 	}

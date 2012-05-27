@@ -10,14 +10,17 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <glload/gl_3_3.h>
+#include <GL/glut.h>
 #include "Shared.h"
-#include "Configuration.h"
+#include "UniversalConfiguration.h"
 #include "ColorTranslator.h"
 
 class ConfigurationHandler{
 public:
-    static void save(UniversalConfiguration uc, std::string path);
-    static UniversalConfiguration load(std::string path) throw(std::string);
+    static void save(UniversalConfiguration *uc, char * path);
+    static UniversalConfiguration* load(char * path) throw(std::string);
 private:   
 };
 

@@ -82,6 +82,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
                             				//handle color coords
                             			}
                             		} while ( reader.move_to_next_attribute() );
+                                }
                             }
                             if ( strcmp( reader.get_name().c_str(), "IndexedFaceSet" ) == 0) { break; }
                         }
@@ -101,7 +102,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
             colorData[ i + 1 ] = 0.0; 
             colorData[ i + 2 ] = 0.0; 
             colorData[ i + 3 ] = 1.0;
-            colorData[ i + y ] = 1.0;
+            //colorData[ i + y ] = 1.0;
             x++;
             if ( x == 3 ) {
                 x = 0;
@@ -110,6 +111,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
                     y = 0;
                 }
             }
+            //std::cout << "Color for triangle " << (i+1)/4 << " corner " << (x+1) << ": " << colorData[ i ] << " " << colorData[ i+1 ] << " " << colorData[ i+2 ] <<  " " << colorData[ i+3 ] << std::endl;
         }
         /* Creates the coord vector that builds triangles */
         for (int f = 0, i = 0, j = 4, k = 8; f < faces.size(); f++, i += 12, j += 12, k += 12) {
@@ -118,14 +120,18 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
             vertexData[ i + 1 ] = points.at( face.x ).y;
             vertexData[ i + 2 ] = points.at( face.x ).z;
             vertexData[ i + 3 ] = points.at( face.x ).w;
+            std::cout << "Vertex for triangle " << f << " corner " << 0 << ": " << vertexData[ i ] << " " << vertexData[ i+1 ] << " " << vertexData[ i+2 ] <<  " " << vertexData[ i+3 ] << std::endl;
             vertexData[ j ]     = points.at( face.y ).x;
             vertexData[ j + 1 ] = points.at( face.y ).y;
             vertexData[ j + 2 ] = points.at( face.y ).z;
             vertexData[ j + 3 ] = points.at( face.y ).w;
+            std::cout << "Vertex for triangle " << f << " corner " << 1 << ": " << vertexData[ j ] << " " << vertexData[ j+1 ] << " " << vertexData[ j+2 ] <<  " " << vertexData[ j+3 ] << std::endl;
             vertexData[ k ]     = points.at( face.z ).x;
             vertexData[ k + 1 ] = points.at( face.z ).y;
             vertexData[ k + 2 ] = points.at( face.z ).z;
             vertexData[ k + 3 ] = points.at( face.z ).w;
+            std::cout << "Vertex for triangle " << f << " corner " << 2 << ": " << vertexData[ k ] << " " << vertexData[ k+1 ] << " " << vertexData[ k+2 ] <<  " " << vertexData[ k+3 ] << std::endl;
+
         }
         if(size == 0){ // means that we didnt find data for us to load
             throw std::string("InvalidX3DFileException");
@@ -220,11 +226,13 @@ void X3DLoader::copyCoordIndex( const char* attribute, std::vector<Vec3Int> *fac
         	i=1;
         }//else triangle
         
-				//std::cout << tmp.x << " " << tmp.y << " " << tmp.z << std::endl;
+		std::cout << "first triangle: " << tmp.x << " " << tmp.y << " " << tmp.z << std::endl;
         faces->push_back( {tmp.x+count,tmp.y+count,tmp.z+count} );
         if(i==1){ //square, add another face
-        	faces->push_back( {tmp2.x+count,tmp.y+count,tmp.z+count} );
+		std::cout << "second triangle: " << tmp2.x << " " << tmp2.y << " " << tmp2.z << std::endl;
+        	faces->push_back( {tmp2.x+count,tmp2.y+count,tmp2.z+count} );
         }
+        std::cout << "size: " << faces->size() <<std::endl;
     }
 }
 

@@ -18,10 +18,6 @@
 #include "Scene.h"
 #include "Shared.h"
 
-struct Vec3Int {
-    int x, y, z;
-};
-
 class X3DLoader : FileLoader {
 public:
     static Scene* loadFile( std::string path ) throw ( std::string );

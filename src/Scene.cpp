@@ -96,7 +96,10 @@ void Scene::selectNext() {
  * @return Retrieves the next GraphicalObject.
  */
 GraphicalObject * Scene::getNext() {
-    return threeDSpace->objects.at(0);
+    if(threeDSpace->objects.size() > 0 ){
+        return threeDSpace->objects.at(0);
+    }
+    return NULL;
 }
 
 /**
@@ -274,6 +277,7 @@ void Scene::autoRescale(){
 	for(int i = 0; i < objects.size(); i++){
 //		float vertexData[objects.at(i)->getVertexDataSize()];
 		GraphicalObject * object = objects.at(i);
+
 		object->setPosition({0,0,0});
 //		vertexData = objects.at(i)->getVertexData();
 		floats += object->getVertexDataSize();
@@ -301,6 +305,7 @@ void Scene::autoRescale(){
 	}
 	std::cout << "TJENA" << std::endl;
 	get3DSpace()->setScale(5/max);
+	cPos = { 0, 0, 0 };
 	
 }
 

@@ -42,6 +42,7 @@ public:
 	bool highlighted();
 	void setMesh(bool mesh);
 	void setPosition(Vec3 pos);
+	Vec3 getPosition();
 	void center(Vec3 camPos, Vec3 optPos);
 	//When following floats are private: the first triangle is permanently meshed. WHY?=
 	float angleX, angleY, angleZ;
