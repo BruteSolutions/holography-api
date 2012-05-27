@@ -1157,7 +1157,7 @@ GTK_SIGNAL_FUNC (startConfigurationBrowser), (gpointer) g_strdup ("Load configur
  gtk_widget_show (menu_loadConf);
 
    //Create remove selected object option
-if(pGO != NULL) {
+if(pGO != NULL && !testObject) {
  GtkWidget *menu_removeObject = gtk_menu_item_new_with_label ("Remove selected object");  
  gtk_menu_append (GTK_MENU (menu), menu_removeObject);
  gtk_signal_connect_object (GTK_OBJECT (menu_removeObject), "activate",
