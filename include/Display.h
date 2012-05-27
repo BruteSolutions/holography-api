@@ -22,7 +22,7 @@ public:
     double getBoundingCube();
     void highlight();
     void unHighlight();
-    void setConfigurations(UniversalConfiguration uc);
+    void setConfigurations(UniversalConfiguration *uc);
     UniversalConfiguration * getConfigurations();
 private:
     Monitor *monitor;

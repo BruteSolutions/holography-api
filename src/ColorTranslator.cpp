@@ -23,7 +23,7 @@ ColorTranslator::ColorTranslator() throw ( std::string ) {
  * that will be converted to red. 
  */
 ColorTranslator::ColorTranslator( Vec3 factor ) throw ( std::string ) {
-    setConversionFactor( factor );
+	setConversionFactor( factor );
     shader = new Shader( "main.vert","main.frag" );
 }
 

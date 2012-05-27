@@ -281,6 +281,7 @@ void subMenu(int a);
 void file_ok_sel(GtkWidget * w, GtkFileSelection * fs);
 #endif
 void startFileBrowser();
+void startConfigurationBrowser();
 void startMenu();
 
 int runTests()
@@ -493,7 +494,7 @@ void mouse(int button, int state, int x, int y) {
 }
 
 #ifdef GTK_ENABLED
-		GtkWidget *filew;
+		GtkWidget *filew, *filew2;
 #endif
 int objCtrl = false;
 void motion(int x, int y){
@@ -822,6 +823,7 @@ case 'k':
 #ifdef GTK_ENABLED
 gint button_press (GtkWidget *, GdkEvent *);
 void menuitem_response (gchar *);
+void configurationSelected( GtkWidget *w, GtkFileSelection *fs );
 GtkWidget *window, *window2;
 GtkWidget *vbox;
 GtkWidget *exit_button;
@@ -836,8 +838,6 @@ void destroyMenu() {
     gtk_main_quit();
 #endif
 }
-
-
 void startFileBrowser() {
 #ifdef GTK_ENABLED
 	gtk_init (0, 0);
@@ -868,17 +868,63 @@ void startFileBrowser() {
   	return;
 }
 
+
+void startConfigurationBrowser() {
+#ifdef GTK_ENABLED
+	gtk_init (0, 0);
+		
+	/* Create a new file selection widget */
+	filew2 = gtk_file_selection_new ("File selection");
+
+	g_signal_connect (filew2, "destroy",
+			      G_CALLBACK (gtk_main_quit), NULL);
+	/* Connect the ok_button to file_ok_sel function */
+	g_signal_connect (GTK_FILE_SELECTION (filew2)->ok_button,
+			  "clicked", G_CALLBACK (configurationSelected), (gpointer) filew2);
+
+	/* Connect the cancel_button to destroy the widget */
+	g_signal_connect_swapped (GTK_FILE_SELECTION (filew2)->cancel_button,
+			              "clicked", G_CALLBACK (gtk_widget_destroy),
+				  filew2);
+
+	/* Lets set the filename, as if this were a save dialog, and we are giving
+
+	 a default filename */
+	gtk_file_selection_set_filename (GTK_FILE_SELECTION(filew2), 
+					 "penguin.png");
+
+	gtk_widget_show (filew2);
+	gtk_main ();
+  #endif
+  	return;
+}
+
 char * currentfilepath;
 unsigned int defaults(unsigned int displayMode, int &width, int &height) {return displayMode;}
 
 #ifdef GTK_ENABLED
-/* Get the selected filename and print it to the console */
+/* Get the selected filename and load the object */
 void file_ok_sel( GtkWidget *w, GtkFileSelection *fs ) {
 	
     currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
     gtk_widget_destroy(filew);
+
 	defaultScene->merge( FileLoader::loadFile( std::string(currentfilepath) ) );
     displayHandeler->rebindBuffers(defaultScene); //Is really important
+}
+#endif
+
+#ifdef GTK_ENABLED
+/* Get the selected configuration filename  */
+void configurationSelected( GtkWidget *w, GtkFileSelection *fs ) {
+	
+    currentfilepath = (char *) gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
+    gtk_widget_destroy(filew2);
+	
+	displayHandeler->setConfigurations((ConfigurationHandler::load(currentfilepath)));
+	
+	
+    //displayHandeler->rebindBuffers(defaultScene); //Is really important
 }
 #endif
 
@@ -944,26 +990,26 @@ const char*  boolToString(bool b) {
 bool showTestObj = FALSE;
 void toggleTestObject();
 void toggleTestObject() {
-if(!showTestObj) {
-testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
-defaultScene->get3DSpace()->addObject(testObj);
-testObj->setOrigin({0,0,-5});
-testObj->setScale(10);
-showTestObj = TRUE;
-}
-else {
-defaultScene->get3DSpace()->removeObject(testObj);
-showTestObj = FALSE;
-}
-displayHandeler->rebindBuffers(defaultScene); 
+	if(!showTestObj) {
+		testObj = new GraphicalObject(testObject, sizeof(testObject)/4, testObjectColor, sizeof(testObjectColor)/4);
+		defaultScene->get3DSpace()->addObject(testObj);
+		testObj->setOrigin({0,0,-5});
+		testObj->setScale(10);
+		showTestObj = TRUE;
+	}
+	else {
+		defaultScene->get3DSpace()->removeObject(testObj);
+		showTestObj = FALSE;
+	}
+	displayHandeler->rebindBuffers(defaultScene); 
 }
 void removeSelectedObject();
 void removeSelectedObject() {
-std::cout << "hej" << endl;
-defaultScene->get3DSpace()->removeObject(pGO);
-std::cout << "död" << std::endl;
-displayHandeler->rebindBuffers(defaultScene); 
- pGO = NULL;
+		std::cout << "hej" << endl;
+		defaultScene->get3DSpace()->removeObject(pGO);
+		std::cout << "död" << std::endl;
+		displayHandeler->rebindBuffers(defaultScene); 
+		 pGO = NULL;
 }
 
 
@@ -1143,6 +1189,14 @@ void startMenu() {
   gtk_signal_connect_object (GTK_OBJECT (menu_testObject), "activate",
             GTK_SIGNAL_FUNC (toggleTestObject), (gpointer) g_strdup ("Toggle test object"));
   gtk_widget_show (menu_testObject);
+  
+   //Create load configuration option
+ GtkWidget *menu_loadConf = gtk_menu_item_new_with_label ("Load configuration");  
+ gtk_menu_append (GTK_MENU (menu), menu_loadConf);
+ gtk_signal_connect_object (GTK_OBJECT (menu_loadConf), "activate",
+GTK_SIGNAL_FUNC (startConfigurationBrowser), (gpointer) g_strdup ("Load configuration"));
+ gtk_widget_show (menu_loadConf);
+
    //Create remove selected object option
 if(pGO != NULL) {
  GtkWidget *menu_removeObject = gtk_menu_item_new_with_label ("Remove selected object");  
@@ -1150,7 +1204,6 @@ if(pGO != NULL) {
  gtk_signal_connect_object (GTK_OBJECT (menu_removeObject), "activate",
 GTK_SIGNAL_FUNC (removeSelectedObject), (gpointer) g_strdup ("Remove selected object"));
  gtk_widget_show (menu_removeObject);
-
 } 
 if( pGO != NULL){
   /* toggleMesh_button */

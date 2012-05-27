@@ -65,6 +65,7 @@ Configuration* Configuration::readStream( std::ifstream& is ) throw ( std::strin
         is >> Tfactor.x >> Tfactor.y  >> Tfactor.z;
         is >> Tpos.x >> Tpos.y  >> Tpos.z;
         is >> Tdir.x >> Tdir.y  >> Tdir.z;
+        std::cout <<  Tfactor.x << " "<<Tfactor.y << " " << Tfactor.z <<std::endl;
     }
     catch( ifstream::failure e ){
 	if( is.fail() ){

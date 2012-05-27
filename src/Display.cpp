@@ -128,10 +128,11 @@ void Display::unHighlight() {
  * Set the configuration for the projectors
  * @param UniversalConfiguration uc to set
  */
-void Display::setConfigurations(UniversalConfiguration uc){
-	colorTranslator = uc.getColorTranslator();
-	configs = uc.getProjectorConfigurations();
+void Display::setConfigurations(UniversalConfiguration *uc){
+	colorTranslator = uc->getColorTranslator();
+	configs = uc->getProjectorConfigurations();
 	int min = configs->size() < projectorList->size() ? configs->size() : projectorList->size();
+	std::cout << "-------min------------: "<<min<<std::endl; 
 	for (int i = 0; i<min; i++) {
 		(projectorList->at(i)).setConfiguration(configs->at(i));
 	}

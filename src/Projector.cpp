@@ -242,7 +242,10 @@ ColorTranslator * Projector::getColorTranslator() {
  * @param c Configuration to be used.
  */
 void Projector::setConfiguration(Configuration c) {
-  configuration = c;
+	configuration = c;
+	colorTranslator->setConversionFactor(configuration.getColorTranslatorFactor());
+	pos = configuration.getPosition();
+	direction = configuration.getDirection();
 }
 
 /**
