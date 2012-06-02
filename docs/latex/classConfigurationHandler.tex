@@ -1,0 +1,54 @@
+\hypertarget{classConfigurationHandler}{
+\section{ConfigurationHandler Class Reference}
+\label{classConfigurationHandler}\index{ConfigurationHandler@{ConfigurationHandler}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classConfigurationHandler_aa674575c4f2239d750ad76b47eb239ad}{save} (\hyperlink{classUniversalConfiguration}{UniversalConfiguration} $\ast$uc, char $\ast$path)
+\item 
+static \hyperlink{classUniversalConfiguration}{UniversalConfiguration} $\ast$ \hyperlink{classConfigurationHandler_ab9f2257f8dcaadfb67350c944119176b}{load} (char $\ast$path)  throw (std::string)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classConfigurationHandler_ab9f2257f8dcaadfb67350c944119176b}{
+\index{ConfigurationHandler@{ConfigurationHandler}!load@{load}}
+\index{load@{load}!ConfigurationHandler@{ConfigurationHandler}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}{\bf UniversalConfiguration} $\ast$ ConfigurationHandler::load (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)  throw (std::string)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classConfigurationHandler_ab9f2257f8dcaadfb67350c944119176b}
+Loads the configurations in the file identified by path and returns them in a \hyperlink{classUniversalConfiguration}{UniversalConfiguration} object. 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the configuration file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classUniversalConfiguration}{UniversalConfiguration} The \hyperlink{classUniversalConfiguration}{UniversalConfiguration} object created 
+\end{DoxyReturn}
+\hypertarget{classConfigurationHandler_aa674575c4f2239d750ad76b47eb239ad}{
+\index{ConfigurationHandler@{ConfigurationHandler}!save@{save}}
+\index{save@{save}!ConfigurationHandler@{ConfigurationHandler}}
+\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}void ConfigurationHandler::save (
+\begin{DoxyParamCaption}
+\item[{{\bf UniversalConfiguration} $\ast$}]{uc, }
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classConfigurationHandler_aa674575c4f2239d750ad76b47eb239ad}
+Saves the configurations specified by the \hyperlink{classUniversalConfiguration}{UniversalConfiguration} object to a file specified by path. 
+\begin{DoxyParams}{Parameters}
+{\em uc} & The \hyperlink{classUniversalConfiguration}{UniversalConfiguration} to be saved \\
+\hline
+{\em path} & Path to where the configuration is supposed to be saved. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+ConfigurationHandler.h\item 
+ConfigurationHandler.cpp\end{DoxyCompactItemize}

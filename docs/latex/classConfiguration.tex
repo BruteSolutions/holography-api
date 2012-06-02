@@ -1,0 +1,121 @@
+\hypertarget{classConfiguration}{
+\section{Configuration Class Reference}
+\label{classConfiguration}\index{Configuration@{Configuration}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classConfiguration_ab4fd03a275c2798ada0ef743239acf74}{Configuration} (\hyperlink{structVec3}{Vec3} pos, \hyperlink{structVec3}{Vec3} dir, \hyperlink{structVec3}{Vec3} factor)
+\item 
+void \hyperlink{classConfiguration_a9403336ba10e6d0338677be02822c508}{writeToStream} (std::ofstream \&os)  throw (std::string)
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classConfiguration_a3d0f2eb397a5d451b4afd9aecee882f2}{getPosition} ()
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classConfiguration_adfccc165f66c49cecc60435a1a2141e4}{getDirection} ()
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classConfiguration_a1713110217c444ff49e3cd009bae0f4e}{getColorTranslatorFactor} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classConfiguration}{Configuration} $\ast$ \hyperlink{classConfiguration_a468ed129dfc345b7641e05572698952b}{readStream} (std::ifstream \&is)  throw (std::string)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classConfiguration_ab4fd03a275c2798ada0ef743239acf74}{
+\index{Configuration@{Configuration}!Configuration@{Configuration}}
+\index{Configuration@{Configuration}!Configuration@{Configuration}}
+\subsubsection[{Configuration}]{\setlength{\rightskip}{0pt plus 5cm}Configuration::Configuration (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{\_\-pos, }
+\item[{{\bf Vec3}}]{\_\-dir, }
+\item[{{\bf Vec3}}]{\_\-factor}
+\end{DoxyParamCaption}
+)}}
+\label{classConfiguration_ab4fd03a275c2798ada0ef743239acf74}
+Constructs a \hyperlink{classConfiguration}{Configuration} object with the given parameters as instance variables. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-pos} & the position value of the \hyperlink{classConfiguration}{Configuration} object \\
+\hline
+{\em \_\-dir} & the direction value of the \hyperlink{classConfiguration}{Configuration} object \\
+\hline
+{\em \_\-factor} & the factor value of the \hyperlink{classConfiguration}{Configuration} object \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classConfiguration_a1713110217c444ff49e3cd009bae0f4e}{
+\index{Configuration@{Configuration}!getColorTranslatorFactor@{getColorTranslatorFactor}}
+\index{getColorTranslatorFactor@{getColorTranslatorFactor}!Configuration@{Configuration}}
+\subsubsection[{getColorTranslatorFactor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} Configuration::getColorTranslatorFactor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classConfiguration_a1713110217c444ff49e3cd009bae0f4e}
+Returns the factor of the color translator. \begin{DoxyReturn}{Returns}
+factor the factor of the color translator 
+\end{DoxyReturn}
+\hypertarget{classConfiguration_adfccc165f66c49cecc60435a1a2141e4}{
+\index{Configuration@{Configuration}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Configuration@{Configuration}}
+\subsubsection[{getDirection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} Configuration::getDirection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classConfiguration_adfccc165f66c49cecc60435a1a2141e4}
+Returns the direction of the projector. \begin{DoxyReturn}{Returns}
+dir the direction of the projector 
+\end{DoxyReturn}
+\hypertarget{classConfiguration_a3d0f2eb397a5d451b4afd9aecee882f2}{
+\index{Configuration@{Configuration}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Configuration@{Configuration}}
+\subsubsection[{getPosition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} Configuration::getPosition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classConfiguration_a3d0f2eb397a5d451b4afd9aecee882f2}
+Returns the \hyperlink{classColorTranslator}{ColorTranslator} that should be used by the projector described. Returns the position of the projector. \begin{DoxyReturn}{Returns}
+pos the position of the projector 
+\end{DoxyReturn}
+\hypertarget{classConfiguration_a468ed129dfc345b7641e05572698952b}{
+\index{Configuration@{Configuration}!readStream@{readStream}}
+\index{readStream@{readStream}!Configuration@{Configuration}}
+\subsubsection[{readStream}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Configuration} $\ast$ Configuration::readStream (
+\begin{DoxyParamCaption}
+\item[{std::ifstream \&}]{is}
+\end{DoxyParamCaption}
+)  throw (std::string)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classConfiguration_a468ed129dfc345b7641e05572698952b}
+Reads the underlying stream and constructs a \hyperlink{classConfiguration}{Configuration} object which is returned. 
+\begin{DoxyParams}{Parameters}
+{\em is} & the input stream \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classConfiguration}{Configuration} the configuration read. 
+\end{DoxyReturn}
+\hypertarget{classConfiguration_a9403336ba10e6d0338677be02822c508}{
+\index{Configuration@{Configuration}!writeToStream@{writeToStream}}
+\index{writeToStream@{writeToStream}!Configuration@{Configuration}}
+\subsubsection[{writeToStream}]{\setlength{\rightskip}{0pt plus 5cm}void Configuration::writeToStream (
+\begin{DoxyParamCaption}
+\item[{std::ofstream \&}]{os}
+\end{DoxyParamCaption}
+)  throw (std::string)}}
+\label{classConfiguration_a9403336ba10e6d0338677be02822c508}
+Writes this object to the underlying stream. 
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Configuration.h\item 
+Configuration.cpp\end{DoxyCompactItemize}

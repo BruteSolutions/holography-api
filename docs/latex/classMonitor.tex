@@ -1,0 +1,99 @@
+\hypertarget{classMonitor}{
+\section{Monitor Class Reference}
+\label{classMonitor}\index{Monitor@{Monitor}}
+}
+
+
+{\ttfamily \#include $<$Monitor.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMonitor_a639d27b16055d8681c2015d00ea083d8}{Monitor} ()
+\item 
+\hyperlink{classMonitor_a64aba8195effc068092ddea5a71e8176}{$\sim$Monitor} ()
+\item 
+void \hyperlink{classMonitor_adb084d156c6e01816a4158dfe71c142f}{display} (\hyperlink{classScene}{Scene} scene)
+\item 
+void \hyperlink{classMonitor_a21b504df5c53c279e94178de182af854}{addShader} (\hyperlink{classShader}{Shader} shader)
+\item 
+std::vector$<$ \hyperlink{classShader}{Shader} $>$ \hyperlink{classMonitor_ab0df82e6f794c5f9910f2ea9c879adb2}{getShaders} ()
+\item 
+\hypertarget{classMonitor_a0080eb7efa685555ec8ac8d5218f75a1}{
+\hyperlink{classProjector}{Projector} $\ast$ {\bfseries getProjector} ()}
+\label{classMonitor_a0080eb7efa685555ec8ac8d5218f75a1}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classMonitor}{Monitor} class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMonitor_a639d27b16055d8681c2015d00ea083d8}{
+\index{Monitor@{Monitor}!Monitor@{Monitor}}
+\index{Monitor@{Monitor}!Monitor@{Monitor}}
+\subsubsection[{Monitor}]{\setlength{\rightskip}{0pt plus 5cm}Monitor::Monitor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classMonitor_a639d27b16055d8681c2015d00ea083d8}
+\hyperlink{classMonitor}{Monitor} constructor. \hypertarget{classMonitor_a64aba8195effc068092ddea5a71e8176}{
+\index{Monitor@{Monitor}!$\sim$Monitor@{$\sim$Monitor}}
+\index{$\sim$Monitor@{$\sim$Monitor}!Monitor@{Monitor}}
+\subsubsection[{$\sim$Monitor}]{\setlength{\rightskip}{0pt plus 5cm}Monitor::$\sim$Monitor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classMonitor_a64aba8195effc068092ddea5a71e8176}
+\hyperlink{classMonitor}{Monitor} destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classMonitor_a21b504df5c53c279e94178de182af854}{
+\index{Monitor@{Monitor}!addShader@{addShader}}
+\index{addShader@{addShader}!Monitor@{Monitor}}
+\subsubsection[{addShader}]{\setlength{\rightskip}{0pt plus 5cm}void Monitor::addShader (
+\begin{DoxyParamCaption}
+\item[{{\bf Shader}}]{shader}
+\end{DoxyParamCaption}
+)}}
+\label{classMonitor_a21b504df5c53c279e94178de182af854}
+Adds a shader to rendering. 
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{classShader}{Shader} to add. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classMonitor_adb084d156c6e01816a4158dfe71c142f}{
+\index{Monitor@{Monitor}!display@{display}}
+\index{display@{display}!Monitor@{Monitor}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}void Monitor::display (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene}}]{scene}
+\end{DoxyParamCaption}
+)}}
+\label{classMonitor_adb084d156c6e01816a4158dfe71c142f}
+Displays a scene. 
+\begin{DoxyParams}{Parameters}
+{\em scn} & \hyperlink{classScene}{Scene} to display. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classMonitor_ab0df82e6f794c5f9910f2ea9c879adb2}{
+\index{Monitor@{Monitor}!getShaders@{getShaders}}
+\index{getShaders@{getShaders}!Monitor@{Monitor}}
+\subsubsection[{getShaders}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf Shader} $>$ Monitor::getShaders (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classMonitor_ab0df82e6f794c5f9910f2ea9c879adb2}
+Returns a list of shaders. \begin{DoxyReturn}{Returns}
+All associated shaders. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Monitor.h\item 
+Monitor.cpp\end{DoxyCompactItemize}

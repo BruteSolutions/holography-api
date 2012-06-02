@@ -1,0 +1,202 @@
+\hypertarget{classShader}{
+\section{Shader Class Reference}
+\label{classShader}\index{Shader@{Shader}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShader_a1c078cd1464883c8803d2077f8aa8657}{Shader} (std::string vsPath, std::string fsPath)
+\item 
+void \hyperlink{classShader_aba0e7f9e1761465551a8dcb8934da0a9}{setVertexShader} (GLuint openglRef)
+\item 
+void \hyperlink{classShader_ac1f8db8231591c23cc187a458655ed97}{setFragmentShader} (GLuint openglRef)
+\item 
+GLuint \hyperlink{classShader_a0b852ff20124b535849d5bdf6161b535}{getVertexShader} ()
+\item 
+GLuint \hyperlink{classShader_ab10406dd15e63d878fa72a8c950b3d67}{getFragmentShader} ()
+\item 
+GLuint \hyperlink{classShader_ab6bb79b65847071b82cb634df3c49897}{getShaderProgram} ()
+\item 
+std::vector$<$ \hyperlink{structUniforms__struct}{uniform\_\-t} $>$ \hyperlink{classShader_a4ad2c589dc11ea8f88674b82616f269e}{getParameters} ()
+\item 
+void \hyperlink{classShader_a50351d8ccac970e9184a20b77fa17103}{removeParameter} (std::string name)
+\item 
+void \hyperlink{classShader_a3e4bb37e2934150c44c4dad620c218be}{addParameter} (std::string name, GLuint p)
+\item 
+std::string \hyperlink{classShader_a0aab5075ddd86a52a67ff0477968a8b6}{loadFileToString} (std::string path)
+\item 
+GLuint \hyperlink{classShader_a1fd891995f7788e3924a0a1cad7bf8ef}{glcppShaderSource} (std::string const \&shader\_\-string, GLenum type)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShader_a1c078cd1464883c8803d2077f8aa8657}{
+\index{Shader@{Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!Shader@{Shader}}
+\subsubsection[{Shader}]{\setlength{\rightskip}{0pt plus 5cm}Shader::Shader (
+\begin{DoxyParamCaption}
+\item[{std::string}]{vsPath, }
+\item[{std::string}]{fsPath}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a1c078cd1464883c8803d2077f8aa8657}
+\hyperlink{classShader}{Shader} constructor. 
+\begin{DoxyParams}{Parameters}
+{\em vsPath} & path to the vertex shader file. An empty string indicates no shader. \\
+\hline
+{\em fsPath} & path to the fragment shader file. An empty string indicates no shader. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShader_a3e4bb37e2934150c44c4dad620c218be}{
+\index{Shader@{Shader}!addParameter@{addParameter}}
+\index{addParameter@{addParameter}!Shader@{Shader}}
+\subsubsection[{addParameter}]{\setlength{\rightskip}{0pt plus 5cm}void Shader::addParameter (
+\begin{DoxyParamCaption}
+\item[{std::string}]{name, }
+\item[{GLuint}]{p}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a3e4bb37e2934150c44c4dad620c218be}
+Adds a parameter to the list of shared variables with this shader program, a so called uniform. The GLuint p is a OpenGL reference pointing to a variable with name name. 
+\begin{DoxyParams}{Parameters}
+{\em name} & GLuint p is a OpenGL reference pointing to a variable with name name. \\
+\hline
+{\em p} & GLuint p is a OpenGL reference pointing to a variable with name name. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classShader_ab10406dd15e63d878fa72a8c950b3d67}{
+\index{Shader@{Shader}!getFragmentShader@{getFragmentShader}}
+\index{getFragmentShader@{getFragmentShader}!Shader@{Shader}}
+\subsubsection[{getFragmentShader}]{\setlength{\rightskip}{0pt plus 5cm}GLuint Shader::getFragmentShader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_ab10406dd15e63d878fa72a8c950b3d67}
+Get the current fragment shader. \begin{DoxyReturn}{Returns}
+openglRef ID of the shader. 
+\end{DoxyReturn}
+\hypertarget{classShader_a4ad2c589dc11ea8f88674b82616f269e}{
+\index{Shader@{Shader}!getParameters@{getParameters}}
+\index{getParameters@{getParameters}!Shader@{Shader}}
+\subsubsection[{getParameters}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf uniform\_\-t} $>$ Shader::getParameters (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a4ad2c589dc11ea8f88674b82616f269e}
+Get the vector with all variables associated with this shader. \begin{DoxyReturn}{Returns}
+A vector with all variables 
+\end{DoxyReturn}
+\hypertarget{classShader_ab6bb79b65847071b82cb634df3c49897}{
+\index{Shader@{Shader}!getShaderProgram@{getShaderProgram}}
+\index{getShaderProgram@{getShaderProgram}!Shader@{Shader}}
+\subsubsection[{getShaderProgram}]{\setlength{\rightskip}{0pt plus 5cm}GLuint Shader::getShaderProgram (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_ab6bb79b65847071b82cb634df3c49897}
+Get the current shader program. \begin{DoxyReturn}{Returns}
+openglRef ID of the shader program. 
+\end{DoxyReturn}
+\hypertarget{classShader_a0b852ff20124b535849d5bdf6161b535}{
+\index{Shader@{Shader}!getVertexShader@{getVertexShader}}
+\index{getVertexShader@{getVertexShader}!Shader@{Shader}}
+\subsubsection[{getVertexShader}]{\setlength{\rightskip}{0pt plus 5cm}GLuint Shader::getVertexShader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a0b852ff20124b535849d5bdf6161b535}
+Get the current vertex shader. \begin{DoxyReturn}{Returns}
+openglRef ID of the shader. 
+\end{DoxyReturn}
+\hypertarget{classShader_a1fd891995f7788e3924a0a1cad7bf8ef}{
+\index{Shader@{Shader}!glcppShaderSource@{glcppShaderSource}}
+\index{glcppShaderSource@{glcppShaderSource}!Shader@{Shader}}
+\subsubsection[{glcppShaderSource}]{\setlength{\rightskip}{0pt plus 5cm}GLuint Shader::glcppShaderSource (
+\begin{DoxyParamCaption}
+\item[{std::string const \&}]{shader\_\-string, }
+\item[{GLenum}]{type}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a1fd891995f7788e3924a0a1cad7bf8ef}
+Compiles the given shader source of the given type. 
+\begin{DoxyParams}{Parameters}
+{\em shader\_\-string} & Source code of shader. \\
+\hline
+{\em type} & Type of shader. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classShader}{Shader} ID. 
+\end{DoxyReturn}
+\hypertarget{classShader_a0aab5075ddd86a52a67ff0477968a8b6}{
+\index{Shader@{Shader}!loadFileToString@{loadFileToString}}
+\index{loadFileToString@{loadFileToString}!Shader@{Shader}}
+\subsubsection[{loadFileToString}]{\setlength{\rightskip}{0pt plus 5cm}std::string Shader::loadFileToString (
+\begin{DoxyParamCaption}
+\item[{std::string}]{path}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a0aab5075ddd86a52a67ff0477968a8b6}
+Compile the given shader and return ID. 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the shader source file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classShader}{Shader} ID. 
+\end{DoxyReturn}
+\hypertarget{classShader_a50351d8ccac970e9184a20b77fa17103}{
+\index{Shader@{Shader}!removeParameter@{removeParameter}}
+\index{removeParameter@{removeParameter}!Shader@{Shader}}
+\subsubsection[{removeParameter}]{\setlength{\rightskip}{0pt plus 5cm}void Shader::removeParameter (
+\begin{DoxyParamCaption}
+\item[{std::string}]{name}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_a50351d8ccac970e9184a20b77fa17103}
+Removes the variable with the specified name from this \hyperlink{classShader}{Shader} objects uniforms. Nothing happens if the variable is not present. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Remove this variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{classShader_ac1f8db8231591c23cc187a458655ed97}{
+\index{Shader@{Shader}!setFragmentShader@{setFragmentShader}}
+\index{setFragmentShader@{setFragmentShader}!Shader@{Shader}}
+\subsubsection[{setFragmentShader}]{\setlength{\rightskip}{0pt plus 5cm}void Shader::setFragmentShader (
+\begin{DoxyParamCaption}
+\item[{GLuint}]{openglRef}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_ac1f8db8231591c23cc187a458655ed97}
+Sets the current fragment shader to use. 
+\begin{DoxyParams}{Parameters}
+{\em openglRef} & ID of the shader. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classShader_aba0e7f9e1761465551a8dcb8934da0a9}{
+\index{Shader@{Shader}!setVertexShader@{setVertexShader}}
+\index{setVertexShader@{setVertexShader}!Shader@{Shader}}
+\subsubsection[{setVertexShader}]{\setlength{\rightskip}{0pt plus 5cm}void Shader::setVertexShader (
+\begin{DoxyParamCaption}
+\item[{GLuint}]{openglRef}
+\end{DoxyParamCaption}
+)}}
+\label{classShader_aba0e7f9e1761465551a8dcb8934da0a9}
+Sets the current vertex shader to use. 
+\begin{DoxyParams}{Parameters}
+{\em openglRef} & ID of the shader. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Shader.h\item 
+Shader.cpp\end{DoxyCompactItemize}

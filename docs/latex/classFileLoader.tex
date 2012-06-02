@@ -1,0 +1,78 @@
+\hypertarget{classFileLoader}{
+\section{FileLoader Class Reference}
+\label{classFileLoader}\index{FileLoader@{FileLoader}}
+}
+Inheritance diagram for FileLoader:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFileLoader}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classScene}{Scene} $\ast$ \hyperlink{classFileLoader_aa10ddbcfa87213ec2d2ade5a51f4cbe0}{loadFile} (std::string path)  throw ( std::string )
+\item 
+static int \hyperlink{classFileLoader_a9586cbf540f225cc16a9fc90e22edad9}{checkFileExtension} (std::string path)
+\item 
+static int \hyperlink{classFileLoader_a32bc1a5954be88d3df694b106aff7e83}{getFileExtensionCode} (std::string path)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFileLoader_a9586cbf540f225cc16a9fc90e22edad9}{
+\index{FileLoader@{FileLoader}!checkFileExtension@{checkFileExtension}}
+\index{checkFileExtension@{checkFileExtension}!FileLoader@{FileLoader}}
+\subsubsection[{checkFileExtension}]{\setlength{\rightskip}{0pt plus 5cm}int FileLoader::checkFileExtension (
+\begin{DoxyParamCaption}
+\item[{std::string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classFileLoader_a9586cbf540f225cc16a9fc90e22edad9}
+Checks if the specified file has a valid file extension \begin{DoxyReturn}{Returns}
+an int representing which file extension was present, if a unknown file extension was present return -\/1. 
+\end{DoxyReturn}
+\hypertarget{classFileLoader_a32bc1a5954be88d3df694b106aff7e83}{
+\index{FileLoader@{FileLoader}!getFileExtensionCode@{getFileExtensionCode}}
+\index{getFileExtensionCode@{getFileExtensionCode}!FileLoader@{FileLoader}}
+\subsubsection[{getFileExtensionCode}]{\setlength{\rightskip}{0pt plus 5cm}int FileLoader::getFileExtensionCode (
+\begin{DoxyParamCaption}
+\item[{std::string}]{fileExtension}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classFileLoader_a32bc1a5954be88d3df694b106aff7e83}
+Get the code representing the file extension 
+\begin{DoxyParams}{Parameters}
+{\em fileExtension} & will be compared internally with known file extensions \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an int representing which file extension was present, if a unknown file extension was present return -\/1. 
+\end{DoxyReturn}
+\hypertarget{classFileLoader_aa10ddbcfa87213ec2d2ade5a51f4cbe0}{
+\index{FileLoader@{FileLoader}!loadFile@{loadFile}}
+\index{loadFile@{loadFile}!FileLoader@{FileLoader}}
+\subsubsection[{loadFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene} $\ast$ FileLoader::loadFile (
+\begin{DoxyParamCaption}
+\item[{std::string}]{path}
+\end{DoxyParamCaption}
+)  throw ( std::string )\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classFileLoader_aa10ddbcfa87213ec2d2ade5a51f4cbe0}
+Loads a file, and from which creates a \hyperlink{classScene}{Scene} object. 
+\begin{DoxyParams}{Parameters}
+{\em path} & the filepath to load a file from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \hyperlink{classScene}{Scene} containing the contents acquired from the specified file 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classRawLoader_a9c9f9267310cc3f707482b818011dbdb}{RawLoader}, and \hyperlink{classX3DLoader_a2693e6c06a6d60e13321e8d9155cc31c}{X3DLoader}.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+FileLoader.h\item 
+FileLoader.cpp\end{DoxyCompactItemize}

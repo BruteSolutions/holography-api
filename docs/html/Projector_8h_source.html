@@ -57,26 +57,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00008"></a>00008 
 <a name="l00009"></a><a class="code" href="classProjector.html">00009</a> <span class="keyword">class </span><a class="code" href="classProjector.html">Projector</a> {
 <a name="l00010"></a>00010 <span class="keyword">public</span>:
-<a name="l00011"></a>00011     <a class="code" href="classProjector.html">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len);
-<a name="l00012"></a>00012     <a class="code" href="classProjector.html">Projector</a>(<a class="code" href="classConfiguration.html">Configuration</a> *c);
-<a name="l00013"></a>00013     <a class="code" href="classProjector.html">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len, <a class="code" href="structVec3.html">Vec3</a> pos, <a class="code" href="structVec3.html">Vec3</a> dir);
-<a name="l00014"></a>00014     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getBufferSize();
-<a name="l00015"></a>00015     <a class="code" href="classColorTranslator.html">ColorTranslator</a> * getColorTranslator();
-<a name="l00016"></a>00016     <span class="keywordtype">void</span> setConfiguration(<a class="code" href="classConfiguration.html">Configuration</a> c);
-<a name="l00017"></a>00017     <a class="code" href="classConfiguration.html">Configuration</a> getConfiguration();
-<a name="l00018"></a>00018     <span class="keywordtype">void</span> highlight();
-<a name="l00019"></a>00019     <span class="keywordtype">void</span> unHighlight();
+<a name="l00011"></a>00011     <a class="code" href="classProjector.html#ac3b7b98ff0014b2c94f1f0038381f78a">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len);
+<a name="l00012"></a>00012     <a class="code" href="classProjector.html#ac3b7b98ff0014b2c94f1f0038381f78a">Projector</a>(<a class="code" href="classConfiguration.html">Configuration</a> *c);
+<a name="l00013"></a>00013     <a class="code" href="classProjector.html#ac3b7b98ff0014b2c94f1f0038381f78a">Projector</a>(<span class="keywordtype">int</span> * pointer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> len, <a class="code" href="structVec3.html">Vec3</a> pos, <a class="code" href="structVec3.html">Vec3</a> dir);
+<a name="l00014"></a>00014     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classProjector.html#a8714a339afd4da16f7949dfde0c30b0a">getBufferSize</a>();
+<a name="l00015"></a>00015     <a class="code" href="classColorTranslator.html">ColorTranslator</a> * <a class="code" href="classProjector.html#aaf340dde1e1a590742200007e4aecd02">getColorTranslator</a>();
+<a name="l00016"></a>00016     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a500a8dbee7f243014dc9e8487fee69db">setConfiguration</a>(<a class="code" href="classConfiguration.html">Configuration</a> c);
+<a name="l00017"></a>00017     <a class="code" href="classConfiguration.html">Configuration</a> <a class="code" href="classProjector.html#a54417b48fb015e507628d5feb75bfccc">getConfiguration</a>();
+<a name="l00018"></a>00018     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a81a631412be8114bde82a155eab5279a">highlight</a>();
+<a name="l00019"></a>00019     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#acf0914f15c887e09aef49a7c13a5e1cd">unHighlight</a>();
 <a name="l00020"></a>00020     <span class="keywordtype">int</span>* getBuffer(); <span class="comment">//not implemented not needed</span>
-<a name="l00021"></a>00021     <span class="keywordtype">void</span> calcKeystone(GLuint pid) <span class="keywordflow">throw</span> (std::string);
-<a name="l00022"></a>00022     <span class="keywordtype">void</span> display(<a class="code" href="classScene.html">Scene</a> scene);
-<a name="l00023"></a>00023     <span class="keywordtype">void</span> addShader(<a class="code" href="classShader.html">Shader</a> shader);
-<a name="l00024"></a>00024     std::vector&lt;Shader&gt; getShaders();
-<a name="l00025"></a>00025     <a class="code" href="structVec3.html">Vec3</a> getPosition();
-<a name="l00026"></a>00026     <a class="code" href="structVec3.html">Vec3</a> getDirection();
-<a name="l00027"></a>00027     <span class="keywordtype">void</span> setPosition(<a class="code" href="structVec3.html">Vec3</a> position);
-<a name="l00028"></a>00028     <span class="keywordtype">void</span> setDirection(<a class="code" href="structVec3.html">Vec3</a> direction_);
-<a name="l00029"></a>00029     <span class="keywordtype">void</span> moveKeystoneCorner(<span class="keywordtype">int</span> corner, <span class="keywordtype">int</span> xory, <span class="keywordtype">float</span> value);
-<a name="l00030"></a>00030     <span class="keywordtype">void</span> setKeystoneObserved(<a class="code" href="structKeystoneSetting.html">KeystoneSetting</a> f);
+<a name="l00021"></a>00021     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a6ea6b55198d6fdfdf7b28c612e95ec26">calcKeystone</a>(GLuint pid) <span class="keywordflow">throw</span> (std::string);
+<a name="l00022"></a>00022     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a6e2ac751c6dafa3048eb25359ed0cd05">display</a>(<a class="code" href="classScene.html">Scene</a> scene);
+<a name="l00023"></a>00023     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a6dfc533175a56a0bf2989b5c0c917a36">addShader</a>(<a class="code" href="classShader.html">Shader</a> shader);
+<a name="l00024"></a>00024     std::vector&lt;Shader&gt; <a class="code" href="classProjector.html#ae356e74b51ffa74a9915b71825b2a774">getShaders</a>();
+<a name="l00025"></a>00025     <a class="code" href="structVec3.html">Vec3</a> <a class="code" href="classProjector.html#a68c643eead5cbe093e1c995c35d3a247">getPosition</a>();
+<a name="l00026"></a>00026     <a class="code" href="structVec3.html">Vec3</a> <a class="code" href="classProjector.html#a2094b745b60702602ab037d6485d030d">getDirection</a>();
+<a name="l00027"></a>00027     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a8c606ce355da71accf80afe0ad8ab778">setPosition</a>(<a class="code" href="structVec3.html">Vec3</a> position);
+<a name="l00028"></a>00028     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a3bbcc7b641d3941cf347b3ce61fda7d6">setDirection</a>(<a class="code" href="structVec3.html">Vec3</a> direction_);
+<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#af7fabc0089d4a6c961d473b009a3b50d">moveKeystoneCorner</a>(<span class="keywordtype">int</span> corner, <span class="keywordtype">int</span> xory, <span class="keywordtype">float</span> value);
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="classProjector.html#a47f7376f32cae68d15e35f4690351c50">setKeystoneObserved</a>(<a class="code" href="structKeystoneSetting.html">KeystoneSetting</a> f);
 <a name="l00031"></a>00031 <span class="keyword">private</span>:
 <a name="l00032"></a>00032     std::vector&lt;Shader&gt; shaders;
 <a name="l00033"></a>00033     <span class="keywordtype">int</span> * pnt; <span class="comment">//not used</span>
@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun May 27 2012 22:58:10 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue May 29 2012 23:03:10 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

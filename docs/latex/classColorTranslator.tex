@@ -1,0 +1,112 @@
+\hypertarget{classColorTranslator}{
+\section{ColorTranslator Class Reference}
+\label{classColorTranslator}\index{ColorTranslator@{ColorTranslator}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classColorTranslator_a27ca339a756db56b8ad0cf19b6a9a107}{ColorTranslator} ()  throw ( std::string )
+\item 
+\hyperlink{classColorTranslator_a88aa857f714fa7f09432a97d9bd89e18}{ColorTranslator} (\hyperlink{structVec3}{Vec3} factor)  throw ( std::string )
+\item 
+\hyperlink{classColorTranslator_ab89af499b7817dff740652eaf17607fa}{$\sim$ColorTranslator} ()
+\item 
+void \hyperlink{classColorTranslator_a3d4f90452a337a1752917dfeab1be3f8}{setConversionFactor} (\hyperlink{structVec3}{Vec3} factor)  throw ( std::string )
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classColorTranslator_a5442cbe5dee3420189c7147c987cb44b}{getConversionFactor} () const 
+\item 
+\hyperlink{classShader}{Shader} $\ast$ \hyperlink{classColorTranslator_afe0270b9b2920771abf823011aebf0c2}{getShader} () const 
+\item 
+void \hyperlink{classColorTranslator_a8c2067bfbf7adc6dbe70676fbb2e090f}{setFactorUniform} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classColorTranslator_a27ca339a756db56b8ad0cf19b6a9a107}{
+\index{ColorTranslator@{ColorTranslator}!ColorTranslator@{ColorTranslator}}
+\index{ColorTranslator@{ColorTranslator}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{ColorTranslator}]{\setlength{\rightskip}{0pt plus 5cm}ColorTranslator::ColorTranslator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)  throw ( std::string )}}
+\label{classColorTranslator_a27ca339a756db56b8ad0cf19b6a9a107}
+Constructs a new \hyperlink{classColorTranslator}{ColorTranslator} with a standard conversion factor. \hypertarget{classColorTranslator_a88aa857f714fa7f09432a97d9bd89e18}{
+\index{ColorTranslator@{ColorTranslator}!ColorTranslator@{ColorTranslator}}
+\index{ColorTranslator@{ColorTranslator}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{ColorTranslator}]{\setlength{\rightskip}{0pt plus 5cm}ColorTranslator::ColorTranslator (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{factor}
+\end{DoxyParamCaption}
+)  throw ( std::string )}}
+\label{classColorTranslator_a88aa857f714fa7f09432a97d9bd89e18}
+Constructs a new \hyperlink{classColorTranslator}{ColorTranslator} with the given conversion factor. 
+\begin{DoxyParams}{Parameters}
+{\em factor} & a vector of 3 floats that determine the amount of red, green that will be converted to red. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classColorTranslator_ab89af499b7817dff740652eaf17607fa}{
+\index{ColorTranslator@{ColorTranslator}!$\sim$ColorTranslator@{$\sim$ColorTranslator}}
+\index{$\sim$ColorTranslator@{$\sim$ColorTranslator}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{$\sim$ColorTranslator}]{\setlength{\rightskip}{0pt plus 5cm}ColorTranslator::$\sim$ColorTranslator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classColorTranslator_ab89af499b7817dff740652eaf17607fa}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classColorTranslator_a5442cbe5dee3420189c7147c987cb44b}{
+\index{ColorTranslator@{ColorTranslator}!getConversionFactor@{getConversionFactor}}
+\index{getConversionFactor@{getConversionFactor}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{getConversionFactor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} ColorTranslator::getConversionFactor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{classColorTranslator_a5442cbe5dee3420189c7147c987cb44b}
+Returns a pointer to the factor of this class \begin{DoxyReturn}{Returns}
+the factor of this class. 
+\end{DoxyReturn}
+\hypertarget{classColorTranslator_afe0270b9b2920771abf823011aebf0c2}{
+\index{ColorTranslator@{ColorTranslator}!getShader@{getShader}}
+\index{getShader@{getShader}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{getShader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader} $\ast$ ColorTranslator::getShader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{classColorTranslator_afe0270b9b2920771abf823011aebf0c2}
+Returns the pointer to the shader object specified (in case apply method isn't the right approach) \begin{DoxyReturn}{Returns}
+a pointer to the shader object of this class. 
+\end{DoxyReturn}
+\hypertarget{classColorTranslator_a3d4f90452a337a1752917dfeab1be3f8}{
+\index{ColorTranslator@{ColorTranslator}!setConversionFactor@{setConversionFactor}}
+\index{setConversionFactor@{setConversionFactor}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{setConversionFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ColorTranslator::setConversionFactor (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{factor}
+\end{DoxyParamCaption}
+)  throw ( std::string )}}
+\label{classColorTranslator_a3d4f90452a337a1752917dfeab1be3f8}
+Sets the factor of this class. If the sum of the components in factor is bigger than 1 normalize the components. 
+\begin{DoxyParams}{Parameters}
+{\em factor} & a vector of 3 floats that determine the amount of red, green that will be converted to red. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classColorTranslator_a8c2067bfbf7adc6dbe70676fbb2e090f}{
+\index{ColorTranslator@{ColorTranslator}!setFactorUniform@{setFactorUniform}}
+\index{setFactorUniform@{setFactorUniform}!ColorTranslator@{ColorTranslator}}
+\subsubsection[{setFactorUniform}]{\setlength{\rightskip}{0pt plus 5cm}void ColorTranslator::setFactorUniform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classColorTranslator_a8c2067bfbf7adc6dbe70676fbb2e090f}
+Sets the uniform \char`\"{}factor\char`\"{} so that the fragment shader can access the factor of this class. 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+ColorTranslator.h\item 
+ColorTranslator.cpp\end{DoxyCompactItemize}

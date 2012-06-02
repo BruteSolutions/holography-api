@@ -1,0 +1,314 @@
+\hypertarget{classProjector}{
+\section{Projector Class Reference}
+\label{classProjector}\index{Projector@{Projector}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classProjector_ac3b7b98ff0014b2c94f1f0038381f78a}{Projector} (int $\ast$pointer, unsigned int len)
+\item 
+\hypertarget{classProjector_a81eb429cd0c4659149a563bf7aaba8f5}{
+{\bfseries Projector} (\hyperlink{classConfiguration}{Configuration} $\ast$c)}
+\label{classProjector_a81eb429cd0c4659149a563bf7aaba8f5}
+
+\item 
+\hyperlink{classProjector_a39d6c9ed1b6cb029aaf7df4586e6af8a}{Projector} (int $\ast$pointer, unsigned int len, \hyperlink{structVec3}{Vec3} pos, \hyperlink{structVec3}{Vec3} dir)
+\item 
+unsigned int \hyperlink{classProjector_a8714a339afd4da16f7949dfde0c30b0a}{getBufferSize} ()
+\item 
+\hyperlink{classColorTranslator}{ColorTranslator} $\ast$ \hyperlink{classProjector_aaf340dde1e1a590742200007e4aecd02}{getColorTranslator} ()
+\item 
+void \hyperlink{classProjector_a500a8dbee7f243014dc9e8487fee69db}{setConfiguration} (\hyperlink{classConfiguration}{Configuration} c)
+\item 
+\hyperlink{classConfiguration}{Configuration} \hyperlink{classProjector_a54417b48fb015e507628d5feb75bfccc}{getConfiguration} ()
+\item 
+void \hyperlink{classProjector_a81a631412be8114bde82a155eab5279a}{highlight} ()
+\item 
+void \hyperlink{classProjector_acf0914f15c887e09aef49a7c13a5e1cd}{unHighlight} ()
+\item 
+\hypertarget{classProjector_afcf269fbc38d9c73188aefedf4010e09}{
+int $\ast$ {\bfseries getBuffer} ()}
+\label{classProjector_afcf269fbc38d9c73188aefedf4010e09}
+
+\item 
+void \hyperlink{classProjector_a6ea6b55198d6fdfdf7b28c612e95ec26}{calcKeystone} (GLuint pid)  throw (std::string)
+\item 
+void \hyperlink{classProjector_a6e2ac751c6dafa3048eb25359ed0cd05}{display} (\hyperlink{classScene}{Scene} scene)
+\item 
+void \hyperlink{classProjector_a6dfc533175a56a0bf2989b5c0c917a36}{addShader} (\hyperlink{classShader}{Shader} shader)
+\item 
+std::vector$<$ \hyperlink{classShader}{Shader} $>$ \hyperlink{classProjector_ae356e74b51ffa74a9915b71825b2a774}{getShaders} ()
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classProjector_a68c643eead5cbe093e1c995c35d3a247}{getPosition} ()
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classProjector_a2094b745b60702602ab037d6485d030d}{getDirection} ()
+\item 
+void \hyperlink{classProjector_a8c606ce355da71accf80afe0ad8ab778}{setPosition} (\hyperlink{structVec3}{Vec3} position)
+\item 
+void \hyperlink{classProjector_a3bbcc7b641d3941cf347b3ce61fda7d6}{setDirection} (\hyperlink{structVec3}{Vec3} direction\_\-)
+\item 
+void \hyperlink{classProjector_af7fabc0089d4a6c961d473b009a3b50d}{moveKeystoneCorner} (int corner, int xory, float value)
+\item 
+void \hyperlink{classProjector_a47f7376f32cae68d15e35f4690351c50}{setKeystoneObserved} (\hyperlink{structKeystoneSetting}{KeystoneSetting} f)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classProjector_ac3b7b98ff0014b2c94f1f0038381f78a}{
+\index{Projector@{Projector}!Projector@{Projector}}
+\index{Projector@{Projector}!Projector@{Projector}}
+\subsubsection[{Projector}]{\setlength{\rightskip}{0pt plus 5cm}Projector::Projector (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{pointer, }
+\item[{unsigned int}]{len}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_ac3b7b98ff0014b2c94f1f0038381f78a}
+Creates a new projector with buffer of size len at the place pointer with position (0,0,0) and direction (0,0,0) 
+\begin{DoxyParams}{Parameters}
+{\em pointer} & Pointer to the rendering buffer. \\
+\hline
+{\em len} & Size of buffer in bytes. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a39d6c9ed1b6cb029aaf7df4586e6af8a}{
+\index{Projector@{Projector}!Projector@{Projector}}
+\index{Projector@{Projector}!Projector@{Projector}}
+\subsubsection[{Projector}]{\setlength{\rightskip}{0pt plus 5cm}Projector::Projector (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{pointer, }
+\item[{unsigned int}]{len, }
+\item[{{\bf Vec3}}]{pos, }
+\item[{{\bf Vec3}}]{dir}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a39d6c9ed1b6cb029aaf7df4586e6af8a}
+Creates a new projector with a buffer of size len at the place pointer with position pos and direction dir 
+\begin{DoxyParams}{Parameters}
+{\em pointer} & Pointer to the rendering buffer. \\
+\hline
+{\em len} & Size of buffer in bytes. \\
+\hline
+{\em pos} & Position of the projector. \\
+\hline
+{\em dir} & Direction of the projector. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classProjector_a6dfc533175a56a0bf2989b5c0c917a36}{
+\index{Projector@{Projector}!addShader@{addShader}}
+\index{addShader@{addShader}!Projector@{Projector}}
+\subsubsection[{addShader}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::addShader (
+\begin{DoxyParamCaption}
+\item[{{\bf Shader}}]{shader}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a6dfc533175a56a0bf2989b5c0c917a36}
+Adds a shader object to the list of shaders. 
+\begin{DoxyParams}{Parameters}
+{\em shader} & the shader to add to the list. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a6ea6b55198d6fdfdf7b28c612e95ec26}{
+\index{Projector@{Projector}!calcKeystone@{calcKeystone}}
+\index{calcKeystone@{calcKeystone}!Projector@{Projector}}
+\subsubsection[{calcKeystone}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::calcKeystone (
+\begin{DoxyParamCaption}
+\item[{GLuint}]{pid}
+\end{DoxyParamCaption}
+)  throw (std::string)}}
+\label{classProjector_a6ea6b55198d6fdfdf7b28c612e95ec26}
+Calculates the the keystone matrix and sets a uniform 
+\begin{DoxyParams}{Parameters}
+{\em pid} & is the shader program used when drawing \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a6e2ac751c6dafa3048eb25359ed0cd05}{
+\index{Projector@{Projector}!display@{display}}
+\index{display@{display}!Projector@{Projector}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::display (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene}}]{scene}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a6e2ac751c6dafa3048eb25359ed0cd05}
+Displays the view through the projector associated with this instance. Prior to that it will also possibly have applied color settings and definitely applied keystone correction on the view. 
+\begin{DoxyParams}{Parameters}
+{\em takes} & a scene and draws in the current window \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a8714a339afd4da16f7949dfde0c30b0a}{
+\index{Projector@{Projector}!getBufferSize@{getBufferSize}}
+\index{getBufferSize@{getBufferSize}!Projector@{Projector}}
+\subsubsection[{getBufferSize}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Projector::getBufferSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a8714a339afd4da16f7949dfde0c30b0a}
+Returns the size of the buffer. \begin{DoxyReturn}{Returns}
+Size of the buffer. 
+\end{DoxyReturn}
+\hypertarget{classProjector_aaf340dde1e1a590742200007e4aecd02}{
+\index{Projector@{Projector}!getColorTranslator@{getColorTranslator}}
+\index{getColorTranslator@{getColorTranslator}!Projector@{Projector}}
+\subsubsection[{getColorTranslator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ColorTranslator} $\ast$ Projector::getColorTranslator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_aaf340dde1e1a590742200007e4aecd02}
+Returns the associated colortranslator object. \begin{DoxyReturn}{Returns}
+Colortranslator object. 
+\end{DoxyReturn}
+\hypertarget{classProjector_a54417b48fb015e507628d5feb75bfccc}{
+\index{Projector@{Projector}!getConfiguration@{getConfiguration}}
+\index{getConfiguration@{getConfiguration}!Projector@{Projector}}
+\subsubsection[{getConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Configuration} Projector::getConfiguration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a54417b48fb015e507628d5feb75bfccc}
+Returns the current configuration. \begin{DoxyReturn}{Returns}
+Current configuration. 
+\end{DoxyReturn}
+\hypertarget{classProjector_a2094b745b60702602ab037d6485d030d}{
+\index{Projector@{Projector}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Projector@{Projector}}
+\subsubsection[{getDirection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} Projector::getDirection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a2094b745b60702602ab037d6485d030d}
+Returns the direction of the projector as a \hyperlink{structVec3}{Vec3} object. \begin{DoxyReturn}{Returns}
+the direction of the projector 
+\end{DoxyReturn}
+\hypertarget{classProjector_a68c643eead5cbe093e1c995c35d3a247}{
+\index{Projector@{Projector}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Projector@{Projector}}
+\subsubsection[{getPosition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} Projector::getPosition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a68c643eead5cbe093e1c995c35d3a247}
+Returns the position of the projector as a \hyperlink{structVec3}{Vec3} object. \begin{DoxyReturn}{Returns}
+the position of the projector 
+\end{DoxyReturn}
+\hypertarget{classProjector_ae356e74b51ffa74a9915b71825b2a774}{
+\index{Projector@{Projector}!getShaders@{getShaders}}
+\index{getShaders@{getShaders}!Projector@{Projector}}
+\subsubsection[{getShaders}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf Shader} $>$ Projector::getShaders (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_ae356e74b51ffa74a9915b71825b2a774}
+Gets the list of in use shaders. \begin{DoxyReturn}{Returns}
+A list of shaders used by the projector 
+\end{DoxyReturn}
+\hypertarget{classProjector_a81a631412be8114bde82a155eab5279a}{
+\index{Projector@{Projector}!highlight@{highlight}}
+\index{highlight@{highlight}!Projector@{Projector}}
+\subsubsection[{highlight}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::highlight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a81a631412be8114bde82a155eab5279a}
+Highlights the background. \hypertarget{classProjector_af7fabc0089d4a6c961d473b009a3b50d}{
+\index{Projector@{Projector}!moveKeystoneCorner@{moveKeystoneCorner}}
+\index{moveKeystoneCorner@{moveKeystoneCorner}!Projector@{Projector}}
+\subsubsection[{moveKeystoneCorner}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::moveKeystoneCorner (
+\begin{DoxyParamCaption}
+\item[{int}]{corner, }
+\item[{int}]{xory, }
+\item[{float}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_af7fabc0089d4a6c961d473b009a3b50d}
+An interface to move the corners of the projected image, changing the observed values so that a new Keystone matrix can be calculated. 
+\begin{DoxyParams}{Parameters}
+{\em corner} & Which of the four coners to change \\
+\hline
+{\em xory} & States which component of the coordinate of a corner that should be changed X=0 Y=1 \\
+\hline
+{\em value} & Is the value to increase or decrease the component with \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a500a8dbee7f243014dc9e8487fee69db}{
+\index{Projector@{Projector}!setConfiguration@{setConfiguration}}
+\index{setConfiguration@{setConfiguration}!Projector@{Projector}}
+\subsubsection[{setConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::setConfiguration (
+\begin{DoxyParamCaption}
+\item[{{\bf Configuration}}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a500a8dbee7f243014dc9e8487fee69db}
+Set the current configuration. 
+\begin{DoxyParams}{Parameters}
+{\em c} & \hyperlink{classConfiguration}{Configuration} to be used. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a3bbcc7b641d3941cf347b3ce61fda7d6}{
+\index{Projector@{Projector}!setDirection@{setDirection}}
+\index{setDirection@{setDirection}!Projector@{Projector}}
+\subsubsection[{setDirection}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::setDirection (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{\_\-direction}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a3bbcc7b641d3941cf347b3ce61fda7d6}
+Sets the direction of the projectior to the parametre. 
+\begin{DoxyParams}{Parameters}
+{\em The} & new direction of the projector \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a47f7376f32cae68d15e35f4690351c50}{
+\index{Projector@{Projector}!setKeystoneObserved@{setKeystoneObserved}}
+\index{setKeystoneObserved@{setKeystoneObserved}!Projector@{Projector}}
+\subsubsection[{setKeystoneObserved}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::setKeystoneObserved (
+\begin{DoxyParamCaption}
+\item[{{\bf KeystoneSetting}}]{f}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a47f7376f32cae68d15e35f4690351c50}
+Set the observed keystone values used when calculating the keystone matrix 
+\begin{DoxyParams}{Parameters}
+{\em f} & Is a \hyperlink{structKeystoneSetting}{KeystoneSetting} struct (contains 8 floats) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_a8c606ce355da71accf80afe0ad8ab778}{
+\index{Projector@{Projector}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Projector@{Projector}}
+\subsubsection[{setPosition}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::setPosition (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{position}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_a8c606ce355da71accf80afe0ad8ab778}
+Sets the position of the projector to the value of the parametre. 
+\begin{DoxyParams}{Parameters}
+{\em The} & new position of the projector. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classProjector_acf0914f15c887e09aef49a7c13a5e1cd}{
+\index{Projector@{Projector}!unHighlight@{unHighlight}}
+\index{unHighlight@{unHighlight}!Projector@{Projector}}
+\subsubsection[{unHighlight}]{\setlength{\rightskip}{0pt plus 5cm}void Projector::unHighlight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classProjector_acf0914f15c887e09aef49a7c13a5e1cd}
+Disables highlighting of background. 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Projector.h\item 
+Projector.cpp\item 
+real.cpp\end{DoxyCompactItemize}

@@ -1,0 +1,186 @@
+\hypertarget{classDisplay}{
+\section{Display Class Reference}
+\label{classDisplay}\index{Display@{Display}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDisplay_ae972fffea6f7ca1d627ef48c3d841bb3}{Display} ()
+\item 
+void \hyperlink{classDisplay_a83c8747af2e4a4e2c2f59f9e30dd12d7}{display} (\hyperlink{classScene}{Scene} scene)
+\item 
+std::vector$<$ \hyperlink{classProjector}{Projector} $>$ $\ast$ \hyperlink{classDisplay_af2463d86a214259bb89fb00e0ced3065}{getProjectors} ()
+\item 
+\hyperlink{classMonitor}{Monitor} $\ast$ \hyperlink{classDisplay_ab27364120a2b6e513d14e9ae39b031f9}{getMonitor} ()
+\item 
+\hyperlink{classColorTranslator}{ColorTranslator} $\ast$ \hyperlink{classDisplay_a2e319a064952d0a7b1c510d23682a784}{getColorTranslator} ()
+\item 
+void \hyperlink{classDisplay_a76d139338c3ae5903f9cc2c6505a41aa}{rebindBuffers} (\hyperlink{classScene}{Scene} $\ast$scene)
+\item 
+void \hyperlink{classDisplay_a30e759876c38401a623f31095d161054}{addProjector} (\hyperlink{classProjector}{Projector} $\ast$projector)
+\item 
+double \hyperlink{classDisplay_a06d5de5525021158585fb4fdfd19fabb}{getBoundingCube} ()
+\item 
+void \hyperlink{classDisplay_afd96105e1c0b6d8e0e6433331482fe6e}{highlight} ()
+\item 
+void \hyperlink{classDisplay_ad5cca0a6d4980aaf229de2be156231cd}{unHighlight} ()
+\item 
+void \hyperlink{classDisplay_a541e55345bf13390a80eb3f1706b5bde}{setConfigurations} (\hyperlink{classUniversalConfiguration}{UniversalConfiguration} $\ast$uc)
+\item 
+\hyperlink{classUniversalConfiguration}{UniversalConfiguration} $\ast$ \hyperlink{classDisplay_ad6fb864e50d126c22c3de548a7fbe666}{getConfigurations} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDisplay_ae972fffea6f7ca1d627ef48c3d841bb3}{
+\index{Display@{Display}!Display@{Display}}
+\index{Display@{Display}!Display@{Display}}
+\subsubsection[{Display}]{\setlength{\rightskip}{0pt plus 5cm}Display::Display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_ae972fffea6f7ca1d627ef48c3d841bb3}
+Initiates the associated objects. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDisplay_a30e759876c38401a623f31095d161054}{
+\index{Display@{Display}!addProjector@{addProjector}}
+\index{addProjector@{addProjector}!Display@{Display}}
+\subsubsection[{addProjector}]{\setlength{\rightskip}{0pt plus 5cm}void Display::addProjector (
+\begin{DoxyParamCaption}
+\item[{{\bf Projector} $\ast$}]{projector}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_a30e759876c38401a623f31095d161054}
+Adds a projector to the display. 
+\begin{DoxyParams}{Parameters}
+{\em projector} & \hyperlink{classProjector}{Projector} to be added. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDisplay_a83c8747af2e4a4e2c2f59f9e30dd12d7}{
+\index{Display@{Display}!display@{display}}
+\index{display@{display}!Display@{Display}}
+\subsubsection[{display}]{\setlength{\rightskip}{0pt plus 5cm}void Display::display (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene}}]{scene}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_a83c8747af2e4a4e2c2f59f9e30dd12d7}
+Displays the given scene. 
+\begin{DoxyParams}{Parameters}
+{\em scene} & \hyperlink{classScene}{Scene} to display. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDisplay_a06d5de5525021158585fb4fdfd19fabb}{
+\index{Display@{Display}!getBoundingCube@{getBoundingCube}}
+\index{getBoundingCube@{getBoundingCube}!Display@{Display}}
+\subsubsection[{getBoundingCube}]{\setlength{\rightskip}{0pt plus 5cm}double Display::getBoundingCube (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_a06d5de5525021158585fb4fdfd19fabb}
+Retrieves the current bounding cube. \begin{DoxyReturn}{Returns}
+Current bounding cube. 
+\end{DoxyReturn}
+\hypertarget{classDisplay_a2e319a064952d0a7b1c510d23682a784}{
+\index{Display@{Display}!getColorTranslator@{getColorTranslator}}
+\index{getColorTranslator@{getColorTranslator}!Display@{Display}}
+\subsubsection[{getColorTranslator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ColorTranslator} $\ast$ Display::getColorTranslator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_a2e319a064952d0a7b1c510d23682a784}
+Retrieves the current colortranslator. \begin{DoxyReturn}{Returns}
+The current colortranslator. 
+\end{DoxyReturn}
+\hypertarget{classDisplay_ad6fb864e50d126c22c3de548a7fbe666}{
+\index{Display@{Display}!getConfigurations@{getConfigurations}}
+\index{getConfigurations@{getConfigurations}!Display@{Display}}
+\subsubsection[{getConfigurations}]{\setlength{\rightskip}{0pt plus 5cm}{\bf UniversalConfiguration} $\ast$ Display::getConfigurations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_ad6fb864e50d126c22c3de548a7fbe666}
+Get the configuration from the projectors. \begin{DoxyReturn}{Returns}
+UnivercalConfiguration 
+\end{DoxyReturn}
+\hypertarget{classDisplay_ab27364120a2b6e513d14e9ae39b031f9}{
+\index{Display@{Display}!getMonitor@{getMonitor}}
+\index{getMonitor@{getMonitor}!Display@{Display}}
+\subsubsection[{getMonitor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Monitor} $\ast$ Display::getMonitor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_ab27364120a2b6e513d14e9ae39b031f9}
+Retrieves the associated monitor. \begin{DoxyReturn}{Returns}
+Current monitor. 
+\end{DoxyReturn}
+\hypertarget{classDisplay_af2463d86a214259bb89fb00e0ced3065}{
+\index{Display@{Display}!getProjectors@{getProjectors}}
+\index{getProjectors@{getProjectors}!Display@{Display}}
+\subsubsection[{getProjectors}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf Projector} $>$ $\ast$ Display::getProjectors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_af2463d86a214259bb89fb00e0ced3065}
+Retrieves all associated projectors. \begin{DoxyReturn}{Returns}
+All projectors. 
+\end{DoxyReturn}
+\hypertarget{classDisplay_afd96105e1c0b6d8e0e6433331482fe6e}{
+\index{Display@{Display}!highlight@{highlight}}
+\index{highlight@{highlight}!Display@{Display}}
+\subsubsection[{highlight}]{\setlength{\rightskip}{0pt plus 5cm}void Display::highlight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_afd96105e1c0b6d8e0e6433331482fe6e}
+Highlights the display. \hypertarget{classDisplay_a76d139338c3ae5903f9cc2c6505a41aa}{
+\index{Display@{Display}!rebindBuffers@{rebindBuffers}}
+\index{rebindBuffers@{rebindBuffers}!Display@{Display}}
+\subsubsection[{rebindBuffers}]{\setlength{\rightskip}{0pt plus 5cm}void Display::rebindBuffers (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene} $\ast$}]{scene}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_a76d139338c3ae5903f9cc2c6505a41aa}
+Update each window with the buffers containing our objects (has to be called whenever the amount of objects to be drawn are modified or when changing scenes) 
+\begin{DoxyParams}{Parameters}
+{\em scene} & The scene to be bound to each window handled in display \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDisplay_a541e55345bf13390a80eb3f1706b5bde}{
+\index{Display@{Display}!setConfigurations@{setConfigurations}}
+\index{setConfigurations@{setConfigurations}!Display@{Display}}
+\subsubsection[{setConfigurations}]{\setlength{\rightskip}{0pt plus 5cm}void Display::setConfigurations (
+\begin{DoxyParamCaption}
+\item[{{\bf UniversalConfiguration} $\ast$}]{uc}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_a541e55345bf13390a80eb3f1706b5bde}
+Set the configuration for the projectors 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classUniversalConfiguration}{UniversalConfiguration}} & uc to set \\
+\hline
+\end{DoxyParams}
+\hypertarget{classDisplay_ad5cca0a6d4980aaf229de2be156231cd}{
+\index{Display@{Display}!unHighlight@{unHighlight}}
+\index{unHighlight@{unHighlight}!Display@{Display}}
+\subsubsection[{unHighlight}]{\setlength{\rightskip}{0pt plus 5cm}void Display::unHighlight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDisplay_ad5cca0a6d4980aaf229de2be156231cd}
+Deactivates highlighting on the display. 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Display.h\item 
+Display.cpp\end{DoxyCompactItemize}

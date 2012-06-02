@@ -1,0 +1,433 @@
+\hypertarget{classGraphicalObject}{
+\section{GraphicalObject Class Reference}
+\label{classGraphicalObject}\index{GraphicalObject@{GraphicalObject}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGraphicalObject_ae30831806efa43bde19640c8857559ce}{
+{\bfseries GraphicalObject} (float vertexData\mbox{[}$\,$\mbox{]}, int size)}
+\label{classGraphicalObject_ae30831806efa43bde19640c8857559ce}
+
+\item 
+\hyperlink{classGraphicalObject_ad0d5c734f217597805c0a3791130c6b4}{GraphicalObject} (float vertexData\mbox{[}$\,$\mbox{]}, int vertexDatasSize, float colorData\mbox{[}$\,$\mbox{]}, int ColorDataSize)
+\item 
+float $\ast$ \hyperlink{classGraphicalObject_a97f317570e78a61e753ae184c76eec29}{getVertexData} ()
+\item 
+float $\ast$ \hyperlink{classGraphicalObject_a50a8d9619867bfb406c9bdc613da8c7a}{getColorData} ()
+\item 
+int \hyperlink{classGraphicalObject_a3af39e1e523f9cf1405c02ddbc10cae6}{getVertexDataSize} ()
+\item 
+int \hyperlink{classGraphicalObject_a06aaea6903c56f878c5621ad64464603}{getColorDataSize} ()
+\item 
+void \hyperlink{classGraphicalObject_a4b5f37bd0b3ac26416ba186ce8a363dd}{bindBufferData} ()
+\item 
+void \hyperlink{classGraphicalObject_a78ddb331c286a2b749094b05dfbf3a8f}{draw} ()
+\item 
+void \hyperlink{classGraphicalObject_a4da3f17543b491a807049e60026586a6}{setOrigin} (\hyperlink{structVec3}{Vec3} ori)
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classGraphicalObject_a70c1917879aeb88cd640c01793ac0bbd}{getOrigin} ()
+\item 
+void \hyperlink{classGraphicalObject_ac07d03dbd89f6b39ac3b0c97ba138583}{setColorTriangle} (int index, \hyperlink{structVec3Int}{Vec3Int} color)
+\item 
+void \hyperlink{classGraphicalObject_a9a702570748c867e8717b55d01abcd46}{rotateX} (float angle)
+\item 
+void \hyperlink{classGraphicalObject_ae2179d2934799c4e7ac8166e6be9a073}{rotateY} (float angle)
+\item 
+void \hyperlink{classGraphicalObject_a2620d1eac3a41cbb6b0f3dc0bb6b6335}{rotateZ} (float angle)
+\item 
+void \hyperlink{classGraphicalObject_a0f07f4a577b33f7ece14792fb1d2f99c}{setUniforms} (GLuint shader)
+\item 
+void \hyperlink{classGraphicalObject_a501ee793d689c1474cf9b5d3ca46b356}{resize} (double factor)
+\item 
+void \hyperlink{classGraphicalObject_ab39c8a59da860bcfe56d42aac140e879}{setHighlightUniform} (GLuint shader)
+\item 
+void \hyperlink{classGraphicalObject_aa3541351751ba02f0a370412eb940925}{toggleHighlight} ()
+\item 
+void \hyperlink{classGraphicalObject_abc3ff1ef131db3b36c40ae04d533daa3}{setHighlight} (bool \_\-bool)
+\item 
+void \hyperlink{classGraphicalObject_a304ff62328d4ced89fbb88951ca2f355}{setScale} (double \_\-scale)
+\item 
+double \hyperlink{classGraphicalObject_a266b270672c4da50c47bbd4cee7008e8}{getScale} ()
+\item 
+void \hyperlink{classGraphicalObject_a2d01a90fa8d7aa54a02e07d9e33eb993}{incrementScale} (double inc)
+\item 
+void \hyperlink{classGraphicalObject_a6582fd399673a5bd5dfcdbad00ff1966}{translate} (\hyperlink{structVec3}{Vec3} trans)
+\item 
+bool \hyperlink{classGraphicalObject_a99b117674c1de60cac36eadd5be3ff3f}{hasMesh} ()
+\item 
+\hypertarget{classGraphicalObject_acc1ff1412cf90e11b323bc0396f80534}{
+bool {\bfseries highlighted} ()}
+\label{classGraphicalObject_acc1ff1412cf90e11b323bc0396f80534}
+
+\item 
+void \hyperlink{classGraphicalObject_a499bbe0e9c9bc5bcff08465f97b60776}{setMesh} (bool mesh)
+\item 
+\hypertarget{classGraphicalObject_a13bf38db47440924c2cfa2eae0bbde07}{
+void {\bfseries setPosition} (\hyperlink{structVec3}{Vec3} pos)}
+\label{classGraphicalObject_a13bf38db47440924c2cfa2eae0bbde07}
+
+\item 
+\hypertarget{classGraphicalObject_a12144c8a86ff8b531d6caeae19f95ea4}{
+\hyperlink{structVec3}{Vec3} {\bfseries getPosition} ()}
+\label{classGraphicalObject_a12144c8a86ff8b531d6caeae19f95ea4}
+
+\item 
+void \hyperlink{classGraphicalObject_abd9b4745450b888e825420c534a7555f}{center} (\hyperlink{structVec3}{Vec3} camPos, \hyperlink{structVec3}{Vec3} optPos)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGraphicalObject_a78331fe745cd3eb10ed1d10594cc2293}{
+\hyperlink{structVec3}{Vec3} {\bfseries origin}}
+\label{classGraphicalObject_a78331fe745cd3eb10ed1d10594cc2293}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classGraphicalObject_ad0d5c734f217597805c0a3791130c6b4}{
+\index{GraphicalObject@{GraphicalObject}!GraphicalObject@{GraphicalObject}}
+\index{GraphicalObject@{GraphicalObject}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{GraphicalObject}]{\setlength{\rightskip}{0pt plus 5cm}GraphicalObject::GraphicalObject (
+\begin{DoxyParamCaption}
+\item[{float}]{\_\-vertexData\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{\_\-vertexDataSize, }
+\item[{float}]{\_\-colorData\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{\_\-colorDataSize}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_ad0d5c734f217597805c0a3791130c6b4}
+\hyperlink{classGraphicalObject}{GraphicalObject} constructor 
+\begin{DoxyParams}{Parameters}
+{\em \_\-vertexData} & Array containing the vertex data. \\
+\hline
+{\em \_\-vertexDataSize} & Should be the number of floats in \_\-vertexData. \\
+\hline
+{\em \_\-colorData} & Array containing the color data for the object. \\
+\hline
+{\em \_\-colorDataSize} & Should be the number of floats in \_\-colorData. In most cases is \_\-colorDataSize = \_\-vertexDataSize. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classGraphicalObject_a4b5f37bd0b3ac26416ba186ce8a363dd}{
+\index{GraphicalObject@{GraphicalObject}!bindBufferData@{bindBufferData}}
+\index{bindBufferData@{bindBufferData}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{bindBufferData}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::bindBufferData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a4b5f37bd0b3ac26416ba186ce8a363dd}
+Binds the buffer data of colarData and vertexData. Must be done before calling the method \hyperlink{classGraphicalObject_a78ddb331c286a2b749094b05dfbf3a8f}{draw()}. \hypertarget{classGraphicalObject_abd9b4745450b888e825420c534a7555f}{
+\index{GraphicalObject@{GraphicalObject}!center@{center}}
+\index{center@{center}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{center}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::center (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{camPos, }
+\item[{{\bf Vec3}}]{optPos}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_abd9b4745450b888e825420c534a7555f}
+Tries to center the object around the given position. Relative to the cameras position. Does not take rotation into account. 
+\begin{DoxyParams}{Parameters}
+{\em camPos} & The cameras offset. \\
+\hline
+{\em optPos} & The point in space where the object will be centered around. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a78ddb331c286a2b749094b05dfbf3a8f}{
+\index{GraphicalObject@{GraphicalObject}!draw@{draw}}
+\index{draw@{draw}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a78ddb331c286a2b749094b05dfbf3a8f}
+Draws the object. \hypertarget{classGraphicalObject_a50a8d9619867bfb406c9bdc613da8c7a}{
+\index{GraphicalObject@{GraphicalObject}!getColorData@{getColorData}}
+\index{getColorData@{getColorData}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{getColorData}]{\setlength{\rightskip}{0pt plus 5cm}float $\ast$ GraphicalObject::getColorData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a50a8d9619867bfb406c9bdc613da8c7a}
+Returns the objects color data array. \begin{DoxyReturn}{Returns}
+Objects color data array. 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a06aaea6903c56f878c5621ad64464603}{
+\index{GraphicalObject@{GraphicalObject}!getColorDataSize@{getColorDataSize}}
+\index{getColorDataSize@{getColorDataSize}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{getColorDataSize}]{\setlength{\rightskip}{0pt plus 5cm}int GraphicalObject::getColorDataSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a06aaea6903c56f878c5621ad64464603}
+Returns the color data array size. \begin{DoxyReturn}{Returns}
+Color data array size. 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a70c1917879aeb88cd640c01793ac0bbd}{
+\index{GraphicalObject@{GraphicalObject}!getOrigin@{getOrigin}}
+\index{getOrigin@{getOrigin}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{getOrigin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} GraphicalObject::getOrigin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a70c1917879aeb88cd640c01793ac0bbd}
+Get the objects origin \begin{DoxyReturn}{Returns}
+the object origin 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a266b270672c4da50c47bbd4cee7008e8}{
+\index{GraphicalObject@{GraphicalObject}!getScale@{getScale}}
+\index{getScale@{getScale}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{getScale}]{\setlength{\rightskip}{0pt plus 5cm}double GraphicalObject::getScale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a266b270672c4da50c47bbd4cee7008e8}
+Returns the scale of the object. \begin{DoxyReturn}{Returns}
+The scale. 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a97f317570e78a61e753ae184c76eec29}{
+\index{GraphicalObject@{GraphicalObject}!getVertexData@{getVertexData}}
+\index{getVertexData@{getVertexData}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{getVertexData}]{\setlength{\rightskip}{0pt plus 5cm}float $\ast$ GraphicalObject::getVertexData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a97f317570e78a61e753ae184c76eec29}
+Returns the objects vertex data array. \begin{DoxyReturn}{Returns}
+Objects vertex data array. 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a3af39e1e523f9cf1405c02ddbc10cae6}{
+\index{GraphicalObject@{GraphicalObject}!getVertexDataSize@{getVertexDataSize}}
+\index{getVertexDataSize@{getVertexDataSize}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{getVertexDataSize}]{\setlength{\rightskip}{0pt plus 5cm}int GraphicalObject::getVertexDataSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a3af39e1e523f9cf1405c02ddbc10cae6}
+Returns the color data vertex size. \begin{DoxyReturn}{Returns}
+Color data vertex size. 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a99b117674c1de60cac36eadd5be3ff3f}{
+\index{GraphicalObject@{GraphicalObject}!hasMesh@{hasMesh}}
+\index{hasMesh@{hasMesh}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{hasMesh}]{\setlength{\rightskip}{0pt plus 5cm}bool GraphicalObject::hasMesh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a99b117674c1de60cac36eadd5be3ff3f}
+Checks if the object is meshed. \begin{DoxyReturn}{Returns}
+True if the object is meshed. False otherwise. 
+\end{DoxyReturn}
+\hypertarget{classGraphicalObject_a2d01a90fa8d7aa54a02e07d9e33eb993}{
+\index{GraphicalObject@{GraphicalObject}!incrementScale@{incrementScale}}
+\index{incrementScale@{incrementScale}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{incrementScale}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::incrementScale (
+\begin{DoxyParamCaption}
+\item[{double}]{inc}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a2d01a90fa8d7aa54a02e07d9e33eb993}
+Increments the objects scale. 
+\begin{DoxyParams}{Parameters}
+{\em inc} & The increment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a501ee793d689c1474cf9b5d3ca46b356}{
+\index{GraphicalObject@{GraphicalObject}!resize@{resize}}
+\index{resize@{resize}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::resize (
+\begin{DoxyParamCaption}
+\item[{double}]{factor}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a501ee793d689c1474cf9b5d3ca46b356}
+Scales the object by the provided factor. 
+\begin{DoxyParams}{Parameters}
+{\em factor} & The factor for scaling. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a9a702570748c867e8717b55d01abcd46}{
+\index{GraphicalObject@{GraphicalObject}!rotateX@{rotateX}}
+\index{rotateX@{rotateX}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{rotateX}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::rotateX (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a9a702570748c867e8717b55d01abcd46}
+Rotate the x angle in radians and calculate the rotation. 
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angular adjustment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_ae2179d2934799c4e7ac8166e6be9a073}{
+\index{GraphicalObject@{GraphicalObject}!rotateY@{rotateY}}
+\index{rotateY@{rotateY}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{rotateY}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::rotateY (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_ae2179d2934799c4e7ac8166e6be9a073}
+Rotate the y angle in radians and calculate the rotation. 
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angular adjustment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a2620d1eac3a41cbb6b0f3dc0bb6b6335}{
+\index{GraphicalObject@{GraphicalObject}!rotateZ@{rotateZ}}
+\index{rotateZ@{rotateZ}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{rotateZ}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::rotateZ (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a2620d1eac3a41cbb6b0f3dc0bb6b6335}
+Rotate the z angle in radians and calculate the rotation. 
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angular adjustment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_ac07d03dbd89f6b39ac3b0c97ba138583}{
+\index{GraphicalObject@{GraphicalObject}!setColorTriangle@{setColorTriangle}}
+\index{setColorTriangle@{setColorTriangle}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setColorTriangle}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setColorTriangle (
+\begin{DoxyParamCaption}
+\item[{int}]{index, }
+\item[{{\bf Vec3Int}}]{color}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_ac07d03dbd89f6b39ac3b0c97ba138583}
+Sets a triangle at an index to the specified color 
+\begin{DoxyParams}{Parameters}
+{\em index} & is the index of the triangle to change color on \\
+\hline
+{\em color} & is a 3 int vector taking a value between 0 255 for each component invalid values will be set to zero \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_abc3ff1ef131db3b36c40ae04d533daa3}{
+\index{GraphicalObject@{GraphicalObject}!setHighlight@{setHighlight}}
+\index{setHighlight@{setHighlight}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setHighlight}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setHighlight (
+\begin{DoxyParamCaption}
+\item[{bool}]{\_\-bool}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_abc3ff1ef131db3b36c40ae04d533daa3}
+Sets the highlight boolean. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-bool} & The new highlight value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_ab39c8a59da860bcfe56d42aac140e879}{
+\index{GraphicalObject@{GraphicalObject}!setHighlightUniform@{setHighlightUniform}}
+\index{setHighlightUniform@{setHighlightUniform}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setHighlightUniform}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setHighlightUniform (
+\begin{DoxyParamCaption}
+\item[{GLuint}]{shader}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_ab39c8a59da860bcfe56d42aac140e879}
+Sets the highlight uniform so it can be accessed by the shader. 
+\begin{DoxyParams}{Parameters}
+{\em shader} & The shader that uses the highlight uniform. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a499bbe0e9c9bc5bcff08465f97b60776}{
+\index{GraphicalObject@{GraphicalObject}!setMesh@{setMesh}}
+\index{setMesh@{setMesh}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setMesh}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setMesh (
+\begin{DoxyParamCaption}
+\item[{bool}]{\_\-mesh}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a499bbe0e9c9bc5bcff08465f97b60776}
+Sets mesh to TRUE or FALSE. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-mesh} & The new mesh boolean. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a4da3f17543b491a807049e60026586a6}{
+\index{GraphicalObject@{GraphicalObject}!setOrigin@{setOrigin}}
+\index{setOrigin@{setOrigin}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setOrigin}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setOrigin (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{ori}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a4da3f17543b491a807049e60026586a6}
+Sets the origin for the object. The origin is the point in space which the object will rotate around. 
+\begin{DoxyParams}{Parameters}
+{\em ori} & The new origin value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a304ff62328d4ced89fbb88951ca2f355}{
+\index{GraphicalObject@{GraphicalObject}!setScale@{setScale}}
+\index{setScale@{setScale}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setScale}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setScale (
+\begin{DoxyParamCaption}
+\item[{double}]{\_\-scale}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a304ff62328d4ced89fbb88951ca2f355}
+Sets the scale of the object. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-scala} & The scale. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_a0f07f4a577b33f7ece14792fb1d2f99c}{
+\index{GraphicalObject@{GraphicalObject}!setUniforms@{setUniforms}}
+\index{setUniforms@{setUniforms}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{setUniforms}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::setUniforms (
+\begin{DoxyParamCaption}
+\item[{GLuint}]{shader}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a0f07f4a577b33f7ece14792fb1d2f99c}
+Sets the scale, objectRot, objectPos and objOrigin uniforms so they can be accessed by the shader. 
+\begin{DoxyParams}{Parameters}
+{\em shader} & The shader that uses the scale, objectRot, objectPos and objOrigin uniforms. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classGraphicalObject_aa3541351751ba02f0a370412eb940925}{
+\index{GraphicalObject@{GraphicalObject}!toggleHighlight@{toggleHighlight}}
+\index{toggleHighlight@{toggleHighlight}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{toggleHighlight}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::toggleHighlight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_aa3541351751ba02f0a370412eb940925}
+Toggles the highligh boolean. If highlight = TRUE before the call to \hyperlink{classGraphicalObject_aa3541351751ba02f0a370412eb940925}{toggleHighlight()} it will be FALSE after and vise versa. \hypertarget{classGraphicalObject_a6582fd399673a5bd5dfcdbad00ff1966}{
+\index{GraphicalObject@{GraphicalObject}!translate@{translate}}
+\index{translate@{translate}!GraphicalObject@{GraphicalObject}}
+\subsubsection[{translate}]{\setlength{\rightskip}{0pt plus 5cm}void GraphicalObject::translate (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{trans}
+\end{DoxyParamCaption}
+)}}
+\label{classGraphicalObject_a6582fd399673a5bd5dfcdbad00ff1966}
+Translates the object by the given offset by updating the pos variable. 
+\begin{DoxyParams}{Parameters}
+{\em trans} & A \hyperlink{structVec3}{Vec3} containing the offset values. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+GraphicalObject.h\item 
+GraphicalObject.cpp\end{DoxyCompactItemize}

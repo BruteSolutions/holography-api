@@ -1,0 +1,228 @@
+\hypertarget{classThreeDSpace}{
+\section{ThreeDSpace Class Reference}
+\label{classThreeDSpace}\index{ThreeDSpace@{ThreeDSpace}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classThreeDSpace_a28985512b5f94528688add5378ba229f}{ThreeDSpace} ()
+\item 
+std::vector$<$ \hyperlink{classGraphicalObject}{GraphicalObject} $\ast$ $>$ \hyperlink{classThreeDSpace_a4de0d3a944f860c158082abdc84d68c0}{getObjects} ()
+\item 
+void \hyperlink{classThreeDSpace_a8d11318f330bd195aa4c750a806652cf}{addObject} (\hyperlink{classGraphicalObject}{GraphicalObject} $\ast$object)
+\item 
+void \hyperlink{classThreeDSpace_a18f1fc352efe3deb67e41600aa387412}{setOrigin} (\hyperlink{structVec3}{Vec3} org)
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classThreeDSpace_ab873c63197d94319887fc2117e6ea6d7}{getOrigin} ()
+\item 
+void \hyperlink{classThreeDSpace_a1d1d309865b74fa140e81038a7ca86da}{bindBuffers} ()
+\item 
+void \hyperlink{classThreeDSpace_abf4d82956964b5d0b2be43698b7c6031}{selectNext} ()
+\item 
+\hypertarget{classThreeDSpace_a8b95c261831dc464f3880146a1cfa206}{
+void {\bfseries clearSelected} ()}
+\label{classThreeDSpace_a8b95c261831dc464f3880146a1cfa206}
+
+\item 
+void \hyperlink{classThreeDSpace_a52e5068f7e1281682dee0517101c5d6b}{removeObject} (\hyperlink{classGraphicalObject}{GraphicalObject} $\ast$)
+\item 
+void \hyperlink{classThreeDSpace_afd5ff33362275de28fa511cf3297364a}{resize} (double factor)
+\item 
+void \hyperlink{classThreeDSpace_adc71ae34272af523239cc6bb12c79736}{setScale} (double \_\-scale)
+\item 
+double \hyperlink{classThreeDSpace_a745a1d81d6241615ba25d22dbcdd649a}{getScale} ()
+\item 
+void \hyperlink{classThreeDSpace_a1e1ea38f8c80cb9a64e6e25bc93f1206}{incrementScale} (double inc)
+\item 
+\hypertarget{classThreeDSpace_aa7b36f8f31290112a6be9cf43ef4ee33}{
+void {\bfseries applyScale} ()}
+\label{classThreeDSpace_aa7b36f8f31290112a6be9cf43ef4ee33}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classThreeDSpace_aad855867dcf323edfbc51a633dbc523d}{
+std::vector$<$ \hyperlink{classGraphicalObject}{GraphicalObject} $\ast$ $>$ {\bfseries objects}}
+\label{classThreeDSpace_aad855867dcf323edfbc51a633dbc523d}
+
+\item 
+\hypertarget{classThreeDSpace_aeeac1bdfd440db9381fc906670e93aad}{
+\hyperlink{structVec3}{Vec3} {\bfseries origin}}
+\label{classThreeDSpace_aeeac1bdfd440db9381fc906670e93aad}
+
+\item 
+\hypertarget{classThreeDSpace_a9d4ea9185f94a8a07aa99305210c6de9}{
+int {\bfseries current}}
+\label{classThreeDSpace_a9d4ea9185f94a8a07aa99305210c6de9}
+
+\item 
+\hypertarget{classThreeDSpace_a4482fef3aa5b3af6f22ad9d9f2b52dda}{
+std::vector$<$ \hyperlink{classGraphicalObject}{GraphicalObject} $\ast$ $>$ {\bfseries selected}}
+\label{classThreeDSpace_a4482fef3aa5b3af6f22ad9d9f2b52dda}
+
+\item 
+\hypertarget{classThreeDSpace_a9c23d65bdc1298e04b38d50b31f12026}{
+float {\bfseries scale}}
+\label{classThreeDSpace_a9c23d65bdc1298e04b38d50b31f12026}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classThreeDSpace_a28985512b5f94528688add5378ba229f}{
+\index{ThreeDSpace@{ThreeDSpace}!ThreeDSpace@{ThreeDSpace}}
+\index{ThreeDSpace@{ThreeDSpace}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{ThreeDSpace}]{\setlength{\rightskip}{0pt plus 5cm}ThreeDSpace::ThreeDSpace (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a28985512b5f94528688add5378ba229f}
+\hyperlink{classThreeDSpace}{ThreeDSpace} constructor initiates important variables. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classThreeDSpace_a8d11318f330bd195aa4c750a806652cf}{
+\index{ThreeDSpace@{ThreeDSpace}!addObject@{addObject}}
+\index{addObject@{addObject}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{addObject}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::addObject (
+\begin{DoxyParamCaption}
+\item[{{\bf GraphicalObject} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a8d11318f330bd195aa4c750a806652cf}
+Adds an \hyperlink{classGraphicalObject}{GraphicalObject} to the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\begin{DoxyParams}{Parameters}
+{\em object} & Graphical object \\
+\hline
+\end{DoxyParams}
+\hypertarget{classThreeDSpace_a1d1d309865b74fa140e81038a7ca86da}{
+\index{ThreeDSpace@{ThreeDSpace}!bindBuffers@{bindBuffers}}
+\index{bindBuffers@{bindBuffers}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{bindBuffers}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::bindBuffers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a1d1d309865b74fa140e81038a7ca86da}
+Binds buffer data for all the GraphicalObjects in the \hyperlink{classThreeDSpace}{ThreeDSpace}. \hypertarget{classThreeDSpace_a4de0d3a944f860c158082abdc84d68c0}{
+\index{ThreeDSpace@{ThreeDSpace}!getObjects@{getObjects}}
+\index{getObjects@{getObjects}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{getObjects}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf GraphicalObject} $\ast$ $>$ ThreeDSpace::getObjects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a4de0d3a944f860c158082abdc84d68c0}
+Returns a vector containing all the GraphicalObjects currently in the \hyperlink{classThreeDSpace}{ThreeDSpace}. \begin{DoxyReturn}{Returns}
+Vector with all GraphicalObjects. 
+\end{DoxyReturn}
+\hypertarget{classThreeDSpace_ab873c63197d94319887fc2117e6ea6d7}{
+\index{ThreeDSpace@{ThreeDSpace}!getOrigin@{getOrigin}}
+\index{getOrigin@{getOrigin}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{getOrigin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} ThreeDSpace::getOrigin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_ab873c63197d94319887fc2117e6ea6d7}
+Returns the origin of the \hyperlink{classThreeDSpace}{ThreeDSpace}. \begin{DoxyReturn}{Returns}
+Origin of the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\end{DoxyReturn}
+\hypertarget{classThreeDSpace_a745a1d81d6241615ba25d22dbcdd649a}{
+\index{ThreeDSpace@{ThreeDSpace}!getScale@{getScale}}
+\index{getScale@{getScale}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{getScale}]{\setlength{\rightskip}{0pt plus 5cm}double ThreeDSpace::getScale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a745a1d81d6241615ba25d22dbcdd649a}
+Returns the scale of the \hyperlink{classThreeDSpace}{ThreeDSpace}. \begin{DoxyReturn}{Returns}
+The scale of the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\end{DoxyReturn}
+\hypertarget{classThreeDSpace_a1e1ea38f8c80cb9a64e6e25bc93f1206}{
+\index{ThreeDSpace@{ThreeDSpace}!incrementScale@{incrementScale}}
+\index{incrementScale@{incrementScale}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{incrementScale}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::incrementScale (
+\begin{DoxyParamCaption}
+\item[{double}]{inc}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a1e1ea38f8c80cb9a64e6e25bc93f1206}
+Increment the scale of the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\begin{DoxyParams}{Parameters}
+{\em inc} & The increment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classThreeDSpace_a52e5068f7e1281682dee0517101c5d6b}{
+\index{ThreeDSpace@{ThreeDSpace}!removeObject@{removeObject}}
+\index{removeObject@{removeObject}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{removeObject}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::removeObject (
+\begin{DoxyParamCaption}
+\item[{{\bf GraphicalObject} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a52e5068f7e1281682dee0517101c5d6b}
+Remove an \hyperlink{classGraphicalObject}{GraphicalObject} from the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\begin{DoxyParams}{Parameters}
+{\em object} & Graphical object pointer \\
+\hline
+\end{DoxyParams}
+\hypertarget{classThreeDSpace_afd5ff33362275de28fa511cf3297364a}{
+\index{ThreeDSpace@{ThreeDSpace}!resize@{resize}}
+\index{resize@{resize}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::resize (
+\begin{DoxyParamCaption}
+\item[{double}]{factor}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_afd5ff33362275de28fa511cf3297364a}
+Resize the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\begin{DoxyParams}{Parameters}
+{\em factor} & The scaling factor. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classThreeDSpace_abf4d82956964b5d0b2be43698b7c6031}{
+\index{ThreeDSpace@{ThreeDSpace}!selectNext@{selectNext}}
+\index{selectNext@{selectNext}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{selectNext}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::selectNext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_abf4d82956964b5d0b2be43698b7c6031}
+Selects the next \hyperlink{classGraphicalObject}{GraphicalObject} in the \hyperlink{classThreeDSpace}{ThreeDSpace}. \hypertarget{classThreeDSpace_a18f1fc352efe3deb67e41600aa387412}{
+\index{ThreeDSpace@{ThreeDSpace}!setOrigin@{setOrigin}}
+\index{setOrigin@{setOrigin}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{setOrigin}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::setOrigin (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{org}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_a18f1fc352efe3deb67e41600aa387412}
+Sets the origin which all object in the \hyperlink{classThreeDSpace}{ThreeDSpace} will rotate around. 
+\begin{DoxyParams}{Parameters}
+{\em org} & New origin. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classThreeDSpace_adc71ae34272af523239cc6bb12c79736}{
+\index{ThreeDSpace@{ThreeDSpace}!setScale@{setScale}}
+\index{setScale@{setScale}!ThreeDSpace@{ThreeDSpace}}
+\subsubsection[{setScale}]{\setlength{\rightskip}{0pt plus 5cm}void ThreeDSpace::setScale (
+\begin{DoxyParamCaption}
+\item[{double}]{\_\-scale}
+\end{DoxyParamCaption}
+)}}
+\label{classThreeDSpace_adc71ae34272af523239cc6bb12c79736}
+Sets the scale for the \hyperlink{classThreeDSpace}{ThreeDSpace}. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-scale} & New scale. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+ThreeDSpace.h\item 
+ThreeDSpace.cpp\end{DoxyCompactItemize}

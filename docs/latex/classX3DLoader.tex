@@ -1,0 +1,47 @@
+\hypertarget{classX3DLoader}{
+\section{X3DLoader Class Reference}
+\label{classX3DLoader}\index{X3DLoader@{X3DLoader}}
+}
+Inheritance diagram for X3DLoader:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classX3DLoader}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classScene}{Scene} $\ast$ \hyperlink{classX3DLoader_a2693e6c06a6d60e13321e8d9155cc31c}{loadFile} (std::string path)  throw ( std::string )
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classX3DLoader_a2693e6c06a6d60e13321e8d9155cc31c}{
+\index{X3DLoader@{X3DLoader}!loadFile@{loadFile}}
+\index{loadFile@{loadFile}!X3DLoader@{X3DLoader}}
+\subsubsection[{loadFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene} $\ast$ X3DLoader::loadFile (
+\begin{DoxyParamCaption}
+\item[{std::string}]{path}
+\end{DoxyParamCaption}
+)  throw ( std::string )\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classX3DLoader_a2693e6c06a6d60e13321e8d9155cc31c}
+Takes a path to an X3D-\/file and returns a scene containing a graphicalobject built from information in the Shape brackets
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & is the path to the X3D-\/file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a \hyperlink{classScene}{Scene} object containing the object in the file 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classFileLoader_aa10ddbcfa87213ec2d2ade5a51f4cbe0}{FileLoader}.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+X3DLoader.h\item 
+X3DLoader.cpp\end{DoxyCompactItemize}

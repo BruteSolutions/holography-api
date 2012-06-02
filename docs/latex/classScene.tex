@@ -1,0 +1,344 @@
+\hypertarget{classScene}{
+\section{Scene Class Reference}
+\label{classScene}\index{Scene@{Scene}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classScene_ad10176d75a9cc0da56626f682d083507}{Scene} ()
+\item 
+\hyperlink{classThreeDSpace}{ThreeDSpace} $\ast$ \hyperlink{classScene_ab74403c449c1431acab9c783331b2da0}{get3DSpace} ()
+\item 
+\hyperlink{structVec3}{Vec3} \hyperlink{classScene_a24db151a098841ac7e6e6bcf7205936d}{getCameraPosition} ()
+\item 
+void \hyperlink{classScene_aec4584d46e3c6b84167e2543f1a3debb}{translateCam} (\hyperlink{structVec3}{Vec3} trans)
+\item 
+void \hyperlink{classScene_acebcb8d63dbee5b93684697560ef9b87}{selectNext} ()
+\item 
+\hyperlink{classGraphicalObject}{GraphicalObject} $\ast$ \hyperlink{classScene_afd7622d2711b6bf5de1e0c10e4c7888e}{getNext} ()
+\item 
+\hyperlink{classGraphicalObject}{GraphicalObject} $\ast$ \hyperlink{classScene_a16ccb8a2a70b9f569e3200e102ffc50e}{getNextSelected} ()
+\item 
+void \hyperlink{classScene_afc4e124efa0700e2fc2108896b90fd04}{deselectAll} ()
+\item 
+std::vector$<$ \hyperlink{classGraphicalObject}{GraphicalObject} $\ast$ $>$ \hyperlink{classScene_ae3dc001c52db9e46815991c1584e6c56}{getSelected} ()
+\item 
+\hypertarget{classScene_ae1bf59ba2fe9e6a6ddd62a1b9acf54e3}{
+void {\bfseries applyPos} (GLuint shader)}
+\label{classScene_ae1bf59ba2fe9e6a6ddd62a1b9acf54e3}
+
+\item 
+void \hyperlink{classScene_adde244975633cbf7150b402fb943682a}{setUniforms} (GLuint shader)
+\item 
+\hypertarget{classScene_a80d8d660eb485e41aa0ad0ac5e130e64}{
+void {\bfseries setRotation} ()}
+\label{classScene_a80d8d660eb485e41aa0ad0ac5e130e64}
+
+\item 
+void \hyperlink{classScene_aadba0549da987fa2a34d928dc132f759}{rotateX} (float angle)
+\item 
+void \hyperlink{classScene_a371818ec48a73b3d26bf68b73652d7c1}{rotateY} (float angle)
+\item 
+void \hyperlink{classScene_a76932b0837c578d05de254dfe0304d6e}{rotateZ} (float angle)
+\item 
+\hypertarget{classScene_a52947077b36d09d8fb01f199473ba323}{
+void {\bfseries rotateXRad} (float angle)}
+\label{classScene_a52947077b36d09d8fb01f199473ba323}
+
+\item 
+\hypertarget{classScene_a7b1752ca9b485c97990c094cdbdfd5b7}{
+void {\bfseries rotateYRad} (float angle)}
+\label{classScene_a7b1752ca9b485c97990c094cdbdfd5b7}
+
+\item 
+\hypertarget{classScene_a1881e9dfcfeb572ec91c24ead09bbf76}{
+void {\bfseries rotateZRad} (float angle)}
+\label{classScene_a1881e9dfcfeb572ec91c24ead09bbf76}
+
+\item 
+void \hyperlink{classScene_a43cd7232f4c439745bb6bd09bfe723a0}{autoRescale} ()
+\item 
+void \hyperlink{classScene_ae7ce397f040f9f0d7f2b65bb3b613aad}{merge} (\hyperlink{classScene}{Scene} $\ast$scene)
+\item 
+void \hyperlink{classScene_a52ce62bd6896ec02c61e187303887ee0}{toggleBackgroundHighlightning} ()
+\item 
+bool \hyperlink{classScene_abd47005abd1021b8170ac38ad8ee2a3c}{getBackgroundHighlightning} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classScene_a751c2cd2faf59a0f1fc6764cbbb3e30c}{
+\hyperlink{classThreeDSpace}{ThreeDSpace} $\ast$ {\bfseries threeDSpace}}
+\label{classScene_a751c2cd2faf59a0f1fc6764cbbb3e30c}
+
+\item 
+\hypertarget{classScene_a0ddf41e31f1c3fee31a52a9a898703f3}{
+\hyperlink{structVec3}{Vec3} {\bfseries cPos}}
+\label{classScene_a0ddf41e31f1c3fee31a52a9a898703f3}
+
+\item 
+\hypertarget{classScene_a0f21d486a60d29c7a531a748ae8312bc}{
+\hyperlink{structVec3}{Vec3} {\bfseries cDir}}
+\label{classScene_a0f21d486a60d29c7a531a748ae8312bc}
+
+\item 
+\hypertarget{classScene_ab262ca600b9a5f92418f6eaf437bb336}{
+\hyperlink{structMat4}{Mat4} {\bfseries worldPos}}
+\label{classScene_ab262ca600b9a5f92418f6eaf437bb336}
+
+\item 
+\hypertarget{classScene_ae452de3381a84afc87711da71e0cc774}{
+\hyperlink{structMat4}{Mat4} {\bfseries worldRotX}}
+\label{classScene_ae452de3381a84afc87711da71e0cc774}
+
+\item 
+\hypertarget{classScene_a288f0349fcb11e7c50fdd163eb23304a}{
+\hyperlink{structMat4}{Mat4} {\bfseries worldRotY}}
+\label{classScene_a288f0349fcb11e7c50fdd163eb23304a}
+
+\item 
+\hypertarget{classScene_a7b99400a175eb643dc70b200e648f6ac}{
+\hyperlink{structMat4}{Mat4} {\bfseries worldRotZ}}
+\label{classScene_a7b99400a175eb643dc70b200e648f6ac}
+
+\item 
+\hypertarget{classScene_ab067b58fc1a606cbcb88fbe776e0560d}{
+float {\bfseries fFrustumScale}}
+\label{classScene_ab067b58fc1a606cbcb88fbe776e0560d}
+
+\item 
+\hypertarget{classScene_a00ec0a4d7c0b640f3be5dd35be576753}{
+float {\bfseries fzNear}}
+\label{classScene_a00ec0a4d7c0b640f3be5dd35be576753}
+
+\item 
+\hypertarget{classScene_ae1e87613574dcd27b9082a51f50dd53e}{
+float {\bfseries fzFar}}
+\label{classScene_ae1e87613574dcd27b9082a51f50dd53e}
+
+\item 
+\hypertarget{classScene_ad8706c0d747c7cc7d996bb690e938d1b}{
+float {\bfseries angleX}}
+\label{classScene_ad8706c0d747c7cc7d996bb690e938d1b}
+
+\item 
+\hypertarget{classScene_ab60da918122d41fe47794ced01153085}{
+float {\bfseries angleY}}
+\label{classScene_ab60da918122d41fe47794ced01153085}
+
+\item 
+\hypertarget{classScene_a50afafbd2e7445913c16f9d7ed0147fe}{
+float {\bfseries angleZ}}
+\label{classScene_a50afafbd2e7445913c16f9d7ed0147fe}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classScene_ad10176d75a9cc0da56626f682d083507}{
+\index{Scene@{Scene}!Scene@{Scene}}
+\index{Scene@{Scene}!Scene@{Scene}}
+\subsubsection[{Scene}]{\setlength{\rightskip}{0pt plus 5cm}Scene::Scene (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_ad10176d75a9cc0da56626f682d083507}
+\hyperlink{classScene}{Scene} constructor initiates all matrices. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classScene_a43cd7232f4c439745bb6bd09bfe723a0}{
+\index{Scene@{Scene}!autoRescale@{autoRescale}}
+\index{autoRescale@{autoRescale}!Scene@{Scene}}
+\subsubsection[{autoRescale}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::autoRescale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_a43cd7232f4c439745bb6bd09bfe723a0}
+Scales all objects and resets their position to their original position and moves the camera to its original position to fit all objects in view \hypertarget{classScene_afc4e124efa0700e2fc2108896b90fd04}{
+\index{Scene@{Scene}!deselectAll@{deselectAll}}
+\index{deselectAll@{deselectAll}!Scene@{Scene}}
+\subsubsection[{deselectAll}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::deselectAll (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_afc4e124efa0700e2fc2108896b90fd04}
+Deselected all objects in 3DSpace \hypertarget{classScene_ab74403c449c1431acab9c783331b2da0}{
+\index{Scene@{Scene}!get3DSpace@{get3DSpace}}
+\index{get3DSpace@{get3DSpace}!Scene@{Scene}}
+\subsubsection[{get3DSpace}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ThreeDSpace} $\ast$ Scene::get3DSpace (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_ab74403c449c1431acab9c783331b2da0}
+Returns the current 3D-\/space. \begin{DoxyReturn}{Returns}
+Current 3D-\/space. 
+\end{DoxyReturn}
+\hypertarget{classScene_abd47005abd1021b8170ac38ad8ee2a3c}{
+\index{Scene@{Scene}!getBackgroundHighlightning@{getBackgroundHighlightning}}
+\index{getBackgroundHighlightning@{getBackgroundHighlightning}!Scene@{Scene}}
+\subsubsection[{getBackgroundHighlightning}]{\setlength{\rightskip}{0pt plus 5cm}bool Scene::getBackgroundHighlightning (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_abd47005abd1021b8170ac38ad8ee2a3c}
+Gets the current state of background highlightning. \hypertarget{classScene_a24db151a098841ac7e6e6bcf7205936d}{
+\index{Scene@{Scene}!getCameraPosition@{getCameraPosition}}
+\index{getCameraPosition@{getCameraPosition}!Scene@{Scene}}
+\subsubsection[{getCameraPosition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec3} Scene::getCameraPosition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_a24db151a098841ac7e6e6bcf7205936d}
+Retrieves the current camera position. \begin{DoxyReturn}{Returns}
+Current camera position. 
+\end{DoxyReturn}
+\hypertarget{classScene_afd7622d2711b6bf5de1e0c10e4c7888e}{
+\index{Scene@{Scene}!getNext@{getNext}}
+\index{getNext@{getNext}!Scene@{Scene}}
+\subsubsection[{getNext}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GraphicalObject} $\ast$ Scene::getNext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_afd7622d2711b6bf5de1e0c10e4c7888e}
+Retrieves the next object from 3D-\/space. \begin{DoxyReturn}{Returns}
+Retrieves the next \hyperlink{classGraphicalObject}{GraphicalObject}. 
+\end{DoxyReturn}
+\hypertarget{classScene_a16ccb8a2a70b9f569e3200e102ffc50e}{
+\index{Scene@{Scene}!getNextSelected@{getNextSelected}}
+\index{getNextSelected@{getNextSelected}!Scene@{Scene}}
+\subsubsection[{getNextSelected}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GraphicalObject} $\ast$ Scene::getNextSelected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_a16ccb8a2a70b9f569e3200e102ffc50e}
+Retrieves the next selected object. \begin{DoxyReturn}{Returns}
+Retrieves the next selection object. 
+\end{DoxyReturn}
+\hypertarget{classScene_ae3dc001c52db9e46815991c1584e6c56}{
+\index{Scene@{Scene}!getSelected@{getSelected}}
+\index{getSelected@{getSelected}!Scene@{Scene}}
+\subsubsection[{getSelected}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf GraphicalObject} $\ast$ $>$ Scene::getSelected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_ae3dc001c52db9e46815991c1584e6c56}
+Retrieves the current selection state. \begin{DoxyReturn}{Returns}
+Current selection state. 
+\end{DoxyReturn}
+\hypertarget{classScene_ae7ce397f040f9f0d7f2b65bb3b613aad}{
+\index{Scene@{Scene}!merge@{merge}}
+\index{merge@{merge}!Scene@{Scene}}
+\subsubsection[{merge}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::merge (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene} $\ast$}]{scene}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_ae7ce397f040f9f0d7f2b65bb3b613aad}
+Merges a given scene to the current 3D-\/space. 
+\begin{DoxyParams}{Parameters}
+{\em scene} & \hyperlink{classScene}{Scene} to merge. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classScene_aadba0549da987fa2a34d928dc132f759}{
+\index{Scene@{Scene}!rotateX@{rotateX}}
+\index{rotateX@{rotateX}!Scene@{Scene}}
+\subsubsection[{rotateX}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::rotateX (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_aadba0549da987fa2a34d928dc132f759}
+Rotate the x angle. 
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angular adjustment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classScene_a371818ec48a73b3d26bf68b73652d7c1}{
+\index{Scene@{Scene}!rotateY@{rotateY}}
+\index{rotateY@{rotateY}!Scene@{Scene}}
+\subsubsection[{rotateY}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::rotateY (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_a371818ec48a73b3d26bf68b73652d7c1}
+Rotate the y angle. 
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angular adjustment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classScene_a76932b0837c578d05de254dfe0304d6e}{
+\index{Scene@{Scene}!rotateZ@{rotateZ}}
+\index{rotateZ@{rotateZ}!Scene@{Scene}}
+\subsubsection[{rotateZ}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::rotateZ (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_a76932b0837c578d05de254dfe0304d6e}
+Rotate the z angle. 
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angular adjustment. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classScene_acebcb8d63dbee5b93684697560ef9b87}{
+\index{Scene@{Scene}!selectNext@{selectNext}}
+\index{selectNext@{selectNext}!Scene@{Scene}}
+\subsubsection[{selectNext}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::selectNext (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_acebcb8d63dbee5b93684697560ef9b87}
+Selects the next item in 3D-\/space. \hypertarget{classScene_adde244975633cbf7150b402fb943682a}{
+\index{Scene@{Scene}!setUniforms@{setUniforms}}
+\index{setUniforms@{setUniforms}!Scene@{Scene}}
+\subsubsection[{setUniforms}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::setUniforms (
+\begin{DoxyParamCaption}
+\item[{GLuint}]{shader}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_adde244975633cbf7150b402fb943682a}
+Writes the current world and camera position and the world rotation. 
+\begin{DoxyParams}{Parameters}
+{\em shader} & program ID. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classScene_a52ce62bd6896ec02c61e187303887ee0}{
+\index{Scene@{Scene}!toggleBackgroundHighlightning@{toggleBackgroundHighlightning}}
+\index{toggleBackgroundHighlightning@{toggleBackgroundHighlightning}!Scene@{Scene}}
+\subsubsection[{toggleBackgroundHighlightning}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::toggleBackgroundHighlightning (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_a52ce62bd6896ec02c61e187303887ee0}
+Toggles background highlightning. \hypertarget{classScene_aec4584d46e3c6b84167e2543f1a3debb}{
+\index{Scene@{Scene}!translateCam@{translateCam}}
+\index{translateCam@{translateCam}!Scene@{Scene}}
+\subsubsection[{translateCam}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::translateCam (
+\begin{DoxyParamCaption}
+\item[{{\bf Vec3}}]{trans}
+\end{DoxyParamCaption}
+)}}
+\label{classScene_aec4584d46e3c6b84167e2543f1a3debb}
+Translates camera. 
+\begin{DoxyParams}{Parameters}
+{\em trans} & Translation vector. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+Scene.h\item 
+Scene.cpp\end{DoxyCompactItemize}

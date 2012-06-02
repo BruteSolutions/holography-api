@@ -1,0 +1,104 @@
+\hypertarget{classUniversalConfiguration}{
+\section{UniversalConfiguration Class Reference}
+\label{classUniversalConfiguration}\index{UniversalConfiguration@{UniversalConfiguration}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classUniversalConfiguration_acf91d2417df506abf0f5c8641c539d0c}{UniversalConfiguration} (std::vector$<$ \hyperlink{classConfiguration}{Configuration} $>$ $\ast$cs, \hyperlink{classColorTranslator}{ColorTranslator} $\ast$ct)
+\item 
+std::vector$<$ \hyperlink{classConfiguration}{Configuration} $>$ $\ast$ \hyperlink{classUniversalConfiguration_a1bcb01f20c8a022736cd0b26210c34a3}{getProjectorConfigurations} ()
+\item 
+\hyperlink{classColorTranslator}{ColorTranslator} $\ast$ \hyperlink{classUniversalConfiguration_a78dac986a22dbfc2b53acfaf633503d9}{getColorTranslator} ()
+\item 
+void \hyperlink{classUniversalConfiguration_ae54c8cfbd39860caa0427b500489ef59}{writeToStream} (std::ofstream \&os)  throw (std::string)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classUniversalConfiguration}{UniversalConfiguration} $\ast$ \hyperlink{classUniversalConfiguration_acfce05a2995755d57901bf69df229ff0}{readStream} (std::ifstream \&is)  throw (std::string)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classUniversalConfiguration_acf91d2417df506abf0f5c8641c539d0c}{
+\index{UniversalConfiguration@{UniversalConfiguration}!UniversalConfiguration@{UniversalConfiguration}}
+\index{UniversalConfiguration@{UniversalConfiguration}!UniversalConfiguration@{UniversalConfiguration}}
+\subsubsection[{UniversalConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}UniversalConfiguration::UniversalConfiguration (
+\begin{DoxyParamCaption}
+\item[{std::vector$<$ {\bf Configuration} $>$ $\ast$}]{cs, }
+\item[{{\bf ColorTranslator} $\ast$}]{ct}
+\end{DoxyParamCaption}
+)}}
+\label{classUniversalConfiguration_acf91d2417df506abf0f5c8641c539d0c}
+Creates a \hyperlink{classUniversalConfiguration}{UniversalConfiguration} object with the given parameters. 
+\begin{DoxyParams}{Parameters}
+{\em cs} & The vector of configurations \\
+\hline
+{\em ct} & The \hyperlink{classColorTranslator}{ColorTranslator} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classUniversalConfiguration_a78dac986a22dbfc2b53acfaf633503d9}{
+\index{UniversalConfiguration@{UniversalConfiguration}!getColorTranslator@{getColorTranslator}}
+\index{getColorTranslator@{getColorTranslator}!UniversalConfiguration@{UniversalConfiguration}}
+\subsubsection[{getColorTranslator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ColorTranslator} $\ast$ UniversalConfiguration::getColorTranslator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classUniversalConfiguration_a78dac986a22dbfc2b53acfaf633503d9}
+Returns the \hyperlink{classColorTranslator}{ColorTranslator} object that should be used by the \hyperlink{classDisplay}{Display} class. \begin{DoxyReturn}{Returns}
+\hyperlink{classColorTranslator}{ColorTranslator} The \hyperlink{classColorTranslator}{ColorTranslator} 
+\end{DoxyReturn}
+\hypertarget{classUniversalConfiguration_a1bcb01f20c8a022736cd0b26210c34a3}{
+\index{UniversalConfiguration@{UniversalConfiguration}!getProjectorConfigurations@{getProjectorConfigurations}}
+\index{getProjectorConfigurations@{getProjectorConfigurations}!UniversalConfiguration@{UniversalConfiguration}}
+\subsubsection[{getProjectorConfigurations}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Configuration} $>$ $\ast$ UniversalConfiguration::getProjectorConfigurations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classUniversalConfiguration_a1bcb01f20c8a022736cd0b26210c34a3}
+Returns a list of \hyperlink{classConfiguration}{Configuration} objects each describing the configurations of a projector. \begin{DoxyReturn}{Returns}
+vector$<$Configuration$>$ The configurationlist from the projectors. 
+\end{DoxyReturn}
+\hypertarget{classUniversalConfiguration_acfce05a2995755d57901bf69df229ff0}{
+\index{UniversalConfiguration@{UniversalConfiguration}!readStream@{readStream}}
+\index{readStream@{readStream}!UniversalConfiguration@{UniversalConfiguration}}
+\subsubsection[{readStream}]{\setlength{\rightskip}{0pt plus 5cm}{\bf UniversalConfiguration} $\ast$ UniversalConfiguration::readStream (
+\begin{DoxyParamCaption}
+\item[{std::ifstream \&}]{is}
+\end{DoxyParamCaption}
+)  throw (std::string)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classUniversalConfiguration_acfce05a2995755d57901bf69df229ff0}
+Reads the underlying stream and constructs a \hyperlink{classUniversalConfiguration}{UniversalConfiguration} object which is returned 
+\begin{DoxyParams}{Parameters}
+{\em is} & The input stream \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classUniversalConfiguration}{UniversalConfiguration} The constructed \hyperlink{classUniversalConfiguration}{UniversalConfiguration} object 
+\end{DoxyReturn}
+\hypertarget{classUniversalConfiguration_ae54c8cfbd39860caa0427b500489ef59}{
+\index{UniversalConfiguration@{UniversalConfiguration}!writeToStream@{writeToStream}}
+\index{writeToStream@{writeToStream}!UniversalConfiguration@{UniversalConfiguration}}
+\subsubsection[{writeToStream}]{\setlength{\rightskip}{0pt plus 5cm}void UniversalConfiguration::writeToStream (
+\begin{DoxyParamCaption}
+\item[{std::ofstream \&}]{os}
+\end{DoxyParamCaption}
+)  throw (std::string)}}
+\label{classUniversalConfiguration_ae54c8cfbd39860caa0427b500489ef59}
+Writes this object to the underlying stream. 
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+UniversalConfiguration.h\item 
+UniversalConfiguration.cpp\end{DoxyCompactItemize}
