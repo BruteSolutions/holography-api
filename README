@@ -1,1 +1,10 @@
 Holography API final release.
+
+Dependencies:
+
+libxml2.6
+freeglut
+OpenGL
+glload
+gtk-2.0
+gtkmm-2.4

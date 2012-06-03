@@ -142,7 +142,7 @@ Scene* X3DLoader::loadFile( std::string path ) throw ( std::string ) {
         return scene;
  
     } catch( const std::exception& e ) { // catches LIBXML++ exception 2.6
-       if( e.what().find( "parse error" ) != string::npos ) throw( std::string( "IllegalX3DFileException" ) );
+       if(!strcmp(e.what(), "parse error")) throw( std::string( "IllegalX3DFileException" ) );
         /*else*/ throw std::string(e.what());
     }
 }

@@ -17,15 +17,12 @@ endif
 ifndef AR
   AR = ar
 endif
-#ifndef LIBXMLCFLAGS
-# LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
-#endif
-#ifndef LIBXMLLIBS
-# LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
-#endif
-# put in CFLAGS $(LIBXMLCFLAGS) 
-# put in LIBS $(LIBXMLLIBS) -lGL 
-
+ifndef LIBXMLCFLAGS
+ LIBXMLCFLAGS = $(shell pkg-config libxml++-2.6 --cflags)
+endif
+ifndef LIBXMLLIBS
+ LIBXMLLIBS = $(shell pkg-config libxml++-2.6 --libs)
+endif
 #GTK
 ifndef GTKMMLIBS
   GTKMMLIBS = $(shell pkg-config gtkmm-2.4 --libs)
@@ -41,21 +38,17 @@ ifndef GTKCFLAGS
 endif
 #GTK END
 
-# put in CFLAGS: $(GTKCFLAGS) $(GTKMMCFLAGS)
-# put in LIBS: $(GTKLIBS) $(GTKMMLIBS)
-#put in OBJECTS $(OBJDIR)/RawLoader.o  $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o
-
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
   TARGETDIR  = .
   TARGET     = $(TARGETDIR)/lib.so
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE -D_SCL_SECURE_NO_WARNINGS -DTIXML_USE_STL -DFREEGLUT_STATIC -DLOAD_X11 -D_LIB -DFREEGLUT_LIB_PRAGMAS=0 -DDEBUG -D_DEBUG
-  INCLUDES  += -I../framework -I../glsdk/glload/include -I../glsdk/glimg/include -I../glsdk/glm -I../glsdk/glutil/include -I../glsdk/glmesh/include -I../glsdk/freeglut/include -Iinclude
+  INCLUDES  += -I../glsdk/glload/include -I../glsdk/freeglut/include -Iinclude
   CPPFLAGS  += -fPIC -shared -MMD -MP $(DEFINES) $(INCLUDES) -std=c++0x
   CFLAGS    += $(CPPFLAGS) $(ARCH) $(LIBXMLCFLAGS) $(GTKCFLAGS) $(GTKMMCFLAGS) -g
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -shared -L../glsdk/glload/lib -L../glsdk/glimg/lib -L../glsdk/glutil/lib -L../glsdk/glmesh/lib -L../glsdk/freeglut/lib -L../framework/lib
-  LIBS      += -lfreeglutD -lGLU -lGL #$(LIBXMLLIBS) $(GTKLIBS) $(GTKMMLIBS)
+  LDFLAGS   += -shared -L../glsdk/freeglut/lib 
+  LIBS      += -lfreeglutD -lGL $(LIBXMLLIBS) $(GTKLIBS) $(GTKMMLIBS)
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   SRCPATH		 = src
@@ -68,9 +61,8 @@ ifeq ($(config),debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/FileLoader.o $(OBJDIR)/RawLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/ConfigurationHandler.o $(OBJDIR)/UniversalConfiguration.o\
+	$(OBJDIR)/FileLoader.o $(OBJDIR)/RawLoader.o $(OBJDIR)/X3DLoader.o $(OBJDIR)/Projector.o $(OBJDIR)/GraphicalObject.o $(OBJDIR)/ColorTranslator.o $(OBJDIR)/Scene.o $(OBJDIR)/ThreeDSpace.o $(OBJDIR)/Display.o $(OBJDIR)/Shader.o $(OBJDIR)/Monitor.o $(OBJDIR)/Configuration.o $(OBJDIR)/ConfigurationHandler.o $(OBJDIR)/UniversalConfiguration.o\
 
-# $(OBJDIR)/FileLoader.o $(OBJDIR)/X3DLoader.o 
 
 RESOURCES := \
 
